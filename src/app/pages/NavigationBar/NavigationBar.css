@@ -1,32 +1,60 @@
 .navigation-bar-container {
-    width: fit-content;
-    height: 100%;
-    background-color: #ddd;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 16px;
+    width: 260px;
+    height: 100vh;
+    overflow-y: auto;
+    box-sizing: border-box;
+    padding: 0 16px;
+    border-right: 2px solid #ddd;
     font-family: 'Quicksand', Arial, sans-serif;
+    scrollbar-width: none;
+    user-select: none;
 
-    .item {
-        border: 2px solid transparent;
-        border-radius: 12px;
+    a {
+        text-decoration: none;
 
-        a {
-            padding: 12px 16px;
-            text-decoration: none;
-            color: #555;
+        .logo {
+            padding: 24px 16px;
+            color: #28a745;
+            font-size: 36px;
             font-weight: bold;
-            display: flex;
-            justify-content: start;
-            align-items: center;
-            gap: 16px;
         }
     }
 
-    .located {
-        border: 2px solid #28a745;
-        background-color: #b7ffc7;
-    }
+    .items {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
 
+        .item {
+            border: 2px solid transparent;
+            border-radius: 12px;
+            box-sizing: border-box;
+
+            a {
+                padding: 14px 16px;
+                color: #555;
+                display: flex;
+                justify-content: start;
+                align-items: center;
+                gap: 16px;
+                font-weight: bold;
+                text-decoration: none;
+            }
+        }
+
+        .item:hover {
+            border: 2px solid #eee;
+            background-color: #eee;
+        }
+
+        .located,
+        .located:hover {
+            border: 2px solid #5add79;
+            background-color: #b7ffc7;
+
+            a {
+                color: #158630;
+            }
+        }
+    }
 }

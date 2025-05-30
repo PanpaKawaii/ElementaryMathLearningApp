@@ -15,14 +15,20 @@ export default function NavigationBar() {
 
     return (
         <div className='navigation-bar-container'>
-            {menuItems.map((item, index) => (
-                <div key={index} className={`item ${location.pathname == item.path ? 'located' : ''}`}>
-                    <Link to={`${item.path}`}>
-                        <i className={`fa-solid fa-${item.icon}`}></i>
-                        <span>{item.name}</span>
-                    </Link>
-                </div>
-            ))}
+
+            <Link to='/'>
+                <div className='logo'>Smath</div>
+            </Link>
+            <div className='items'>
+                {menuItems.map((item, index) => (
+                    <div key={index} className={`item ${location.pathname == item.path ? 'located' : ''}`}>
+                        <Link to={`${item.path}`}>
+                            <i className={`fa-solid fa-${item.icon}`}></i>
+                            <span>{item.name}</span>
+                        </Link>
+                    </div>
+                ))}
+            </div>
         </div>
     )
 }
