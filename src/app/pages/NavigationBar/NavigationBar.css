@@ -1,0 +1,32 @@
+.navigation-bar-container {
+    width: fit-content;
+    height: 100%;
+    background-color: #ddd;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 16px;
+    font-family: 'Quicksand', Arial, sans-serif;
+
+    .item {
+        border: 2px solid transparent;
+        border-radius: 12px;
+
+        a {
+            padding: 12px 16px;
+            text-decoration: none;
+            color: #555;
+            font-weight: bold;
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            gap: 16px;
+        }
+    }
+
+    .located {
+        border: 2px solid #28a745;
+        background-color: #b7ffc7;
+    }
+
+}
