@@ -1,0 +1,40 @@
+.topic {
+    width: fit-content;
+    cursor: pointer;
+    position: relative;
+
+    .grid-card {
+        margin: 6px 6px 8px;
+        width: 80px;
+        height: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #fdd9e5;
+        border: 6px solid #ffc4d8;
+        border-radius: 50%;
+        box-shadow: 0px 8px 0px 0px #f99dbc;
+        box-sizing: border-box;
+        transition: all 0.1s ease;
+    }
+
+    .active {
+        margin: 14px 6px 0;
+        box-shadow: none;
+    }
+
+    .shadow {
+        z-index: -1;
+        top: 36px;
+        left: 6px;
+        position: absolute;
+        width: 80px;
+        height: 8px;
+        background-color: #f99dbc;
+        transition: all 0.1s ease;
+    }
+
+    .no-shadow {
+        height: 0;
+    }
+}

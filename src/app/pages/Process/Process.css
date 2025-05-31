@@ -7,32 +7,5 @@
         display: grid;
         grid-template-columns: repeat(4, minmax(0, 1fr));
         gap: 20px;
-
-        .topic {
-            width: 120px;
-            display: flex;
-            justify-content: center;
-            align-items: start;
-            cursor: pointer;
-
-            .grid-card {
-                margin: 8px;
-                width: 100px;
-                height: 80px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                background-color: #fdd9e5;
-                border: 8px solid #ffc4d8;
-                border-radius: 100%;
-                box-shadow: 0px 10px 0px #f99dbc;
-                box-sizing: border-box;
-            }
-
-            .active {
-                margin: 16px 8px 0;
-                box-shadow: none;
-            }
-        }
     }
 }
