@@ -1,25 +1,29 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Button.css';
 
-export default function Button({ active, onToggle, children }) {
-
-    const [SelectedTopic, setSelectedTopic] = useState(null);
-
+// export default function Button({ border, radius, active, onToggle, children }) {
+export default function Button(props) {
     return (
         <>
-            <div className='topic'>
+            <div className='special-button'>
                 <div
-                    className={`grid-card ${active ? 'active' : ''}`}
-                    // onMouseDown={() => setSelectedTopic(topic)}
+                    className={`grid-card ${props.active ? 'active' : ''}`}
+                    style={{
+                        width: `${props.width}`,
+                        height: `${props.height}`,
+                        borderRadius: `${props.radius}`,
+                        border: `${props.border} solid #fec2d6`,
+                    }}
+                    // onMouseDown={props.onToggle}
                     // onMouseUp={() => setSelectedTopic(null)}
                     // onMouseLeave={() => setSelectedTopic(null)}
                     // onClick={() => setSelectedTopic(topic)}
-                    onClick={onToggle}
+                    onClick={props.onToggle}
                 >
-                    {children}
+                    {props.children}
                 </div>
 
-                <div className={`${active ? 'no-shadow' : 'shadow'}`}></div>
+                <div className={`${props.active ? 'no-shadow' : 'shadow'}`}></div>
             </div>
         </>
     )

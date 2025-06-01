@@ -5,13 +5,12 @@
     box-sizing: border-box;
     padding: 0 16px;
     border-right: 2px solid #ddd;
-    font-family: 'Quicksand', Arial, sans-serif;
+    position: fixed !important;
     scrollbar-width: none;
     user-select: none;
+    font-family: 'Quicksand', Arial, sans-serif;
 
     a {
-        text-decoration: none;
-
         .logo {
             padding: 24px 16px;
             color: #28a745;
@@ -38,7 +37,6 @@
                 align-items: center;
                 gap: 16px;
                 font-weight: bold;
-                text-decoration: none;
             }
         }
 
