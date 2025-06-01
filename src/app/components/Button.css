@@ -1,0 +1,42 @@
+.special-button {
+    width: fit-content;
+    position: relative;
+    user-select: none;
+
+    .grid-card {
+        margin: 8px;
+        /* width: 80px;
+        height: 60px; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #fdd9e5;
+        /* border: 6px solid #fec2d6; */
+        /* border-radius: 50%; */
+        box-shadow: 0px 8px 0px 0px #f99dbc;
+        box-sizing: border-box;
+        cursor: pointer;
+        font-weight: bold;
+        transition: all 0.1s ease;
+    }
+
+    .active {
+        margin: 16px 8px 0;
+        box-shadow: none;
+    }
+
+    .shadow {
+        z-index: -1;
+        top: 38px;
+        left: 8px;
+        position: absolute;
+        width: 80px;
+        height: 8px;
+        background-color: #f99dbc;
+        transition: all 0.1s ease;
+    }
+
+    .no-shadow {
+        height: 0;
+    }
+}

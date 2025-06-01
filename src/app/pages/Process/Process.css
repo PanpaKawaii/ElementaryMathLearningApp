@@ -1,38 +1,68 @@
 .process-container {
-    width: fit-content;
-    padding: 20px;
+    width: 600px;
+    padding: 0 0 0 260px;
+    font-family: 'Quicksand', Arial, sans-serif;
 
     .chapter {
-        padding: 20px;
-        display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 20px;
+        width: 100%;
+        padding: 0 0 20px;
 
-        .topic {
-            width: 120px;
+        .chapter-heading {
+            width: auto;
+            padding: 20px;
+            color: #fff;
+            background-color: #f99dbc;
+            border-radius: 16px;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+
+            h3 {
+                font-size: 24px;
+                margin: 0 0 8px;
+            }
+        }
+
+        .topics {
+            justify-self: center;
+            width: fit-content;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 20px;
+
+            .text {
+                color: #fd73a7;
+                font-size: 28px;
+            }
+
+            .fa-trophy {
+                color: #fd73a7;
+                font-size: 32px;
+                filter: drop-shadow(0px 0px 1px #f99dbc);
+            }
+        }
+
+        .selected-topic {
+            width: auto;
+            color: #fff;
+            margin: 0 20px 20px;
+            padding: 4px 12px 20px;
+            background-color: #999;
+            border-radius: 20px;
             display: flex;
-            justify-content: center;
-            align-items: start;
-            cursor: pointer;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+            overflow: hidden;
 
-            .grid-card {
-                margin: 8px;
-                width: 100px;
-                height: 80px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                background-color: #fdd9e5;
-                border: 8px solid #ffc4d8;
-                border-radius: 100%;
-                box-shadow: 0px 10px 0px #f99dbc;
-                box-sizing: border-box;
+            .text {
+                color: #fd73a7;
             }
+        }
 
-            .active {
-                margin: 16px 8px 0;
-                box-shadow: none;
-            }
+        .hidden {
+            transition: all 0.3s ease;
+            transform: scale(0);
         }
     }
 }
