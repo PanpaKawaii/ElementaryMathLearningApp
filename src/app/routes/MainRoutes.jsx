@@ -2,7 +2,7 @@ import React from 'react'
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom'
 
 import NavigationBar from '../pages/NavigationBar/NavigationBar'
-import Process from '../pages/Process/Process'
+import LearnContainer from '../pages/LearnContainer/LearnContainer'
 
 export default function MainRoutes() {
     return (
@@ -14,7 +14,7 @@ export default function MainRoutes() {
                 <NavigationBar />
                 <Routes>
                     <Route path='/' element={<Navigate to='/learn' replace />} />
-                    <Route path='/learn' element={<Process />} />
+                    <Route path='/learn' element={<LearnContainer />} />
                     <Route path='*' element={<></>} />
                 </Routes>
                 <></>
