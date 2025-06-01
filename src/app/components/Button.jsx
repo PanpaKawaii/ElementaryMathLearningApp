@@ -23,7 +23,13 @@ export default function Button(props) {
                     {props.children}
                 </div>
 
-                <div className={`${props.active ? 'no-shadow' : 'shadow'}`}></div>
+                <div
+                    className={`${(props.active || !props.radius.includes('%')) ? 'no-shadow' : 'shadow'}`}
+                    style={{
+                        width: `${props.width}`,
+                        top: `${8 + parseInt(props.height.replace('px', '')) / 2}px`,
+                    }}
+                ></div>
             </div>
         </>
     )

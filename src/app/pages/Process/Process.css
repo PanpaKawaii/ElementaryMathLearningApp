@@ -6,12 +6,13 @@
     .chapter {
         width: 100%;
         padding: 0 0 20px;
+        position: relative;
 
         .chapter-heading {
             width: auto;
             padding: 20px;
             color: #fff;
-            background-color: #f99dbc;
+            background-color: #fd73a7;
             border-radius: 16px;
             position: sticky;
             top: 0;
@@ -36,32 +37,60 @@
                 font-size: 28px;
             }
 
-            .fa-trophy {
+            .fa-trophy,
+            .fa-book {
                 color: #fd73a7;
                 font-size: 32px;
                 filter: drop-shadow(0px 0px 1px #f99dbc);
             }
         }
 
+        .please-select {
+            z-index: -1;
+            width: 560px;
+            height: 80px;
+            margin: 0 20px 20px;
+            color: #f99dbc;
+            font-weight: bold;
+            border: 8px solid #fdd9e5;
+            border-radius: 20px;
+            box-sizing: border-box;
+            position: absolute;
+            text-align: center;
+            align-content: center;
+        }
+
         .selected-topic {
             width: auto;
-            color: #fff;
+            height: 80px;
+            color: #fd73a7;
+            font-weight: bold;
             margin: 0 20px 20px;
-            padding: 4px 12px 20px;
-            background-color: #999;
+            background-color: #fec2d6;
             border-radius: 20px;
             display: flex;
             justify-content: space-between;
+            /* align-items: center; */
             transition: all 0.3s ease;
             overflow: hidden;
 
-            .text {
-                color: #fd73a7;
+            .topic-title {
+                max-width: 340px;
+                padding: 12px 16px;
+                font-size: 20px;
+                word-break: break-word;
+            }
+
+            a {
+                padding: 4px 12px 20px;
+
+                .text {
+                    color: #fd73a7;
+                }
             }
         }
 
         .hidden {
-            transition: all 0.3s ease;
             transform: scale(0);
         }
     }

@@ -1,6 +1,6 @@
 export const SubjectSample = {
     'subjectId': 'subj-001',
-    'subjectName': 'Elementary Math',
+    'subjectName': 'Elementary Math For Grade 1',
     'chapters': [
         {
             'chapterId': 'chap-001',
