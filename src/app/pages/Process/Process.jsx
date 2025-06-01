@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import './Process.css';
 import { Link } from 'react-router-dom';
-import Button from '../../components/Button.jsx';
 import { SubjectSample } from '../../../mocks/subject_sample';
+import Button from '../../components/Button.jsx';
+import './Process.css';
 
 export default function Process() {
 
@@ -45,8 +45,31 @@ export default function Process() {
                                 height={'60px'}
                                 border={'6px'}
                                 radius={'50%'}
-                                onToggle={() => handleToggle({ topicId: chapter.chapterId })}
-                                active={chapter.chapterId == SelectedTopic?.topicId}
+                                onToggle={() =>
+                                    handleToggle({
+                                        topicId: 'quiz-' + chapter.chapterId,
+                                        topicName: 'Final Quiz',
+                                    },
+                                        chapter
+                                    )}
+                                active={'quiz-' + chapter.chapterId == SelectedTopic?.topicId}
+                            >
+                                <i className='fa-solid fa-book'></i>
+                            </Button>
+
+                            <Button
+                                width={'80px'}
+                                height={'60px'}
+                                border={'6px'}
+                                radius={'50%'}
+                                onToggle={() =>
+                                    handleToggle({
+                                        topicId: 'advanced-' + chapter.chapterId,
+                                        topicName: 'Advanced Quiz',
+                                    },
+                                        chapter
+                                    )}
+                                active={'advanced-' + chapter.chapterId == SelectedTopic?.topicId}
                             >
                                 <i className='fa-solid fa-trophy'></i>
                             </Button>
@@ -55,25 +78,36 @@ export default function Process() {
                         <p><i>No topics available</i></p>
                     )}
 
+                    <div className='please-select'>
+                        Please select a topic
+                    </div>
+
                     <div className={`selected-topic ${(chapter.chapterId == SelectedChapter?.chapterId && SelectedTopic) ? '' : 'hidden'}`}>
-                        <div style={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                        }}
-                        >
-                            <div>{SelectedChapter?.chapterName}</div>
-                            <div>{SelectedTopic?.topicName}</div>
+                        {/* <div className='chapter-title'>{SelectedChapter?.chapterName}</div> */}
+                        <div className='topic-title'>
+                            {SelectedTopic?.topicName ? SelectedTopic?.topicName : SelectedTopic?.topicId}
                         </div>
-                        <Link to='/6'>
+                        <Link to='/'>
                             <Button
                                 width={'180px'}
                                 height={'40px'}
                                 radius={'12px'}
                             >
-                                <div className='text'>STUDY</div>
+                                <div className='text'>LET'S STUDY</div>
                             </Button>
                         </Link>
                     </div>
+
+
+                    {/* <div>
+                        <Button
+                            width={'180px'}
+                            height={'30px'}
+                            radius={'10px'}
+                        >
+                            <div className='text'>TEST</div>
+                        </Button>
+                    </div> */}
                 </div>
             ))}
         </div>
