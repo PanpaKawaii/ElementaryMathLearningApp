@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { SubjectSample } from '../../../mocks/subject_sample';
-import Button from '../../components/Button.jsx';
-import './Process.css';
+import { SubjectSample } from '../../../../mocks/subject_sample.js';
+import Button from '../../../components/Button.jsx';
+import './Progress.css';
 
-export default function Process() {
+export default function Progress() {
 
     const [SelectedChapter, setSelectedChapter] = useState(null);
     const [SelectedTopic, setSelectedTopic] = useState(null);
@@ -15,14 +15,15 @@ export default function Process() {
     };
 
     return (
-        <div className='process-container'>
-            <h2>{SubjectSample.subjectName}</h2>
+        <div className='progress-container'>
+            {/* <h2>{SubjectSample.subjectName}</h2> */}
+            <div className='hide-header'></div>
             {SubjectSample.chapters.map((chapter) => (
                 <div key={chapter.chapterId} className='chapter'>
 
                     <div className='chapter-heading'>
                         <h3>{chapter.chapterName}</h3>
-                        <div>Process: <b>0/10</b> Finished Topics</div>
+                        <div>Progress: <b>0/10</b> Finished Topics</div>
                     </div>
                     {chapter.topics.length > 0 ? (
                         <div className='topics'>
