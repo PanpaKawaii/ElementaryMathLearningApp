@@ -31,6 +31,10 @@
                 font-size: 24px;
                 margin: 0 0 8px;
             }
+
+            .topic-progress {
+                font-weight: bold;
+            }
         }
 
         .topics {
@@ -73,8 +77,6 @@
             width: auto;
             height: 80px;
             margin: 0 20px 20px;
-            color: #fd73a7;
-            /* ======================================================================= */
             font-weight: bold;
             background-color: #fec2d6;
             /* ======================================================================= */
