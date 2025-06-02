@@ -24,12 +24,12 @@ export default function Progress() {
                     <div
                         className='chapter-heading'
                         style={{
-                            backgroundColor: `hsl(${Math.round(chapter_index * (360 / 8))}, 97%, 70%)`,
-                            textShadow: `1px 1px 1px hsl(${Math.round(chapter_index * (360 / 8))}, 100%, 40%)`,
+                            backgroundColor: `hsl(${Math.round(chapter_index * (360 / 8))}, 97%, 60%)`,
+                            textShadow: `1px 1px 0px hsl(${Math.round(chapter_index * (360 / 8))}, 100%, 40%)`,
                         }}
                     >
                         <h3>{chapter.chapterName}</h3>
-                        <div>Progress: <b>0/10</b> Finished Topics</div>
+                        <div className='topic-progress'>Progress: 0/10 finished topics</div>
                     </div>
                     {chapter.topics.length > 0 ? (
                         <div className='topics'>
@@ -53,7 +53,6 @@ export default function Progress() {
                                 height={'60px'}
                                 border={'6px'}
                                 radius={'50%'}
-                                // maincolor={`${Math.round(chapter_index * (360 / 8))}`}
                                 maincolor={'locked'}
                                 onToggle={() =>
                                     handleToggle({
@@ -92,7 +91,7 @@ export default function Progress() {
                     <div
                         className='please-select'
                         style={{
-                            color: `hsl(${Math.round(chapter_index * (360 / 8))}, 83%, 76%)`,
+                            color: `hsl(${Math.round(chapter_index * (360 / 8))}, 83%, 71%)`,
                             border: `8px solid hsl(${Math.round(chapter_index * (360 / 8))}, 84%, 89%)`,
                         }}
                     >
@@ -102,15 +101,14 @@ export default function Progress() {
                     <div
                         className={`selected-topic ${(chapter.chapterId == SelectedChapter?.chapterId && SelectedTopic) ? '' : 'hidden'}`}
                         style={{
-                            color: `hsl(${Math.round(chapter_index * (360 / 8))}, 97%, 70%)`,
-                            backgroundColor: `hsl(${Math.round(chapter_index * (360 / 8))}, 92%, 84%)`,
+                            backgroundColor: `hsl(${Math.round(chapter_index * (360 / 8))}, 92%, 79%)`,
                         }}
                     >
                         {/* <div className='chapter-title'>{SelectedChapter?.chapterName}</div> */}
                         <div
                             className='topic-title'
                             style={{
-                                textShadow: `1px 1px 1px hsl(${Math.round(chapter_index * (360 / 8))}, 100%, 40%)`,
+                                textShadow: `1px 1px 0px hsl(${Math.round(chapter_index * (360 / 8))}, 100%, 40%)`,
                             }}
                         >
                             {SelectedTopic?.topicName ? SelectedTopic?.topicName : SelectedTopic?.topicId}
