@@ -102,7 +102,7 @@
 
                     .progress {
                         width: 100%;
-                        color: #777;
+                        color: #fff;
                         text-align: center;
                         /* background: linear-gradient(to right, #ffc107 34%, #ccc 34%); */
                         border-radius: 10px;
