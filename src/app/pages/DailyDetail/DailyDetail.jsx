@@ -1,11 +1,11 @@
 import React from 'react';
-import { SubjectSample } from '../../../mocks/subject_sample.js';
+import { Subject } from '../../../mocks/DatabaseSample.js';
 import './DailyDetail.css';
 
 export default function DailyDetail() {
     return (
         <div className='dailydetail-container'>
-            <h1>{SubjectSample.subjectName}</h1>
+            <h1>{Subject[0].Name}</h1>
 
             <div className='achievement'>
                 <div><i className='fa-solid fa-fire'></i>856</div>
