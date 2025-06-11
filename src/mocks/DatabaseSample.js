@@ -122,4 +122,19 @@ export const Topic = [
     // { TopicId: 88, ChapterId: 8, Number: 8, Name: 'NONE' },
     // { TopicId: 89, ChapterId: 8, Number: 9, Name: 'NONE' },
     // { TopicId: 90, ChapterId: 8, Number: 10, Name: 'NONE' },
-]
+];
+
+export const Comment = [
+    { Id: 1, UserId: 1, QuestionId: 1, Content: 'I talk about the question', Answer: null, CommentDate: '11-06-2025' },
+    { Id: 2, UserId: 1, QuestionId: 1, Content: 'I answer 1', Answer: 1, CommentDate: '11-06-2025' },
+    { Id: 3, UserId: 1, QuestionId: 1, Content: 'I answer 1', Answer: 1, CommentDate: '11-06-2025' },
+    { Id: 4, UserId: 1, QuestionId: 1, Content: 'I answer 2', Answer: 2, CommentDate: '11-06-2025' },
+    { Id: 5, UserId: 1, QuestionId: 1, Content: 'I answer 2', Answer: 2, CommentDate: '11-06-2025' },
+    { Id: 6, UserId: 1, QuestionId: 1, Content: 'I answer 5', Answer: 5, CommentDate: '11-06-2025' },
+    { Id: 7, UserId: 1, QuestionId: 1, Content: 'I answer 2', Answer: 2, CommentDate: '11-06-2025' },
+    { Id: 8, UserId: 1, QuestionId: 1, Content: 'I answer 3', Answer: 3, CommentDate: '11-06-2025' },
+    { Id: 9, UserId: 1, QuestionId: 1, Content: 'I answer 3', Answer: 3, CommentDate: '11-06-2025' },
+    { Id: 10, UserId: 1, QuestionId: 1, Content: 'I answer 9', Answer: 9, CommentDate: '11-06-2025' },
+    { Id: 11, UserId: 1, QuestionId: 1, Content: 'I talk about the question too', Answer: null, CommentDate: '11-06-2025' },
+    { Id: 12, UserId: 1, QuestionId: 1, Content: 'I answer 11', Answer: 11, CommentDate: '11-06-2025' },
+];
