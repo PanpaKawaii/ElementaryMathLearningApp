@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { SubjectSample } from '../../../../mocks/subject_sample.js';
-import { Subject, Chapter, Topic } from '../../../../mocks/DatabaseSample.js';
+import { subjects, chapters, topics } from '../../../../mocks/DatabaseSample.js';
 import Button from '../../../components/Button.jsx';
 import './Progress.css';
 
 export default function Progress() {
 
-    const SubjectIdParam = 1;
-
     // const [SUBJECTs, setSUBJECTs] = useState(Subject.filter(subject => subject.Id === SubjectIdParam));
-    const [SUBJECTs, setSUBJECTs] = useState(Subject);
-    const [CHAPTERs, setCHAPTERs] = useState(Chapter);
-    const [TOPICs, setTOPICs] = useState(Topic);
+    const [SUBJECTs, setSUBJECTs] = useState(subjects[0]);
+    const [CHAPTERs, setCHAPTERs] = useState(chapters);
+    const [TOPICs, setTOPICs] = useState(topics);
 
     const [SelectedChapter, setSelectedChapter] = useState(null);
     const [SelectedTopic, setSelectedTopic] = useState(null);
@@ -25,7 +23,7 @@ export default function Progress() {
     return (
         <div className='progress-container'>
 
-            {SUBJECTs.map((subject, subject_index) => (
+            {/* {subjects.map((subject, subject_index) => (
                 <div
                     key={subject_index}
                     style={{
@@ -63,10 +61,12 @@ export default function Progress() {
                         </div>
                     ))}
                 </div>
-            ))}
+            ))} */}
 
-            <div className='hide-header'></div>
-            {CHAPTERs.filter(chapter => chapter.SubjectId === SUBJECTs[0].Id).map((chapter, chapter_index) => (
+            <div className='subject-name'>
+                <h1>{SUBJECTs.Name}</h1>
+            </div>
+            {CHAPTERs.filter(chapter => chapter.SubjectId === SUBJECTs.Id).map((chapter, chapter_index) => (
                 <div key={chapter.ChapterId} className='chapter'>
 
                     <div
@@ -161,7 +161,7 @@ export default function Progress() {
                         >
                             {SelectedTopic?.Name ? SelectedTopic?.Name : SelectedTopic?.TopicId}
                         </div>
-                        <Link to='/'>
+                        <Link to={`/studying/topic/${SelectedTopic?.TopicId}`}>
                             <Button
                                 width={'180px'}
                                 height={'40px'}
