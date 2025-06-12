@@ -1,9 +1,9 @@
-export const Subject = [
+export const subjects = [
     { Id: 1, Name: 'Mathematics Grade 1', Price: 120000, UploadDate: '26-05-2025', LastEditDate: '03-06-2025' },
     { Id: 2, Name: 'Mathematics Grade 2', Price: 140000, UploadDate: '27-05-2025', LastEditDate: '04-06-2025' },
 ];
 
-export const Chapter = [
+export const chapters = [
     { ChapterId: 1, SubjectId: 1, Number: 1, Name: 'Numbers and Counting' },
     { ChapterId: 2, SubjectId: 1, Number: 2, Name: 'Addition and Subtraction' },
     { ChapterId: 3, SubjectId: 1, Number: 3, Name: 'Multiplication Basics' },
@@ -23,7 +23,7 @@ export const Chapter = [
     { ChapterId: 16, SubjectId: 2, Number: 8, Name: 'Data and Graphs' },
 ];
 
-export const Topic = [
+export const topics = [
     { TopicId: 1, ChapterId: 1, Number: 1, Name: 'Counting to 10' },
     { TopicId: 2, ChapterId: 1, Number: 2, Name: 'Addition Basics' },
     { TopicId: 3, ChapterId: 1, Number: 3, Name: 'Subtraction Basics' },
@@ -124,7 +124,7 @@ export const Topic = [
     // { TopicId: 90, ChapterId: 8, Number: 10, Name: 'NONE' },
 ];
 
-export const Comment = [
+export const comments = [
     { Id: 1, UserId: 1, QuestionId: 1, Content: 'I talk about the question', Answer: null, CommentDate: '11-06-2025' },
     { Id: 2, UserId: 1, QuestionId: 1, Content: 'I answer 1', Answer: 1, CommentDate: '11-06-2025' },
     { Id: 3, UserId: 1, QuestionId: 1, Content: 'I answer 1', Answer: 1, CommentDate: '11-06-2025' },
@@ -137,4 +137,17 @@ export const Comment = [
     { Id: 10, UserId: 1, QuestionId: 1, Content: 'I answer 9', Answer: 9, CommentDate: '11-06-2025' },
     { Id: 11, UserId: 1, QuestionId: 1, Content: 'I talk about the question too', Answer: null, CommentDate: '11-06-2025' },
     { Id: 12, UserId: 1, QuestionId: 1, Content: 'I answer 11', Answer: 11, CommentDate: '11-06-2025' },
+];
+
+export const questions = [
+    { Id: 1, Number: 1, Type: 'Multiple', Question: 'What is 3 + 2?', CorrectAnswer: '5', OtherAnswer: ['6', '7', '8'], Explaination: '3 + 2 equals 5 because you add 3 and 2 together.', Note: 'Basic addition' },
+    { Id: 2, Number: 2, Type: 'Text', Question: 'Fill in the blank: 4 + __ = 7', CorrectAnswer: '3', OtherAnswer: ['2', '4', '5'], Explaination: 'To find the missing number, you subtract 4 from 7. 7 - 4 = 3.', Note: 'Simple addition' },
+    { Id: 3, Number: 3, Type: 'Multiple', Question: 'Which number is greater: 8 or 5?', CorrectAnswer: '8', OtherAnswer: ['5'], Explaination: '8 is greater than 5 because 8 is a larger number.', Note: 'Number comparison' },
+    { Id: 4, Number: 4, Type: 'AscendingOrder', Question: 'Arrange the numbers in ascending order: 5, 3, 8, 2', CorrectAnswer: '2, 3, 5, 8', OtherAnswer: ['3, 5, 8, 2', '8, 5, 3, 2', '5, 2, 3, 8'], Explaination: 'Ascending order means arranging numbers from the smallest to the largest.', Note: 'Number sequencing' },
+    { Id: 5, Number: 5, Type: 'DescendingOrder', Question: 'Arrange the numbers in descending order: 7, 2, 9, 5', CorrectAnswer: '9, 7, 5, 2', OtherAnswer: ['2, 5, 7, 9', '9, 7, 2, 5', '7, 5, 2, 9'], Explaination: 'Descending order means arranging numbers from the largest to the smallest.', Note: 'Number sequencing' },
+    { Id: 6, Number: 6, Type: 'Text', Question: 'Fill in the blank: 10 - __ = 6', CorrectAnswer: '4', OtherAnswer: ['5', '6', '3'], Explaination: 'To find the missing number, subtract 6 from 10. 10 - 6 = 4.', Note: 'Simple subtraction' },
+    { Id: 7, Number: 7, Type: 'Multiple', Question: 'What is 6 + 3?', CorrectAnswer: '9', OtherAnswer: ['8', '7', '6'], Explaination: '6 + 3 equals 9 because adding 6 and 3 gives you 9.', Note: 'Basic addition' },
+    { Id: 8, Number: 8, Type: 'Multiple', Question: 'What is the number that comes after 10?', CorrectAnswer: '11', OtherAnswer: ['9', '10', '12'], Explaination: 'The number after 10 is 11.', Note: 'Basic counting' },
+    { Id: 9, Number: 9, Type: 'Text', Question: 'Fill in the blank: __ + 5 = 9', CorrectAnswer: '4', OtherAnswer: ['3', '6', '5'], Explaination: 'To find the missing number, subtract 5 from 9. 9 - 5 = 4.', Note: 'Simple addition' },
+    { Id: 10, Number: 10, Type: 'Multiple', Question: 'Which number is smaller: 4 or 6?', CorrectAnswer: '4', OtherAnswer: ['6'], Explaination: '4 is smaller than 6 because 4 is less than 6.', Note: 'Number comparison' },
 ];
