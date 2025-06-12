@@ -17,7 +17,7 @@ export default function Progress() {
 
     const handleToggle = (topic, chapter) => {
         setSelectedChapter(p => chapter);
-        setSelectedTopic(p => topic.TopicId == SelectedTopic?.TopicId ? null : topic);
+        setSelectedTopic(p => topic.Id == SelectedTopic?.Id ? null : topic);
     };
 
     return (
@@ -44,8 +44,8 @@ export default function Progress() {
                                 borderRadius: '12px',
                             }}
                         >
-                            <div>ID {chapter.ChapterId}: {chapter.Name}</div>
-                            {TOPICs.filter(topic => topic.ChapterId === chapter.ChapterId).map((topic, topic_index) => (
+                            <div>ID {chapter.Id}: {chapter.Name}</div>
+                            {TOPICs.filter(topic => topic.ChapterId === chapter.Id).map((topic, topic_index) => (
                                 <div
                                     key={topic_index}
                                     style={{
@@ -55,7 +55,7 @@ export default function Progress() {
                                         borderRadius: '12px',
                                     }}
                                 >
-                                    <div>ID {topic.TopicId}: {topic.Name}</div>
+                                    <div>ID {topic.Id}: {topic.Name}</div>
                                 </div>
                             ))}
                         </div>
@@ -67,7 +67,7 @@ export default function Progress() {
                 <h1>{SUBJECTs.Name}</h1>
             </div>
             {CHAPTERs.filter(chapter => chapter.SubjectId === SUBJECTs.Id).map((chapter, chapter_index) => (
-                <div key={chapter.ChapterId} className='chapter'>
+                <div key={chapter.Id} className='chapter'>
 
                     <div
                         className='chapter-heading'
@@ -79,17 +79,17 @@ export default function Progress() {
                         <h3>{chapter.Name}</h3>
                         <div className='topic-progress'>Progress: 0/10 finished topics</div>
                     </div>
-                    {TOPICs.filter(topic => topic.ChapterId === chapter.ChapterId).length > 0 ? (
+                    {TOPICs.filter(topic => topic.ChapterId === chapter.Id).length > 0 ? (
                         <div className='topics'>
-                            {TOPICs.filter(topic => topic.ChapterId === chapter.ChapterId).map((topic, topic_index) => (
+                            {TOPICs.filter(topic => topic.ChapterId === chapter.Id).map((topic, topic_index) => (
                                 <Button
-                                    key={topic.TopicId}
+                                    key={topic.Id}
                                     width={'80px'}
                                     height={'60px'}
                                     border={'6px'}
                                     radius={'50%'}
                                     maincolor={`${Math.round(chapter_index * (360 / 8))}`}
-                                    active={topic.TopicId == SelectedTopic?.TopicId}
+                                    active={topic.Id == SelectedTopic?.Id}
                                     onToggle={() => handleToggle(topic, chapter)}
                                 >
                                     <div className='text'>{topic_index + 1}</div>
@@ -104,12 +104,12 @@ export default function Progress() {
                                 maincolor={'locked'}
                                 onToggle={() =>
                                     handleToggle({
-                                        TopicId: 'quiz-' + chapter.ChapterId,
+                                        Id: 'quiz-' + chapter.Id,
                                         TopicName: 'Final Quiz',
                                     },
                                         chapter
                                     )}
-                                active={'quiz-' + chapter.ChapterId == SelectedTopic?.TopicId}
+                                active={'quiz-' + chapter.Id == SelectedTopic?.Id}
                             >
                                 <i className='fa-solid fa-book'></i>
                             </Button>
@@ -122,12 +122,12 @@ export default function Progress() {
                                 maincolor={'gold'}
                                 onToggle={() =>
                                     handleToggle({
-                                        TopicId: 'advanced-' + chapter.ChapterId,
+                                        Id: 'advanced-' + chapter.Id,
                                         TopicName: 'Advanced Quiz',
                                     },
                                         chapter
                                     )}
-                                active={'advanced-' + chapter.ChapterId == SelectedTopic?.TopicId}
+                                active={'advanced-' + chapter.Id == SelectedTopic?.Id}
                             >
                                 <i className='fa-solid fa-trophy'></i>
                             </Button>
@@ -147,7 +147,7 @@ export default function Progress() {
                     </div>
 
                     <div
-                        className={`selected-topic ${(chapter.ChapterId == SelectedChapter?.ChapterId && SelectedTopic) ? '' : 'hidden'}`}
+                        className={`selected-topic ${(chapter.Id == SelectedChapter?.Id && SelectedTopic) ? '' : 'hidden'}`}
                         style={{
                             backgroundColor: `hsl(${Math.round(chapter_index * (360 / 8))}, 92%, 79%)`,
                         }}
@@ -159,9 +159,9 @@ export default function Progress() {
                                 textShadow: `1px 1px 0px hsl(${Math.round(chapter_index * (360 / 8))}, 100%, 40%)`,
                             }}
                         >
-                            {SelectedTopic?.Name ? SelectedTopic?.Name : SelectedTopic?.TopicId}
+                            {SelectedTopic?.Name ? SelectedTopic?.Name : SelectedTopic?.Id}
                         </div>
-                        <Link to={`/studying/topic/${SelectedTopic?.TopicId}`}>
+                        <Link to={`/studying/topic/${SelectedTopic?.Id}`}>
                             <Button
                                 width={'180px'}
                                 height={'40px'}
