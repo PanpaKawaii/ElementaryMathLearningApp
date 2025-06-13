@@ -23,6 +23,7 @@ export default function MainRoutes() {
                 </Routes> */}
 
                 <Routes>
+                    <Route path='/' element={<Navigate to='/learn' replace />} />
                     <Route path='/' element={<NavigationBar />} >
                         <Route path='learn' element={<LearnContainer />} />
                         <Route path='comment' element={<CommentTest />} />
