@@ -104,12 +104,12 @@ export default function Progress() {
                                 maincolor={'locked'}
                                 onToggle={() =>
                                     handleToggle({
-                                        Id: 'quiz-' + chapter.Id,
-                                        TopicName: 'Final Quiz',
+                                        Id: 'final-quiz-' + chapter.Id,
+                                        Name: 'Final Quiz',
                                     },
                                         chapter
                                     )}
-                                active={'quiz-' + chapter.Id == SelectedTopic?.Id}
+                                active={'final-quiz-' + chapter.Id == SelectedTopic?.Id}
                             >
                                 <i className='fa-solid fa-book'></i>
                             </Button>
@@ -122,12 +122,12 @@ export default function Progress() {
                                 maincolor={'gold'}
                                 onToggle={() =>
                                     handleToggle({
-                                        Id: 'advanced-' + chapter.Id,
-                                        TopicName: 'Advanced Quiz',
+                                        Id: 'advanced-quiz-' + chapter.Id,
+                                        Name: 'Advanced Quiz',
                                     },
                                         chapter
                                     )}
-                                active={'advanced-' + chapter.Id == SelectedTopic?.Id}
+                                active={'advanced-quiz-' + chapter.Id == SelectedTopic?.Id}
                             >
                                 <i className='fa-solid fa-trophy'></i>
                             </Button>
