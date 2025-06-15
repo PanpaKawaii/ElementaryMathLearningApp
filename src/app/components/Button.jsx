@@ -27,6 +27,50 @@ export default function Button(props) {
             backgroundColor: `hsl(0, 0%, 89%)`,
             boxShadow: `${props.active ? 'none' : `0px 8px 0px 0px hsl(0, 0%, 76%)`}`,
         };
+    } else if (props.maincolor == 'white') {
+        ButtonStyle = {
+            width: `${props.width}`,
+            height: `${props.height}`,
+            borderRadius: `${props.radius}`,
+            border: `${props.border} solid hsl(0, 0%, 94%)`,
+            color: `hsl(0, 0%, 60%)`,
+            textShadow: `1px 1px 1px hsl(0, 0%, 30%)`,
+            backgroundColor: `hsl(0, 0%, 99%)`,
+            boxShadow: `${props.active ? 'none' : `0px 8px 0px 0px hsl(0, 0%, 88%)`}`,
+        };
+    } else if (props.maincolor == 'black') {
+        ButtonStyle = {
+            width: `${props.width}`,
+            height: `${props.height}`,
+            borderRadius: `${props.radius}`,
+            border: `${props.border} solid hsl(0, 0%, 35%)`,
+            color: `hsl(0, 0%, 10%)`,
+            textShadow: `1px 1px 1px hsl(0, 0%, 40%)`,
+            backgroundColor: `hsl(0, 0%, 45%)`,
+            boxShadow: `${props.active ? 'none' : `0px 8px 0px 0px hsl(0, 0%, 25%)`}`,
+        };
+    } else if (props.maincolor == 'correct') {
+        ButtonStyle = {
+            width: `${props.width}`,
+            height: `${props.height}`,
+            borderRadius: `${props.radius}`,
+            border: `${props.border} solid hsl(94, 98%, 40%)`,
+            color: `hsl(0, 0%, 100%)`,
+            textShadow: `none`,
+            backgroundColor: `hsl(95, 100%, 42%)`,
+            boxShadow: `${props.active ? '0px 0px 0px 10px hsla(95, 100%, 40%, 0.4)' : `0px 8px 0px 0px hsl(134, 61%, 41%)`}`,
+        };
+    } else if (props.maincolor == 'incorrect') {
+        ButtonStyle = {
+            width: `${props.width}`,
+            height: `${props.height}`,
+            borderRadius: `${props.radius}`,
+            border: `${props.border} solid hsl(0, 98%, 50%)`,
+            color: `hsl(0, 0%, 100%)`,
+            textShadow: `none`,
+            backgroundColor: `hsl(0, 100%, 60%)`,
+            boxShadow: `${props.active ? '0px 0px 0px 10px hsla(0, 100%, 50%, 0.4)' : `0px 8px 0px 0px hsl(0, 61%, 41%)`}`,
+        };
     } else {
         ButtonStyle = {
             width: `${props.width}`,
@@ -52,6 +96,30 @@ export default function Button(props) {
             width: `${props.width}`,
             top: `${8 + parseInt(props.height.replace('px', '')) / 2}px`,
             backgroundColor: `hsl(0, 0%, 76%)`,
+        };
+    } else if (props.maincolor == 'white') {
+        ShadowStyle = {
+            width: `${props.width}`,
+            top: `${8 + parseInt(props.height.replace('px', '')) / 2}px`,
+            backgroundColor: `hsl(0, 0%, 88%)`,
+        };
+    } else if (props.maincolor == 'black') {
+        ShadowStyle = {
+            width: `${props.width}`,
+            top: `${8 + parseInt(props.height.replace('px', '')) / 2}px`,
+            backgroundColor: `hsl(0, 0%, 25%)`,
+        };
+    } else if (props.maincolor == 'correct') {
+        ShadowStyle = {
+            width: `${props.width}`,
+            top: `${8 + parseInt(props.height.replace('px', '')) / 2}px`,
+            backgroundColor: `hsl(134, 61%, 41%)`,
+        };
+    } else if (props.maincolor == 'incorrect') {
+        ShadowStyle = {
+            width: `${props.width}`,
+            top: `${8 + parseInt(props.height.replace('px', '')) / 2}px`,
+            backgroundColor: `hsl(0, 61%, 41%)`,
         };
     } else {
         ShadowStyle = {

@@ -20,14 +20,19 @@
 
         .heading {
             margin: 0 0 40px;
-            padding: 20px;
+            padding: 16px 20px;
             display: flex;
             gap: 20px;
             font-size: 20px;
             font-weight: bold;
 
+            a {
+                align-content: center;
+            }
+
             i,
             .current-question {
+                color: #000;
                 align-content: center;
             }
 
@@ -77,37 +82,85 @@
                     align-items: center;
                     border-top: 2px solid #ddd;
                     box-sizing: border-box;
+
+                    .result-status {
+                        padding: 8px 0;
+                        width: 100%;
+                        max-width: 600px;
+                        height: 100%;
+                        box-sizing: border-box;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+                        gap: 8px;
+
+                        i {
+                            font-size: 56px;
+                            background-color: #fff;
+                            border-radius: 100%;
+                        }
+
+                        .fa-ellipsis {
+                            color: #777;
+                        }
+
+                        .fa-circle-check {
+                            color: #28a745;
+                        }
+
+                        .fa-circle-xmark {
+                            color: #dc3545;
+                        }
+
+                        .text-status {
+                            color: #28a745;
+                            font-weight: bold;
+                        }
+
+                        .text-explaination {
+                            color: #dc3545;
+                            font-weight: bold;
+                            word-break: break-all;
+                        }
+                    }
                 }
 
                 .correct-result {
-                    border-top: 2px solid #28a745;
+                    border-top: 2px solid hsl(134, 61%, 80%);
                     background-color: #d3f9d8;
                 }
 
                 .incorrect-result {
-                    border-top: 2px solid #dc3545;
+                    border-top: 2px solid hsl(354, 70%, 80%);
                     background-color: #fad7d9;
                 }
             }
         }
     }
 
-    .radio-group {
-        padding: 20px 80px;
+    .answer-group {
+        /* padding: 20px 80px;
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 40px 60px;
+        gap: 40px 60px; */
 
         .radio-label {
-            height: 120px;
+            width: auto;
+            height: fit-content;
             border: 2px solid #ccc;
             box-sizing: border-box;
             border-radius: 12px;
             display: flex;
+            align-self: center;
             justify-content: center;
             align-items: start;
             cursor: pointer;
             overflow: hidden;
+
+            .text {
+                font-size: 40px;
+            }
 
             .hidden-radio {
                 display: none;
