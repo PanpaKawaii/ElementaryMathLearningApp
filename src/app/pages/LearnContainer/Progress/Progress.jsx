@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { SubjectSample } from '../../../../mocks/subject_sample.js';
 import { subjects, chapters, topics } from '../../../../mocks/DatabaseSample.js';
 import Button from '../../../components/Button.jsx';
 import './Progress.css';

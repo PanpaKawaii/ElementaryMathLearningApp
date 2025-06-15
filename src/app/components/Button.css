@@ -5,16 +5,10 @@
 
     .grid-card {
         margin: 8px;
-        /* width: 80px;
-        height: 60px; */
         text-align: center;
         align-content: center;
         background-color: #fdd9e5;
-        /* ======================================================================= */
-        /* border: 6px solid #fec2d6; */
-        /* border-radius: 50%; */
         box-shadow: 0px 8px 0px 0px #f99dbc;
-        /* ======================================================================= */
         box-sizing: border-box;
         cursor: pointer;
         font-weight: bold;
@@ -25,7 +19,6 @@
     .active {
         margin: 16px 8px 0;
         box-shadow: none;
-        /* ======================================================================= */
     }
 
     .shadow {
@@ -34,7 +27,6 @@
         position: absolute;
         height: 8px;
         background-color: #f99dbc;
-        /* ======================================================================= */
         /* background-color: red; */
         transition: all 0.1s ease;
     }
