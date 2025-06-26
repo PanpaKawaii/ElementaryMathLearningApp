@@ -5,6 +5,7 @@ import NavigationBar from '../pages/NavigationBar/NavigationBar'
 import LearnContainer from '../pages/LearnContainer/LearnContainer'
 import CommentTest from '../pages/Comment/CommentTest'
 import Studying from '../pages/Studying/Studying'
+import FinalQuiz from '../pages/Studying/FinalQuiz'
 import Subject from '../pages/Subject/Subject'
 
 export default function MainRoutes() {
@@ -30,8 +31,9 @@ export default function MainRoutes() {
                         <Route path='subject' element={<Subject />} />
                         <Route path='comment' element={<CommentTest />} />
                     </Route>
-                    <Route path='*' element={<Navigate to='/learn' replace />} />
+                    {/* <Route path='*' element={<Navigate to='/learn' replace />} /> */}
                     <Route path='studying/topic/:id' element={<Studying />} />
+                    <Route path='studying/chapter/:id' element={<FinalQuiz />} />
                 </Routes>
                 <></>
             </div>

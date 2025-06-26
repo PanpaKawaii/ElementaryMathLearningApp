@@ -12,9 +12,8 @@ export default function Progress() {
     if (!SubjectId) navigate('/subject');
 
     // const [SUBJECTs, setSUBJECTs] = useState(Subject.filter(subject => subject.Id === SubjectIdParam));
-    const [SUBJECTs, setSUBJECTs] = useState([]);
-    const [CHAPTERs, setCHAPTERs] = useState([]);
-    const [TOPICs, setTOPICs] = useState(topics);
+    const [SUBJECTs, setSUBJECTs] = useState(null);
+    const [BOUGHTSUBJECTs, setBOUGHTSUBJECTs] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -26,6 +25,11 @@ export default function Progress() {
                 const subjectData = await fetchData(`api/subject/${SubjectId}`, token);
                 console.log('subjectData', subjectData);
                 setSUBJECTs(subjectData);
+
+                const boughtSubjectData = await fetchData(`api/boughtsubject/user/${1}`, token);
+                console.log('boughtSubjectData', boughtSubjectData);
+                setBOUGHTSUBJECTs(boughtSubjectData.filter(bs => bs.id === SubjectId));
+                console.log('boughtSubjectDataFilter', boughtSubjectData.filter(bs => bs.id == SubjectId));
 
                 setLoading(false);
             } catch (error) {
@@ -45,6 +49,8 @@ export default function Progress() {
         setSelectedChapter(p => chapter);
         setSelectedTopic(p => topic.id == SelectedTopic?.id ? null : topic);
     };
+    console.log('SelectedTopic', SelectedTopic);
+
 
     if (loading) return <Loading />
 
@@ -132,12 +138,12 @@ export default function Progress() {
                                 maincolor={'locked'}
                                 onToggle={() =>
                                     handleToggle({
-                                        id: 'final-quiz-' + chapter.id,
+                                        id: (chapter.topics?.length + 1) + '-' + chapter.id,
                                         name: 'Final Quiz',
                                     },
                                         chapter
                                     )}
-                                active={'final-quiz-' + chapter.id == SelectedTopic?.id}
+                                active={(chapter.topics?.length + 1) + '-' + chapter.id == SelectedTopic?.id}
                             >
                                 <i className='fa-solid fa-book'></i>
                             </Button>
@@ -150,12 +156,12 @@ export default function Progress() {
                                 maincolor={'gold'}
                                 onToggle={() =>
                                     handleToggle({
-                                        id: 'advanced-quiz-' + chapter.id,
+                                        id: (chapter.topics?.length + 2) + '+' + chapter.id,
                                         name: 'Advanced Quiz',
                                     },
                                         chapter
                                     )}
-                                active={'advanced-quiz-' + chapter.id == SelectedTopic?.id}
+                                active={(chapter.topics?.length + 2) + '+' + chapter.id == SelectedTopic?.id}
                             >
                                 <i className='fa-solid fa-trophy'></i>
                             </Button>
@@ -189,7 +195,14 @@ export default function Progress() {
                         >
                             {SelectedTopic?.name ? SelectedTopic?.name : SelectedTopic?.id}
                         </div>
-                        <Link to={`/studying/topic/${SelectedTopic?.id}`}>
+                        <Link to={
+                            `${(SelectedTopic?.id + '').includes('-') ? `/studying/chapter/${SelectedTopic?.id?.split('-')[1]}` :
+                                (
+                                    (SelectedTopic?.id + '').includes('+') ? `/studying/chapter/${SelectedTopic?.id?.split('+')[1]}` :
+                                        `/studying/topic/${SelectedTopic?.id}`
+                                )}`
+                        }
+                        >
                             <Button
                                 width={'180px'}
                                 height={'40px'}

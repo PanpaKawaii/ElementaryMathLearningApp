@@ -5,7 +5,7 @@ import './MultipleForm.css';
 export default function MultipleForm({ Question, Status, SelectedAnswer, setSelectedAns }) {
     return (
         <div className='answer-group'>
-            {Question.Answers.map((ans, i) => (
+            {Question.answers.split('@@').map((ans, i) => (
                 // <label key={i} className='radio-label'>
                 //     <input
                 //         type='radio'

@@ -7,7 +7,7 @@ import Button from '../../components/Button.jsx';
 import Loading from '../../layouts/Loading/Loading.jsx';
 import './Studying.css';
 
-export default function Studying() {
+export default function FinalQuiz() {
     const formRef = useRef(null);
     const navigate = useNavigate();
     const TopicId = useParams();
@@ -28,7 +28,7 @@ export default function Studying() {
             try {
                 const questionData = await fetchData(`api/topic/${TopicId.id}`, token);
                 console.log('questionData', questionData);
-                setQUESTIONs(questionData.questions);
+                setQUESTIONs(questionData.questions);////////////////////////////////////////////////////////////////////////////////////////////////////////
 
                 setLoading(false);
             } catch (error) {
