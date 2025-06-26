@@ -119,7 +119,7 @@
                             font-weight: bold;
                         }
 
-                        .text-explaination {
+                        .text-explanation {
                             color: #dc3545;
                             font-weight: bold;
                             word-break: break-all;
@@ -179,6 +179,7 @@
                     border: 4px solid #ffd700;
                     box-sizing: border-box;
                     border-radius: 16px;
+                    box-shadow: 0 0 0 8px #ffd70040;
                     display: flex;
                     align-items: center;
                     gap: 4px;
