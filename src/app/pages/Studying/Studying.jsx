@@ -65,6 +65,7 @@ export default function Studying() {
         // console.log('Choice: ', Choice);
     };
 
+    const CorrectCount = QuizProgress.filter(q => q === true).length
     const handleFinish = () => {
 
     };
@@ -202,10 +203,26 @@ export default function Studying() {
                 </div>
             )
                 :
-                <div className='card-study'>
-                    <div>FINISH</div>
-                    <button onClick={() => { handleFinish() }}>FINISH</button>
-                    <Link to='/'><i className='fa-solid fa-xmark'></i></Link>
+                <div className='card-study card-finish'>
+                    <div className='percent'>{100 * CorrectCount / QUESTIONs.length}%</div>
+                    <div className='text'>Well done!</div>
+                    <div className='btn-box'>
+                        <div className='bonus'>
+                            <div className='point'>+{CorrectCount * 10}</div><i className='fa-solid fa-lightbulb'></i>
+                        </div>
+                        <Button
+                            width={'120px'}
+                            height={'52px'}
+                            border={'6px'}
+                            radius={'16px'}
+                            maincolor={'correct'}
+                            active={false}
+                            onToggle={handleFinish}
+                        >
+                            FINISH
+                        </Button>
+                    </div>
+                    {/* <Link to='/'><i className='fa-solid fa-xmark'></i></Link> */}
                 </div>
             }
         </div>

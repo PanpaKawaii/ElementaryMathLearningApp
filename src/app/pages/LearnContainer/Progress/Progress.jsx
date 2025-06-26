@@ -1,23 +1,52 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { subjects, chapters, topics } from '../../../../mocks/DatabaseSample.js';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { subjects, topics } from '../../../../mocks/DatabaseSample.js';
+import { fetchData } from '../../../../mocks/CallingAPI.js'
 import Button from '../../../components/Button.jsx';
+import Loading from '../../../layouts/Loading/Loading.jsx';
 import './Progress.css';
 
 export default function Progress() {
+    const navigate = useNavigate();
+    const SubjectId = localStorage.getItem('SubjectId');
+    if (!SubjectId) navigate('/subject');
 
     // const [SUBJECTs, setSUBJECTs] = useState(Subject.filter(subject => subject.Id === SubjectIdParam));
-    const [SUBJECTs, setSUBJECTs] = useState(subjects[0]);
-    const [CHAPTERs, setCHAPTERs] = useState(chapters);
+    const [SUBJECTs, setSUBJECTs] = useState([]);
+    const [CHAPTERs, setCHAPTERs] = useState([]);
     const [TOPICs, setTOPICs] = useState(topics);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        // const token = user?.token;
+        const token = '';
+        const fetchDataAPI = async () => {
+            try {
+                const subjectData = await fetchData(`api/subject/${SubjectId}`, token);
+                console.log('subjectData', subjectData);
+                setSUBJECTs(subjectData);
+
+                setLoading(false);
+            } catch (error) {
+                setError(error);
+                setLoading(false);
+            }
+        };
+
+        fetchDataAPI();
+        // }, [user]);
+    }, []);
 
     const [SelectedChapter, setSelectedChapter] = useState(null);
     const [SelectedTopic, setSelectedTopic] = useState(null);
 
     const handleToggle = (topic, chapter) => {
         setSelectedChapter(p => chapter);
-        setSelectedTopic(p => topic.Id == SelectedTopic?.Id ? null : topic);
+        setSelectedTopic(p => topic.id == SelectedTopic?.id ? null : topic);
     };
+
+    if (loading) return <Loading />
 
     return (
         <div className='progress-container'>
@@ -63,10 +92,10 @@ export default function Progress() {
             ))} */}
 
             <div className='subject-name'>
-                <h1>{SUBJECTs.Name}</h1>
+                <h1>{SUBJECTs.name}</h1>
             </div>
-            {CHAPTERs.filter(chapter => chapter.SubjectId === SUBJECTs.Id).map((chapter, chapter_index) => (
-                <div key={chapter.Id} className='chapter'>
+            {SUBJECTs.chapters.map((chapter, chapter_index) => (
+                <div key={chapter.id} className='chapter'>
 
                     <div
                         className='chapter-heading'
@@ -75,20 +104,20 @@ export default function Progress() {
                             textShadow: `1px 1px 0px hsl(${Math.round(chapter_index * (360 / 8))}, 100%, 40%)`,
                         }}
                     >
-                        <h3>{chapter.Name}</h3>
-                        <div className='topic-progress'>Progress: 0/10 finished topics</div>
+                        <h3>{chapter.name}</h3>
+                        <div className='topic-progress'>Progress: 0/{chapter.topics?.length} finished topics</div>
                     </div>
-                    {TOPICs.filter(topic => topic.ChapterId === chapter.Id).length > 0 ? (
+                    {chapter.topics?.length > 0 ? (
                         <div className='topics'>
-                            {TOPICs.filter(topic => topic.ChapterId === chapter.Id).map((topic, topic_index) => (
+                            {chapter.topics.map((topic, topic_index) => (
                                 <Button
-                                    key={topic.Id}
+                                    key={topic.id}
                                     width={'80px'}
                                     height={'60px'}
                                     border={'6px'}
                                     radius={'50%'}
                                     maincolor={`${Math.round(chapter_index * (360 / 8))}`}
-                                    active={topic.Id == SelectedTopic?.Id}
+                                    active={topic.id == SelectedTopic?.id}
                                     onToggle={() => handleToggle(topic, chapter)}
                                 >
                                     <div className='text'>{topic_index + 1}</div>
@@ -103,12 +132,12 @@ export default function Progress() {
                                 maincolor={'locked'}
                                 onToggle={() =>
                                     handleToggle({
-                                        Id: 'final-quiz-' + chapter.Id,
-                                        Name: 'Final Quiz',
+                                        id: 'final-quiz-' + chapter.id,
+                                        name: 'Final Quiz',
                                     },
                                         chapter
                                     )}
-                                active={'final-quiz-' + chapter.Id == SelectedTopic?.Id}
+                                active={'final-quiz-' + chapter.id == SelectedTopic?.id}
                             >
                                 <i className='fa-solid fa-book'></i>
                             </Button>
@@ -121,12 +150,12 @@ export default function Progress() {
                                 maincolor={'gold'}
                                 onToggle={() =>
                                     handleToggle({
-                                        Id: 'advanced-quiz-' + chapter.Id,
-                                        Name: 'Advanced Quiz',
+                                        id: 'advanced-quiz-' + chapter.id,
+                                        name: 'Advanced Quiz',
                                     },
                                         chapter
                                     )}
-                                active={'advanced-quiz-' + chapter.Id == SelectedTopic?.Id}
+                                active={'advanced-quiz-' + chapter.id == SelectedTopic?.id}
                             >
                                 <i className='fa-solid fa-trophy'></i>
                             </Button>
@@ -146,7 +175,7 @@ export default function Progress() {
                     </div>
 
                     <div
-                        className={`selected-topic ${(chapter.Id == SelectedChapter?.Id && SelectedTopic) ? '' : 'hidden'}`}
+                        className={`selected-topic ${(chapter.id == SelectedChapter?.id && SelectedTopic) ? '' : 'hidden'}`}
                         style={{
                             backgroundColor: `hsl(${Math.round(chapter_index * (360 / 8))}, 92%, 79%)`,
                         }}
@@ -158,9 +187,9 @@ export default function Progress() {
                                 textShadow: `1px 1px 0px hsl(${Math.round(chapter_index * (360 / 8))}, 100%, 40%)`,
                             }}
                         >
-                            {SelectedTopic?.Name ? SelectedTopic?.Name : SelectedTopic?.Id}
+                            {SelectedTopic?.name ? SelectedTopic?.name : SelectedTopic?.id}
                         </div>
-                        <Link to={`/studying/topic/${SelectedTopic?.Id}`}>
+                        <Link to={`/studying/topic/${SelectedTopic?.id}`}>
                             <Button
                                 width={'180px'}
                                 height={'40px'}
@@ -171,18 +200,6 @@ export default function Progress() {
                             </Button>
                         </Link>
                     </div>
-
-
-                    {/* <div>
-                        <Button
-                            width={'180px'}
-                            height={'30px'}
-                            radius={'10px'}
-                            maincolor={`${Math.round(11 * (360 / 8))}`}
-                        >
-                            <div className='text'>TEST</div>
-                        </Button>
-                    </div> */}
                 </div>
             ))}
         </div>

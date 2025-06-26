@@ -1,0 +1,29 @@
+.subject-container {
+
+    .subjects {
+        margin: 0 0 40px;
+        padding: 0 20px;
+
+        .heading {
+            padding: 20px;
+            box-sizing: border-box;
+            font-weight: bold;
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: repeat(6, minmax(0, 1fr));
+            gap: 20px;
+
+            .col {
+                background-color: red;
+                width: 200px;
+                height: 260px;
+                display: flex;
+                justify-content: center;
+                align-items: start;
+                cursor: pointer;
+            }
+        }
+    }
+}

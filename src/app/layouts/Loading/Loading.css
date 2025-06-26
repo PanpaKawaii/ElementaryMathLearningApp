@@ -1,0 +1,52 @@
+@keyframes RotateZ {
+    from {
+        transform: rotateZ(0);
+    }
+
+    to {
+        transform: rotateZ(360deg);
+    }
+}
+
+.loadingcircle-container {
+    width: 100%;
+    min-width: 600px;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .arrow-container {
+        width: 200px;
+        height: 200px;
+        background-color: #fff;
+        border-radius: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        animation: RotateZ 1.4s linear infinite;
+
+        .arrow {
+            width: 160px;
+            height: 160px;
+            border: 12px solid #999;
+            box-sizing: border-box;
+            border-radius: 50%;
+        }
+
+        .white {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background-color: #fff;
+        }
+    }
+}

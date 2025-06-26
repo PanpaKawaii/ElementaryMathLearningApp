@@ -9,8 +9,9 @@ export default function NavigationBar() {
 
     const menuItems = [
         { name: 'LEARN', icon: 'house', path: '/learn' },
-        { name: 'COMMENT', icon: '', path: '/comment' },
-        { name: 'PROFILE', icon: '', path: '/def' },
+        { name: 'SUBJECT', icon: 'book', path: '/subject' },
+        { name: 'COMMENT', icon: 'comment', path: '/comment' },
+        { name: 'PROFILE', icon: 'user', path: '/profile' },
     ];
 
     return (
