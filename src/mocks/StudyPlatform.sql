@@ -84,7 +84,7 @@ CREATE TABLE [Question] (
     Question		NVARCHAR(255),
     CorrectAnswer	NVARCHAR(255),
     Answers			NVARCHAR(255),
-    Explaination	NVARCHAR(255),
+    Explanation	    NVARCHAR(255),
     Note			NVARCHAR(255),
     TopicId			INT FOREIGN KEY REFERENCES [Topic](Id)
 );
@@ -128,7 +128,7 @@ CREATE TABLE [Progress] (
     Id				INT PRIMARY KEY IDENTITY(1,1),
     Chapter			INT,
     Topic			INT,
-    BoughtSubjectId	INT FOREIGN KEY REFERENCES [BoughtSubject](Id)
+    BoughtSubjectId	INT UNIQUE FOREIGN KEY REFERENCES [BoughtSubject](Id)
 );
 
 -- Table: [TopicProgress]
@@ -197,7 +197,7 @@ INSERT INTO [Topic] (Number, Name, ChapterId) VALUES
 (1, 'Hydrocarbons', 6)
 
 -- Table: [Question]
---INSERT INTO [Question] (Number, Type, Question, CorrectAnswer, Answers, Explaination, Note, TopicId) VALUES
+--INSERT INTO [Question] (Number, Type, Question, CorrectAnswer, Answers, Explanation, Note, TopicId) VALUES
 --(1, 'Multiple Choice', 'What is 3 + 2?', '5', '7@@6@@5@@8', '3 + 2 equals 5 because you add 3 and 2 together.', 'Basic addition', 1),
 --(2, 'Text Answer', 'Fill in the blank: 4 + _ = 7', '3', '2@@3@@4@@5', 'To find the missing number, you subtract 4 from 7. 7 - 4 = 3.', 'Simple addition', 1),
 --(3, 'Multiple Choice', 'Which number is greater: 8 or 5?', '8', '8@@5', '8 is greater than 5 because 8 is a larger number.', 'Number comparison', 1),
@@ -209,7 +209,7 @@ INSERT INTO [Topic] (Number, Name, ChapterId) VALUES
 --(9, 'Text Answer', 'Fill in the blank: _ + 5 = 9', '4', '6@@3@@4@@5', 'To find the missing number, subtract 5 from 9. 9 - 5 = 4.', 'Simple addition', 1),
 --(10, 'Multiple Choice', 'Which number is smaller: 4 or 6?', '4', '4@@6', '4 is smaller than 6 because 4 is less than 6.', 'Number comparison', 1);
 -- Addition (TopicId = 1)
-INSERT INTO [Question] (Number, Type, Question, CorrectAnswer, Answers, Explaination, Note, TopicId) VALUES
+INSERT INTO [Question] (Number, Type, Question, CorrectAnswer, Answers, Explanation, Note, TopicId) VALUES
 (1, 'Multiple Choice', 'What is 2 + 3?', '5', '6@@3@@5@@4', '', '', 1),
 (2, 'Multiple Choice', 'What is 1 + 6?', '7', '5@@8@@7@@6', '', '', 1),
 (3, 'Multiple Choice', 'What is 4 + 5?', '9', '10@@9@@7@@8', '', '', 1),
@@ -252,9 +252,9 @@ INSERT INTO [Question] (Number, Type, Question, CorrectAnswer, Answers, Explaina
 (7, 'Multiple Choice', 'What is 14 / 2?', '7', '6@@5@@7@@8', '', '', 4),
 (8, 'Multiple Choice', 'What is 16 / 4?', '4', '3@@5@@2@@4', '', '', 4),
 (9, 'Multiple Choice', 'What is 18 / 3?', '6', '4@@3@@5@@6', '', '', 4),
-(10, 'Multiple Choice', 'What is 20 / 5?', '4', '4@@5@@2@@3', '', '', 4);
+(10, 'Multiple Choice', 'What is 20 / 5?', '4', '4@@5@@2@@3', '', '', 4),
 
-INSERT INTO [Question] (Number, Type, Question, CorrectAnswer, Answers, Explaination, Note, TopicId) VALUES
+
 (1, 'Multiple Choice', 'Which number is greater: 4 or 6?', '6', '4@@6', '', '', 5),
 (2, 'Multiple Choice', 'Which number is smaller: 7 or 3?', '3', '7@@3', '', '', 5),
 (3, 'Multiple Choice', 'Which number is greater: 9 or 2?', '9', '9@@2', '', '', 5),
@@ -297,9 +297,9 @@ INSERT INTO [Question] (Number, Type, Question, CorrectAnswer, Answers, Explaina
 (7, 'Multiple Choice', 'Fill in the blank: 30 > 28 > ? > 26', '27', '27@@28@@29@@26', '', '', 8),
 (8, 'Multiple Choice', 'Fill in the blank: 0 < 1 < ? < 3', '2', '2@@3@@1@@0', '', '', 8),
 (9, 'Multiple Choice', 'Fill in the blank: 15 > 14 > ? > 12', '13', '12@@14@@13@@15', '', '', 8),
-(10, 'Multiple Choice', 'Fill in the blank: 6 < 7 < ? < 9', '8', '6@@9@@7@@8', '', '', 8);
+(10, 'Multiple Choice', 'Fill in the blank: 6 < 7 < ? < 9', '8', '6@@9@@7@@8', '', '', 8),
 
-INSERT INTO [Question] (Number, Type, Question, CorrectAnswer, Answers, Explaination, Note, TopicId) VALUES
+
 (1, 'Multiple Choice', 'Arrange in ascending order: 4, 2, 5, 1', '1, 2, 4, 5', '4, 2, 5, 1@@1, 2, 4, 5@@5, 4, 2, 1@@2, 1, 4, 5', '', '', 9),
 (2, 'Multiple Choice', 'Arrange in ascending order: 7, 3, 6, 2', '2, 3, 6, 7', '6, 2, 3, 7@@2, 3, 6, 7@@7, 6, 3, 2@@3, 2, 6, 7', '', '', 9),
 (3, 'Multiple Choice', 'Arrange in ascending order: 9, 5, 8, 6', '5, 6, 8, 9', '9, 5, 8, 6@@6, 8, 9, 5@@5, 6, 8, 9@@8, 5, 6, 9', '', '', 9),
