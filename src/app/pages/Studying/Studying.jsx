@@ -93,13 +93,13 @@ export default function Studying() {
     };
 
     const CorrectCount = QuizProgress.filter(q => q === true).length
+    const Percent = CorrectCount / QUESTIONs.length
     const handleFinish = () => {
         navigate('/learn');
     };
 
     if (loading) return <Loading />
     if (QUESTIONs.length <= 0) navigate('/learn');
-
     return (
         <div className='studying-container'>
             {Order < QUESTIONs.length ? (
@@ -234,8 +234,19 @@ export default function Studying() {
             )
                 :
                 <div className='card-study card-finish'>
-                    <div className='percent'>{100 * CorrectCount / QUESTIONs.length}%</div>
-                    <div className='text'>Well done!</div>
+                    {/* <div className='percent perfect'>{100 * CorrectCount / QUESTIONs.length}%</div> */}
+                    {Percent === 1 ?
+                        <><div className='percent perfect'>{100 * Percent}%</div>
+                            <div className='text perfect'>Perfect!</div></> :
+                        ((Percent < 1 && Percent >= 0.8) ?
+                            <><div className='percent welldone'>{100 * Percent}%</div>
+                                <div className='text welldone'>Well done!</div></> :
+                            ((Percent < 0.8 && Percent >= 0.5) ?
+                                <><div className='percent good'>{100 * Percent}%</div>
+                                    <div className='text good'>Good!</div></> :
+                                <><div className='percent tryharder'>{100 * Percent}%</div>
+                                    <div className='text tryharder'>Try Harder!</div></>
+                            ))}
                     <div className='btn-box'>
                         <div className='bonus'>
                             <div className='point'>+{CorrectCount * 10}</div><i className='fa-solid fa-lightbulb'></i>

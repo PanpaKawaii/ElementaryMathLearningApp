@@ -8,7 +8,7 @@ export default function CommentTest() {
 
     function getChildrenComment(Id, num) {
 
-        const ChildrenComment = COMMENTs.filter(comment => comment.Answer === Id);
+        const ChildrenComment = COMMENTs.filter(comment => comment.answer === Id);
 
         return (
             <div>
@@ -21,9 +21,9 @@ export default function CommentTest() {
                             </div>
                         }
                         <div style={{ width: `${400 - 40 * num}px` }}>
-                            <div key={i} className='content'>ID{comment.Id}. {comment.Content}</div>
+                            <div key={i} className='content'>ID{comment.id}. {comment.content}</div>
                             <div>
-                                {getChildrenComment(comment.Id, num + 1)}
+                                {getChildrenComment(comment.id, num + 1)}
                             </div>
                         </div>
                     </div>

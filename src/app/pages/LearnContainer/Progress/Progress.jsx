@@ -14,12 +14,14 @@ export default function Progress() {
     // const [SUBJECTs, setSUBJECTs] = useState(Subject.filter(subject => subject.Id === SubjectIdParam));
     const [SUBJECTs, setSUBJECTs] = useState(null);
     const [BOUGHTSUBJECTs, setBOUGHTSUBJECTs] = useState(null);
+    const [PROGRESSes, setPROGRESSes] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
         // const token = user?.token;
         const token = '';
+        const BOUGHTSUBJECTID = 1;
         const fetchDataAPI = async () => {
             try {
                 const subjectData = await fetchData(`api/subject/${SubjectId}`, token);
@@ -30,6 +32,10 @@ export default function Progress() {
                 console.log('boughtSubjectData', boughtSubjectData);
                 setBOUGHTSUBJECTs(boughtSubjectData.filter(bs => bs.id === SubjectId));
                 console.log('boughtSubjectDataFilter', boughtSubjectData.filter(bs => bs.id == SubjectId));
+
+                const progressData = await fetchData(`api/progress/boughtsubject/${BOUGHTSUBJECTID}`, token);
+                console.log('progressData', progressData);
+                setPROGRESSes(progressData);
 
                 setLoading(false);
             } catch (error) {
@@ -49,11 +55,28 @@ export default function Progress() {
         setSelectedChapter(p => chapter);
         setSelectedTopic(p => topic.id == SelectedTopic?.id ? null : topic);
     };
-    console.log('SelectedTopic', SelectedTopic);
 
+    const LearnableTopic = (ChapterNumber, TopicNumber) => {
+        if (ChapterNumber < PROGRESSes?.chapter) {
+            return true;
+        } else if (TopicNumber <= PROGRESSes?.topic && ChapterNumber == PROGRESSes?.chapter) {
+            return true;
+        } else return false;
+    }
+    const LearnableQuiz = (ChapterNumber, ChapterTopicsLength) => {
+        if (ChapterNumber < PROGRESSes?.chapter) {
+            return true;
+        } else if (ChapterTopicsLength + 1 <= PROGRESSes?.topic && ChapterNumber == PROGRESSes?.chapter) {
+            return true;
+        } else return false;
+    }
+    const LearnableAdvanced = (ChapterNumber) => {
+        if (ChapterNumber < PROGRESSes?.chapter) {
+            return true;
+        } else return false;
+    }
 
     if (loading) return <Loading />
-
     return (
         <div className='progress-container'>
 
@@ -98,9 +121,9 @@ export default function Progress() {
             ))} */}
 
             <div className='subject-name'>
-                <h1>{SUBJECTs.name}</h1>
+                <h1>{SUBJECTs?.name}</h1>
             </div>
-            {SUBJECTs.chapters.map((chapter, chapter_index) => (
+            {SUBJECTs?.chapters.map((chapter, chapter_index) => (
                 <div key={chapter.id} className='chapter'>
 
                     <div
@@ -122,10 +145,20 @@ export default function Progress() {
                                     height={'60px'}
                                     border={'6px'}
                                     radius={'50%'}
-                                    maincolor={`${Math.round(chapter_index * (360 / 8))}`}
+                                    // maincolor={
+                                    //     `${chapter.number < PROGRESSes?.chapter ?
+                                    //         Math.round(chapter_index * (360 / 8))
+                                    //         : ((topic.number <= PROGRESSes?.topic && chapter.number == PROGRESSes?.chapter) ?
+                                    //             Math.round(chapter_index * (360 / 8))
+                                    //             : 'locked')}`}
+                                    maincolor={LearnableTopic(chapter.number, topic.number) ? Math.round(chapter_index * (360 / 8)) : 'locked'}
                                     active={topic.id == SelectedTopic?.id}
-                                    onToggle={() => handleToggle(topic, chapter)}
+                                    onToggle={() => { if (LearnableTopic(chapter.number, topic.number)) { handleToggle(topic, chapter) } }}
                                 >
+                                    {/* <div>Topic: {topic.number}</div>
+                                    <div>Chapter: {chapter.number}</div>
+                                    <div>P.Topic: {PROGRESSes?.chapter}</div>
+                                    <div>P.Chapter: {PROGRESSes?.topic}</div> */}
                                     <div className='text'>{topic_index + 1}</div>
                                 </Button>
                             ))}
@@ -135,14 +168,21 @@ export default function Progress() {
                                 height={'60px'}
                                 border={'6px'}
                                 radius={'50%'}
-                                maincolor={'locked'}
-                                onToggle={() =>
-                                    handleToggle({
-                                        id: (chapter.topics?.length + 1) + '-' + chapter.id,
-                                        name: 'Final Quiz',
-                                    },
-                                        chapter
-                                    )}
+                                // maincolor={
+                                //     `${chapter.number < PROGRESSes?.chapter ? 'correct' :
+                                //         ((chapter.topics?.length + 1 <= PROGRESSes?.topic && chapter.number == PROGRESSes?.chapter) ? 'correct' :
+                                //             'locked')}`}
+                                maincolor={LearnableQuiz(chapter.number, chapter.topics?.length) ? Math.round(chapter_index * (360 / 8)) : 'locked'}
+                                onToggle={() => {
+                                    if (LearnableQuiz(chapter.number, chapter.topics?.length)) {
+                                        handleToggle({
+                                            id: (chapter.topics?.length + 1) + '-' + chapter.id,
+                                            name: 'Final Quiz',
+                                        },
+                                            chapter
+                                        )
+                                    }
+                                }}
                                 active={(chapter.topics?.length + 1) + '-' + chapter.id == SelectedTopic?.id}
                             >
                                 <i className='fa-solid fa-book'></i>
@@ -153,14 +193,18 @@ export default function Progress() {
                                 height={'60px'}
                                 border={'6px'}
                                 radius={'50%'}
-                                maincolor={'gold'}
-                                onToggle={() =>
-                                    handleToggle({
-                                        id: (chapter.topics?.length + 2) + '+' + chapter.id,
-                                        name: 'Advanced Quiz',
-                                    },
-                                        chapter
-                                    )}
+                                // maincolor={`${chapter.number < PROGRESSes?.chapter ? 'gold' : 'locked'}`}
+                                maincolor={LearnableAdvanced(chapter.number) ? 'gold' : 'locked'}
+                                onToggle={() => {
+                                    if (LearnableAdvanced(chapter.number)) {
+                                        handleToggle({
+                                            id: (chapter.topics?.length + 2) + '+' + chapter.id,
+                                            name: 'Advanced Quiz',
+                                        },
+                                            chapter
+                                        )
+                                    }
+                                }}
                                 active={(chapter.topics?.length + 2) + '+' + chapter.id == SelectedTopic?.id}
                             >
                                 <i className='fa-solid fa-trophy'></i>
@@ -195,14 +239,10 @@ export default function Progress() {
                         >
                             {SelectedTopic?.name ? SelectedTopic?.name : SelectedTopic?.id}
                         </div>
-                        <Link to={
-                            `${(SelectedTopic?.id + '').includes('-') ? `/studying/chapter/${SelectedTopic?.id?.split('-')[1]}` :
-                                (
-                                    (SelectedTopic?.id + '').includes('+') ? `/studying/chapter/${SelectedTopic?.id?.split('+')[1]}` :
-                                        `/studying/topic/${SelectedTopic?.id}`
-                                )}`
-                        }
-                        >
+                        <Link
+                            to={`${(SelectedTopic?.id + '').includes('-') ? `/studying/chapter/${SelectedTopic?.id?.split('-')[1]}` :
+                                ((SelectedTopic?.id + '').includes('+') ? `/studying/chapter/${SelectedTopic?.id?.split('+')[1]}` :
+                                    `/studying/topic/${SelectedTopic?.id}`)}`}>
                             <Button
                                 width={'180px'}
                                 height={'40px'}

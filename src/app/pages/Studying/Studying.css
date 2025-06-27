@@ -159,12 +159,50 @@
             .percent {
                 font-size: 200px;
                 font-weight: bold;
+
+                &.perfect {
+                    color: #ffd700;
+                    text-shadow: 8px 8px 0 hsl(42, 100%, 43%);
+                }
+
+                &.welldone {
+                    color: #ffd700;
+                    text-shadow: 8px 8px 0 hsl(42, 100%, 43%);
+                }
+
+                &.good {
+                    color: #c0c0c0;
+                    text-shadow: 8px 8px 0 hsl(0, 0%, 50%);
+                }
+
+                &.tryharder {
+                    color: #ff3333;
+                }
             }
 
             .text {
                 margin: 0 0 20px;
                 font-size: 40px;
                 font-weight: bold;
+
+                &.perfect {
+                    color: #ffd700;
+                    text-shadow: 2px 2px 0 hsl(42, 100%, 43%);
+                }
+
+                &.welldone {
+                    color: #ffd700;
+                    text-shadow: 2px 2px 0 hsl(42, 100%, 43%);
+                }
+
+                &.good {
+                    color: #c0c0c0;
+                    text-shadow: 2px 2px 0 hsl(0, 0%, 50%);
+                }
+
+                &.tryharder {
+                    color: #ff3333;
+                }
             }
 
             .btn-box {
