@@ -21,6 +21,7 @@ export default function Progress() {
     useEffect(() => {
         // const token = user?.token;
         const token = '';
+        const UserId = 1;
         const BOUGHTSUBJECTID = 1;
         const fetchDataAPI = async () => {
             try {
@@ -28,12 +29,12 @@ export default function Progress() {
                 console.log('subjectData', subjectData);
                 setSUBJECTs(subjectData);
 
-                const boughtSubjectData = await fetchData(`api/boughtsubject/user/${1}`, token);
+                const boughtSubjectData = await fetchData(`api/boughtsubject/user/${UserId}`, token);
                 console.log('boughtSubjectData', boughtSubjectData);
                 setBOUGHTSUBJECTs(boughtSubjectData.filter(bs => bs.id === SubjectId));
-                console.log('boughtSubjectDataFilter', boughtSubjectData.filter(bs => bs.id == SubjectId));
+                console.log('boughtSubjectDataFilter', boughtSubjectData.find(bs => bs.id == SubjectId));
 
-                const progressData = await fetchData(`api/progress/boughtsubject/${BOUGHTSUBJECTID}`, token);
+                const progressData = await fetchData(`api/progress/boughtsubject/${boughtSubjectData.find(bs => bs.id == SubjectId).id}`, token);
                 console.log('progressData', progressData);
                 setPROGRESSes(progressData);
 
@@ -134,7 +135,14 @@ export default function Progress() {
                         }}
                     >
                         <h3>{chapter.name}</h3>
-                        <div className='topic-progress'>Progress: 0/{chapter.topics?.length} finished topics</div>
+                        <div className='topic-progress'>
+                            Progress: {
+                                chapter.number < PROGRESSes?.chapter ? chapter.topics?.length :
+                                    (chapter.number > PROGRESSes?.chapter ? 0 :
+                                        (chapter.topics?.length < PROGRESSes?.topic ? chapter.topics?.length :
+                                            PROGRESSes?.topic))}
+                            /{chapter.topics?.length} finished topics
+                        </div>
                     </div>
                     {chapter.topics?.length > 0 ? (
                         <div className='topics'>

@@ -194,7 +194,9 @@ INSERT INTO [Topic] (Number, Name, ChapterId) VALUES
 (1, 'Ascending Sort', 3),
 (2, 'Descending Sort', 3),
 (1, 'Newtons Laws', 4),
-(1, 'Hydrocarbons', 6)
+(2, 'E=mc^2', 4),
+(1, 'Hydrocarbons', 6),
+(2, 'C12H22O11', 6)
 
 -- Table: [Question]
 --INSERT INTO [Question] (Number, Type, Question, CorrectAnswer, Answers, Explanation, Note, TopicId) VALUES
@@ -341,7 +343,8 @@ INSERT INTO [Comment] (Content, Answer, CommentDate, QuestionId, UserId) VALUES
 
 -- Table: [BoughtSubject]
 INSERT INTO [BoughtSubject] (PurchaseDate, Feedback, SubjectId, UserId) VALUES
-('2025-01-10', 'Great course', 1, 1),
+('2025-01-10', 'Great Math course', 1, 1),
+('2025-01-10', 'Great Physics course', 2, 1),
 ('2025-02-15', 'Very informative', 2, 2),
 ('2025-03-20', 'Needs more examples', 3, 3),
 ('2025-04-25', 'Excellent content', 2, 4),
@@ -349,7 +352,12 @@ INSERT INTO [BoughtSubject] (PurchaseDate, Feedback, SubjectId, UserId) VALUES
 
 -- Table: [Progress]
 INSERT INTO [Progress] (Chapter, Topic, BoughtSubjectId) VALUES
-(2, 1, 1)
+(2, 1, 1),
+(1, 1, 2),
+(1, 1, 3),
+(1, 1, 4),
+(1, 1, 5),
+(1, 1, 6)
 
 -- Table: [TopicProgress]
 INSERT INTO [TopicProgress] (Score, StartDate, UserId, TopicId) VALUES

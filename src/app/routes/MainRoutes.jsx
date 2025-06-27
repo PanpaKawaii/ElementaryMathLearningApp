@@ -31,7 +31,7 @@ export default function MainRoutes() {
                         <Route path='subject' element={<Subject />} />
                         <Route path='comment' element={<CommentTest />} />
                     </Route>
-                    {/* <Route path='*' element={<Navigate to='/learn' replace />} /> */}
+                    <Route path='*' element={<Navigate to='/learn' replace />} />
                     <Route path='studying/topic/:id' element={<Studying />} />
                     <Route path='studying/chapter/:id' element={<FinalQuiz />} />
                 </Routes>
