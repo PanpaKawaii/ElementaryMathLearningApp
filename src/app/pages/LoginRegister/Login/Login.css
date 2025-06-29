@@ -1,0 +1,92 @@
+.loginregister-container {
+    .card-box {
+        .card-body {
+            form {
+                .form-input-login {
+                    input {
+                        &:focus {
+                            box-shadow: 0 0 0 4px #9349d540;
+                            border-color: #9349d5;
+                        }
+                    }
+                }
+
+                .form-check-login {
+                    .forget-link {
+                        color: #9349d5;
+                        font-weight: bold;
+
+                        &:hover {
+                            color: #7028af;
+                        }
+                    }
+                }
+
+                .btn-login {
+                    .btn {
+                        border: none;
+
+                        &.btn-submit {
+                            flex: 3;
+                            color: #fff;
+                            background-color: #9349d5;
+
+                            &:hover {
+                                background-color: #7028af;
+                            }
+
+                            &:active {
+                                background-color: #4a1a74;
+                            }
+                        }
+
+                        &.btn-reset {
+                            flex: 1;
+                            color: #fff;
+                            background-color: #c9a4ea;
+
+                            &:hover {
+                                background-color: #ae76e0;
+                            }
+
+                            &:active {
+                                background-color: #9349d5;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .other-method {
+                margin: 20px 0 0;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                color: #777;
+                font-size: 14px;
+
+                hr {
+                    flex: 1;
+                    height: 1px;
+                    border: none;
+                    border-bottom: 1px solid #aaa;
+                }
+            }
+
+            .google-method {
+                width: 100%;
+                height: 40px;
+                margin: 20px 0 0;
+                color: #555;
+                background-color: #fff;
+                border: 2px solid #ccc;
+                box-sizing: border-box;
+                border-radius: 4px;
+                text-align: center;
+                align-content: center;
+                cursor: pointer;
+                user-select: none;
+            }
+        }
+    }
+}

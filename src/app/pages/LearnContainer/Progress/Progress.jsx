@@ -31,7 +31,7 @@ export default function Progress() {
 
                 const boughtSubjectData = await fetchData(`api/boughtsubject/user/${UserId}`, token);
                 console.log('boughtSubjectData', boughtSubjectData);
-                setBOUGHTSUBJECTs(boughtSubjectData.filter(bs => bs.id === SubjectId));
+                // setBOUGHTSUBJECTs(boughtSubjectData.filter(bs => bs.id === SubjectId));
                 console.log('boughtSubjectDataFilter', boughtSubjectData.find(bs => bs.id == SubjectId));
 
                 const progressData = await fetchData(`api/progress/boughtsubject/${boughtSubjectData.find(bs => bs.id == SubjectId).id}`, token);
