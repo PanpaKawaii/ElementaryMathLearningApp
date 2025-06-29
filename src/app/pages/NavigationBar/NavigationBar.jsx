@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Link, useLocation, Outlet } from 'react-router-dom';
+import { useAuth } from '../../hooks/AuthContext/AuthContext.jsx';
 import './NavigationBar.css';
 
 export default function NavigationBar() {
-
+    const { user } = useAuth();
     const location = useLocation();
     console.log(location.pathname);
 
@@ -12,6 +13,7 @@ export default function NavigationBar() {
         { name: 'SUBJECT', icon: 'book', path: '/subject' },
         { name: 'COMMENT', icon: 'comment', path: '/comment' },
         { name: 'PROFILE', icon: 'user', path: '/profile' },
+        { name: 'LOGIN-REGISTER', icon: 'right-to-bracket', path: '/login-register' },
     ];
 
     return (
@@ -22,12 +24,16 @@ export default function NavigationBar() {
                 </Link>
                 <div className='items'>
                     {menuItems.map((item, index) => (
-                        <div key={index} className={`item ${location.pathname == item.path ? 'located' : ''}`}>
-                            <Link to={`${item.path}`}>
-                                <i className={`fa-solid fa-${item.icon}`}></i>
-                                <span>{item.name}</span>
-                            </Link>
-                        </div>
+                        <>
+                            {((item.path !== '/profile' && item.path !== '/login-register') || (item.path === '/profile' && user) || (item.path === '/login-register' && !user)) &&
+                                <div key={index} className={`item ${location.pathname == item.path ? 'located' : ''}`}>
+                                    <Link to={`${item.path}`}>
+                                        <i className={`fa-solid fa-${item.icon}`}></i>
+                                        <span>{item.name}</span>
+                                    </Link>
+                                </div>
+                            }
+                        </>
                     ))}
                 </div>
             </div>
