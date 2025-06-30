@@ -10,7 +10,6 @@ import LoginRegister from '../pages/LoginRegister/LoginRegister'
 
 import Studying from '../pages/Studying/Studying'
 import FinalQuiz from '../pages/Studying/FinalQuiz'
-import Subject from '../pages/Subject/Subject'
 import ProfilePage from '../pages/Profile/ProfilePage'
 
 
