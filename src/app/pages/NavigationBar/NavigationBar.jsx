@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link, useLocation, Outlet } from 'react-router-dom';
 import { useAuth } from '../../hooks/AuthContext/AuthContext.jsx';
 import './NavigationBar.css';
@@ -12,6 +12,7 @@ export default function NavigationBar() {
         { name: 'LEARN', icon: 'house', path: '/learn' },
         { name: 'SUBJECT', icon: 'book', path: '/subject' },
         { name: 'COMMENT', icon: 'comment', path: '/comment' },
+        { name: 'RANK', icon: 'star', path: '/rank' },
         { name: 'PROFILE', icon: 'user', path: '/profile' },
         { name: 'LOGIN-REGISTER', icon: 'right-to-bracket', path: '/login-register' },
     ];

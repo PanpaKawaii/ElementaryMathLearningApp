@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { subjects, topics } from '../../../../mocks/DatabaseSample.js';
 import { fetchData } from '../../../../mocks/CallingAPI.js';
 import { useAuth } from '../../../hooks/AuthContext/AuthContext.jsx';
 import Button from '../../../components/Button.jsx';
@@ -13,7 +12,6 @@ export default function Progress() {
     const SubjectId = localStorage.getItem('SubjectId');
     if (!SubjectId) navigate('/subject');
 
-    // const [SUBJECTs, setSUBJECTs] = useState(Subject.filter(subject => subject.Id === SubjectIdParam));
     const [SUBJECTs, setSUBJECTs] = useState(null);
     const [PROGRESSes, setPROGRESSes] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -25,16 +23,11 @@ export default function Progress() {
         const fetchDataAPI = async () => {
             try {
                 const subjectData = await fetchData(`api/subject/${SubjectId}`, token);
-                console.log('subjectData', subjectData);
                 setSUBJECTs(subjectData);
 
                 const boughtSubjectData = await fetchData(`api/boughtsubject/user/${user.id}`, token);
-                console.log('boughtSubjectData', boughtSubjectData);
-                // setBOUGHTSUBJECTs(boughtSubjectData.filter(bs => bs.id === SubjectId));
-                console.log('boughtSubjectDataFilter', boughtSubjectData.find(bs => bs.id == SubjectId));
 
                 const progressData = await fetchData(`api/progress/boughtsubject/${boughtSubjectData.find(bs => bs.id == SubjectId).id}`, token);
-                console.log('progressData', progressData);
                 setPROGRESSes(progressData);
 
                 setLoading(false);
@@ -75,7 +68,7 @@ export default function Progress() {
         } else return false;
     }
 
-    if (loading) return <Loading />
+    if (loading) return <Loading Size={'Average'} />
     return (
         <div className='progress-container'>
 
@@ -135,10 +128,11 @@ export default function Progress() {
                         <h3>{chapter.name}</h3>
                         <div className='topic-progress'>
                             Progress: {
-                                chapter.number < PROGRESSes?.chapter ? chapter.topics?.length :
+                                PROGRESSes ? (chapter.number < PROGRESSes?.chapter ? chapter.topics?.length :
                                     (chapter.number > PROGRESSes?.chapter ? 0 :
                                         (chapter.topics?.length < PROGRESSes?.topic ? chapter.topics?.length :
-                                            PROGRESSes?.topic))}
+                                            PROGRESSes?.topic))) : 0
+                            }
                             /{chapter.topics?.length} finished topics
                         </div>
                     </div>
@@ -246,9 +240,11 @@ export default function Progress() {
                             {SelectedTopic?.name ? SelectedTopic?.name : SelectedTopic?.id}
                         </div>
                         <Link
-                            to={`${(SelectedTopic?.id + '').includes('-') ? `/studying/chapter/${SelectedTopic?.id?.split('-')[1]}` :
-                                ((SelectedTopic?.id + '').includes('+') ? `/studying/chapter/${SelectedTopic?.id?.split('+')[1]}` :
-                                    `/studying/topic/${SelectedTopic?.id}`)}`}>
+                            to={`${(SelectedTopic?.id + '').includes('-') ? `/studying/quiz/chapter/${SelectedTopic?.id?.split('-')[1]}` :
+                                ((SelectedTopic?.id + '').includes('+') ? `/studying/advanced/chapter/${SelectedTopic?.id?.split('+')[1]}` :
+                                    `/studying/chapter/${SelectedChapter?.id}/topic/${SelectedTopic?.id}`)}`}
+                            state={SelectedTopic?.id}
+                        >
                             <Button
                                 width={'180px'}
                                 height={'40px'}

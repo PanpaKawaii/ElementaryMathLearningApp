@@ -51,36 +51,41 @@ export default function Subject() {
 
     return (
         <div className='subject-container learn-container'>
-            <div className='subjects my-subject'>
-                <div className='heading'>MY SUBJECTS</div>
-                <div className='row'>
-                    {BoughtSubjectInformation.map((subject, i) => (
-                        <div key={i} className='col' onClick={() => handleNavigate(subject.subjectId)}>
-                            <div className='card'>
-                                <div className='img'></div>
-                                {/* <div>subjectId: {subject.subjectId}</div> */}
-                                <div className='name'>{subject.subjectInfo.name}</div>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </div>
-            <div className='subjects buy-subject'>
-                <div className='heading'>LET'S START LEARNING A NEW SUBJECT!</div>
-                <div className='row'>
-                    {SUBJECTs.map((subject, i) => (
-                        <div to='./detail' key={i} className='col'>
-                            <div className='card'>
-                                <Link>
+            {BoughtSubjectInformation?.length > 0 ?
+                <div className='subjects my-subject'>
+                    <div className='heading'>MY SUBJECTS</div>
+                    <div className='row'>
+                        {BoughtSubjectInformation.map((subject, i) => (
+                            <div key={i} className='col' onClick={() => handleNavigate(subject.subjectId)}>
+                                <div className='card'>
                                     <div className='img'></div>
-                                    <div className='name'>{subject.name}</div>
-                                    <div className='price'>{subject.price.toLocaleString('vi-VN')} VND</div>
-                                </Link>
+                                    <div className='name'>{subject.subjectInfo.name}</div>
+                                </div>
                             </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
                 </div>
-            </div>
-        </div>
+                : <p><i>You didn't buy any subject</i></p>
+            }
+            {SUBJECTs?.length > 0 ?
+                <div className='subjects buy-subject'>
+                    <div className='heading'>LET'S START LEARNING A NEW SUBJECT!</div>
+                    <div className='row'>
+                        {SUBJECTs.map((subject, i) => (
+                            <div to='./detail' key={i} className='col'>
+                                <div className='card'>
+                                    <Link>
+                                        <div className='img'></div>
+                                        <div className='name'>{subject.name}</div>
+                                        <div className='price'>{subject.price.toLocaleString('vi-VN')} VND</div>
+                                    </Link>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                : <p><i>No subjects available</i></p>
+            }
+        </div >
     )
 }

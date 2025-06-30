@@ -33,11 +33,14 @@ export default function MainRoutes() {
                         <Route path='learn' element={<LearnContainer />} />
                         <Route path='subject' element={<Subject />} />
                         <Route path='comment' element={<CommentTest />} />
+                        <Route path='rank' element={<></>} />
+                        <Route path='profile' element={<></>} />
                         <Route path='login-register' element={<LoginRegister />} />
                     </Route>
                     <Route path='*' element={<Navigate to='/learn' replace />} />
-                    <Route path='studying/topic/:id' element={<Studying />} />
-                    <Route path='studying/chapter/:id' element={<FinalQuiz />} />
+                    <Route path='studying/chapter/:chapter/topic/:id' element={<Studying />} />
+                    <Route path='studying/quiz/chapter/:chapter' element={<Studying />} />
+                    <Route path='studying/advanced/chapter/:chapter' element={<Studying />} />
                 </Routes>
                 <></>
             </div>

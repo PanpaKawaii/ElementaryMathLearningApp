@@ -9,17 +9,17 @@
 }
 
 .loadingcircle-container {
-    width: 600px;
-    height: 100vh;
+    height: 110vh;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
     background-color: #fff;
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
     justify-content: center;
     align-items: center;
 
-    .arrow-container {
+    .container {
         width: 200px;
         height: 200px;
         background-color: #fff;

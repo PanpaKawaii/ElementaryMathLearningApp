@@ -168,7 +168,7 @@ export default function Register({ MoveImage }) {
                         border={'6px'}
                         radius={'8px'}
                         maincolor={'correct'}
-                        onToggle={() => handleSubmitFromOutSide()}
+                        onToggle={() => { if (!loading) { handleSubmitFromOutSide() } }}
                         active={loading}
                     >
                         SUBMIT
