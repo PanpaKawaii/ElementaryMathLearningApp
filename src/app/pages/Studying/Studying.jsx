@@ -197,7 +197,7 @@ export default function Studying() {
                                     <div>{QUESTIONs[Order].Explanation}</div> */}
                                 </div>
                                 <div>
-                                    {QuizProgress[Order] == null &&
+                                    {/* {QuizProgress[Order] == null &&
                                         <Button
                                             width={'200px'}
                                             height={'52px'}
@@ -209,23 +209,25 @@ export default function Studying() {
                                         >
                                             CHECK
                                         </Button>
-                                    }
-                                    {QuizProgress[Order] != null &&
-                                        <Button
-                                            width={'200px'}
-                                            height={'52px'}
-                                            border={'6px'}
-                                            radius={'16px'}
-                                            maincolor={QuizProgress[Order] === true ? 'correct'
-                                                : (QuizProgress[Order] === false ? 'incorrect'
-                                                    : 'white')
-                                            }
-                                            active={false}
-                                            onToggle={handleChangeQuestion}
-                                        >
-                                            CONTINUE
-                                        </Button>
-                                    }
+                                    } */}
+                                    {/* {QuizProgress[Order] != null && */}
+                                    <Button
+                                        width={'200px'}
+                                        height={'52px'}
+                                        border={'6px'}
+                                        radius={'16px'}
+                                        maincolor={
+                                            QuizProgress[Order] == null ? 'white'
+                                                : (QuizProgress[Order] === true ? 'correct'
+                                                    : (QuizProgress[Order] === false ? 'incorrect'
+                                                        : 'white'))
+                                        }
+                                        active={false}
+                                        onToggle={QuizProgress[Order] == null ? handleCheckQuestion : handleChangeQuestion}
+                                    >
+                                        {QuizProgress[Order] == null ? 'CHECK' : 'CONTINUE'}
+                                    </Button>
+                                    {/* } */}
                                 </div>
                             </div>
                         </form>

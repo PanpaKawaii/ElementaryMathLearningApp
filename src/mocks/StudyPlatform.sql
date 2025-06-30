@@ -88,7 +88,7 @@ CREATE TABLE [Question] (
 CREATE TABLE [User] (
     Id					INT PRIMARY KEY IDENTITY(1,1),
     Name				NVARCHAR(255),
-    Username			NVARCHAR(255),
+    Username			NVARCHAR(255) UNIQUE,
     Password			NVARCHAR(255),
     Role				NVARCHAR(255),
     CuratorId			INT,

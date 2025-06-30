@@ -9,8 +9,7 @@
 }
 
 .loadingcircle-container {
-    width: 100%;
-    min-width: 600px;
+    width: 600px;
     height: 100vh;
     margin: 0;
     padding: 0;

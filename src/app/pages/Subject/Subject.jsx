@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { fetchData } from '../../../mocks/CallingAPI.js'
+import { fetchData } from '../../../mocks/CallingAPI.js';
+import { useAuth } from '../../hooks/AuthContext/AuthContext.jsx';
 import './Subject.css';
 
 export default function Subject() {
+    const { user } = useAuth();
     const navigate = useNavigate();
 
     const [SUBJECTs, setSUBJECTs] = useState([]);
@@ -14,14 +16,13 @@ export default function Subject() {
     useEffect(() => {
         // const token = user?.token;
         const token = '';
-        const UserId = 1;
         const fetchDataAPI = async () => {
             try {
                 const subjectData = await fetchData('api/subject', token);
                 console.log('subjectData', subjectData);
                 setSUBJECTs(subjectData);
 
-                const boughtSubjectData = await fetchData(`api/boughtsubject/user/${UserId}`, token);
+                const boughtSubjectData = await fetchData(`api/boughtsubject/user/${user.id}`, token);
                 console.log('boughtSubjectData', boughtSubjectData);
                 setBOUGHTSUBJECTs(boughtSubjectData);
 
@@ -33,8 +34,7 @@ export default function Subject() {
         };
 
         fetchDataAPI();
-        // }, [user]);
-    }, []);
+    }, [user]);
 
     const BoughtSubjectInformation = BOUGHTSUBJECTs.map(bought => {
         const subject = SUBJECTs.find(sub => sub.id === bought.subjectId);

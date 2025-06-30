@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { subjects, topics } from '../../../../mocks/DatabaseSample.js';
-import { fetchData } from '../../../../mocks/CallingAPI.js'
+import { fetchData } from '../../../../mocks/CallingAPI.js';
+import { useAuth } from '../../../hooks/AuthContext/AuthContext.jsx';
 import Button from '../../../components/Button.jsx';
 import Loading from '../../../layouts/Loading/Loading.jsx';
 import './Progress.css';
 
 export default function Progress() {
+    const { user } = useAuth();
     const navigate = useNavigate();
     const SubjectId = localStorage.getItem('SubjectId');
     if (!SubjectId) navigate('/subject');
 
     // const [SUBJECTs, setSUBJECTs] = useState(Subject.filter(subject => subject.Id === SubjectIdParam));
     const [SUBJECTs, setSUBJECTs] = useState(null);
-    const [BOUGHTSUBJECTs, setBOUGHTSUBJECTs] = useState(null);
     const [PROGRESSes, setPROGRESSes] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -21,15 +22,13 @@ export default function Progress() {
     useEffect(() => {
         // const token = user?.token;
         const token = '';
-        const UserId = 1;
-        const BOUGHTSUBJECTID = 1;
         const fetchDataAPI = async () => {
             try {
                 const subjectData = await fetchData(`api/subject/${SubjectId}`, token);
                 console.log('subjectData', subjectData);
                 setSUBJECTs(subjectData);
 
-                const boughtSubjectData = await fetchData(`api/boughtsubject/user/${UserId}`, token);
+                const boughtSubjectData = await fetchData(`api/boughtsubject/user/${user.id}`, token);
                 console.log('boughtSubjectData', boughtSubjectData);
                 // setBOUGHTSUBJECTs(boughtSubjectData.filter(bs => bs.id === SubjectId));
                 console.log('boughtSubjectDataFilter', boughtSubjectData.find(bs => bs.id == SubjectId));
@@ -46,8 +45,7 @@ export default function Progress() {
         };
 
         fetchDataAPI();
-        // }, [user]);
-    }, []);
+    }, [user]);
 
     const [SelectedChapter, setSelectedChapter] = useState(null);
     const [SelectedTopic, setSelectedTopic] = useState(null);

@@ -47,11 +47,7 @@ export default function Login({ MoveImage }) {
             login(result);
 
             setLoading(false);
-            if (result.role && result.role === 'Customer') {
-                navigate('/player');
-            } else {
-                navigate('/');
-            }
+            navigate('/');
         } catch (error) {
             console.log('Login failed:', error);
             setLoginError({ value: 'Login failed', name: 'Username or Password' });
@@ -60,8 +56,8 @@ export default function Login({ MoveImage }) {
     };
 
     const formRef = useRef(null);
-    const handleSendOtpFromOutSide = () => {
-        console.log('handleSendOtpFromOutSide!');
+    const handleSubmitFromOutSide = () => {
+        console.log('handleSubmitFromOutSide!');
         if (formRef.current) {
             formRef.current.requestSubmit();
         }
@@ -116,7 +112,7 @@ export default function Login({ MoveImage }) {
                         border={'6px'}
                         radius={'8px'}
                         maincolor={'correct'}
-                        onToggle={() => handleSendOtpFromOutSide()}
+                        onToggle={() => handleSubmitFromOutSide()}
                         active={loading}
                     >
                         SUBMIT
