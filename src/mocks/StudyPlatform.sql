@@ -51,7 +51,6 @@ IF OBJECT_ID('dbo.[Subject]', 'U') IS NOT NULL
     DROP TABLE dbo.[Subject];
     GO
 
--- Table: [Subject]
 CREATE TABLE [Subject] (
     Id				INT PRIMARY KEY IDENTITY(1,1),
     Name			NVARCHAR(255),
@@ -60,7 +59,6 @@ CREATE TABLE [Subject] (
     LastEditDate	DATE
 );
 
--- Table: [Chapter]
 CREATE TABLE [Chapter] (
     Id				INT PRIMARY KEY IDENTITY(1,1),
     Number			INT,
@@ -68,7 +66,6 @@ CREATE TABLE [Chapter] (
     SubjectId		INT FOREIGN KEY REFERENCES [Subject](Id)
 );
 
--- Table: [Topic]
 CREATE TABLE [Topic] (
     Id			INT PRIMARY KEY IDENTITY(1,1),
     Number		INT,
@@ -76,7 +73,6 @@ CREATE TABLE [Topic] (
     ChapterId	INT FOREIGN KEY REFERENCES [Chapter](Id)
 );
 
--- Table: [Question]
 CREATE TABLE [Question] (
     Id				INT PRIMARY KEY IDENTITY(1,1),
     Number			INT,
@@ -89,7 +85,6 @@ CREATE TABLE [Question] (
     TopicId			INT FOREIGN KEY REFERENCES [Topic](Id)
 );
 
--- Table: [User]
 CREATE TABLE [User] (
     Id					INT PRIMARY KEY IDENTITY(1,1),
     Name				NVARCHAR(255),
@@ -104,7 +99,6 @@ CREATE TABLE [User] (
     HighestDayStreak	INT
 );
 
--- Table: [Comment]
 CREATE TABLE [Comment] (
     Id			INT PRIMARY KEY IDENTITY(1,1),
     Content		NVARCHAR(255),
@@ -114,7 +108,6 @@ CREATE TABLE [Comment] (
     UserId		INT FOREIGN KEY REFERENCES [User](Id)
 );
 
--- Table: [BoughtSubject]
 CREATE TABLE [BoughtSubject] (
     Id				INT PRIMARY KEY IDENTITY(1,1),
     PurchaseDate	DATE,
@@ -123,7 +116,6 @@ CREATE TABLE [BoughtSubject] (
     UserId			INT FOREIGN KEY REFERENCES [User](Id)
 );
 
--- Table: [Progress]
 CREATE TABLE [Progress] (
     Id				INT PRIMARY KEY IDENTITY(1,1),
     Chapter			INT,
@@ -131,7 +123,6 @@ CREATE TABLE [Progress] (
     BoughtSubjectId	INT UNIQUE FOREIGN KEY REFERENCES [BoughtSubject](Id)
 );
 
--- Table: [TopicProgress]
 CREATE TABLE [TopicProgress] (
     Id			INT PRIMARY KEY IDENTITY(1,1),
     Score		INT,
@@ -140,14 +131,12 @@ CREATE TABLE [TopicProgress] (
     TopicId		INT FOREIGN KEY REFERENCES [Topic](Id)
 );
 
--- Table: [Achievement]
 CREATE TABLE [Achievement] (
     Id			INT PRIMARY KEY IDENTITY(1,1),
     Name		NVARCHAR(255),
     Description	NVARCHAR(255)
 );
 
--- Table: [AccomplishAchievement]
 CREATE TABLE [AccomplishAchievement] (
     Id				INT PRIMARY KEY IDENTITY(1,1),
     Progress		INT,
@@ -157,7 +146,6 @@ CREATE TABLE [AccomplishAchievement] (
     UserId			INT FOREIGN KEY REFERENCES [User](Id)
 );
 
--- Table: [Following]
 CREATE TABLE [Following] (
     Id			INT PRIMARY KEY IDENTITY(1,1),
     FollowDate	DATE,
@@ -165,13 +153,11 @@ CREATE TABLE [Following] (
     UserId		INT FOREIGN KEY REFERENCES [User](Id)
 );
 
--- Table: [Subject]
 INSERT INTO [Subject] (Name, Price, UploadDate, LastEditDate) VALUES
 ('Mathematics', 600000, '2024-01-15', '2025-05-20'),
 ('Physics', 700000, '2024-02-10', '2025-06-01'),
 ('Chemistry', 800000, '2024-03-05', '2025-05-25')
 
--- Table: [Chapter]
 INSERT INTO [Chapter] (Number, Name, SubjectId) VALUES
 (1, 'Calculus', 1),
 (2, 'Comparison', 1),
@@ -181,7 +167,6 @@ INSERT INTO [Chapter] (Number, Name, SubjectId) VALUES
 (1, 'Electromagnetism', 3),
 (2, 'Organic Chemistry', 3)
 
--- Table: [Topic]
 INSERT INTO [Topic] (Number, Name, ChapterId) VALUES
 (1, 'Plus Numbers', 1),
 (2, 'Subtract Numbers', 1),
@@ -194,9 +179,10 @@ INSERT INTO [Topic] (Number, Name, ChapterId) VALUES
 (1, 'Ascending Sort', 3),
 (2, 'Descending Sort', 3),
 (1, 'Newtons Laws', 4),
-(1, 'Hydrocarbons', 6)
+(2, 'E=mc^2', 4),
+(1, 'Hydrocarbons', 6),
+(2, 'C12H22O11', 6)
 
--- Table: [Question]
 --INSERT INTO [Question] (Number, Type, Question, CorrectAnswer, Answers, Explanation, Note, TopicId) VALUES
 --(1, 'Multiple Choice', 'What is 3 + 2?', '5', '7@@6@@5@@8', '3 + 2 equals 5 because you add 3 and 2 together.', 'Basic addition', 1),
 --(2, 'Text Answer', 'Fill in the blank: 4 + _ = 7', '3', '2@@3@@4@@5', 'To find the missing number, you subtract 4 from 7. 7 - 4 = 3.', 'Simple addition', 1),
@@ -323,15 +309,15 @@ INSERT INTO [Question] (Number, Type, Question, CorrectAnswer, Answers, Explanat
 (10, 'Multiple Choice', 'Arrange in descending order: 0, 2, 1, 3', '3, 2, 1, 0', '0, 2, 1, 3@@2, 1, 3, 0@@3, 2, 1, 0@@1, 0, 2, 3', '', '', 10);
 
 
--- Table: [User]
 INSERT INTO [User] (Name, Username, Password, Role, CuratorId, Email, Point, JoinedDate, DayStreak, HighestDayStreak) VALUES
-('John Doe', 'jdoe', 'pass123', 'Student', NULL, 'jdoe@example.com', 100, '2024-06-01', 5, 10),
-('Jane Smith', 'jsmith', 'pass456', 'Student', NULL, 'jsmith@example.com', 150, '2024-06-02', 7, 12),
-('Alice Brown', 'abrown', 'pass789', 'Curator', 1, 'abrown@example.com', 200, '2024-06-03', 3, 8),
-('Bob Johnson', 'bjohnson', 'pass101', 'Student', NULL, 'bjohnson@example.com', 120, '2024-06-04', 4, 9),
-('Carol White', 'cwhite', 'pass112', 'Student', NULL, 'cwhite@example.com', 180, '2025-06-01', 6, 11)
+(N'Đặng Ngọc Hải Triều', 'haitrieu', '123456', 'Student', null, 'haitrieu@example.com', 108900, '2024-06-01', 880, 880),
+(N'Nguyễn Xuân Trường', 'xuantruong', '123456', 'Student', null, 'xuantruong@example.com', 15070, '2024-06-02', 7, 1200),
+('Mountain Daddy', 'mountain', '123456', 'Parent', null, 'mountain@example.com', 2000000, '2024-06-03', 0, 0),
+('Admin Trieu', 'admin', '123456', 'Admin', NULL, 'admin@example.com', 0, '2024-06-04', 0, 0),
+('Teacher Trieu', 'teacher', '123456', 'Teacher', NULL, 'teacher@example.com', 0, '2025-06-01', 0, 0),
+('Tester Trieu', 'tester', '123456', 'Student', 3, 'tester@example.com', 100000, '2024-06-02', 100, 1000)
+UPDATE [User] SET CuratorId = 3 WHERE Id = 1;
 
--- Table: [Comment]
 INSERT INTO [Comment] (Content, Answer, CommentDate, QuestionId, UserId) VALUES
 ('Good explanation', null, '2025-06-01', 1, 1),
 ('Disagree with answer', 1, '2025-06-02', 2, 1),
@@ -339,19 +325,22 @@ INSERT INTO [Comment] (Content, Answer, CommentDate, QuestionId, UserId) VALUES
 ('Needs more detail', 2, '2025-06-04', 4, 1),
 ('Useful note', 3, '2025-06-05', 5, 1)
 
--- Table: [BoughtSubject]
 INSERT INTO [BoughtSubject] (PurchaseDate, Feedback, SubjectId, UserId) VALUES
-('2025-01-10', 'Great course', 1, 1),
+('2025-01-10', 'Great Math course', 1, 1),
+('2025-01-10', 'Great Physics course', 2, 1),
 ('2025-02-15', 'Very informative', 2, 2),
 ('2025-03-20', 'Needs more examples', 3, 3),
 ('2025-04-25', 'Excellent content', 2, 4),
 ('2025-05-30', 'Highly recommended', 3, 5)
 
--- Table: [Progress]
 INSERT INTO [Progress] (Chapter, Topic, BoughtSubjectId) VALUES
-(2, 1, 1)
+(2, 1, 1),
+(1, 1, 2),
+(1, 1, 3),
+(1, 1, 4),
+(1, 1, 5),
+(1, 1, 6)
 
--- Table: [TopicProgress]
 INSERT INTO [TopicProgress] (Score, StartDate, UserId, TopicId) VALUES
 (85, '2025-06-01', 1, 1),
 (90, '2025-06-02', 2, 2),
@@ -359,7 +348,6 @@ INSERT INTO [TopicProgress] (Score, StartDate, UserId, TopicId) VALUES
 (92, '2025-06-04', 4, 4),
 (87, '2025-06-05', 5, 5)
 
--- Table: [Achievement]
 INSERT INTO [Achievement] (Name, Description) VALUES
 ('Beginer', 'Completed first chapter'),
 ('Intermediate', 'Completed five topics'),
@@ -367,7 +355,6 @@ INSERT INTO [Achievement] (Name, Description) VALUES
 ('Expert', 'Completed all subjects'),
 ('Master', 'Highest streak achieved')
 
--- Table: [AccomplishAchievement]
 INSERT INTO [AccomplishAchievement] (Progress, AchieveDate, Status, AchievementId, UserId) VALUES
 (85, '2025-06-01', 1, 1, 1),
 (90, '2025-06-02', 1, 2, 2),
@@ -375,7 +362,6 @@ INSERT INTO [AccomplishAchievement] (Progress, AchieveDate, Status, AchievementI
 (92, '2025-06-04', 1, 4, 4),
 (87, '2025-06-05', 1, 5, 5)
 
--- Table: [Following]
 INSERT INTO [Following] (FollowDate, FollowingId, UserId) VALUES
 ('2025-06-01', 1, 2),
 ('2025-06-02', 2, 1),
