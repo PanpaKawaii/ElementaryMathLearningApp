@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link, useLocation, Outlet } from 'react-router-dom';
 import { useAuth } from '../../hooks/AuthContext/AuthContext.jsx';
 import './NavigationBar.css';
@@ -12,6 +12,7 @@ export default function NavigationBar() {
         { name: 'LEARN', icon: 'house', path: '/learn' },
         { name: 'SUBJECT', icon: 'book', path: '/subject' },
         { name: 'COMMENT', icon: 'comment', path: '/comment' },
+        { name: 'RANK', icon: 'star', path: '/rank' },
         { name: 'PROFILE', icon: 'user', path: '/profile' },
         { name: 'LOGIN-REGISTER', icon: 'right-to-bracket', path: '/login-register' },
     ];
@@ -24,16 +25,16 @@ export default function NavigationBar() {
                 </Link>
                 <div className='items'>
                     {menuItems.map((item, index) => (
-                        <>
+                        <React.Fragment key={index}>
                             {((item.path !== '/profile' && item.path !== '/login-register') || (item.path === '/profile' && user) || (item.path === '/login-register' && !user)) &&
-                                <div key={index} className={`item ${location.pathname == item.path ? 'located' : ''}`}>
+                                <div className={`item ${location.pathname == item.path ? 'located' : ''}`}>
                                     <Link to={`${item.path}`}>
                                         <i className={`fa-solid fa-${item.icon}`}></i>
                                         <span>{item.name}</span>
                                     </Link>
                                 </div>
                             }
-                        </>
+                        </React.Fragment>
                     ))}
                 </div>
             </div>

@@ -56,18 +56,18 @@ export default function Register({ MoveImage }) {
 
             setRegisterSuccess('Register success!');
             setRegisterError({ value: '', name: '' });
-            setLoading(false);
         } catch (error) {
             console.log('Register failed:', error);
             setRegisterError({ value: 'Register failed', name: 'Username, Name, Role, Password, Confirm, Accept' });
             setRegisterSuccess('');
+        } finally {
             setLoading(false);
         }
     };
 
     const formRef = useRef(null);
-    const handleSendOtpFromOutSide = () => {
-        console.log('handleSendOtpFromOutSide!');
+    const handleSubmitFromOutSide = () => {
+        console.log('handleSubmitFromOutSide!');
         if (formRef.current) {
             formRef.current.requestSubmit();
         }
@@ -106,7 +106,7 @@ export default function Register({ MoveImage }) {
             <div className='bubble bubble-register bubble1'></div>
             <div className='bubble bubble-register bubble2'></div>
             <div className='bubble bubble-register bubble3'></div>
-            <div className='title'>REGISTER {Role}</div>
+            <div className='title'>REGISTER</div>
             <form ref={formRef} onSubmit={handleSubmitRegister}>
                 <div className='form-group form-input-register'>
                     <i className={`fa-solid fa-user ${RegisterError.name.includes('Username') && 'invalid-icon'}`}></i>
@@ -168,7 +168,7 @@ export default function Register({ MoveImage }) {
                         border={'6px'}
                         radius={'8px'}
                         maincolor={'correct'}
-                        onToggle={() => handleSendOtpFromOutSide()}
+                        onToggle={() => { if (!loading) { handleSubmitFromOutSide() } }}
                         active={loading}
                     >
                         SUBMIT

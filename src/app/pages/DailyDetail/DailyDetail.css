@@ -1,7 +1,7 @@
 .dailydetail-container {
     width: 360px;
     height: fit-content;
-    margin: 20px 0 0;
+    padding: 20px 0 0;
     background-color: #fff;
     display: flex;
     flex-direction: column;

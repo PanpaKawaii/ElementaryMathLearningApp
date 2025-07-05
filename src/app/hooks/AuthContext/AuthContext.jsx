@@ -17,6 +17,7 @@ export const AuthProvider = ({ children }) => {
         const handleStorageChange = (event) => {
             if (event.key === 'user') {
                 // window.location.reload();
+                logout();
                 window.location.href = '/';
             }
         };

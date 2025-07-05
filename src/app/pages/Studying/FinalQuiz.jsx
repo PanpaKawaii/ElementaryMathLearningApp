@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { questions } from '../../../mocks/DatabaseSample.js';
-import { fetchData } from '../../../mocks/CallingAPI.js'
+import { fetchData } from '../../../mocks/CallingAPI.js';
 import MultipleForm from './Form/MultipleForm.jsx';
 import Button from '../../components/Button.jsx';
 import Loading from '../../layouts/Loading/Loading.jsx';
@@ -30,9 +29,9 @@ export default function FinalQuiz() {
                 console.log('questionData', questionData);
                 setQUESTIONs(questionData.questions);////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-                setLoading(false);
             } catch (error) {
                 setError(error);
+            } finally {
                 setLoading(false);
             }
         };
@@ -97,9 +96,8 @@ export default function FinalQuiz() {
         navigate('/learn');
     };
 
-    if (loading) return <Loading />
+    if (loading) return <Loading Size={'Large'} />
     if (QUESTIONs.length <= 0) navigate('/learn');
-
     return (
         <div className='studying-container'>
             {Order < QUESTIONs.length ? (
@@ -187,7 +185,7 @@ export default function FinalQuiz() {
                                             :
                                             <>
                                                 <i className='fa-solid fa-circle-xmark'></i>
-                                                <div className='text-explanation'>{QUESTIONs[Order].explaination}</div>
+                                                <div className='text-explanation'>{QUESTIONs[Order].explanation}</div>
                                             </>
                                         )
                                     }

@@ -65,6 +65,27 @@ export const putData = async (endpoint, data, token) => {
     }
 };
 
+// Hàm gọi API PUT
+export const patchData = async (endpoint, data, token) => {
+    try {
+        const response = await fetch(`${apiUrl}${endpoint}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(data),
+        });
+        if (!response.ok) {
+            throw new Error(`Error: ${response.statusText}`);
+        }
+        return;
+    } catch (error) {
+        console.error('Error putting data:', error);
+        throw error;
+    }
+};
+
 // Hàm gọi API DELETE
 export const deleteData = async (endpoint, token) => {
     try {

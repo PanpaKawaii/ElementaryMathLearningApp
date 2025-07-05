@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../hooks/AuthContext/AuthContext.jsx';
 import Login from './Login/Login';
 import Register from './Register/Register';
 import './LoginRegister.css';
@@ -9,6 +11,12 @@ import Transparent from '../../assets/Transparent.png';
 
 export default function LoginRegister() {
     console.log('Login-Register');
+    const { user } = useAuth();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (user) navigate('/learn');
+    }, []);
 
     const moveImage = () => {
         const img = document.getElementById('MovingImage');

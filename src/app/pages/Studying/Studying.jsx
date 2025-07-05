@@ -1,16 +1,29 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
-import { questions } from '../../../mocks/DatabaseSample.js';
-import { fetchData } from '../../../mocks/CallingAPI.js'
-import MultipleForm from './Form/MultipleForm.jsx';
+import React, { useEffect, useRef, useState } from 'react';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { fetchData, postData, patchData } from '../../../mocks/CallingAPI.js';
 import Button from '../../components/Button.jsx';
+import { useAuth } from '../../hooks/AuthContext/AuthContext.jsx';
 import Loading from '../../layouts/Loading/Loading.jsx';
+import MultipleForm from './Form/MultipleForm.jsx';
 import './Studying.css';
 
 export default function Studying() {
-    const formRef = useRef(null);
+    const { user } = useAuth();
     const navigate = useNavigate();
-    const TopicId = useParams();
+    const formRef = useRef(null);
+    const location = useLocation();
+    const Params = useParams();
+
+    const TopicId = location.state;
+    console.log('TopicId', TopicId);
+    const IsTopic = !(String(TopicId).includes('-')) && !(String(TopicId).includes('+'));
+    const IsQuiz = String(TopicId).includes('-');
+    const IsAdvanced = String(TopicId).includes('+');
+    console.log('IsTopic', IsTopic);
+
+    const ChapterId = Params.chapter;
+    console.log('ChapterId', ChapterId);
+
 
     const [QUESTIONs, setQUESTIONs] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -22,48 +35,61 @@ export default function Studying() {
     const [SelectedAnswer, setSelectedAns] = useState(null);
 
     useEffect(() => {
-        // const token = user?.token;
+        // const token = user?.token; // === FIX ===
         const token = '';
-        const fetchDataAPI = async () => {
+        const fetchDataTopicAPI = async () => {
             try {
-                const questionData = await fetchData(`api/topic/${TopicId.id}`, token);
+                const questionData = await fetchData(`api/topic/${TopicId}`, token);
                 console.log('questionData', questionData);
-                setQUESTIONs(questionData.questions);
+                setQUESTIONs(questionData.questions.filter(q => q.note == 'Regular'));
 
-                setLoading(false);
             } catch (error) {
                 setError(error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        const fetchDataQuizAPI = async () => {
+            try {
+                // API lấy ngẫu nhiên 10 Questions từ Chapter truyền vào
+                const chapterData = await fetchData(`api/chapter/${ChapterId}`, token);
+                const allQuestions = chapterData.topics.flatMap(topic => topic.questions);
+                const random10Questions = allQuestions
+                    .map(question => ({ ...question, sort: Math.random() }))
+                    .sort((a, b) => a.sort - b.sort)
+                    .filter((_, index) => index < 10)
+                    .map(({ sort, ...rest }) => rest);
+                setQUESTIONs(random10Questions);
+
+            } catch (error) {
+                setError(error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        const fetchDataAdvancedAPI = async () => {
+            try {
+                // Đổi API thành lấy Advanced Questions từ Chapter truyền vào === FIX ===
+                const chapterData = await fetchData(`api/chapter/${ChapterId}`, token);
+                const allQuestions = chapterData.topics.flatMap(topic => topic.questions.filter(q => q.note == 'Advanced'));
+                const random10Questions = allQuestions
+                    .map(question => ({ ...question, sort: Math.random() }))
+                    .sort((a, b) => a.sort - b.sort)
+                    .filter((_, index) => index < 10)
+                    .map(({ sort, ...rest }) => rest);
+                setQUESTIONs(random10Questions);
+
+            } catch (error) {
+                setError(error);
+            } finally {
                 setLoading(false);
             }
         };
 
-        fetchDataAPI();
-        // }, [user]);
+        if (IsTopic) fetchDataTopicAPI();
+        else if (IsQuiz) fetchDataQuizAPI();
+        else if (IsAdvanced) fetchDataAdvancedAPI();
     }, [TopicId]);
-
-    // useEffect(() => {
-    //     // Hàm để lưu tiến độ vào localStorage khi tắt hoặc chuyển trang
-    //     const handleBeforeUnload = () => {
-    //         localStorage.setItem('Progress', QuizProgress);
-    //         console.log('Progress saved to localStorage', QuizProgress);
-    //     };
-
-    //     // Lắng nghe sự kiện beforeunload (tắt hoặc chuyển trang)
-    //     window.addEventListener('beforeunload', handleBeforeUnload);
-
-    //     // Cleanup khi component unmount
-    //     return () => {
-    //         window.removeEventListener('beforeunload', handleBeforeUnload);
-    //     };
-    // }, []);
-
-    useEffect(() => {
-        // Cleanup function (sẽ chạy khi component unmount)
-        return () => {
-            localStorage.setItem('Progress', QuizProgress);
-            console.log('Progress saved to localStorage', QuizProgress);
-        };
-    }, [QuizProgress]);
 
     const handleChangeQuestion = () => {
         console.log('Change Question');
@@ -75,8 +101,6 @@ export default function Studying() {
     const handleCheckQuestion = (e) => {
         e.preventDefault();
         console.log('handleCheckQuestion');
-        // const Choice = e.target.choice.value;
-        // if (!Choice) return;
         if (SelectedAnswer == null) return;
 
         const NewQuizProgress = [...QuizProgress];
@@ -89,16 +113,96 @@ export default function Studying() {
         }
         setQuizProgress(NewQuizProgress);
         console.log('SelectedAnswer: ', SelectedAnswer);
-        // console.log('Choice: ', Choice);
     };
 
-    const CorrectCount = QuizProgress.filter(q => q === true).length
-    const Percent = CorrectCount / QUESTIONs.length
+    const updateDataAPI = async (Percent) => {
+        const TopicProgressData = {
+            score: Percent,
+            userId: Number(user?.id),
+            topicId: String(TopicId).split('-')[0].split('+')[0],
+            note: 'Topic',
+        };
+        console.log('TopicProgressData:', TopicProgressData);
+
+        const ChapterProgressData = {
+            score: Percent,
+            userId: Number(user?.id),
+            chapterId: ChapterId,
+            note: IsQuiz ? 'Quiz' : (IsAdvanced ? 'Advanced' : 'Error'),
+        };
+        console.log('ChapterProgressData:', ChapterProgressData);
+
+        // const token = user?.token; // === FIX ===
+        const token = '';
+        try {
+            // Lưu lịch sử vào Chapter/Topic Progress
+            if (IsTopic) {
+                const updatedTopicProgressData = await postData(`api/topicprogress`, TopicProgressData, token);
+                console.log('updatedTopicProgressData', updatedTopicProgressData);
+            }
+            else if (IsQuiz || IsAdvanced) {
+                const updatedChapterProgressData = await postData(`api/chapterprogress`, ChapterProgressData, token);
+                console.log('updatedChapterProgressData', updatedChapterProgressData);
+            }
+
+            // Lấy tiến trình hiện tại của Subject đó
+            const SubjectId = localStorage.getItem('SubjectId');
+            const boughtSubjectData = await fetchData(`api/boughtsubject/user/${user.id}`, token);
+            const currentProgressData = await fetchData(`api/progress/boughtsubject/${boughtSubjectData.find(bs => bs.id == SubjectId).id}`, token);
+            console.log('currentProgressData', currentProgressData);
+
+            if (Percent >= 10) {
+                const chapters = await fetchData(`api/chapter`);
+                const chapter = chapters.find(c => c.id == ChapterId);
+
+                if (IsTopic) {
+                    // Nếu đang ở Topic có Topic.number bằng với Process.Topic và Chapter.number bằng với Process.Chapter, không phải Quiz, thì cộng tiến trình Topic lên 1
+                    console.log('It is a Topic');
+                    const topic = await fetchData(`api/topic/${TopicId}`);
+
+                    if (chapter.number == currentProgressData.chapter && topic.number == currentProgressData.topic) {
+                        console.log('Current Topic');
+                        const newProgressData = {
+                            chapter: currentProgressData.chapter,
+                            topic: currentProgressData.topic + 1,
+                        };
+                        console.log('newProgressData:', newProgressData);
+
+                        await patchData(`api/progress?id=${currentProgressData.id}`, newProgressData, token);
+
+                    } else console.log('Not current Topic');
+                }
+                else if (IsQuiz) {
+                    // Nếu đang ở Quiz của Chapter có number trùng với Process.Chapter thì mở khóa Chapter mới, đưa tiến trình Topic về 1
+                    console.log('It is a Quiz');
+
+                    if (chapter.number == currentProgressData.chapter) {
+                        console.log('Current Quiz');
+                        const newProgressData = {
+                            chapter: currentProgressData.chapter + 1,
+                            topic: 1,
+                        };
+                        console.log('newProgressData:', newProgressData);
+
+                        await patchData(`api/progress?id=${currentProgressData.id}`, newProgressData, token);
+
+                    } else console.log('Not current Chapter');
+                } else console.log('Not Quiz or Topic');
+            } else console.log('Percent < 10%');
+
+            navigate('/learn');
+        } catch (error) {
+            console.log('Saving progress failed');
+        }
+    };
+
+    const CorrectCount = QuizProgress.filter(q => q === true).length;
+    const Percent = parseInt(100 * CorrectCount / QUESTIONs.length);
     const handleFinish = () => {
-        navigate('/learn');
+        updateDataAPI(Percent);
     };
 
-    if (loading) return <Loading />
+    if (loading) return <Loading Size={'Large'} />
     if (QUESTIONs.length <= 0) navigate('/learn');
     return (
         <div className='studying-container'>
@@ -138,9 +242,6 @@ export default function Studying() {
                                 <div className='question'>{QUESTIONs[Order].question1}</div>
                             </div>
                             {(() => {
-                                // let RandomAnswers = [...QUESTIONs[Order].Answers].sort(() => Math.random() - 0.5);
-                                // let RandomAnswers = [...QUESTIONs[Order].Answers];
-
                                 if (QUESTIONs[Order].type === 'Multiple') {
                                     return <MultipleForm Question={QUESTIONs[Order]} Status={QuizProgress[Order]} SelectedAnswer={SelectedAnswer} setSelectedAns={setSelectedAns} />
                                 } else return (
@@ -168,10 +269,6 @@ export default function Studying() {
                                     // </div>
                                 )
                             })()}
-                            {/* <div>
-                                <button type='submit' className='btn'>CHECK</button>
-                                <button type='button' onClick={() => { handleChangeQuestion() }}>CONTINUE</button>
-                            </div> */}
                             <div className={`check-result ${QuizProgress[Order] === true ? 'correct-result'
                                 : (QuizProgress[Order] === false ? 'incorrect-result'
                                     : '')
@@ -187,45 +284,28 @@ export default function Studying() {
                                             :
                                             <>
                                                 <i className='fa-solid fa-circle-xmark'></i>
-                                                <div className='text-explanation'>{QUESTIONs[Order].explaination}</div>
+                                                <div className='text-explanation'>{QUESTIONs[Order].explanation || 'No explanation'}</div>
                                             </>
                                         )
                                     }
-                                    {/* <i className='fa-solid fa-ellipsis'></i>
-                                    <i className='fa-solid fa-circle-check'></i>
-                                    <i className='fa-solid fa-circle-xmark'></i>
-                                    <div>{QUESTIONs[Order].Explanation}</div> */}
                                 </div>
                                 <div>
-                                    {QuizProgress[Order] == null &&
-                                        <Button
-                                            width={'200px'}
-                                            height={'52px'}
-                                            border={'6px'}
-                                            radius={'16px'}
-                                            maincolor={'white'}
-                                            active={false}
-                                            onToggle={handleCheckQuestion}
-                                        >
-                                            CHECK
-                                        </Button>
-                                    }
-                                    {QuizProgress[Order] != null &&
-                                        <Button
-                                            width={'200px'}
-                                            height={'52px'}
-                                            border={'6px'}
-                                            radius={'16px'}
-                                            maincolor={QuizProgress[Order] === true ? 'correct'
-                                                : (QuizProgress[Order] === false ? 'incorrect'
-                                                    : 'white')
-                                            }
-                                            active={false}
-                                            onToggle={handleChangeQuestion}
-                                        >
-                                            CONTINUE
-                                        </Button>
-                                    }
+                                    <Button
+                                        width={'200px'}
+                                        height={'52px'}
+                                        border={'6px'}
+                                        radius={'16px'}
+                                        maincolor={
+                                            QuizProgress[Order] == null ? 'white'
+                                                : (QuizProgress[Order] === true ? 'correct'
+                                                    : (QuizProgress[Order] === false ? 'incorrect'
+                                                        : 'white'))
+                                        }
+                                        active={false}
+                                        onToggle={QuizProgress[Order] == null ? handleCheckQuestion : handleChangeQuestion}
+                                    >
+                                        {QuizProgress[Order] == null ? 'CHECK' : 'CONTINUE'}
+                                    </Button>
                                 </div>
                             </div>
                         </form>
@@ -234,17 +314,16 @@ export default function Studying() {
             )
                 :
                 <div className='card-study card-finish'>
-                    {/* <div className='percent perfect'>{100 * CorrectCount / QUESTIONs.length}%</div> */}
-                    {Percent === 1 ?
-                        <><div className='percent perfect'>{100 * Percent}%</div>
+                    {Percent === 100 ?
+                        <><div className='percent perfect'>{Percent}%</div>
                             <div className='text perfect'>Perfect!</div></> :
-                        ((Percent < 1 && Percent >= 0.8) ?
-                            <><div className='percent welldone'>{100 * Percent}%</div>
+                        ((Percent < 100 && Percent >= 80) ?
+                            <><div className='percent welldone'>{Percent}%</div>
                                 <div className='text welldone'>Well done!</div></> :
-                            ((Percent < 0.8 && Percent >= 0.5) ?
-                                <><div className='percent good'>{100 * Percent}%</div>
+                            ((Percent < 80 && Percent >= 50) ?
+                                <><div className='percent good'>{Percent}%</div>
                                     <div className='text good'>Good!</div></> :
-                                <><div className='percent tryharder'>{100 * Percent}%</div>
+                                <><div className='percent tryharder'>{Percent}%</div>
                                     <div className='text tryharder'>Try Harder!</div></>
                             ))}
                     <div className='btn-box'>
@@ -263,7 +342,6 @@ export default function Studying() {
                             FINISH
                         </Button>
                     </div>
-                    {/* <Link to='/'><i className='fa-solid fa-xmark'></i></Link> */}
                 </div>
             }
         </div>
