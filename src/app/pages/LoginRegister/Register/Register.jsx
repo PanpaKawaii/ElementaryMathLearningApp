@@ -56,11 +56,11 @@ export default function Register({ MoveImage }) {
 
             setRegisterSuccess('Register success!');
             setRegisterError({ value: '', name: '' });
-            setLoading(false);
         } catch (error) {
             console.log('Register failed:', error);
             setRegisterError({ value: 'Register failed', name: 'Username, Name, Role, Password, Confirm, Accept' });
             setRegisterSuccess('');
+        } finally {
             setLoading(false);
         }
     };

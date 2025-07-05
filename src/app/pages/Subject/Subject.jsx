@@ -26,9 +26,9 @@ export default function Subject() {
                 console.log('boughtSubjectData', boughtSubjectData);
                 setBOUGHTSUBJECTs(boughtSubjectData);
 
-                setLoading(false);
             } catch (error) {
                 setError(error);
+            } finally {
                 setLoading(false);
             }
         };
@@ -43,6 +43,8 @@ export default function Subject() {
             subjectInfo: subject || {}
         };
     });
+    console.log('BoughtSubjectInformation', BoughtSubjectInformation);
+
 
     const handleNavigate = (SubjectId) => {
         localStorage.setItem('SubjectId', SubjectId);
@@ -58,7 +60,7 @@ export default function Subject() {
                         {BoughtSubjectInformation.map((subject, i) => (
                             <div key={i} className='col' onClick={() => handleNavigate(subject.subjectId)}>
                                 <div className='card'>
-                                    <div className='img'></div>
+                                    <img src={subject.subjectInfo.image} alt={subject.subjectInfo.name} />
                                     <div className='name'>{subject.subjectInfo.name}</div>
                                 </div>
                             </div>
@@ -75,7 +77,7 @@ export default function Subject() {
                             <div to='./detail' key={i} className='col'>
                                 <div className='card'>
                                     <Link>
-                                        <div className='img'></div>
+                                        <img src={subject.image} alt={subject.name} />
                                         <div className='name'>{subject.name}</div>
                                         <div className='price'>{subject.price.toLocaleString('vi-VN')} VND</div>
                                     </Link>

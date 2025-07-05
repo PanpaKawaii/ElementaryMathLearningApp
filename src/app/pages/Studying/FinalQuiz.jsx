@@ -29,9 +29,9 @@ export default function FinalQuiz() {
                 console.log('questionData', questionData);
                 setQUESTIONs(questionData.questions);////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-                setLoading(false);
             } catch (error) {
                 setError(error);
+            } finally {
                 setLoading(false);
             }
         };

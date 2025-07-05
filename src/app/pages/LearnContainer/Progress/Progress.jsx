@@ -30,9 +30,9 @@ export default function Progress() {
                 const progressData = await fetchData(`api/progress/boughtsubject/${boughtSubjectData.find(bs => bs.id == SubjectId).id}`, token);
                 setPROGRESSes(progressData);
 
-                setLoading(false);
             } catch (error) {
                 setError(error);
+            } finally {
                 setLoading(false);
             }
         };

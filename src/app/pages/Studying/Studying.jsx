@@ -9,14 +9,21 @@ import './Studying.css';
 
 export default function Studying() {
     const { user } = useAuth();
-    const formRef = useRef(null);
     const navigate = useNavigate();
+    const formRef = useRef(null);
     const location = useLocation();
+    const Params = useParams();
+
     const TopicId = location.state;
     console.log('TopicId', TopicId);
-    const Params = useParams();
+    const IsTopic = !(String(TopicId).includes('-')) && !(String(TopicId).includes('+'));
+    const IsQuiz = String(TopicId).includes('-');
+    const IsAdvanced = String(TopicId).includes('+');
+    console.log('IsTopic', IsTopic);
+
     const ChapterId = Params.chapter;
     console.log('ChapterId', ChapterId);
+
 
     const [QUESTIONs, setQUESTIONs] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -34,44 +41,54 @@ export default function Studying() {
             try {
                 const questionData = await fetchData(`api/topic/${TopicId}`, token);
                 console.log('questionData', questionData);
-                setQUESTIONs(questionData.questions);
+                setQUESTIONs(questionData.questions.filter(q => q.note == 'Regular'));
 
-                setLoading(false);
             } catch (error) {
                 setError(error);
+            } finally {
                 setLoading(false);
             }
         };
         const fetchDataQuizAPI = async () => {
             try {
-                // Đổi API thành lấy ngẫu nhiên 10 Questions từ Chapter truyền vào === FIX ===
-                const questionData = await fetchData(`api/topic/${TopicId.split('-')[1]}`, token);
-                console.log('questionData', questionData);
-                setQUESTIONs(questionData.questions);
+                // API lấy ngẫu nhiên 10 Questions từ Chapter truyền vào
+                const chapterData = await fetchData(`api/chapter/${ChapterId}`, token);
+                const allQuestions = chapterData.topics.flatMap(topic => topic.questions);
+                const random10Questions = allQuestions
+                    .map(question => ({ ...question, sort: Math.random() }))
+                    .sort((a, b) => a.sort - b.sort)
+                    .filter((_, index) => index < 10)
+                    .map(({ sort, ...rest }) => rest);
+                setQUESTIONs(random10Questions);
 
-                setLoading(false);
             } catch (error) {
                 setError(error);
+            } finally {
                 setLoading(false);
             }
         };
         const fetchDataAdvancedAPI = async () => {
             try {
                 // Đổi API thành lấy Advanced Questions từ Chapter truyền vào === FIX ===
-                const questionData = await fetchData(`api/topic/${TopicId.split('+')[1]}`, token);
-                console.log('questionData', questionData);
-                setQUESTIONs(questionData.questions);
+                const chapterData = await fetchData(`api/chapter/${ChapterId}`, token);
+                const allQuestions = chapterData.topics.flatMap(topic => topic.questions.filter(q => q.note == 'Advanced'));
+                const random10Questions = allQuestions
+                    .map(question => ({ ...question, sort: Math.random() }))
+                    .sort((a, b) => a.sort - b.sort)
+                    .filter((_, index) => index < 10)
+                    .map(({ sort, ...rest }) => rest);
+                setQUESTIONs(random10Questions);
 
-                setLoading(false);
             } catch (error) {
                 setError(error);
+            } finally {
                 setLoading(false);
             }
         };
 
-        if (!(String(TopicId).includes('-')) && !(String(TopicId).includes('+'))) fetchDataTopicAPI();
-        else if (String(TopicId).includes('-')) fetchDataQuizAPI();
-        else if (String(TopicId).includes('+')) fetchDataAdvancedAPI();
+        if (IsTopic) fetchDataTopicAPI();
+        else if (IsQuiz) fetchDataQuizAPI();
+        else if (IsAdvanced) fetchDataAdvancedAPI();
     }, [TopicId]);
 
     const handleChangeQuestion = () => {
@@ -102,16 +119,31 @@ export default function Studying() {
         const TopicProgressData = {
             score: Percent,
             userId: Number(user?.id),
-            topicId: (!(String(TopicId).includes('-')) && !(String(TopicId).includes('+'))) ? TopicId : 1,// Chỉnh thành null nếu là Quiz hoặc thêm thuộc tính ChapterId và Note
+            topicId: String(TopicId).split('-')[0].split('+')[0],
+            note: 'Topic',
         };
         console.log('TopicProgressData:', TopicProgressData);
+
+        const ChapterProgressData = {
+            score: Percent,
+            userId: Number(user?.id),
+            chapterId: ChapterId,
+            note: IsQuiz ? 'Quiz' : (IsAdvanced ? 'Advanced' : 'Error'),
+        };
+        console.log('ChapterProgressData:', ChapterProgressData);
 
         // const token = user?.token; // === FIX ===
         const token = '';
         try {
-            // Lưu lịch sử vào Topic Progress
-            const updatedData = await postData(`api/topicprogress`, TopicProgressData, token);
-            console.log('updatedData', updatedData);
+            // Lưu lịch sử vào Chapter/Topic Progress
+            if (IsTopic) {
+                const updatedTopicProgressData = await postData(`api/topicprogress`, TopicProgressData, token);
+                console.log('updatedTopicProgressData', updatedTopicProgressData);
+            }
+            else if (IsQuiz || IsAdvanced) {
+                const updatedChapterProgressData = await postData(`api/chapterprogress`, ChapterProgressData, token);
+                console.log('updatedChapterProgressData', updatedChapterProgressData);
+            }
 
             // Lấy tiến trình hiện tại của Subject đó
             const SubjectId = localStorage.getItem('SubjectId');
@@ -119,11 +151,11 @@ export default function Studying() {
             const currentProgressData = await fetchData(`api/progress/boughtsubject/${boughtSubjectData.find(bs => bs.id == SubjectId).id}`, token);
             console.log('currentProgressData', currentProgressData);
 
-            if (updatedData.score >= 10) {
+            if (Percent >= 10) {
                 const chapters = await fetchData(`api/chapter`);
                 const chapter = chapters.find(c => c.id == ChapterId);
 
-                if (!(String(TopicId).includes('-')) && !(String(TopicId).includes('+'))) {
+                if (IsTopic) {
                     // Nếu đang ở Topic có Topic.number bằng với Process.Topic và Chapter.number bằng với Process.Chapter, không phải Quiz, thì cộng tiến trình Topic lên 1
                     console.log('It is a Topic');
                     const topic = await fetchData(`api/topic/${TopicId}`);
@@ -140,7 +172,7 @@ export default function Studying() {
 
                     } else console.log('Not current Topic');
                 }
-                else if (String(TopicId).includes('-')) {
+                else if (IsQuiz) {
                     // Nếu đang ở Quiz của Chapter có number trùng với Process.Chapter thì mở khóa Chapter mới, đưa tiến trình Topic về 1
                     console.log('It is a Quiz');
 
@@ -256,10 +288,6 @@ export default function Studying() {
                                             </>
                                         )
                                     }
-                                    {/* <i className='fa-solid fa-ellipsis'></i>
-                                    <i className='fa-solid fa-circle-check'></i>
-                                    <i className='fa-solid fa-circle-xmark'></i>
-                                    <div>{QUESTIONs[Order].Explanation}</div> */}
                                 </div>
                                 <div>
                                     <Button
