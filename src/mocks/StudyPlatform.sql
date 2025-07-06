@@ -110,7 +110,7 @@ CREATE TABLE [Comment] (
     Id			INT PRIMARY KEY IDENTITY(1,1),
     Content		NVARCHAR(255),
     Answer		INT,
-    CommentDate DATE,
+    CommentDate DATETIME,
     QuestionId	INT FOREIGN KEY REFERENCES [Question](Id),
     UserId		INT FOREIGN KEY REFERENCES [User](Id)
 );
@@ -134,7 +134,7 @@ CREATE TABLE [Progress] (
 CREATE TABLE [ChapterProgress] (
     Id			INT PRIMARY KEY IDENTITY(1,1),
     Score		INT,
-    StartDate	DATE,
+    StartDate	DATETIME,
     Note        NVARCHAR(255),
     UserId		INT FOREIGN KEY REFERENCES [User](Id),
     ChapterId   INT FOREIGN KEY REFERENCES [Chapter](Id)
@@ -143,7 +143,7 @@ CREATE TABLE [ChapterProgress] (
 CREATE TABLE [TopicProgress] (
     Id			INT PRIMARY KEY IDENTITY(1,1),
     Score		INT,
-    StartDate	DATE,
+    StartDate	DATETIME,
     Note        NVARCHAR(255),
     UserId		INT FOREIGN KEY REFERENCES [User](Id),
     TopicId		INT FOREIGN KEY REFERENCES [Topic](Id)
@@ -329,20 +329,20 @@ INSERT INTO [Question] (Number, Type, Question, CorrectAnswer, Answers, Explanat
 
 
 INSERT INTO [User] (Name, Image, Username, Password, Role, Type, CuratorId, Email, Point, LastOnline, JoinedDate, DayStreak, HighestDayStreak) VALUES
-(N'Đặng Ngọc Hải Triều', 'Imageeeeeeeeeeeeee', 'haitrieu', '123456', 'Student', 'Regular', null, 'haitrieu@example.com', 108900, '2024-07-01', '2024-06-01', 880, 880),
-(N'Nguyễn Xuân Trường', 'Imageeeeeeeeeeeeee', 'xuantruong', '123456', 'Student', 'VIP', null, 'xuantruong@example.com', 15070, '2024-07-01', '2024-06-02', 7, 1200),
-('Mountain Daddy', 'Imageeeeeeeeeeeeee', 'mountain', '123456', 'Parent', 'Regular', null, 'mountain@example.com', 2000000, '2024-07-01', '2024-06-03', 0, 0),
-('Admin Trieu', 'Imageeeeeeeeeeeeee', 'admin', '123456', 'Admin', 'Regular', NULL, 'admin@example.com', 0, '2024-07-01', '2024-06-04', 0, 0),
-('Teacher Trieu', 'Imageeeeeeeeeeeeee', 'teacher', '123456', 'Teacher', 'Regular', NULL, 'teacher@example.com', 0, '2024-07-01', '2025-06-01', 0, 0),
-('Tester Trieu', 'Imageeeeeeeeeeeeee', 'tester', '123456', 'Student', 'Regular', 3, 'tester@example.com', 100000, '2024-07-01', '2024-06-02', 100, 1000)
+(N'Đặng Ngọc Hải Triều', 'https://i.pinimg.com/736x/e7/10/17/e7101751e85d4960b039adc0cffada4f.jpg', 'haitrieu', '123456', 'Student', 'Regular', null, 'haitrieu@example.com', 108900, '2024-07-01', '2024-06-01', 880, 880),
+(N'Nguyễn Xuân Trường', 'https://i.pinimg.com/736x/af/2e/45/af2e450dee86885b777c32b584f15ed5.jpg', 'xuantruong', '123456', 'Student', 'VIP', null, 'xuantruong@example.com', 15070, '2024-07-01', '2024-06-02', 7, 1200),
+('Mountain Daddy', 'https://i.pinimg.com/736x/e2/7c/dd/e27cdd4e412c291955ab8e817df46be2.jpg', 'mountain', '123456', 'Parent', 'Regular', null, 'mountain@example.com', 2000000, '2024-07-01', '2024-06-03', 0, 0),
+('Admin Trieu', 'https://i.pinimg.com/736x/f2/24/cb/f224cb341f23ac57d8508b0035ac6554.jpg', 'admin', '123456', 'Admin', 'Regular', NULL, 'admin@example.com', 0, '2024-07-01', '2024-06-04', 0, 0),
+('Teacher Trieu', 'https://i.pinimg.com/736x/0a/32/52/0a325220d9212e51e6fd98b42f99c1b0.jpg', 'teacher', '123456', 'Teacher', 'Regular', NULL, 'teacher@example.com', 0, '2024-07-01', '2025-06-01', 0, 0),
+('Tester Trieu', 'https://i.pinimg.com/736x/cc/9e/bd/cc9ebdead570cc7b070dfd23d7bf4351.jpg', 'tester', '123456', 'Student', 'Regular', 3, 'tester@example.com', 100000, '2024-07-01', '2024-06-02', 100, 1000)
 UPDATE [User] SET CuratorId = 3 WHERE Id = 1;
 
 INSERT INTO [Comment] (Content, Answer, CommentDate, QuestionId, UserId) VALUES
-('Good explanation', null, '2025-06-01', 1, 1),
-('Disagree with answer', 1, '2025-06-02', 2, 1),
-('Clear solution', 2, '2025-06-03', 3, 1),
-('Needs more detail', 2, '2025-06-04', 4, 1),
-('Useful note', 3, '2025-06-05', 5, 1)
+('Good explanation', null, '2025-06-01 14:30:00', 1, 1),
+('Disagree with answer', 1, '2025-06-02 14:30:00', 2, 1),
+('Clear solution', 2, '2025-06-03 14:30:00', 3, 1),
+('Needs more detail', 2, '2025-06-04 14:30:00', 4, 1),
+('Useful note', 3, '2025-06-05 14:30:00', 5, 1)
 
 INSERT INTO [BoughtSubject] (PurchaseDate, Feedback, Rating, SubjectId, UserId) VALUES
 ('2025-01-10', 'Great Math course', 5, 1, 1),
@@ -361,18 +361,18 @@ INSERT INTO [Progress] (Chapter, Topic, BoughtSubjectId) VALUES
 (1, 1, 6)
 
 INSERT INTO [ChapterProgress] (Score, StartDate, Note, UserId, ChapterId) VALUES
-(30, '2025-06-01', 'Quiz', 1, 1),
-(100, '2025-06-02', 'Quiz', 2, 2),
-(60, '2025-06-03', 'Advanced', 3, 3),
-(90, '2025-06-04', 'Quiz', 4, 4),
-(80, '2025-06-05', 'Advanced', 5, 5)
+(30, '2025-06-01 14:30:00', 'Quiz', 1, 1),
+(100, '2025-06-02 14:30:00', 'Quiz', 2, 2),
+(60, '2025-06-03 14:30:00', 'Advanced', 3, 3),
+(90, '2025-06-04 14:30:00', 'Quiz', 4, 4),
+(80, '2025-06-05 14:30:00', 'Advanced', 5, 5)
 
 INSERT INTO [TopicProgress] (Score, StartDate, Note, UserId, TopicId) VALUES
-(80, '2025-06-01', 'Topic', 1, 1),
-(90, '2025-06-02', 'Topic', 2, 2),
-(80, '2025-06-03', 'Topic', 3, 3),
-(70, '2025-06-04', 'Topic', 4, 4),
-(100, '2025-06-05', 'Topic', 5, 5)
+(80, '2025-06-01 14:30:00', 'Topic', 1, 1),
+(90, '2025-06-02 14:30:00', 'Topic', 2, 2),
+(80, '2025-06-03 14:30:00', 'Topic', 3, 3),
+(70, '2025-06-04 14:30:00', 'Topic', 4, 4),
+(100, '2025-06-05 14:30:00', 'Topic', 5, 5)
 
 INSERT INTO [Achievement] (Name, Description) VALUES
 ('Beginer', 'Completed first chapter'),

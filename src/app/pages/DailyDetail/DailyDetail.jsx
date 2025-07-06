@@ -1,17 +1,48 @@
-import React, { useState } from 'react';
-import { subjects } from '../../../mocks/DatabaseSample.js';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { fetchData } from '../../../mocks/CallingAPI.js';
+import { useAuth } from '../../hooks/AuthContext/AuthContext.jsx';
 import './DailyDetail.css';
 
 export default function DailyDetail() {
+    const { user } = useAuth();
 
-    const [SUBJECTs, setSUBJECTs] = useState(subjects);
+    const [USER, setUSER] = useState(null);
+    const [PerfectLesson, setPerfectLesson] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        // const token = user?.token;
+        const token = '';
+        const fetchDataAPI = async () => {
+            try {
+                const topicprogressData = await fetchData(`api/topicprogress`, token);
+                const chapterprogressData = await fetchData(`api/chapterprogress`, token);
+                console.log('Topic, Chapter', topicprogressData, chapterprogressData);
+                const PerfectTopic = topicprogressData.filter(topic => topic.userId == user.id && topic.score == 100);
+                const PerfectChapter = chapterprogressData.filter(chapter => chapter.userId == user.id && chapter.score == 100);
+                console.log('PerfectTopic, PerfectChapter', PerfectTopic, PerfectChapter);
+                setPerfectLesson(PerfectTopic.length + PerfectChapter.length);
+
+                const userData = await fetchData(`api/user/${user?.id}`, token);
+                setUSER(userData);
+            } catch (error) {
+                setError(error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchDataAPI();
+    }, [user]);
 
     return (
         <div className='dailydetail-container'>
             <div className='achievement'>
-                <div><i className='fa-solid fa-fire'></i>856</div>
-                <div><i className='fa-solid fa-lightbulb'></i>5620</div>
-                <div><i className='fa-solid fa-star'></i>43</div>
+                <div><i className='fa-solid fa-fire'></i>{USER?.dayStreak}</div>
+                <div><i className='fa-solid fa-lightbulb'></i>{USER?.point}</div>
+                <div><i className='fa-solid fa-star'></i>{PerfectLesson}</div>
             </div>
 
             <section>

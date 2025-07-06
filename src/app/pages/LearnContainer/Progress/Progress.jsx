@@ -10,7 +10,6 @@ export default function Progress() {
     const { user } = useAuth();
     const navigate = useNavigate();
     const SubjectId = localStorage.getItem('SubjectId');
-    if (!SubjectId) navigate('/subject');
 
     const [SUBJECTs, setSUBJECTs] = useState(null);
     const [PROGRESSes, setPROGRESSes] = useState(null);
@@ -18,6 +17,7 @@ export default function Progress() {
     const [error, setError] = useState(null);
 
     useEffect(() => {
+        if (!SubjectId) navigate('/subject');
         // const token = user?.token;
         const token = '';
         const fetchDataAPI = async () => {
