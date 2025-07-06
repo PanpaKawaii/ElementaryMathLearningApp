@@ -10,7 +10,7 @@ import LoginRegister from '../pages/LoginRegister/LoginRegister'
 
 import Studying from '../pages/Studying/Studying'
 import FinalQuiz from '../pages/Studying/FinalQuiz'
-import ProfilePage from '../pages/Profile/ProfilePage'
+import ProfileContainer from '../pages/ProfileContainer/ProfileContainer'
 
 
 export default function MainRoutes() {
@@ -36,7 +36,7 @@ export default function MainRoutes() {
                         <Route path='subject' element={<Subject />} />
                         <Route path='comment' element={<CommentTest />} />
                         <Route path='rank' element={<></>} />
-                        <Route path='profile' element={<ProfilePage />} />
+                        <Route path='profile' element={<ProfileContainer />} />
                         <Route path='login-register' element={<LoginRegister />} />
                     </Route>
                     <Route path='*' element={<Navigate to='/learn' replace />} />

@@ -13,7 +13,7 @@
     a {
         .logo {
             padding: 24px 16px;
-            color: #28a745;
+            color: #7ed957;
             font-size: 36px;
             font-weight: bold;
         }
@@ -47,11 +47,11 @@
 
         .located,
         .located:hover {
-            border: 2px solid #5add79;
-            background-color: #b7ffc7;
+            border: 2px solid #7ed957;
+            background-color: #7ed95740;
 
             a {
-                color: #158630;
+                color: #28a745;
             }
         }
     }

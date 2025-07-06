@@ -50,7 +50,9 @@ export default function Login({ MoveImage }) {
         } catch (error) {
             console.log('Login failed:', error);
             setLoginError({ value: 'Login failed', name: 'Username or Password' });
-        } finally { }
+        } finally {
+            setLoading(false);
+        }
     };
 
     const formRef = useRef(null);
@@ -102,6 +104,8 @@ export default function Login({ MoveImage }) {
 
                 {LoginError && <div className='message error-message'>{LoginError.value}</div>}
                 {!LoginError && <div className='message error-message'></div>}
+
+                <button type='submit' style={{ display: 'none' }}></button>
 
                 <div className='btn-box btn-login'>
                     <Button

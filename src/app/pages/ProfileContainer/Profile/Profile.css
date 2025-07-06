@@ -1,0 +1,332 @@
+/* Friendlier, modern, and visually appealing profile page styles */
+.profile-container {
+    width: 600px;
+
+    .profile-box {
+        padding: 20px 0;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .header {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+
+            img {
+                width: 160px;
+                height: 160px;
+                border: 2px solid #ccc;
+                box-sizing: border-box;
+                border-radius: 20px;
+            }
+
+            .avatar {
+                position: relative;
+                width: 160px;
+                height: 160px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                border: 2px dashed #ccc;
+                box-sizing: border-box;
+                border-radius: 20px;
+
+                &:hover {
+                    border-color: #7ed957;
+                }
+
+                .fa-plus {
+                    font-size: 40px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: #aaa;
+                }
+
+                .fa-pencil {
+                    position: absolute;
+                    top: 4px;
+                    right: 4px;
+                    width: 36px;
+                    height: 36px;
+                    color: #aaa;
+                    background-color: #eee;
+                    border-radius: 50%;
+                    text-align: center;
+                    align-content: center;
+                    cursor: pointer;
+                }
+            }
+
+            .info {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                height: 160px;
+
+                .up-info {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 4px;
+
+                    .name {
+                        font-size: 32px;
+                        font-weight: bold;
+                        word-break: break-all;
+                        max-height: 80px;
+                        overflow: hidden;
+                    }
+
+                    .username {
+                        font-size: 20px;
+                        font-weight: 600;
+                    }
+
+                    .joined {
+                        font-size: 16px;
+                        color: #aaa;
+                    }
+                }
+
+                .down-info {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    .follow {
+                        display: flex;
+                        font-weight: bold;
+                        gap: 20px;
+
+                        .btn {
+                            padding: 0;
+                            color: #7ed957;
+                            background-color: transparent;
+                        }
+                    }
+                }
+            }
+        }
+
+        .line {
+            border: 1px solid #ccc;
+        }
+
+        .main-content {
+            display: flex;
+            gap: 20px;
+
+            .statistics-achievements {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+
+                .title {
+                    margin: 0 0 8px;
+                    font-size: 20px;
+                    font-weight: bold;
+                }
+
+                .statistics {
+                    .row {
+                        display: grid;
+                        grid-template-columns: repeat(2, minmax(0, 1fr));
+                        gap: 16px;
+
+                        .box {
+                            padding: 12px;
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            border: 2px solid #ddd;
+                            box-sizing: border-box;
+                            border-radius: 12px;
+
+                            .value {
+                                font-size: 24px;
+                                font-weight: bold;
+                                color: #7ed957;
+                            }
+
+                            .label {
+                                color: #999;
+                                font-weight: 600;
+                            }
+                        }
+                    }
+                }
+
+                .achievements {
+                    .list {
+                        border: 2px solid #ddd;
+                        box-sizing: border-box;
+                        border-radius: 20px;
+
+                        .item {
+                            display: flex;
+                            align-items: center;
+                            gap: 20px;
+                            padding: 20px;
+                            box-sizing: content-box;
+                            border-bottom: 2px solid #ccc;
+
+                            &:last-child {
+                                border: none;
+                            }
+
+                            .fa-trophy {
+                                width: 72px;
+                                height: 72px;
+                                display: flex;
+                                flex-direction: column;
+                                align-items: center;
+                                justify-content: center;
+                                color: #ffd700;
+                                font-size: 48px;
+                            }
+
+                            .content {
+                                flex: 1;
+
+                                .header {
+                                    display: flex;
+                                    justify-content: space-between;
+                                    align-items: center;
+                                    font-size: 20px;
+                                    font-weight: bold;
+
+                                    .achievements-title {
+                                        font-weight: bold;
+                                    }
+
+                                    .progress-label {
+                                        color: #999;
+                                        font-weight: 600;
+                                    }
+                                }
+
+                                .bar-bg {
+                                    width: 100%;
+                                    height: 12px;
+                                    margin: 8px 0 4px;
+                                    background: #ccc;
+                                    border-radius: 6px;
+                                    overflow: hidden;
+
+                                    .bar {
+                                        height: 100%;
+                                        border-radius: 6px;
+                                    }
+                                }
+
+                                .desc {
+                                    color: #999;
+                                    font-size: 14px;
+                                    font-weight: 500;
+                                }
+
+                                /* @media (max-width: 900px) {
+                            .item {
+                                flex-direction: column;
+                                align-items: flex-start;
+                                padding: 18px 12px;
+                            }
+
+                            .icon {
+                                margin-bottom: 10px;
+                                margin-right: 0;
+                            }
+                        } */
+                            }
+                        }
+                    }
+                }
+            }
+
+            .social-addfriends {
+                width: fit-content;
+                border: 2px solid #ddd;
+                box-sizing: border-box;
+                border-radius: 20px;
+                padding: 20px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+
+                .profile-follow-section {
+                    text-align: center;
+                }
+
+                .profile-follow-tabs {
+                    display: flex;
+                    justify-content: center;
+                    gap: 16px;
+                    margin-bottom: 12px;
+                }
+
+                .profile-follow-tab {
+                    color: #b0b8c1;
+                    font-size: 1.1rem;
+                    font-weight: 600;
+                    cursor: pointer;
+                    padding: 6px 18px;
+                    border-radius: 8px;
+                    transition: background 0.2s, color 0.2s;
+                }
+
+                .profile-follow-tab.active,
+                .profile-follow-tab:hover {
+                    background: #7ed957;
+                    color: #222c36;
+                }
+
+                .profile-follow-info {
+                    margin-top: 8px;
+                }
+
+                .profile-follow-img {
+                    width: 60px;
+                    margin-bottom: 8px;
+                }
+
+                .profile-follow-desc {
+                    width: 200px;
+                    color: #b0b8c1;
+                    font-size: 1rem;
+                }
+
+                .profile-add-friends .title {
+                    color: #fff;
+                    font-size: 1.1rem;
+                    margin-bottom: 8px;
+                }
+
+                .profile-find-friends-btn,
+                .profile-invite-friends-btn {
+                    background: #7ed957;
+                    color: #222c36;
+                    border: none;
+                    border-radius: 8px;
+                    padding: 10px 18px;
+                    font-size: 1rem;
+                    font-weight: 600;
+                    margin-right: 8px;
+                    margin-bottom: 6px;
+                    cursor: pointer;
+                    transition: background 0.2s, color 0.2s;
+                }
+
+                .profile-find-friends-btn:hover,
+                .profile-invite-friends-btn:hover {
+                    background: #fff;
+                    color: #7ed957;
+                }
+            }
+        }
+    }
+}
