@@ -7,6 +7,7 @@
         display: flex;
         flex-direction: column;
         gap: 20px;
+        position: relative;
 
         .header {
             display: flex;
@@ -81,6 +82,7 @@
                     }
 
                     .username {
+                        color: #555;
                         font-size: 20px;
                         font-weight: 600;
                     }
@@ -244,87 +246,6 @@
                             }
                         }
                     }
-                }
-            }
-
-            .social-addfriends {
-                width: fit-content;
-                border: 2px solid #ddd;
-                box-sizing: border-box;
-                border-radius: 20px;
-                padding: 20px;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 20px;
-
-                .profile-follow-section {
-                    text-align: center;
-                }
-
-                .profile-follow-tabs {
-                    display: flex;
-                    justify-content: center;
-                    gap: 16px;
-                    margin-bottom: 12px;
-                }
-
-                .profile-follow-tab {
-                    color: #b0b8c1;
-                    font-size: 1.1rem;
-                    font-weight: 600;
-                    cursor: pointer;
-                    padding: 6px 18px;
-                    border-radius: 8px;
-                    transition: background 0.2s, color 0.2s;
-                }
-
-                .profile-follow-tab.active,
-                .profile-follow-tab:hover {
-                    background: #7ed957;
-                    color: #222c36;
-                }
-
-                .profile-follow-info {
-                    margin-top: 8px;
-                }
-
-                .profile-follow-img {
-                    width: 60px;
-                    margin-bottom: 8px;
-                }
-
-                .profile-follow-desc {
-                    width: 200px;
-                    color: #b0b8c1;
-                    font-size: 1rem;
-                }
-
-                .profile-add-friends .title {
-                    color: #fff;
-                    font-size: 1.1rem;
-                    margin-bottom: 8px;
-                }
-
-                .profile-find-friends-btn,
-                .profile-invite-friends-btn {
-                    background: #7ed957;
-                    color: #222c36;
-                    border: none;
-                    border-radius: 8px;
-                    padding: 10px 18px;
-                    font-size: 1rem;
-                    font-weight: 600;
-                    margin-right: 8px;
-                    margin-bottom: 6px;
-                    cursor: pointer;
-                    transition: background 0.2s, color 0.2s;
-                }
-
-                .profile-find-friends-btn:hover,
-                .profile-invite-friends-btn:hover {
-                    background: #fff;
-                    color: #7ed957;
                 }
             }
         }

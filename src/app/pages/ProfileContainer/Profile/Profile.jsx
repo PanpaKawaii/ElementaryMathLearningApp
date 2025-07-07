@@ -73,7 +73,7 @@ const mockAchievements = [
     }
 ];
 
-export default function Profile() {
+export default function Profile({ Following, Follower, setFollowPopup }) {
     const { user, logout } = useAuth();
     const navigate = useNavigate();
 
@@ -98,14 +98,17 @@ export default function Profile() {
                 setPerfectLesson(PerfectTopic.length + PerfectChapter.length);
 
                 const userData = await fetchData(`api/user/${user?.id}`, token);
-                const following = await fetchData(`api/following/user/${user.id}`, token);
+                // const following = await fetchData(`api/following/user/${user.id}`, token);
                 // const follower = await fetchData(`api/following/following/${user.id}`, token);
-                console.log('following', following);
+                // console.log('following', following);
                 // console.log('follower', follower);
-                const userWithMoreDetail = { ...userData, following: following };
-                // const userWithMoreDetail = { ...userData, following: following, follower: follower };
-                console.log('userWithMoreDetail', userWithMoreDetail);
-                setUSER(userWithMoreDetail);
+                // setFollowing(following);
+                // setFollower(follower);
+                // const userWithMoreDetail = { ...userData, following: following };
+                // const userWithMoreDetail = { ...userData, following: Following, follower: Follower };
+                // console.log('userWithMoreDetail', userWithMoreDetail);
+                // setUSER(userWithMoreDetail);
+                setUSER(userData);
             } catch (error) {
                 setError(error);
             } finally {
@@ -125,13 +128,19 @@ export default function Profile() {
             });
     }, [user]);
 
+    const handleOpenFollow = (Status) => {
+        setFollowPopup(Status);
+        // window.location.href = '#follow';
+        // navigate('#follow');
+    }
+
     if (loading) return <Loading Size={'Average'} />
     return (
         <div className='profile-container'>
             <div className='profile-box'>
                 <div className='header'>
                     {USER?.image ?
-                        <img src={USER?.image} alt={USER.name}/>
+                        <img src={USER?.image} alt={USER.name} />
                         :
                         <div className='avatar'>
                             <i className='fa-solid fa-plus'></i>
@@ -145,8 +154,8 @@ export default function Profile() {
                         </div>
                         <div className='down-info'>
                             <div className='follow'>
-                                <button className='btn following'>{USER?.following?.length || 0} {USER?.following?.length == 1 ? 'following' : 'followings'}</button>
-                                <button className='btn following'>{USER?.follower?.length || 0} {USER?.follower?.length == 1 ? 'follower' : 'followers'}</button>
+                                <button className='btn following' onClick={() => handleOpenFollow('Following')}>{Following?.length || 0} {Following?.length == 1 ? 'following' : 'followings'}</button>
+                                <button className='btn following' onClick={() => handleOpenFollow('Follower')}>{Follower?.length || 0} {Follower?.length == 1 ? 'follower' : 'followers'}</button>
                             </div>
                             <button className='btn' onClick={() => logout()}>Logout</button>
                         </div>
@@ -199,23 +208,6 @@ export default function Profile() {
                             </div>
                         </div>
                     </div>
-                    {/* <div className='social-addfriends'>
-                        <div className='profile-follow-section'>
-                            <div className='profile-follow-tabs'>
-                                <span className='profile-follow-tab active'>FOLLOWING</span>
-                                <span className='profile-follow-tab'>FOLLOWERS</span>
-                            </div>
-                            <div className='profile-follow-info'>
-                                <img src='https://d35aaqx5ub95lt.cloudfront.net/images/profile/empty-followers.svg' alt='Followers' className='profile-follow-img' />
-                                <div className='profile-follow-desc'>Learning is more fun and effective when you connect with others.</div>
-                            </div>
-                        </div>
-                        <div className='profile-add-friends'>
-                            <div className='title'>Add friends</div>
-                            <button className='profile-find-friends-btn'>Find friends</button>
-                            <button className='profile-invite-friends-btn'>Invite friends</button>
-                        </div>
-                    </div> */}
                 </div>
             </div>
         </div>
