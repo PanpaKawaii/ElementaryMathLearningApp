@@ -9,6 +9,7 @@ export default function DailyDetail() {
 
     const [USER, setUSER] = useState(null);
     const [PerfectLesson, setPerfectLesson] = useState(null);
+    const [StudyToday, setStudyToday] = useState(false);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -25,8 +26,19 @@ export default function DailyDetail() {
                 console.log('PerfectTopic, PerfectChapter', PerfectTopic, PerfectChapter);
                 setPerfectLesson(PerfectTopic.length + PerfectChapter.length);
 
-                const userData = await fetchData(`api/user/${user?.id}`, token);
-                setUSER(userData);
+                const UserData = await fetchData(`api/user/${user?.id}`, token);
+                const lastOnline = new Date(UserData.lastOnline);
+                const today = new Date();
+                lastOnline.setHours(0, 0, 0, 0);
+                today.setHours(0, 0, 0, 0);
+                const diffDays = Math.floor((today - lastOnline) / (1000 * 60 * 60 * 24));
+                if (diffDays >= 1) {
+                    setStudyToday(false);
+                } else {
+                    setStudyToday(true);
+                }
+
+                setUSER(UserData);
             } catch (error) {
                 setError(error);
             } finally {
@@ -40,7 +52,7 @@ export default function DailyDetail() {
     return (
         <div className='dailydetail-container'>
             <div className='achievement'>
-                <div><i className='fa-solid fa-fire'></i>{USER?.dayStreak}</div>
+                <div><i className={`fa-solid fa-fire ${StudyToday ? 'studytoday' : 'notstudytoday'}`}></i>{USER?.dayStreak}</div>
                 <div><i className='fa-solid fa-lightbulb'></i>{USER?.point}</div>
                 <div><i className='fa-solid fa-star'></i>{PerfectLesson}</div>
             </div>

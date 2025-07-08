@@ -31,7 +31,13 @@
         }
 
         .fa-fire {
-            color: #ff4500;
+            &.studytoday {
+                color: #ff4500;
+            }
+
+            &.notstudytoday {
+                color: #ccc;
+            }
         }
 
         .fa-lightbulb {

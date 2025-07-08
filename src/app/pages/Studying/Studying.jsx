@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
-import { fetchData, postData, patchData } from '../../../mocks/CallingAPI.js';
+import { fetchData, postData, patchData, putData } from '../../../mocks/CallingAPI.js';
 import Button from '../../components/Button.jsx';
 import { useAuth } from '../../hooks/AuthContext/AuthContext.jsx';
 import Loading from '../../layouts/Loading/Loading.jsx';
@@ -115,7 +115,7 @@ export default function Studying() {
         console.log('SelectedAnswer: ', SelectedAnswer);
     };
 
-    const updateDataAPI = async (Percent) => {
+    const updateDataAPI = async (Percent, CorrectCount) => {
         const TopicProgressData = {
             score: Percent,
             userId: Number(user?.id),
@@ -148,7 +148,7 @@ export default function Studying() {
             // Lấy tiến trình hiện tại của Subject đó
             const SubjectId = localStorage.getItem('SubjectId');
             const boughtSubjectData = await fetchData(`api/boughtsubject/user/${user.id}`, token);
-            const currentProgressData = await fetchData(`api/progress/boughtsubject/${boughtSubjectData.find(bs => bs.id == SubjectId).id}`, token);
+            const currentProgressData = await fetchData(`api/progress/boughtsubject/${boughtSubjectData.find(bs => bs.subjectId == SubjectId).id}`, token);
             console.log('currentProgressData', currentProgressData);
 
             if (Percent >= 10) {
@@ -190,6 +190,51 @@ export default function Studying() {
                 } else console.log('Not Quiz or Topic');
             } else console.log('Percent < 10%');
 
+            const UserData = await fetchData(`api/user/${user?.id}`, token);
+            const newPoint = UserData.point + CorrectCount * 10;
+            const newLastOnline = new Date().toISOString().split('T')[0];
+            let newDayStreak = UserData.dayStreak + 1;
+            let newHighestDayStreak = UserData.highestDayStreak;
+
+            const lastOnline = new Date(UserData.lastOnline);
+            const today = new Date();
+            lastOnline.setHours(0, 0, 0, 0);
+            today.setHours(0, 0, 0, 0);
+            const diffDays = Math.floor((today - lastOnline) / (1000 * 60 * 60 * 24));
+            if (diffDays === 1) {
+                console.log('Hôm qua online');
+                newDayStreak = UserData.dayStreak + 1;
+            } else if (diffDays > 1) {
+                console.log('Trước hôm qua online');
+                newDayStreak = 1;
+            } else if (diffDays === 0) {
+                console.log('Hôm nay online');
+                newDayStreak = UserData.dayStreak;
+            } else {
+                console.log('Tương lai online?');
+            }
+
+            if (newDayStreak > UserData.highestDayStreak) newHighestDayStreak = newDayStreak;
+
+            const UpdatedUserData = {
+                name: UserData.name,
+                username: UserData.username,
+                password: UserData.password,
+                role: UserData.role,
+                curatorId: UserData.curatorId,
+                email: UserData.email,
+                point: newPoint, //newPoint
+                dayStreak: newDayStreak, //newDayStreak
+                highestDayStreak: newHighestDayStreak, //newHighestDayStreak
+                image: UserData.image,
+                lastOnline: newLastOnline, //newLastOnline
+                type: UserData.type,
+            };
+            console.log('UpdatedUserData:', UpdatedUserData);
+
+            const resultUpdatedUserData = await putData(`api/user?id=${UserData.id}`, UpdatedUserData, token);
+            console.log('resultUpdatedUserData', resultUpdatedUserData);
+
             navigate('/learn');
         } catch (error) {
             console.log('Saving progress failed');
@@ -199,7 +244,7 @@ export default function Studying() {
     const CorrectCount = QuizProgress.filter(q => q === true).length;
     const Percent = parseInt(100 * CorrectCount / QUESTIONs.length);
     const handleFinish = () => {
-        updateDataAPI(Percent);
+        updateDataAPI(Percent, CorrectCount);
     };
 
     if (loading) return <Loading Size={'Large'} />

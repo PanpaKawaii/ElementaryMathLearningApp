@@ -173,7 +173,7 @@ export default function Profile({ Following, Follower, setFollowPopup }) {
                                 </div>
                                 <div className='box'>
                                     <span className='value'>{USER?.point}</span>
-                                    <span className='label'>Total XP</span>
+                                    <span className='label'>Total point</span>
                                 </div>
                                 <div className='box'>
                                     <span className='value'>{USER?.highestDayStreak}</span>
@@ -213,94 +213,3 @@ export default function Profile({ Following, Follower, setFollowPopup }) {
         </div>
     );
 }
-
-// Add styles for styled-achievement-list and styled-achievement-item in ProfilePage.css:
-/*
-.styled-achievement-list {
-    background: #19212a;
-    border-radius: 16px;
-    border: 2px solid #222c36;
-    padding: 16px 0;
-    margin-top: 8px;
-}
-.styled-achievement-item {
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid #222c36;
-    padding: 16px 0;
-    border-left: 8px solid #333;
-    background: #222c36;
-    border-radius: 12px;
-    margin-bottom: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-}
-.styled-achievement-item:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
-}
-.styled-achievement-icon {
-    width: 64px;
-    height: 64px;
-    border-radius: 12px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: 2.2rem;
-    color: #fff;
-    margin-right: 20px;
-    position: relative;
-}
-.styled-achievement-level {
-    font-size: 0.85rem;
-    font-weight: bold;
-    margin-top: 4px;
-    color: #fff;
-    background: rgba(0,0,0,0.15);
-    border-radius: 6px;
-    padding: 2px 8px;
-    position: absolute;
-    bottom: 6px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-.styled-achievement-content {
-    flex: 1;
-}
-.styled-achievement-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: #fff;
-}
-.styled-achievement-title {
-    font-size: 1.1rem;
-    font-weight: bold;
-}
-.styled-achievement-progress-label {
-    font-size: 1rem;
-    color: #aaa;
-    margin-left: 12px;
-}
-.styled-achievement-bar-bg {
-    width: 100%;
-    height: 10px;
-    background: #2c3642;
-    border-radius: 6px;
-    margin: 8px 0 4px 0;
-    overflow: hidden;
-}
-.styled-achievement-bar {
-    height: 100%;
-    border-radius: 6px;
-    background: #FFD966;
-    transition: width 0.4s;
-}
-.styled-achievement-desc {
-    color: #b0b8c1;
-    font-size: 1rem;
-    margin-top: 2px;
-}
-*/
