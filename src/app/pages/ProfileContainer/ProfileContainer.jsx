@@ -4,7 +4,6 @@ import { useAuth } from '../../hooks/AuthContext/AuthContext.jsx';
 import DailyDetail from '../DailyDetail/DailyDetail';
 import Follow from './Follow/Follow';
 import Profile from './Profile/Profile';
-import './ProfileContainer.css';
 
 export default function ProfileContainer() {
     const { user } = useAuth();

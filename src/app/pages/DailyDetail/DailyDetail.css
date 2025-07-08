@@ -23,29 +23,29 @@
         div {
             display: flex;
             align-items: center;
-        }
 
-        i {
-            width: 32px;
-            font-size: 24px;
-        }
+            i {
+                width: 32px;
+                font-size: 24px;
 
-        .fa-fire {
-            &.studytoday {
-                color: #ff4500;
+                &.fa-fire {
+                    &.studytoday {
+                        color: #ff4500;
+                    }
+
+                    &.notstudytoday {
+                        color: #ccc;
+                    }
+                }
+
+                &.fa-lightbulb {
+                    color: #fb8b24;
+                }
+
+                &.fa-star {
+                    color: #ffd700;
+                }
             }
-
-            &.notstudytoday {
-                color: #ccc;
-            }
-        }
-
-        .fa-lightbulb {
-            color: #fb8b24;
-        }
-
-        .fa-star {
-            color: #ffd700;
         }
     }
 
@@ -64,6 +64,7 @@
             text-align: center;
 
             .number {
+                color: #666;
                 font-size: 120px;
                 font-weight: bold;
             }

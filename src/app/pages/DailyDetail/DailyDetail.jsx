@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { fetchData } from '../../../mocks/CallingAPI.js';
 import { useAuth } from '../../hooks/AuthContext/AuthContext.jsx';
 import './DailyDetail.css';
@@ -21,10 +20,10 @@ export default function DailyDetail() {
             try {
                 const topicprogressData = await fetchData(`api/topicprogress`, token);
                 const chapterprogressData = await fetchData(`api/chapterprogress`, token);
-                console.log('Topic, Chapter', topicprogressData, chapterprogressData);
+                // console.log('Topic, Chapter', topicprogressData, chapterprogressData);
                 const PerfectTopic = topicprogressData.filter(topic => topic.userId == user.id && topic.score == 100);
                 const PerfectChapter = chapterprogressData.filter(chapter => chapter.userId == user.id && chapter.score == 100);
-                console.log('PerfectTopic, PerfectChapter', PerfectTopic, PerfectChapter);
+                // console.log('PerfectTopic, PerfectChapter', PerfectTopic, PerfectChapter);
                 setPerfectLesson(PerfectTopic.length + PerfectChapter.length);
 
                 const UserData = await fetchData(`api/user/${user?.id}`, token);
@@ -43,9 +42,6 @@ export default function DailyDetail() {
                 const listuser = await fetchData(`listuser`, token);
                 const following = await fetchData(`api/following/user/${user.id}`, token);
                 const follower = await fetchData(`api/following/following/${user.id}`, token);
-                console.log('listuser', listuser);
-                console.log('following', following);
-                console.log('follower', follower);
                 const mergedListFollowing = following.map(follow => {
                     const matchedUser = listuser.find(user => user.id == follow.followingId);
                     return {
@@ -76,7 +72,7 @@ export default function DailyDetail() {
         fetchDataAPI();
     }, [user]);
 
-    const Rank = Friend.filter(fr => fr.user?.point > USER?.point).length + 1;
+    const Rank = Friend.filter(fr => fr.user?.point >= USER?.point).length + 1;
     console.log('Rank', Rank);
 
     return (
@@ -90,8 +86,8 @@ export default function DailyDetail() {
             <section>
                 <div className='title'>Friends Rank</div>
                 <div className='rank'>
-                    <div className={`number ${Rank == 1 ? 'gold' : (Rank == 2 ? 'silver' : (Rank == 3 ? 'bronze' : ''))}`}>
-                        #{Rank}
+                    <div className={`number ${loading ? '' : (Rank == 1 ? 'gold' : (Rank == 2 ? 'silver' : (Rank == 3 ? 'bronze' : '')))}`}>
+                        #{loading ? '?' : Rank}
                     </div>
                     <div className='text'>You're ranked <b>#{Rank}</b> among your friends</div>
                 </div>

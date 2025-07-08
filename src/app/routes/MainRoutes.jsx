@@ -6,6 +6,7 @@ import NavigationBar from '../pages/NavigationBar/NavigationBar'
 import LearnContainer from '../pages/LearnContainer/LearnContainer'
 import Subject from '../pages/Subject/Subject'
 import CommentTest from '../pages/Comment/CommentTest'
+import RankingContainer from '../pages/RankingContainer/RankingContainer'
 import LoginRegister from '../pages/LoginRegister/LoginRegister'
 
 import Studying from '../pages/Studying/Studying'
@@ -34,7 +35,7 @@ export default function MainRoutes() {
                         <Route path='learn' element={<LearnContainer />} />
                         <Route path='subject' element={<Subject />} />
                         <Route path='comment' element={<CommentTest />} />
-                        <Route path='rank' element={<></>} />
+                        <Route path='rank' element={<RankingContainer />} />
                         <Route path='profile' element={<ProfileContainer />} />
                         <Route path='login-register' element={<LoginRegister />} />
                     </Route>
