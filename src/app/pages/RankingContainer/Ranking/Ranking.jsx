@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { fetchData } from '../../../../mocks/CallingAPI.js';
 import { useAuth } from '../../../hooks/AuthContext/AuthContext.jsx';
 import Loading from '../../../layouts/Loading/Loading.jsx';
@@ -7,12 +8,14 @@ import './Ranking.css';
 
 export default function Ranking() {
     const { user } = useAuth();
+    const navigate = useNavigate();
 
     const [Friend, setFriend] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
+        if (!user) navigate('/login-register');
         // const token = user?.token;
         const token = '';
         const fetchDataAPI = async () => {
@@ -56,7 +59,7 @@ export default function Ranking() {
                                             <path d='M4 6l4 5 4-8 4 8 4-5 2 11H2z' />
                                         </svg>
                                     }
-                                    <img src={item.image} />
+                                    <img src={item.image} className={`${i === 0 ? 'gold' : (i === 1 ? 'silver' : i === 2 ? 'bronze' : '')}`} />
                                 </td>
                                 <td className='name-icon-td'>
                                     <div className='name-icon'>

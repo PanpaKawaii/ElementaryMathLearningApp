@@ -145,7 +145,7 @@
             padding: 40px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: start;
             align-items: center;
             position: relative;
 
@@ -157,31 +157,57 @@
             }
 
             .percent {
-                font-size: 200px;
+                width: 400px;
+                height: 400px;
+                box-sizing: border-box;
+                text-align: center;
+                align-content: center;
+                border-radius: 50%;
                 font-weight: bold;
 
                 &.perfect {
-                    color: #ffd700;
-                    text-shadow: 8px 8px 0 hsl(42, 100%, 43%);
+                    font-size: 120px;
+                    color: #FFC800;
+                    border: 32px solid #FFC800;
+                    background: linear-gradient(45deg, #FEEA66 50%, #FFD900 50%);
+                    text-shadow: 4px 4px 0 #FF9600;
+                    box-shadow: 4px 4px #FF9600, inset 4px 4px #FF9600;
                 }
 
                 &.welldone {
-                    color: #ffd700;
-                    text-shadow: 8px 8px 0 hsl(42, 100%, 43%);
+                    font-size: 140px;
+                    color: #AAC1D4;
+                    border: 32px solid #AAC1D4;
+                    background: linear-gradient(45deg, #D6E4EF 50%, #C2D1DD 50%);
+                    text-shadow: 4px 4px 0 #849FB5;
+                    box-shadow: 4px 4px #849FB5, inset 4px 4px #849FB5;
                 }
 
                 &.good {
-                    color: #c0c0c0;
-                    text-shadow: 8px 8px 0 hsl(0, 0%, 50%);
+                    font-size: 140px;
+                    color: #D7975D;
+                    border: 32px solid #D7975D;
+                    background: linear-gradient(45deg, #F7BE8B 50%, #E5AE7C 50%);
+                    text-shadow: 4px 4px 0 #CD7900;
+                    box-shadow: 4px 4px #CD7900, inset 4px 4px #CD7900;
                 }
 
                 &.tryharder {
+                    margin: 100px 0 0;
+                    width: 400px;
+                    height: 240px;
+                    font-size: 140px;
                     color: #ff3333;
+                    border: 32px solid #ff3333;
+                    border-radius: 52px;
+                    background: linear-gradient(26deg, #fe6767bf 50%, #ff4444bf 50%), linear-gradient(154deg, #fe6767bf 50%, #ff4444 50%);
+                    text-shadow: 4px 4px 0 #990909;
+                    box-shadow: 4px 4px #990909, inset 4px 4px #990909;
                 }
             }
 
             .text {
-                margin: 0 0 20px;
+                margin: 20px 0;
                 font-size: 40px;
                 font-weight: bold;
 

@@ -177,7 +177,7 @@ export default function Profile({ Following, Follower, setFollowPopup }) {
                                 </div>
                                 <div className='box'>
                                     <span className='value'>{USER?.highestDayStreak}</span>
-                                    <span className='label'>Highest streak</span>
+                                    <span className='label'>Highest day streak</span>
                                 </div>
                                 <div className='box'>
                                     <span className='value'>{PerfectLesson}</span>

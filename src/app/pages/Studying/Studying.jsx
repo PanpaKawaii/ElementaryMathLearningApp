@@ -192,7 +192,7 @@ export default function Studying() {
 
             const UserData = await fetchData(`api/user/${user?.id}`, token);
             const newPoint = UserData.point + CorrectCount * 10;
-            const newLastOnline = new Date().toISOString().split('T')[0];
+            const newLastOnline = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Bangkok' }).split('T')[0];
             let newDayStreak = UserData.dayStreak + 1;
             let newHighestDayStreak = UserData.highestDayStreak;
 

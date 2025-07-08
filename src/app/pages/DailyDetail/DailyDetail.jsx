@@ -87,7 +87,7 @@ export default function DailyDetail() {
                 <div className='title'>Friends Rank</div>
                 <div className='rank'>
                     <div className={`number ${loading ? '' : (Rank == 1 ? 'gold' : (Rank == 2 ? 'silver' : (Rank == 3 ? 'bronze' : '')))}`}>
-                        #{loading ? '?' : Rank}
+                        {loading ? '?' : Rank}
                     </div>
                     <div className='text'>You're ranked <b>#{Rank}</b> among your friends</div>
                 </div>

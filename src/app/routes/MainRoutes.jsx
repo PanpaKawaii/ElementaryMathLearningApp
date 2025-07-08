@@ -35,7 +35,7 @@ export default function MainRoutes() {
                         <Route path='learn' element={<LearnContainer />} />
                         <Route path='subject' element={<Subject />} />
                         <Route path='comment' element={<CommentTest />} />
-                        <Route path='rank' element={<RankingContainer />} />
+                        <Route path='ranking' element={<RankingContainer />} />
                         <Route path='profile' element={<ProfileContainer />} />
                         <Route path='login-register' element={<LoginRegister />} />
                     </Route>

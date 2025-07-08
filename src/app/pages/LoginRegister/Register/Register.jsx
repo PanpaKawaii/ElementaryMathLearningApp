@@ -45,7 +45,7 @@ export default function Register({ MoveImage }) {
             dayStreak: 0,
             highestDayStreak: 0,
             image: 'https://i.pinimg.com/736x/50/2d/f5/502df527ee91c613c64586ed977ba316.jpg',
-            lastOnline: new Date(Date.now() - 86400000).toISOString().split('T')[0],
+            lastOnline: new Date(Date.now() - 86400000).toLocaleDateString('en-CA', { timeZone: 'Asia/Bangkok' }).split('T')[0],
             type: 'Regular',
         };
         console.log('RegisterData:', RegisterData);
