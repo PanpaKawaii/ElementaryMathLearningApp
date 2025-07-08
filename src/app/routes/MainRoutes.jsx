@@ -9,7 +9,6 @@ import CommentTest from '../pages/Comment/CommentTest'
 import LoginRegister from '../pages/LoginRegister/LoginRegister'
 
 import Studying from '../pages/Studying/Studying'
-import FinalQuiz from '../pages/Studying/FinalQuiz'
 import ProfileContainer from '../pages/ProfileContainer/ProfileContainer'
 
 

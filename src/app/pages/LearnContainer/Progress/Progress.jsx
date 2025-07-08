@@ -23,11 +23,16 @@ export default function Progress() {
         const fetchDataAPI = async () => {
             try {
                 const subjectData = await fetchData(`api/subject/${SubjectId}`, token);
+                console.log('subjectData', subjectData);
                 setSUBJECTs(subjectData);
 
                 const boughtSubjectData = await fetchData(`api/boughtsubject/user/${user.id}`, token);
+                console.log('boughtSubjectData', boughtSubjectData);
 
-                const progressData = await fetchData(`api/progress/boughtsubject/${boughtSubjectData.find(bs => bs.id == SubjectId).id}`, token);
+                console.log('Id', boughtSubjectData.find(bs => bs.subjectId == SubjectId).id);
+                const progressData = await fetchData(`api/progress/boughtsubject/${boughtSubjectData.find(bs => bs.subjectId == SubjectId).id}`, token);
+                console.log('progressData', progressData);
+                
                 setPROGRESSes(progressData);
 
             } catch (error) {
@@ -133,7 +138,7 @@ export default function Progress() {
                                         (chapter.topics?.length < PROGRESSes?.topic ? chapter.topics?.length :
                                             PROGRESSes?.topic))) : 0
                             }
-                            /{chapter.topics?.length} finished topics
+                            /{chapter.topics?.length}
                         </div>
                     </div>
                     {chapter.topics?.length > 0 ? (

@@ -12,10 +12,11 @@
 
     a {
         .logo {
-            padding: 24px 16px;
+            padding: 16px;
             color: #7ed957;
-            font-size: 36px;
+            font-size: 60px;
             font-weight: bold;
+            text-align: center;
         }
     }
 
