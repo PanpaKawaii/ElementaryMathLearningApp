@@ -408,9 +408,3 @@ INSERT INTO [Following] (FollowDate, FollowingId, UserId) VALUES
 --SELECT * FROM [Achievement]
 --SELECT * FROM [AccomplishAchievement]
 --SELECT * FROM [Following]
-
-update [User] set
-lastOnline = '2025-07-06',
-dayStreak = 880,
-highestDayStreak = 1000
-where id = 1
