@@ -1,6 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
-import { fetchData, postData, patchData, putData } from '../../../mocks/CallingAPI.js';
+import { fetchData, patchData, postData, putData } from '../../../mocks/CallingAPI.js';
 import Button from '../../components/Button.jsx';
 import { useAuth } from '../../hooks/AuthContext/AuthContext.jsx';
 import Loading from '../../layouts/Loading/Loading.jsx';
@@ -42,7 +42,6 @@ export default function Studying() {
                 const questionData = await fetchData(`api/topic/${TopicId}`, token);
                 console.log('questionData', questionData);
                 setQUESTIONs(questionData.questions.filter(q => q.note == 'Regular'));
-
             } catch (error) {
                 setError(error);
             } finally {
@@ -51,7 +50,6 @@ export default function Studying() {
         };
         const fetchDataQuizAPI = async () => {
             try {
-                // API lấy ngẫu nhiên 10 Questions từ Chapter truyền vào
                 const chapterData = await fetchData(`api/chapter/${ChapterId}`, token);
                 const allQuestions = chapterData.topics.flatMap(topic => topic.questions);
                 const random10Questions = allQuestions
@@ -60,7 +58,6 @@ export default function Studying() {
                     .filter((_, index) => index < 10)
                     .map(({ sort, ...rest }) => rest);
                 setQUESTIONs(random10Questions);
-
             } catch (error) {
                 setError(error);
             } finally {
@@ -69,7 +66,6 @@ export default function Studying() {
         };
         const fetchDataAdvancedAPI = async () => {
             try {
-                // Đổi API thành lấy Advanced Questions từ Chapter truyền vào === FIX ===
                 const chapterData = await fetchData(`api/chapter/${ChapterId}`, token);
                 const allQuestions = chapterData.topics.flatMap(topic => topic.questions.filter(q => q.note == 'Advanced'));
                 const random10Questions = allQuestions
@@ -78,7 +74,6 @@ export default function Studying() {
                     .filter((_, index) => index < 10)
                     .map(({ sort, ...rest }) => rest);
                 setQUESTIONs(random10Questions);
-
             } catch (error) {
                 setError(error);
             } finally {
@@ -244,11 +239,16 @@ export default function Studying() {
     const CorrectCount = QuizProgress.filter(q => q === true).length;
     const Percent = parseInt(100 * CorrectCount / QUESTIONs.length);
     const handleFinish = () => {
+        setLoading(true);
         updateDataAPI(Percent, CorrectCount);
     };
 
+    // useEffect(() => {
+    //     if (QUESTIONs?.length <= 0) navigate('/learn');
+    // }, []);
+
     if (loading) return <Loading Size={'Large'} />
-    if (QUESTIONs.length <= 0) navigate('/learn');
+    if (QUESTIONs?.length <= 0) navigate('/learn');
     return (
         <div className='studying-container'>
             {Order < QUESTIONs.length ? (

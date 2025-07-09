@@ -5,12 +5,12 @@ import NavigationBar from '../pages/NavigationBar/NavigationBar'
 
 import LearnContainer from '../pages/LearnContainer/LearnContainer'
 import Subject from '../pages/Subject/Subject'
-import CommentTest from '../pages/Comment/CommentTest'
 import RankingContainer from '../pages/RankingContainer/RankingContainer'
+import ProfileContainer from '../pages/ProfileContainer/ProfileContainer'
 import LoginRegister from '../pages/LoginRegister/LoginRegister'
 
 import Studying from '../pages/Studying/Studying'
-import ProfileContainer from '../pages/ProfileContainer/ProfileContainer'
+import AdvancedQuestion from '../pages/ForumContainer/AdvancedQuestion'
 
 
 export default function MainRoutes() {
@@ -20,24 +20,15 @@ export default function MainRoutes() {
                 className='main-container'
                 style={{ display: 'flex' }}
             >
-                {/* <NavigationBar />
-                <Routes>
-                    <Route path='/' element={<Navigate to='/learn' replace />} />
-                    <Route path='/learn' element={<LearnContainer />} />
-                    <Route path='/comment' element={<CommentTest />} />
-                    <Route path='/studying/:id' element={<Studying />} />
-                    <Route path='*' element={<Navigate to='/learn' replace />} />
-                </Routes> */}
-
                 <Routes>
                     <Route path='/' element={<Navigate to='/learn' replace />} />
                     <Route path='/' element={<NavigationBar />} >
                         <Route path='learn' element={<LearnContainer />} />
                         <Route path='subject' element={<Subject />} />
-                        <Route path='comment' element={<CommentTest />} />
                         <Route path='ranking' element={<RankingContainer />} />
                         <Route path='profile' element={<ProfileContainer />} />
                         <Route path='login-register' element={<LoginRegister />} />
+                        <Route path='forum/chapter/:chapter' element={<AdvancedQuestion />} />
                     </Route>
                     <Route path='*' element={<Navigate to='/learn' replace />} />
                     <Route path='studying/chapter/:chapter/topic/:id' element={<Studying />} />

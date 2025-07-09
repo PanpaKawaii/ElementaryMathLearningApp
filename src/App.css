@@ -16,7 +16,8 @@ a {
   text-decoration: none;
 }
 
-input {
+input,
+textarea {
   outline: none;
   border: 2px solid #ccc;
   padding: 8px 12px;

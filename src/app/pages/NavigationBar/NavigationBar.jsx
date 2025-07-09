@@ -11,7 +11,6 @@ export default function NavigationBar() {
     const menuItems = [
         { name: 'LEARN', icon: 'house', path: '/learn' },
         { name: 'SUBJECT', icon: 'book', path: '/subject' },
-        { name: 'COMMENT', icon: 'comment', path: '/comment' },
         { name: 'RANK', icon: 'star', path: '/ranking' },
         { name: 'PROFILE', icon: 'user', path: '/profile' },
         { name: 'LOGIN-REGISTER', icon: 'right-to-bracket', path: '/login-register' },
@@ -29,7 +28,6 @@ export default function NavigationBar() {
                             {(
                                 (item.path !== '/profile' && item.path !== '/login-register' && item.path !== '/comment' && item.path !== '/ranking') ||
                                 (item.path === '/profile' && user) ||
-                                (item.path === '/comment' && user) ||
                                 (item.path === '/ranking' && user) ||
                                 (item.path === '/login-register' && !user)
                             ) &&

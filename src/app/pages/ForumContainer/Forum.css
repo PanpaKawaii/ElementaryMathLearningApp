@@ -1,0 +1,128 @@
+.forum-container {
+    width: 100%;
+
+    .forum-content {
+        margin: 0 40px;
+
+        .questions {
+            display: flex;
+
+            .head-block {
+                width: 40px;
+                height: auto;
+                display: flex;
+                justify-content: center;
+                position: relative;
+
+                .vertical-line {
+                    width: 20px;
+                    border-left: 2px solid #ccc;
+                    box-sizing: border-box;
+                    border-color: #ccc;
+                    position: absolute;
+                    right: 0;
+                }
+
+                .line-full {
+                    top: 0;
+                    height: 100%;
+                    /* border-color: blue; */
+                }
+
+                .line-img {
+                    bottom: 0;
+                    height: calc(100% - 40px);
+                    /* border-color: lime; */
+                }
+
+                .no-line {
+                    top: 0;
+                    height: 0;
+                    /* border-color: orange; */
+                }
+
+                .horizon-line {
+                    width: 20px;
+                    height: 20px;
+                    border-bottom: 2px solid #ccc;
+                    border-left: 2px solid #ccc;
+                    border-radius: 0 0 0 16px;
+                    border-color: #ccc;
+                    /* border-color: red; */
+                    box-sizing: border-box;
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                }
+            }
+
+            .content {
+                word-break: break-all;
+                overflow: hidden;
+                display: flex;
+                gap: 8px;
+
+                .image {
+
+                    img {
+                        width: 40px;
+                        height: 40px;
+                        border: 2px solid #ccc;
+                        box-sizing: border-box;
+                        border-radius: 50%;
+                    }
+                }
+
+                .name-comment {
+                    padding: 4px 12px;
+                    box-sizing: border-box;
+                    background-color: #eee;
+                    border-radius: 12px;
+
+                    .name {
+                        font-size: 18px;
+                        font-weight: bold;
+                    }
+                }
+
+                .commentdate-btn {
+                    margin: 2px 0 10px 20px;
+                    display: flex;
+                    color: #999;
+                    font-size: 12px;
+                    font-weight: 600;
+                    gap: 20px;
+
+                    .btn {
+                        padding: 0;
+                        font-size: 12px;
+                        background-color: transparent;
+                        color: #999;
+
+                        &.btn-takedown {
+                            color: #ff8080;
+                        }
+                    }
+                }
+
+                &.input-comment {
+
+                    .comment-area {
+                        width: 100%;
+                        display: flex;
+                        gap: 8px;
+
+                        textarea {
+                            flex: 1;
+                            margin: 0 0 16px;
+                            width: 100%;
+                            resize: none;
+                            overflow-wrap: break-word;
+                            /* white-space: pre-wrap; */
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
