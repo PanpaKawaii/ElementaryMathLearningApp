@@ -1,11 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
-import { fetchData, postData, patchData, putData } from '../../../mocks/CallingAPI.js';
+import { useEffect, useState } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { fetchData } from '../../../mocks/CallingAPI.js';
 import Button from '../../components/Button.jsx';
 import { useAuth } from '../../hooks/AuthContext/AuthContext.jsx';
 import Loading from '../../layouts/Loading/Loading.jsx';
 import './AdvancedQuestion.css';
-import Forum from './Forum';
+import Forum from './Forum.jsx';
 
 export default function AdvancedQuestion() {
     const { user } = useAuth();

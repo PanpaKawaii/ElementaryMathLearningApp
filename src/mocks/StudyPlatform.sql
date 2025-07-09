@@ -341,11 +341,11 @@ INSERT INTO [User] (Name, Image, Username, Password, Role, Type, CuratorId, Emai
 (N'Trương Kim Hằng', 'https://i.pinimg.com/736x/bf/cb/ce/bfcbce2283cee2265de4e2b2094ce984.jpg', 'kimhang', '123456', 'Student', 'Regular', 3, 'kimhang@example.com', 9990, '2025-07-10', '2025-07-10', 693, 940),
 (N'Lê Minh Khoa', 'https://i.pinimg.com/736x/11/77/fe/1177feaaa2da0e7cac19a3342be0c393.jpg', 'minhkhoa', '123456', 'Student', 'Regular', 3, 'minhkhoa@example.com', 12600, '2025-07-10', '2025-07-10', 313, 872),
 (N'Lê Huy Vũ', 'https://i.pinimg.com/736x/5f/b7/ae/5fb7ae8203d059646c1b2d05b7f4ebdf.jpg', 'huyvu', '123456', 'Student', 'Regular', 3, 'huyvu@example.com', 4260, '2025-07-10', '2025-07-10', 603, 603),
-(N'Nguyễn Gia Huy', 'https://i.pinimg.com/736x/d1/ba/15/d1ba156c10b10d44a92d6bac20849953.jpg', 'giahuy', '123456', 'Student', 'Regular', 3, 'giahuy@example.com', 8320, '2025-07-10', '2025-07-10', 518, 518),
+(N'Nguyễn Gia Huy', 'https://i.pinimg.com/736x/76/71/31/767131bbd40a7b293183727c7e6da827.jpg', 'giahuy', '123456', 'Student', 'Regular', 3, 'giahuy@example.com', 8320, '2025-07-10', '2025-07-10', 518, 518),
 (N'Nguyễn Gia Hoàng', 'https://i.pinimg.com/736x/d1/ba/15/d1ba156c10b10d44a92d6bac20849953.jpg', 'giahoang', '123456', 'Student', 'Regular', 3, 'giahoang@example.com', 9420, '2025-07-10', '2025-07-10', 244, 861),
-(N'Nguyễn Huy Hoàng', 'https://i.pinimg.com/736x/d1/ba/15/d1ba156c10b10d44a92d6bac20849953.jpg', 'huyhoang', '123456', 'Student', 'Regular', 3, 'huyhoang@example.com', 7490, '2025-07-10', '2025-07-10', 211, 211),
+(N'Nguyễn Huy Hoàng', 'https://i.pinimg.com/736x/93/7a/df/937adf21934953e7342a695b936b031c.jpg', 'huyhoang', '123456', 'Student', 'Regular', 3, 'huyhoang@example.com', 7490, '2025-07-10', '2025-07-10', 211, 211),
 (N'Phạm Thành Danh', 'https://i.pinimg.com/736x/d1/ba/15/d1ba156c10b10d44a92d6bac20849953.jpg', 'thanhdanh', '123456', 'Student', 'Regular', 3, 'thanhdanh@example.com', 2970, '2025-07-10', '2025-07-10', 731, 952),
-(N'Nguyễn Trường Sang', 'https://i.pinimg.com/736x/a7/a6/f8/a7a6f85c49827940774d761e882101f5.jpg', 'truongsang', '123456', 'Student', 'Regular', 3, 'truongsang@example.com', 5230, '2025-07-10', '2025-07-10', 533, 587),
+(N'Nguyễn Trường Sang', 'https://i.pinimg.com/736x/88/39/3e/88393ead9af03f8f76814c42352ded55.jpg', 'truongsang', '123456', 'Student', 'Regular', 3, 'truongsang@example.com', 5230, '2025-07-10', '2025-07-10', 533, 587),
 (N'Võ Minh Tiến', 'https://i.pinimg.com/736x/d1/ba/15/d1ba156c10b10d44a92d6bac20849953.jpg', 'minhtien', '123456', 'Student', 'Regular', 3, 'minhtien@example.com', 14780, '2025-07-10', '2025-07-10', 601, 601)
 UPDATE [User] SET CuratorId = 3 WHERE Id = 1;
 

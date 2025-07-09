@@ -39,7 +39,7 @@ export default function DailyDetail() {
                 }
                 setUSER(UserData);
 
-                const listuser = await fetchData(`listuser`, token);
+                const listuser = await fetchData('listuser', token);
                 const following = await fetchData(`api/following/user/${user.id}`, token);
                 const follower = await fetchData(`api/following/following/${user.id}`, token);
                 const mergedListFollowing = following.map(follow => {

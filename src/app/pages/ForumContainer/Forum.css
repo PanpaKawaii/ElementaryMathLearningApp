@@ -1,5 +1,6 @@
 .forum-container {
     width: 100%;
+    position: relative;
 
     .forum-content {
         margin: 0 40px;
@@ -55,72 +56,85 @@
                     right: 0;
                 }
             }
+        }
+    }
 
-            .content {
-                word-break: break-all;
-                overflow: hidden;
+    .content {
+        word-break: break-all;
+        overflow: hidden;
+        display: flex;
+        gap: 8px;
+
+        .image {
+
+            img {
+                width: 40px;
+                height: 40px;
+                border: 2px solid #ccc;
+                box-sizing: border-box;
+                border-radius: 50%;
+            }
+        }
+
+        .name-comment {
+            padding: 4px 12px;
+            box-sizing: border-box;
+            background-color: #eee;
+            border-radius: 12px;
+
+            &.my-comment {
+                background-color: #d0ffbb;
+            }
+
+            .name {
+                /* white-space: nowrap; */
+                font-size: 18px;
+                font-weight: bold;
+            }
+        }
+
+        .commentdate-btn {
+            margin: 2px 0 10px 20px;
+            display: flex;
+            color: #999;
+            font-size: 12px;
+            font-weight: 600;
+            gap: 20px;
+
+            .btn {
+                padding: 0;
+                font-size: 12px;
+                background-color: transparent;
+                color: #999;
+
+                &.btn-takedown {
+                    color: #ff8080;
+                }
+            }
+        }
+
+        &.input-reply,
+        &.input-comment {
+
+            &.input-comment {
+                position: sticky;
+                bottom: 0;
+                background-color: #fff;
+                padding: 12px 0 0;
+            }
+
+            .comment-area {
+                width: 100%;
                 display: flex;
                 gap: 8px;
 
-                .image {
-
-                    img {
-                        width: 40px;
-                        height: 40px;
-                        border: 2px solid #ccc;
-                        box-sizing: border-box;
-                        border-radius: 50%;
-                    }
-                }
-
-                .name-comment {
-                    padding: 4px 12px;
-                    box-sizing: border-box;
-                    background-color: #eee;
-                    border-radius: 12px;
-
-                    .name {
-                        font-size: 18px;
-                        font-weight: bold;
-                    }
-                }
-
-                .commentdate-btn {
-                    margin: 2px 0 10px 20px;
-                    display: flex;
-                    color: #999;
-                    font-size: 12px;
-                    font-weight: 600;
-                    gap: 20px;
-
-                    .btn {
-                        padding: 0;
-                        font-size: 12px;
-                        background-color: transparent;
-                        color: #999;
-
-                        &.btn-takedown {
-                            color: #ff8080;
-                        }
-                    }
-                }
-
-                &.input-comment {
-
-                    .comment-area {
-                        width: 100%;
-                        display: flex;
-                        gap: 8px;
-
-                        textarea {
-                            flex: 1;
-                            margin: 0 0 16px;
-                            width: 100%;
-                            resize: none;
-                            overflow-wrap: break-word;
-                            /* white-space: pre-wrap; */
-                        }
-                    }
+                textarea {
+                    flex: 1;
+                    margin: 0 0 16px;
+                    width: 100%;
+                    resize: none;
+                    overflow-wrap: break-word;
+                    /* white-space: pre-wrap; */
                 }
             }
         }
