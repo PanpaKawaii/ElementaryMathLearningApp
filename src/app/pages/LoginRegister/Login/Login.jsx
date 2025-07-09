@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { postData } from '../../../../mocks/CallingAPI.js';
 import Button from '../../../components/Button.jsx';

@@ -28,9 +28,10 @@
             top: 80px;
             z-index: 1;
 
-            h3 {
-                font-size: 24px;
-                margin: 0 0 8px;
+            .heading {
+                font-size: 28px;
+                font-weight: bold;
+                margin: 0 0 4px;
             }
 
             .topic-progress {
@@ -96,7 +97,7 @@
             }
 
             a {
-                padding: 4px 12px 20px;
+                margin: 4px 12px 20px;
 
                 .text {
                     color: #fff;

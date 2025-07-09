@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './Button.css';
 
 // export default function Button({ border, radius, active, onToggle, children }) {

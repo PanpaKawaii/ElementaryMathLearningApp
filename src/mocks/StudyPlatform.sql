@@ -225,6 +225,8 @@ INSERT INTO [Question] (Number, Type, Question, CorrectAnswer, Answers, Explanat
 (9, 'Multiple Choice', 'What is 9 + 1?', '10', '9@@8@@10@@11', '', 'Regular', 1),
 (10, 'Multiple Choice', 'What is 8 + 3?', '11', '11@@12@@9@@10', '', 'Regular', 1),
 (11, 'Multiple Choice', 'What is 14 + 27?', '41', '40@@30@@41@@31', '', 'Advanced', 1),
+(12, 'Multiple Choice', 'What is 44 + 66?', '110', '120@@110@@100@@90', '', 'Advanced', 1),
+(13, 'Multiple Choice', 'What is 34 + 56?', '90', '90@@80@@70@@60', '', 'Advanced', 1),
 
 (1, 'Multiple Choice', 'What is 5 - 2?', '3', '2@@3@@4@@1', '', 'Regular', 2),
 (2, 'Multiple Choice', 'What is 8 - 3?', '5', '3@@6@@5@@4', '', 'Regular', 2),
@@ -330,19 +332,41 @@ INSERT INTO [Question] (Number, Type, Question, CorrectAnswer, Answers, Explanat
 
 INSERT INTO [User] (Name, Image, Username, Password, Role, Type, CuratorId, Email, Point, LastOnline, JoinedDate, DayStreak, HighestDayStreak) VALUES
 (N'Đặng Ngọc Hải Triều', 'https://i.pinimg.com/736x/e7/10/17/e7101751e85d4960b039adc0cffada4f.jpg', 'haitrieu', '123456', 'Student', 'Regular', null, 'haitrieu@example.com', 108900, '2024-07-01', '2024-06-01', 880, 880),
-(N'Nguyễn Xuân Trường', 'https://i.pinimg.com/736x/af/2e/45/af2e450dee86885b777c32b584f15ed5.jpg', 'xuantruong', '123456', 'Student', 'VIP', null, 'xuantruong@example.com', 15070, '2024-07-01', '2024-06-02', 7, 1200),
+(N'Nguyễn Xuân Trường', 'https://i.pinimg.com/736x/af/2e/45/af2e450dee86885b777c32b584f15ed5.jpg', 'xuantruong', '123456', 'Student', 'VIP', null, 'xuantruong@example.com', 15070, '2024-07-01', '2024-06-02', 802, 802),
 ('Mountain Daddy', 'https://i.pinimg.com/736x/e2/7c/dd/e27cdd4e412c291955ab8e817df46be2.jpg', 'mountain', '123456', 'Parent', 'Regular', null, 'mountain@example.com', 2000000, '2024-07-01', '2024-06-03', 0, 0),
 ('Admin Trieu', 'https://i.pinimg.com/736x/f2/24/cb/f224cb341f23ac57d8508b0035ac6554.jpg', 'admin', '123456', 'Admin', 'Regular', NULL, 'admin@example.com', 0, '2024-07-01', '2024-06-04', 0, 0),
 ('Teacher Trieu', 'https://i.pinimg.com/736x/0a/32/52/0a325220d9212e51e6fd98b42f99c1b0.jpg', 'teacher', '123456', 'Teacher', 'Regular', NULL, 'teacher@example.com', 0, '2024-07-01', '2025-06-01', 0, 0),
-('Tester Trieu', 'https://i.pinimg.com/736x/cc/9e/bd/cc9ebdead570cc7b070dfd23d7bf4351.jpg', 'tester', '123456', 'Student', 'Regular', 3, 'tester@example.com', 100000, '2024-07-01', '2024-06-02', 100, 1000)
+('Tester Trieu', 'https://i.pinimg.com/736x/cc/9e/bd/cc9ebdead570cc7b070dfd23d7bf4351.jpg', 'tester', '123456', 'Student', 'Regular', 3, 'tester@example.com', 100000, '2024-07-01', '2024-06-02', 100, 1000),
+(N'Nguyễn Thành Dương', 'https://i.pinimg.com/736x/04/e4/7a/04e47a806a5d6ff80720858457657241.jpg', 'thanhduong', '123456', 'Student', 'Regular', 3, 'thanhduong@example.com', 13540, '2025-07-10', '2025-07-10', 406, 406),
+(N'Trương Kim Hằng', 'https://i.pinimg.com/736x/bf/cb/ce/bfcbce2283cee2265de4e2b2094ce984.jpg', 'kimhang', '123456', 'Student', 'Regular', 3, 'kimhang@example.com', 9990, '2025-07-10', '2025-07-10', 693, 940),
+(N'Lê Minh Khoa', 'https://i.pinimg.com/736x/11/77/fe/1177feaaa2da0e7cac19a3342be0c393.jpg', 'minhkhoa', '123456', 'Student', 'Regular', 3, 'minhkhoa@example.com', 12600, '2025-07-10', '2025-07-10', 313, 872),
+(N'Lê Huy Vũ', 'https://i.pinimg.com/736x/5f/b7/ae/5fb7ae8203d059646c1b2d05b7f4ebdf.jpg', 'huyvu', '123456', 'Student', 'Regular', 3, 'huyvu@example.com', 4260, '2025-07-10', '2025-07-10', 603, 603),
+(N'Nguyễn Gia Huy', 'https://i.pinimg.com/736x/76/71/31/767131bbd40a7b293183727c7e6da827.jpg', 'giahuy', '123456', 'Student', 'Regular', 3, 'giahuy@example.com', 8320, '2025-07-10', '2025-07-10', 518, 518),
+(N'Nguyễn Gia Hoàng', 'https://i.pinimg.com/736x/d1/ba/15/d1ba156c10b10d44a92d6bac20849953.jpg', 'giahoang', '123456', 'Student', 'Regular', 3, 'giahoang@example.com', 9420, '2025-07-10', '2025-07-10', 244, 861),
+(N'Nguyễn Huy Hoàng', 'https://i.pinimg.com/736x/93/7a/df/937adf21934953e7342a695b936b031c.jpg', 'huyhoang', '123456', 'Student', 'Regular', 3, 'huyhoang@example.com', 7490, '2025-07-10', '2025-07-10', 211, 211),
+(N'Phạm Thành Danh', 'https://i.pinimg.com/736x/d1/ba/15/d1ba156c10b10d44a92d6bac20849953.jpg', 'thanhdanh', '123456', 'Student', 'Regular', 3, 'thanhdanh@example.com', 2970, '2025-07-10', '2025-07-10', 731, 952),
+(N'Nguyễn Trường Sang', 'https://i.pinimg.com/736x/88/39/3e/88393ead9af03f8f76814c42352ded55.jpg', 'truongsang', '123456', 'Student', 'Regular', 3, 'truongsang@example.com', 5230, '2025-07-10', '2025-07-10', 533, 587),
+(N'Võ Minh Tiến', 'https://i.pinimg.com/736x/d1/ba/15/d1ba156c10b10d44a92d6bac20849953.jpg', 'minhtien', '123456', 'Student', 'Regular', 3, 'minhtien@example.com', 14780, '2025-07-10', '2025-07-10', 601, 601)
 UPDATE [User] SET CuratorId = 3 WHERE Id = 1;
 
 INSERT INTO [Comment] (Content, Answer, CommentDate, QuestionId, UserId) VALUES
-('Good explanation', null, '2025-06-01 14:30:00', 1, 1),
-('Disagree with answer', 1, '2025-06-02 14:30:00', 2, 1),
-('Clear solution', 2, '2025-06-03 14:30:00', 3, 1),
-('Needs more detail', 2, '2025-06-04 14:30:00', 4, 1),
-('Useful note', 3, '2025-06-05 14:30:00', 5, 1)
+('I talk about the question', NULL, '2025-06-11 00:00:00', 11, 1),
+('I answer 1', 1, '2025-06-11 00:00:00', 11, 7),
+('I answer 1', 1, '2025-06-11 00:00:00', 11, 8),
+('I answer 2', 2, '2025-06-11 00:00:00', 11, 9),
+('I answer 2', 2, '2025-06-11 00:00:00', 11, 10),
+('I answer 5', 5, '2025-06-11 00:00:00', 11, 11),
+('I answer 2', 2, '2025-06-11 00:00:00', 11, 12),
+('I answer 3', 3, '2025-06-11 00:00:00', 11, 13),
+('I answer 3', 3, '2025-06-11 00:00:00', 11, 14),
+('I answer 9', 9, '2025-06-11 00:00:00', 11, 15),
+('I talk about the question too', NULL, '2025-06-11 00:00:00', 11, 16),
+('I answer 11', 11, '2025-06-11 00:00:00', 11, 1)
+--('Good explanation', null, '2025-06-01 14:30:00', 1, 1),
+--('Disagree with answer', 1, '2025-06-02 14:30:00', 2, 1),
+--('Clear solution', 2, '2025-06-03 14:30:00', 3, 1),
+--('Needs more detail', 2, '2025-06-04 14:30:00', 4, 1),
+--('Useful note', 3, '2025-06-05 14:30:00', 5, 1)
 
 INSERT INTO [BoughtSubject] (PurchaseDate, Feedback, Rating, SubjectId, UserId) VALUES
 ('2025-01-10', 'Great Math course', 5, 1, 1),
@@ -391,9 +415,18 @@ INSERT INTO [AccomplishAchievement] (Progress, AchieveDate, Status, AchievementI
 INSERT INTO [Following] (FollowDate, FollowingId, UserId) VALUES
 ('2025-06-01', 1, 2),
 ('2025-06-02', 2, 1),
-('2025-06-03', 1, 3),
-('2025-06-04', 1, 4),
-('2025-06-05', 4, 3)
+('2025-07-10', 1, 7),
+('2025-07-10', 1, 8),
+('2025-07-10', 1, 9),
+('2025-07-10', 1, 10),
+('2025-07-10', 1, 11),
+('2025-07-10', 1, 12),
+('2025-07-10', 1, 13),
+('2025-07-10', 1, 16),
+('2025-07-10', 2, 12),
+('2025-07-10', 2, 13),
+('2025-07-10', 2, 14),
+('2025-07-10', 2, 15)
 
 --SELECT * FROM [Subject]
 --SELECT * FROM [Chapter]
@@ -408,9 +441,3 @@ INSERT INTO [Following] (FollowDate, FollowingId, UserId) VALUES
 --SELECT * FROM [Achievement]
 --SELECT * FROM [AccomplishAchievement]
 --SELECT * FROM [Following]
-
-update [User] set
-lastOnline = '2025-07-06',
-dayStreak = 880,
-highestDayStreak = 1000
-where id = 1

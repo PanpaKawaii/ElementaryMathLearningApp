@@ -23,29 +23,29 @@
         div {
             display: flex;
             align-items: center;
-        }
 
-        i {
-            width: 32px;
-            font-size: 24px;
-        }
+            i {
+                width: 32px;
+                font-size: 24px;
 
-        .fa-fire {
-            &.studytoday {
-                color: #ff4500;
+                &.fa-fire {
+                    &.studytoday {
+                        color: #ff4500;
+                    }
+
+                    &.notstudytoday {
+                        color: #ccc;
+                    }
+                }
+
+                &.fa-lightbulb {
+                    color: #fb8b24;
+                }
+
+                &.fa-star {
+                    color: #ffd700;
+                }
             }
-
-            &.notstudytoday {
-                color: #ccc;
-            }
-        }
-
-        .fa-lightbulb {
-            color: #fb8b24;
-        }
-
-        .fa-star {
-            color: #ffd700;
         }
     }
 
@@ -60,10 +60,11 @@
             font-weight: bold;
         }
 
-        .rank {
+        /* .rank {
             text-align: center;
 
             .number {
+                color: #666;
                 font-size: 120px;
                 font-weight: bold;
             }
@@ -81,6 +82,42 @@
             .bronze {
                 color: #cd7f32;
                 text-shadow: 2px 2px 0 hsl(30, 70%, 40%);
+            }
+        } */
+
+        .rank {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .number {
+                width: 192px;
+                height: 192px;
+                margin: 20px 0;
+                font-size: 96px;
+                box-sizing: border-box;
+                align-content: center;
+                border-radius: 50%;
+                font-weight: bold;
+
+                &.gold {
+                    color: #FF9600;
+                    border: 24px solid #FFC800;
+                    background: linear-gradient(45deg, #FEEA66 50%, #FFD900 50%);
+                }
+
+                &.silver {
+                    color: #849FB5;
+                    border: 24px solid #AAC1D4;
+                    background: linear-gradient(45deg, #D6E4EF 50%, #C2D1DD 50%);
+                }
+
+                &.bronze {
+                    color: #CD7900;
+                    border: 24px solid #D7975D;
+                    background: linear-gradient(45deg, #F7BE8B 50%, #E5AE7C 50%);
+                }
             }
         }
 

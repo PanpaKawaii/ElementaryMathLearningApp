@@ -1,12 +1,11 @@
 import DailyDetail from '../DailyDetail/DailyDetail.jsx';
-import './LearnContainer.css';
-import Progress from './Progress/Progress.jsx';
+import Ranking from './Ranking/Ranking.jsx';
 
-export default function LearnContainer() {
+export default function RankingContainer() {
     return (
         <div className='learn-container'>
             <div className='container-2'>
-                <Progress />
+                <Ranking />
                 <DailyDetail />
             </div>
         </div>

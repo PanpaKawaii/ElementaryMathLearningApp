@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { postData, deleteData } from '../../../../mocks/CallingAPI.js';
+import { deleteData, postData } from '../../../../mocks/CallingAPI.js';
 import { useAuth } from '../../../hooks/AuthContext/AuthContext.jsx';
 import './Follow.css';
 

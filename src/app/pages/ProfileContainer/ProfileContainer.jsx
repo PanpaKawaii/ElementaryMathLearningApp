@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
 import { fetchData } from '../../../mocks/CallingAPI.js';
 import { useAuth } from '../../hooks/AuthContext/AuthContext.jsx';
-import DailyDetail from '../DailyDetail/DailyDetail';
-import Follow from './Follow/Follow';
-import Profile from './Profile/Profile';
-import './ProfileContainer.css';
+import DailyDetail from '../DailyDetail/DailyDetail.jsx';
+import Follow from './Follow/Follow.jsx';
+import Profile from './Profile/Profile.jsx';
 
 export default function ProfileContainer() {
     const { user } = useAuth();
@@ -22,7 +21,7 @@ export default function ProfileContainer() {
         const token = '';
         const fetchDataAPI = async () => {
             try {
-                const listuser = await fetchData(`listuser`, token);
+                const listuser = await fetchData('listuser', token);
                 const following = await fetchData(`api/following/user/${user.id}`, token);
                 const follower = await fetchData(`api/following/following/${user.id}`, token);
                 console.log('listuser', listuser);

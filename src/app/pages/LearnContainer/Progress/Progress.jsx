@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { fetchData } from '../../../../mocks/CallingAPI.js';
-import { useAuth } from '../../../hooks/AuthContext/AuthContext.jsx';
 import Button from '../../../components/Button.jsx';
+import { useAuth } from '../../../hooks/AuthContext/AuthContext.jsx';
 import Loading from '../../../layouts/Loading/Loading.jsx';
 import './Progress.css';
 
@@ -32,7 +32,7 @@ export default function Progress() {
                 console.log('Id', boughtSubjectData.find(bs => bs.subjectId == SubjectId).id);
                 const progressData = await fetchData(`api/progress/boughtsubject/${boughtSubjectData.find(bs => bs.subjectId == SubjectId).id}`, token);
                 console.log('progressData', progressData);
-                
+
                 setPROGRESSes(progressData);
 
             } catch (error) {
@@ -130,7 +130,7 @@ export default function Progress() {
                             textShadow: `1px 1px 0px hsl(${Math.round(chapter_index * (360 / 8))}, 100%, 40%)`,
                         }}
                     >
-                        <h3>{chapter.name}</h3>
+                        <div className='heading'>{chapter.name}</div>
                         <div className='topic-progress'>
                             Progress: {
                                 PROGRESSes ? (chapter.number < PROGRESSes?.chapter ? chapter.topics?.length :
@@ -244,6 +244,23 @@ export default function Progress() {
                         >
                             {SelectedTopic?.name ? SelectedTopic?.name : SelectedTopic?.id}
                         </div>
+
+                        {(SelectedTopic?.id + '').includes('+') &&
+                            <Link
+                                to={`/forum/chapter/${SelectedTopic?.id?.split('+')[1]}`}
+                                state={SelectedTopic?.id}
+                            >
+                                <Button
+                                    width={'100px'}
+                                    height={'40px'}
+                                    radius={'12px'}
+                                    maincolor={`${Math.round(chapter_index * (360 / 8))}`}
+                                >
+                                    <div className='text'>FORUM</div>
+                                </Button>
+                            </Link>
+                        }
+
                         <Link
                             to={`${(SelectedTopic?.id + '').includes('-') ? `/studying/quiz/chapter/${SelectedTopic?.id?.split('-')[1]}` :
                                 ((SelectedTopic?.id + '').includes('+') ? `/studying/advanced/chapter/${SelectedTopic?.id?.split('+')[1]}` :
@@ -251,7 +268,7 @@ export default function Progress() {
                             state={SelectedTopic?.id}
                         >
                             <Button
-                                width={'180px'}
+                                width={'160px'}
                                 height={'40px'}
                                 radius={'12px'}
                                 maincolor={`${Math.round(chapter_index * (360 / 8))}`}

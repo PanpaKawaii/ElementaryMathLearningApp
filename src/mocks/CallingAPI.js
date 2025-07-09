@@ -99,7 +99,8 @@ export const deleteData = async (endpoint, token) => {
         if (!response.ok) {
             throw new Error(`Error: ${response.statusText}`);
         }
-        return await response.json();
+        // return await response.json();
+        return response;
     } catch (error) {
         console.error('Error deleting data:', error);
         throw error;

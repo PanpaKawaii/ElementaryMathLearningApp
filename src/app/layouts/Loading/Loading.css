@@ -15,7 +15,6 @@
     box-sizing: border-box;
     background-color: #fff;
     display: flex;
-    /* flex-direction: column; */
     justify-content: center;
     align-items: center;
 
@@ -32,8 +31,8 @@
         animation: RotateZ 1.4s linear infinite;
 
         .arrow {
-            width: 160px;
-            height: 160px;
+            width: 180px;
+            height: 180px;
             border: 12px solid #999;
             box-sizing: border-box;
             border-radius: 50%;
@@ -46,6 +45,7 @@
             width: 100px;
             height: 100px;
             background-color: #fff;
+            border-radius: 0 100% 0 0;
         }
     }
 }
