@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/AuthContext/AuthContext.jsx';
-import Login from './Login/Login';
-import Register from './Register/Register';
+import Login from './Login/Login.jsx';
 import './LoginRegister.css';
+import Register from './Register/Register.jsx';
 
-import LoginImage from '../../assets/Purple.png';
 import RegisterImage from '../../assets/Green.png';
+import LoginImage from '../../assets/Purple.png';
 import Transparent from '../../assets/Transparent.png';
 
 export default function LoginRegister() {

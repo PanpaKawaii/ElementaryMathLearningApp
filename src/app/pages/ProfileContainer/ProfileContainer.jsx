@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { fetchData } from '../../../mocks/CallingAPI.js';
 import { useAuth } from '../../hooks/AuthContext/AuthContext.jsx';
-import DailyDetail from '../DailyDetail/DailyDetail';
-import Follow from './Follow/Follow';
-import Profile from './Profile/Profile';
+import DailyDetail from '../DailyDetail/DailyDetail.jsx';
+import Follow from './Follow/Follow.jsx';
+import Profile from './Profile/Profile.jsx';
 
 export default function ProfileContainer() {
     const { user } = useAuth();

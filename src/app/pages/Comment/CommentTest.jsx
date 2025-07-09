@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { comments } from '../../../mocks/DatabaseSample.js';
 import './CommentTest.css';
 

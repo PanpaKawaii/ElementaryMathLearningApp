@@ -1,5 +1,3 @@
-import React from 'react'
-
 const CheckValidation = (Username, Name, Role, Password, Confirm, Accept) => {
 
     if (!Username) {

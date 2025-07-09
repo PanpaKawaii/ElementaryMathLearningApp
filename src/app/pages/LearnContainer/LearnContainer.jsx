@@ -1,6 +1,6 @@
-import DailyDetail from '../DailyDetail/DailyDetail';
+import DailyDetail from '../DailyDetail/DailyDetail.jsx';
 import './LearnContainer.css';
-import Progress from './Progress/Progress';
+import Progress from './Progress/Progress.jsx';
 
 export default function LearnContainer() {
     return (

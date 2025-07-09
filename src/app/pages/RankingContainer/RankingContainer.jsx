@@ -1,5 +1,5 @@
-import DailyDetail from '../DailyDetail/DailyDetail';
-import Ranking from './Ranking/Ranking';
+import DailyDetail from '../DailyDetail/DailyDetail.jsx';
+import Ranking from './Ranking/Ranking.jsx';
 
 export default function RankingContainer() {
     return (

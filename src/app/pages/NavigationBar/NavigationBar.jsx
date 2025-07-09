@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, useLocation, Outlet } from 'react-router-dom';
+import { Link, Outlet, useLocation } from 'react-router-dom';
 import { useAuth } from '../../hooks/AuthContext/AuthContext.jsx';
 import './NavigationBar.css';
 

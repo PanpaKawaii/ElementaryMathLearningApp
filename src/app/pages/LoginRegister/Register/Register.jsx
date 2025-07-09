@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { postData } from '../../../../mocks/CallingAPI.js';
 import Button from '../../../components/Button.jsx';
 import CheckValidation from './CheckValidation.jsx';
