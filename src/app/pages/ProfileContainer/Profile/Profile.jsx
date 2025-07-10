@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { fetchData } from '../../../../mocks/CallingAPI.js';
+import Button from '../../../components/Button.jsx';
 import { useAuth } from '../../../hooks/AuthContext/AuthContext.jsx';
 import Loading from '../../../layouts/Loading/Loading.jsx';
+import StudentManagement from '../../StudentManagement/StudentManagement.jsx';
 import './Profile.css';
 
 // Mock user data as backup
@@ -73,13 +75,13 @@ const mockAchievements = [
     }
 ];
 
-export default function Profile({ Following, Follower, setFollowPopup }) {
+export default function Profile({ Following, Follower, setFollowPopup, setUserStudyHistory }) {
     const { user, logout } = useAuth();
     const navigate = useNavigate();
 
     const [USER, setUSER] = useState(null);
     const [PerfectLesson, setPerfectLesson] = useState(null);
-    const [achievements, setAchievements] = useState([]);
+    const [achievements, setAchievements] = useState(mockAchievements);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -118,14 +120,14 @@ export default function Profile({ Following, Follower, setFollowPopup }) {
 
         fetchDataAPI();
 
-        // Fetch achievements
-        fetchData('achievement', token)
-            .then(data => {
-                setAchievements(Array.isArray(data) ? data : [data]);
-            })
-            .catch(() => {
-                setAchievements(mockAchievements); // fallback to mock achievements
-            });
+        // // Fetch achievements
+        // fetchData('achievement', token)
+        //     .then(data => {
+        //         setAchievements(Array.isArray(data) ? data : [data]);
+        //     })
+        //     .catch(() => {
+        //         setAchievements(mockAchievements); // fallback to mock achievements
+        //     });
     }, [user]);
 
     const handleOpenFollow = (Status) => {
@@ -153,61 +155,115 @@ export default function Profile({ Following, Follower, setFollowPopup }) {
                             <div className='joined'>Joined {USER?.joinedDate}</div>
                         </div>
                         <div className='down-info'>
-                            <div className='follow'>
-                                <button className='btn following' onClick={() => handleOpenFollow('Following')}>{Following?.length || 0} {Following?.length == 1 ? 'following' : 'followings'}</button>
-                                <button className='btn following' onClick={() => handleOpenFollow('Follower')}>{Follower?.length || 0} {Follower?.length == 1 ? 'follower' : 'followers'}</button>
-                            </div>
-                            <button className='btn' onClick={() => logout()}>Logout</button>
+                            {user?.role == 'Student' &&
+                                <div className='follow'>
+                                    <button className='btn following' onClick={() => handleOpenFollow('Following')}>{Following?.length || 0} {Following?.length == 1 ? 'following' : 'followings'}</button>
+                                    <button className='btn following' onClick={() => handleOpenFollow('Follower')}>{Follower?.length || 0} {Follower?.length == 1 ? 'follower' : 'followers'}</button>
+                                </div>
+                            }
+                            <Button
+                                width={'80px'}
+                                height={'32px'}
+                                border={'6px'}
+                                radius={'16px'}
+                                maincolor={'correct'}
+                                active={false}
+                            // onToggle={() => {}}
+                            >
+                                <div className='text'>Modify</div>
+                            </Button>
+                            {user?.role == 'Student' &&
+                                <Button
+                                    width={'100px'}
+                                    height={'32px'}
+                                    border={'6px'}
+                                    radius={'16px'}
+                                    maincolor={'correct'}
+                                    active={false}
+                                    onToggle={() => setUserStudyHistory(p => user?.id == p ? null : user?.id)}
+                                >
+                                    <div className='text'>Progress</div>
+                                </Button>
+                            }
+                            {user?.role == 'Parent' &&
+                                <Button
+                                    width={'124px'}
+                                    height={'32px'}
+                                    border={'6px'}
+                                    radius={'16px'}
+                                    maincolor={'correct'}
+                                    active={false}
+                                    // onToggle={() => }
+                                >
+                                    <div className='text'>Add Student</div>
+                                </Button>
+                            }
+                            <Button
+                                width={'80px'}
+                                height={'32px'}
+                                border={'6px'}
+                                radius={'16px'}
+                                maincolor={'locked'}
+                                active={false}
+                                onToggle={() => logout()}
+                            >
+                                <div className='text'>Logout</div>
+                            </Button>
+                            {/* <button className='btn' onClick={() => logout()}>Logout</button> */}
                         </div>
                     </div>
                 </div>
                 <div className='line'></div>
                 <div className='main-content'>
-                    <div className='statistics-achievements'>
-                        <div className='statistics'>
-                            <div className='title'>Statistics</div>
-                            <div className='row'>
-                                <div className='box'>
-                                    <span className='value'>{USER?.dayStreak}</span>
-                                    <span className='label'>Day streak</span>
-                                </div>
-                                <div className='box'>
-                                    <span className='value'>{USER?.point}</span>
-                                    <span className='label'>Total point</span>
-                                </div>
-                                <div className='box'>
-                                    <span className='value'>{USER?.highestDayStreak}</span>
-                                    <span className='label'>Highest day streak</span>
-                                </div>
-                                <div className='box'>
-                                    <span className='value'>{PerfectLesson}</span>
-                                    <span className='label'>Perfect lessons</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div className='achievements'>
-                            <div className='title'>Achievements</div>
-                            <div className='list'>
-                                {achievements.map(a => (
-                                    <div className='item' key={a.id}>
-                                        <i className='fa-solid fa-trophy'></i>
-                                        <div className='content'>
-                                            <div className='header'>
-                                                <div className='achievements-title'>{a.name}</div>
-                                                {a.progress !== undefined && a.goal !== undefined && (
-                                                    <div className='progress-label'>{a.progress}/{a.goal}</div>
-                                                )}
-                                            </div>
-                                            <div className='bar-bg'>
-                                                <div className='bar' style={{ width: a.progress && a.goal ? `${Math.min(100, Math.round((a.progress / a.goal) * 100))}%` : '0%', background: a.color || '#FFD966' }}></div>
-                                            </div>
-                                            <div className='desc'>{a.description}</div>
-                                        </div>
+                    {user?.role == 'Student' ?
+                        <div className='statistics-achievements'>
+                            <div className='statistics'>
+                                <div className='title'>Statistics</div>
+                                <div className='row'>
+                                    <div className='box'>
+                                        <span className='value'>{USER?.dayStreak}</span>
+                                        <span className='label'>Day streak</span>
                                     </div>
-                                ))}
+                                    <div className='box'>
+                                        <span className='value'>{USER?.point}</span>
+                                        <span className='label'>Total point</span>
+                                    </div>
+                                    <div className='box'>
+                                        <span className='value'>{USER?.highestDayStreak}</span>
+                                        <span className='label'>Highest day streak</span>
+                                    </div>
+                                    <div className='box'>
+                                        <span className='value'>{PerfectLesson}</span>
+                                        <span className='label'>Perfect lessons</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className='achievements'>
+                                <div className='title'>Achievements</div>
+                                <div className='list'>
+                                    {achievements.map(a => (
+                                        <div className='item' key={a.id}>
+                                            <i className='fa-solid fa-trophy'></i>
+                                            <div className='content'>
+                                                <div className='header'>
+                                                    <div className='achievements-title'>{a.name}</div>
+                                                    {a.progress !== undefined && a.goal !== undefined && (
+                                                        <div className='progress-label'>{a.progress}/{a.goal}</div>
+                                                    )}
+                                                </div>
+                                                <div className='bar-bg'>
+                                                    <div className='bar' style={{ width: a.progress && a.goal ? `${Math.min(100, Math.round((a.progress / a.goal) * 100))}%` : '0%', background: a.color || '#FFD966' }}></div>
+                                                </div>
+                                                <div className='desc'>{a.description}</div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        :
+                        (user?.role == 'Parent' ? <StudentManagement setUserStudyHistory={setUserStudyHistory} /> : <div>Unsupported Role</div>)
+                    }
                 </div>
             </div>
         </div>

@@ -3,6 +3,7 @@ import { fetchData } from '../../../mocks/CallingAPI.js';
 import { useAuth } from '../../hooks/AuthContext/AuthContext.jsx';
 import DailyDetail from '../DailyDetail/DailyDetail.jsx';
 import Follow from './Follow/Follow.jsx';
+import StudyHistory from './StudyHistory/StudyHistory.jsx';
 import Profile from './Profile/Profile.jsx';
 
 export default function ProfileContainer() {
@@ -15,6 +16,8 @@ export default function ProfileContainer() {
     const [Refresh, setRefresh] = useState(0);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
+    const [UserStudyHistory, setUserStudyHistory] = useState(null);
 
     useEffect(() => {
         // const token = user?.token;
@@ -45,7 +48,7 @@ export default function ProfileContainer() {
                 //     !following.some(f => f.followingId === u.id) && u.id !== user?.id
                 // )
                 //     .map(u => ({ user: u }));
-                const FilterListUser = listuser.filter(u => u.id !== user?.id).map(u => ({ user: u }));
+                const FilterListUser = listuser.filter(u => u.id !== user?.id && u.role === 'Student').map(u => ({ user: u }));
 
                 console.log('FilterListUser', FilterListUser);
                 console.log('mergedListFollowing', mergedListFollowing);
@@ -66,8 +69,9 @@ export default function ProfileContainer() {
     return (
         <div className='learn-container'>
             <div className='container-2'>
-                <Profile Following={Following} Follower={Follower} setFollowPopup={setFollowPopup} />
-                <DailyDetail />
+                <Profile Following={Following} Follower={Follower} setFollowPopup={setFollowPopup} setUserStudyHistory={setUserStudyHistory} />
+                {/* <DailyDetail /> */}
+                <StudyHistory UserStudyHistory={UserStudyHistory} />
             </div>
             <Follow ListUser={ListUser} Following={Following} Follower={Follower} FollowPopup={FollowPopup} setFollowPopup={setFollowPopup} setRefresh={setRefresh} />
         </div>
