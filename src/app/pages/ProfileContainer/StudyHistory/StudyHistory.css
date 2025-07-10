@@ -1,0 +1,74 @@
+.studyhistory-container {
+    width: 400px;
+
+    .table-container {
+        height: auto;
+        margin: 40px 0;
+        border-radius: 20px 0 0 20px;
+
+        table {
+            width: 100%;
+            max-width: 400px;
+            justify-self: center;
+            border-collapse: collapse;
+
+            tr {
+                transition: all 0.2s ease;
+
+                &:first-child {
+                    border: none;
+                }
+
+                &:hover {
+                    background-color: #eee;
+                }
+
+                &:nth-child(odd) {
+                    border-top: 2px solid #ffff00;
+                    border-bottom: 2px solid #ff0000;
+                    background-color: #ccc;
+                }
+
+                &:nth-child(even) {
+                    border-bottom: 2px solid #ff00ff;
+                    background-color: #aaa;
+                }
+
+                td {
+                    padding: 8px;
+                    box-sizing: border-box;
+                    text-align: center;
+                    align-content: center;
+                    font-weight: bold;
+                    transition: all 0.15s ease;
+
+                    &:first-child {
+                        border-radius: 20px 0 0 20px;
+                        overflow: hidden;
+                    }
+
+                    &:last-child {
+                        border-radius: 0 20px 20px 0;
+                        overflow: hidden;
+                    }
+
+                    .name-date {
+                        display: flex;
+                        justify-content: space-between;
+                    }
+
+                    .index {
+                        min-width: 28px;
+                        justify-self: center;
+                    }
+
+                    &.image-td {
+                        padding: 8px 0;
+                        width: 80px;
+                        position: relative;
+                    }
+                }
+            }
+        }
+    }
+}

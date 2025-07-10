@@ -49,3 +49,18 @@ h5,
 h6 {
   margin: 0;
 }
+
+::-webkit-scrollbar {
+  width: 12px;
+  background-color: #7ed95720;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 2px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  background-color: #7ed957;
+}

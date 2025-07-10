@@ -21,10 +21,12 @@ export default function Forum({ SelectedQuestion }) {
     const [error, setError] = useState(null);
 
     useEffect(() => {
+        setCOMMENTs([]);
         // const token = user?.token; // === FIX ===
         const token = '';
         const fetchDataAdvancedAPI = async () => {
             try {
+                setLoading(true);
                 const listuser = await fetchData('listuser', token);
                 const commentData = await fetchData(`api/comment/question/${SelectedQuestion?.id}`, token);
                 console.log('commentData', commentData);
@@ -108,6 +110,7 @@ export default function Forum({ SelectedQuestion }) {
         if (!Content) return;
         SubmitComment(Content, Answer);
         setInputComment(null);
+        refComment.current.value = '';
     }
 
     const handleTakeDownComment = (CommentId) => {

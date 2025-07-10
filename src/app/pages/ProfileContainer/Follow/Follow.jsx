@@ -121,7 +121,7 @@ export default function Follow({ ListUser, Following, Follower, FollowPopup, set
                                 <img src={f.user?.image} alt={f.user?.name} />
                                 <div className='info'>
                                     <div className='name-username'>
-                                        <div className='name'>{f.user?.id} - {f.user?.name}</div>
+                                        <div className='name'>{f.user?.name}</div>
                                         <div className='username'>@{f.user?.username}</div>
                                     </div>
                                     <div className='daystreak-point-follow'>

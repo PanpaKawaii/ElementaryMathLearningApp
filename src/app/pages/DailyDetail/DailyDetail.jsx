@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { fetchData } from '../../../mocks/CallingAPI.js';
 import { useAuth } from '../../hooks/AuthContext/AuthContext.jsx';
 import './DailyDetail.css';
+import { Link } from 'react-router-dom';
 
 export default function DailyDetail() {
     const { user } = useAuth();
@@ -86,9 +87,9 @@ export default function DailyDetail() {
             <section>
                 <div className='title'>Friends Rank</div>
                 <div className='rank'>
-                    <div className={`number ${loading ? '' : (Rank == 1 ? 'gold' : (Rank == 2 ? 'silver' : (Rank == 3 ? 'bronze' : '')))}`}>
+                    <Link to='/ranking' className={`number ${loading ? '' : (Rank == 1 ? 'gold' : (Rank == 2 ? 'silver' : (Rank == 3 ? 'bronze' : '')))}`}>
                         {loading ? '?' : Rank}
-                    </div>
+                    </Link>
                     <div className='text'>You're ranked <b>#{Rank}</b> among your friends</div>
                 </div>
             </section>

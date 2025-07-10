@@ -16,9 +16,9 @@ export default function Crown() {
                             <svg width='100' height='140' viewBox='0 0 100 100'>
                                 <polygon
                                     points='50,30 70,60 50,90 30,60'
-                                    fill='red'
-                                    stroke='black'
-                                    strokeWidth='2'
+                                    fill='#ff0000'
+                                    stroke='#ffa500'
+                                    strokeWidth='8'
                                 />
                             </svg>
                         </div>
