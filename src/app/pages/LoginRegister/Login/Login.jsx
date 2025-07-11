@@ -46,7 +46,7 @@ export default function Login({ MoveImage }) {
             console.log('result', result);
             login(result);
 
-            navigate('/');
+            navigate('/profile');
         } catch (error) {
             console.log('Login failed:', error);
             setLoginError({ value: 'Login failed', name: 'Username or Password' });

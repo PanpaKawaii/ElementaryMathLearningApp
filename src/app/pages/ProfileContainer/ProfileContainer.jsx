@@ -69,9 +69,11 @@ export default function ProfileContainer() {
     return (
         <div className='learn-container'>
             <div className='container-2'>
-                <Profile Following={Following} Follower={Follower} setFollowPopup={setFollowPopup} setUserStudyHistory={setUserStudyHistory} />
-                {/* <DailyDetail /> */}
-                <StudyHistory UserStudyHistory={UserStudyHistory} />
+                <Profile Following={Following} Follower={Follower} setFollowPopup={setFollowPopup} UserStudyHistory={UserStudyHistory} setUserStudyHistory={setUserStudyHistory} />
+                {user?.role == 'Student' &&
+                    (UserStudyHistory ? <StudyHistory UserStudyHistory={UserStudyHistory} /> : <DailyDetail />)
+                }
+                {user?.role == 'Parent' && <StudyHistory UserStudyHistory={UserStudyHistory} />}
             </div>
             <Follow ListUser={ListUser} Following={Following} Follower={Follower} FollowPopup={FollowPopup} setFollowPopup={setFollowPopup} setRefresh={setRefresh} />
         </div>

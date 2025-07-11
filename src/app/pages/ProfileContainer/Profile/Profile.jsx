@@ -75,7 +75,7 @@ const mockAchievements = [
     }
 ];
 
-export default function Profile({ Following, Follower, setFollowPopup, setUserStudyHistory }) {
+export default function Profile({ Following, Follower, setFollowPopup, UserStudyHistory, setUserStudyHistory }) {
     const { user, logout } = useAuth();
     const navigate = useNavigate();
 
@@ -147,32 +147,22 @@ export default function Profile({ Following, Follower, setFollowPopup, setUserSt
                         <div className='avatar'>
                             <i className='fa-solid fa-plus'></i>
                             <i className='fa-solid fa-pencil'></i>
-                        </div>}
+                        </div>
+                    }
                     <div className='info'>
                         <div className='up-info'>
                             <div className='name'>{USER?.name}</div>
                             <div className='username'>@{USER?.username}</div>
                             <div className='joined'>Joined {USER?.joinedDate}</div>
-                        </div>
-                        <div className='down-info'>
                             {user?.role == 'Student' &&
                                 <div className='follow'>
                                     <button className='btn following' onClick={() => handleOpenFollow('Following')}>{Following?.length || 0} {Following?.length == 1 ? 'following' : 'followings'}</button>
                                     <button className='btn following' onClick={() => handleOpenFollow('Follower')}>{Follower?.length || 0} {Follower?.length == 1 ? 'follower' : 'followers'}</button>
                                 </div>
                             }
-                            <Button
-                                width={'80px'}
-                                height={'32px'}
-                                border={'6px'}
-                                radius={'16px'}
-                                maincolor={'correct'}
-                                active={false}
-                            // onToggle={() => {}}
-                            >
-                                <div className='text'>Modify</div>
-                            </Button>
-                            {user?.role == 'Student' &&
+                        </div>
+                        <div className='btn-box'>
+                            <div className='green-btn'>
                                 <Button
                                     width={'100px'}
                                     height={'32px'}
@@ -180,26 +170,39 @@ export default function Profile({ Following, Follower, setFollowPopup, setUserSt
                                     radius={'16px'}
                                     maincolor={'correct'}
                                     active={false}
-                                    onToggle={() => setUserStudyHistory(p => user?.id == p ? null : user?.id)}
+                                // onToggle={() => {}} === FIX ===
                                 >
-                                    <div className='text'>Progress</div>
+                                    <div className='text'>Modify</div>
                                 </Button>
-                            }
-                            {user?.role == 'Parent' &&
-                                <Button
-                                    width={'124px'}
-                                    height={'32px'}
-                                    border={'6px'}
-                                    radius={'16px'}
-                                    maincolor={'correct'}
-                                    active={false}
-                                    // onToggle={() => }
-                                >
-                                    <div className='text'>Add Student</div>
-                                </Button>
-                            }
+                                {user?.role == 'Student' &&
+                                    <Button
+                                        width={'140px'}
+                                        height={'32px'}
+                                        border={'6px'}
+                                        radius={'16px'}
+                                        maincolor={`${UserStudyHistory ? 'incorrect' : 'correct'}`}
+                                        active={false}
+                                        onToggle={() => setUserStudyHistory(p => user?.id == p ? null : user?.id)}
+                                    >
+                                        <div className='text'>{UserStudyHistory ? 'Close Progress' : 'My Progress'}</div>
+                                    </Button>
+                                }
+                                {user?.role == 'Parent' &&
+                                    <Button
+                                        width={'140px'}
+                                        height={'32px'}
+                                        border={'6px'}
+                                        radius={'16px'}
+                                        maincolor={'correct'}
+                                        active={false}
+                                    // onToggle={() => {}} === FIX ===
+                                    >
+                                        <div className='text'>Add Student</div>
+                                    </Button>
+                                }
+                            </div>
                             <Button
-                                width={'80px'}
+                                width={'100px'}
                                 height={'32px'}
                                 border={'6px'}
                                 radius={'16px'}
@@ -262,7 +265,7 @@ export default function Profile({ Following, Follower, setFollowPopup, setUserSt
                             </div>
                         </div>
                         :
-                        (user?.role == 'Parent' ? <StudentManagement setUserStudyHistory={setUserStudyHistory} /> : <div>Unsupported Role</div>)
+                        (user?.role == 'Parent' ? <StudentManagement UserStudyHistory={UserStudyHistory} setUserStudyHistory={setUserStudyHistory} /> : <div>Unsupported Role</div>)
                     }
                 </div>
             </div>

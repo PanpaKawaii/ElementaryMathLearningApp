@@ -35,7 +35,7 @@ export default function MainRoutes() {
                     <Route path='studying/quiz/chapter/:chapter' element={<Studying />} />
                     <Route path='studying/advanced/chapter/:chapter' element={<Studying />} />
                 </Routes>
-                <></>
+                {/* <></> */}
             </div>
         </BrowserRouter>
     )

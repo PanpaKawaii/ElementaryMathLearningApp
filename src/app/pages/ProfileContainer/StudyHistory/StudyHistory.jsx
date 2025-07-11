@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { fetchData } from '../../../../mocks/CallingAPI.js';
 import { useAuth } from '../../../hooks/AuthContext/AuthContext.jsx';
+import Loading from '../../../layouts/Loading/Loading.jsx';
 import './StudyHistory.css';
 
 export default function StudyHistory({ UserStudyHistory }) {
@@ -64,6 +65,9 @@ export default function StudyHistory({ UserStudyHistory }) {
         }
     }, [user, UserStudyHistory]);
 
+    if (loading) return <Loading Size={'Small'} />
+    else if (!UserStudyHistory) return <div className='notification please-select'>Please select a student</div>
+    else if (UserTopicChapterProgress.length == 0) return <div className='notification no-data'>No data</div>
     return (
         <div className='studyhistory-container'>
             <div className='table-container'>

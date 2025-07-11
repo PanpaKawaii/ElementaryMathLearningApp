@@ -7,7 +7,8 @@ export default function Loading({ Size }) {
                 width:
                     Size === 'Large' ? '100%'
                         : (Size === 'Average' ? '600px'
-                            : 'fit-content')
+                            : (Size === 'Small' ? '400px'
+                                : 'fit-content'))
             }}>
             <div className='container'>
                 <div className='arrow'></div>

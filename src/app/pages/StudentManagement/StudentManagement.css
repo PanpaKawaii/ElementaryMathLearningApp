@@ -2,12 +2,13 @@
     width: 600px;
 
     .table-container {
-        height: auto;
+        height: calc(100vh - 260px);
         border-radius: 20px 0 0 20px;
+        overflow-y: scroll;
 
         table {
             width: 100%;
-            max-width: 800px;
+            max-width: 600px;
             justify-self: center;
             border-collapse: collapse;
 
@@ -23,7 +24,7 @@
                     background-color: #eee;
                 }
 
-                &.me {
+                &.chosen {
                     background-color: #7ed95740;
 
                     &:hover {
@@ -114,7 +115,7 @@
                     }
 
                     &.name-icon-td {
-                        max-width: 360px;
+                        max-width: 270px;
                         padding: 12px;
                         align-content: start;
 
