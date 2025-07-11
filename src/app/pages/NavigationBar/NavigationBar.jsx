@@ -14,6 +14,7 @@ export default function NavigationBar() {
         { name: 'RANK', icon: 'star', path: '/ranking' },
         { name: 'PROFILE', icon: 'user', path: '/profile' },
         { name: 'LOGIN-REGISTER', icon: 'right-to-bracket', path: '/login-register' },
+        { name: 'SUBJECT-MANAGER', icon: 'book', path: 'manager/subject' },
     ];
 
     return (

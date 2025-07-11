@@ -76,6 +76,17 @@ export default function Button(props) {
             backgroundColor: `hsl(0, 100%, 60%)`,
             boxShadow: `${(IsClicked || props.active) ? '0px 0px 0px 10px hsla(0, 100%, 50%, 0.4)' : `0px 8px 0px 0px hsl(0, 61%, 41%)`}`,
         };
+    } else if (props.maincolor == 'edit') {
+        ButtonStyle = {
+            width: `${props.width}`,
+            height: `${props.height}`,
+            borderRadius: `${props.radius}`,
+            border: `${props.border} solid hsl(39, 98%, 50%)`,
+            color: `hsl(0, 0%, 100%)`,
+            textShadow: `none`,
+            backgroundColor: `hsl(39, 100%, 60%)`,
+            boxShadow: `${(IsClicked || props.active) ? '0px 0px 0px 10px hsla(39, 100%, 50%, 0.4)' : `0px 8px 0px 0px hsl(39, 61%, 41%)`}`,
+        };
     } else {
         ButtonStyle = {
             width: `${props.width}`,

@@ -12,6 +12,7 @@ import LoginRegister from '../pages/LoginRegister/LoginRegister'
 import Studying from '../pages/Studying/Studying'
 import AdvancedQuestion from '../pages/ForumContainer/AdvancedQuestion'
 
+import SubjectManager from '../pages/ManagerContainer/SubjectManager/SubjectManager'
 
 export default function MainRoutes() {
     return (
@@ -29,6 +30,7 @@ export default function MainRoutes() {
                         <Route path='profile' element={<ProfileContainer />} />
                         <Route path='login-register' element={<LoginRegister />} />
                         <Route path='forum/chapter/:chapter' element={<AdvancedQuestion />} />
+                        <Route path='manager/subject' element={<SubjectManager />} />
                     </Route>
                     <Route path='*' element={<Navigate to='/learn' replace />} />
                     <Route path='studying/chapter/:chapter/topic/:id' element={<Studying />} />

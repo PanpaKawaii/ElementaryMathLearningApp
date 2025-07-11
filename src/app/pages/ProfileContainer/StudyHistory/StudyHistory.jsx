@@ -36,12 +36,12 @@ export default function StudyHistory({ UserStudyHistory }) {
                 const userchapterprogress = chapterprogress.filter(ctp => ctp.userId == UserStudyHistory);
                 console.log('userchapterprogress', userchapterprogress);
 
-                const chapter = await fetchData('api/chapter', token);
-                console.log('chapter', chapter);
+                const chapters = await fetchData('api/chapter', token);
+                console.log('chapters', chapters);
 
                 const mergedChapterProgresses = userchapterprogress.map(ct => ({
                     ...ct,
-                    relateId: chapter.find(c => c.id == ct.chapterId)
+                    relateId: chapters.find(c => c.id == ct.chapterId)
                 }));
                 console.log('mergedChapterProgresses', mergedChapterProgresses);
 

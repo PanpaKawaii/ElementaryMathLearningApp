@@ -1,0 +1,57 @@
+.subjectmanager-container {
+    padding: 20px;
+    background-color: #eee;
+
+    .title {
+        margin: 0 0 20px;
+        font-size: 32px;
+        font-weight: bold;
+    }
+
+    .add-form {
+        margin: 0 0 20px;
+        display: flex;
+        gap: 8px;
+        align-items: end;
+
+        input {
+            height: 40px;
+            border-radius: 6px;
+            box-shadow: inset 4px 4px 2px #00000040, inset -4px -4px 2px #ffffffbf;
+            background-color: #eee;
+            border: none;
+            font-weight: bold;
+        }
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 30px;
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        th,
+        td {
+            border: 1px solid #dee2e6;
+            padding: 12px;
+            text-align: left;
+            vertical-align: top;
+
+            img {
+                border-radius: 4px;
+            }
+
+            .btn-box {
+                display: flex;
+            }
+        }
+
+        th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+    }
+}

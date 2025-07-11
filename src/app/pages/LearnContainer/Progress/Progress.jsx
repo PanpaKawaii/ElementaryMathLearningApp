@@ -120,9 +120,8 @@ export default function Progress() {
             <div className='subject-name'>
                 <h1>{SUBJECTs?.name}</h1>
             </div>
-            {SUBJECTs?.chapters.map((chapter, chapter_index) => (
+            {SUBJECTs?.chapters.sort((a, b) => Number(a.number) - Number(b.number)).map((chapter, chapter_index) => (
                 <div key={chapter.id} className='chapter'>
-
                     <div
                         className='chapter-heading'
                         style={{
@@ -133,8 +132,8 @@ export default function Progress() {
                         <div className='heading'>{chapter.name}</div>
                         <div className='topic-progress'>
                             Progress: {
-                                PROGRESSes ? (chapter.number < PROGRESSes?.chapter ? chapter.topics?.length :
-                                    (chapter.number > PROGRESSes?.chapter ? 0 :
+                                PROGRESSes ? (chapter_index + 1 < PROGRESSes?.chapter ? chapter.topics?.length :
+                                    (chapter_index + 1 > PROGRESSes?.chapter ? 0 :
                                         (chapter.topics?.length < PROGRESSes?.topic ? chapter.topics?.length :
                                             PROGRESSes?.topic))) : 0
                             }
@@ -143,25 +142,19 @@ export default function Progress() {
                     </div>
                     {chapter.topics?.length > 0 ? (
                         <div className='topics'>
-                            {chapter.topics.map((topic, topic_index) => (
+                            {chapter.topics.sort((a, b) => Number(a.number) - Number(b.number)).map((topic, topic_index) => (
                                 <Button
                                     key={topic.id}
                                     width={'80px'}
                                     height={'60px'}
                                     border={'6px'}
                                     radius={'50%'}
-                                    // maincolor={
-                                    //     `${chapter.number < PROGRESSes?.chapter ?
-                                    //         Math.round(chapter_index * (360 / 8))
-                                    //         : ((topic.number <= PROGRESSes?.topic && chapter.number == PROGRESSes?.chapter) ?
-                                    //             Math.round(chapter_index * (360 / 8))
-                                    //             : 'locked')}`}
-                                    maincolor={LearnableTopic(chapter.number, topic.number) ? Math.round(chapter_index * (360 / 8)) : 'locked'}
+                                    maincolor={LearnableTopic(chapter_index + 1, topic_index + 1) ? Math.round(chapter_index * (360 / 8)) : 'locked'}
                                     active={topic.id == SelectedTopic?.id}
-                                    onToggle={() => { if (LearnableTopic(chapter.number, topic.number)) { handleToggle(topic, chapter) } }}
+                                    onToggle={() => { if (LearnableTopic(chapter_index + 1, topic_index + 1)) { handleToggle(topic, chapter) } }}
                                 >
-                                    {/* <div>Topic: {topic.number}</div>
-                                    <div>Chapter: {chapter.number}</div>
+                                    {/* <div>Topic: {topic_index + 1}</div>
+                                    <div>Chapter: {chapter_index + 1}</div>
                                     <div>P.Topic: {PROGRESSes?.chapter}</div>
                                     <div>P.Chapter: {PROGRESSes?.topic}</div> */}
                                     <div className='text'>{topic_index + 1}</div>
@@ -173,13 +166,9 @@ export default function Progress() {
                                 height={'60px'}
                                 border={'6px'}
                                 radius={'50%'}
-                                // maincolor={
-                                //     `${chapter.number < PROGRESSes?.chapter ? 'correct' :
-                                //         ((chapter.topics?.length + 1 <= PROGRESSes?.topic && chapter.number == PROGRESSes?.chapter) ? 'correct' :
-                                //             'locked')}`}
-                                maincolor={LearnableQuiz(chapter.number, chapter.topics?.length) ? Math.round(chapter_index * (360 / 8)) : 'locked'}
+                                maincolor={LearnableQuiz(chapter_index + 1, chapter.topics?.length) ? Math.round(chapter_index * (360 / 8)) : 'locked'}
                                 onToggle={() => {
-                                    if (LearnableQuiz(chapter.number, chapter.topics?.length)) {
+                                    if (LearnableQuiz(chapter_index + 1, chapter.topics?.length)) {
                                         handleToggle({
                                             id: (chapter.topics?.length + 1) + '-' + chapter.id,
                                             name: 'Final Quiz',
@@ -198,10 +187,9 @@ export default function Progress() {
                                 height={'60px'}
                                 border={'6px'}
                                 radius={'50%'}
-                                // maincolor={`${chapter.number < PROGRESSes?.chapter ? 'gold' : 'locked'}`}
-                                maincolor={LearnableAdvanced(chapter.number) ? 'gold' : 'locked'}
+                                maincolor={LearnableAdvanced(chapter_index + 1) ? 'gold' : 'locked'}
                                 onToggle={() => {
-                                    if (LearnableAdvanced(chapter.number)) {
+                                    if (LearnableAdvanced(chapter_index + 1)) {
                                         handleToggle({
                                             id: (chapter.topics?.length + 2) + '+' + chapter.id,
                                             name: 'Advanced Quiz',
@@ -235,7 +223,6 @@ export default function Progress() {
                             backgroundColor: `hsl(${Math.round(chapter_index * (360 / 8))}, 92%, 79%)`,
                         }}
                     >
-                        {/* <div className='chapter-title'>{SelectedChapter?.Name}</div> */}
                         <div
                             className='topic-title'
                             style={{
