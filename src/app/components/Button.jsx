@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import './Button.css';
 
-// export default function Button({ border, radius, active, onToggle, children }) {
 export default function Button(props) {
 
     const [IsClicked, setIsClicked] = useState(false);
@@ -163,21 +162,10 @@ export default function Button(props) {
                     id='GridCard'
                     className={`grid-card ${(IsClicked || props.active) && 'active'}`}
                     style={ButtonStyle}
-                    // style={{
-                    //     width: `${props.width}`,
-                    //     height: `${props.height}`,
-                    //     borderRadius: `${props.radius}`,
-                    //     border: `${props.border} solid hsl(${props.maincolor}, 92%, 84%)`,
-                    //     color: `hsl(${props.maincolor}, 97%, 70%)`,
-                    //     textShadow: `1px 1px 1px hsl(${props.maincolor}, 100%, 40%)`,
-                    //     backgroundColor: `hsl(${props.maincolor}, 84%, 89%)`,
-                    //     boxShadow: `${props.active ? 'none' : `0px 8px 0px 0px hsl(${props.maincolor}, 83%, 76%)`}`,
-                    // }}
 
                     onMouseDown={() => handleChangeState(true)}
                     onMouseUp={() => handleChangeState(false)}
                     onMouseLeave={() => handleChangeState(false)}
-                    // onClick={() => setSelectedTopic(topic)}
                     onClick={props.onToggle}
                 >
                     {props.children}

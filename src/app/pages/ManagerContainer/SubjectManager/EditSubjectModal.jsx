@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { putData } from '../../../../mocks/CallingAPI.js';
+import { patchData } from '../../../../mocks/CallingAPI.js';
 import Button from '../../../components/Button.jsx';
 import { useAuth } from '../../../hooks/AuthContext/AuthContext.jsx';
 import './EditModal.css';
 
-export default function EditSubjectModal({ subject, onClose }) {
+export default function EditSubjectModal({ subject, onClose, setRefresh }) {
     const { user } = useAuth();
 
     const [form, setForm] = useState({ ...subject });
@@ -17,14 +17,13 @@ export default function EditSubjectModal({ subject, onClose }) {
         // const token = user?.token;
         const token = '';
         try {
-            // const resultUpdateSubject = await putData(`api/user?id=${UserData.id}`, form, token);
-            // console.log('resultUpdateSubject', resultUpdateSubject);
-            console.log('resultUpdateSubject');
+            const resultUpdateSubject = await patchData(`api/subject?id=${SubjectId}`, form, token);
+            console.log('resultUpdateSubject', resultUpdateSubject);
+            // console.log('resultUpdateSubject');
 
             onClose();
-        } catch (error) {
-            setError(error);
-        } finally { }
+            setRefresh(p => p + 1);
+        } catch (error) { } finally { }
     };
 
     const handleUpdate = async (e) => {

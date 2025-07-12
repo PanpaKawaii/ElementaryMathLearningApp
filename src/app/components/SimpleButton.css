@@ -1,0 +1,22 @@
+.simple-button {
+    width: fit-content;
+    position: relative;
+    user-select: none;
+
+    .grid-card {
+        text-align: center;
+        align-content: center;
+        box-sizing: border-box;
+        cursor: pointer;
+        font-weight: bold;
+        transition: all 0.1s ease;
+    }
+
+    .shadow {
+        z-index: -1;
+        left: 8px;
+        position: absolute;
+        height: 8px;
+        transition: all 0.1s ease;
+    }
+}

@@ -16,6 +16,10 @@ a {
   text-decoration: none;
 }
 
+img {
+  object-fit: cover;
+}
+
 input,
 textarea {
   outline: none;
@@ -53,6 +57,7 @@ h6 {
 ::-webkit-scrollbar {
   width: 12px;
   background-color: #7ed95720;
+  border-radius: 6px;
 }
 
 ::-webkit-scrollbar-track {
