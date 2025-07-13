@@ -11,6 +11,7 @@ export default function Button(props) {
     let ButtonStyle = {
         width: `${props.width}`,
         height: `${props.height}`,
+        padding: `${props.padding}`,
         borderRadius: `${props.radius}`,
         color: `${props.textcolor || '#888'}`,
         backgroundColor: `${props.bgcolor || '#eee'}`,

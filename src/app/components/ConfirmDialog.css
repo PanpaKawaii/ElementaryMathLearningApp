@@ -1,4 +1,4 @@
-.edit-modal {
+.confirm-modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -16,16 +16,14 @@
         background-color: #eee;
         border-radius: 20px;
 
-        form {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
+        .message {
+            margin: 0 0 24px;
+        }
 
-            .btn-box {
-                display: flex;
-                justify-content: space-between;
-                gap: 12px;
-            }
+        .btn-box {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
         }
     }
 }

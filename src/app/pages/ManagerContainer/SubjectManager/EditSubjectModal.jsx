@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { patchData } from '../../../../mocks/CallingAPI.js';
-import Button from '../../../components/Button.jsx';
+import SimpleButton from '../../../components/SimpleButton.jsx';
 import { useAuth } from '../../../hooks/AuthContext/AuthContext.jsx';
 import './EditModal.css';
 
@@ -19,8 +19,6 @@ export default function EditSubjectModal({ subject, onClose, setRefresh }) {
         try {
             const resultUpdateSubject = await patchData(`api/subject?id=${SubjectId}`, form, token);
             console.log('resultUpdateSubject', resultUpdateSubject);
-            // console.log('resultUpdateSubject');
-
             onClose();
             setRefresh(p => p + 1);
         } catch (error) { } finally { }
@@ -32,36 +30,36 @@ export default function EditSubjectModal({ subject, onClose, setRefresh }) {
     };
 
     return (
-        <div className='modal-backdrop'>
+        <div className='edit-modal'>
             <div className='modal-box'>
-                <h3>Edit Subject</h3>
+                <div className='title'>Edit Subject</div>
                 <form onSubmit={handleUpdate}>
-                    <input name='name' value={form.name} onChange={handleChange} required />
-                    <input name='image' value={form.image} onChange={handleChange} required />
-                    <input name='price' value={form.price} onChange={handleChange} required />
-                    <div className='modal-actions'>
-                        <Button
-                            width={'100px'}
+                    <input name='name' placeholder='Name' value={form.name} onChange={handleChange} required />
+                    <input name='image' placeholder='Image URL' value={form.image} onChange={handleChange} required />
+                    <input name='price' placeholder='Price' value={form.price} onChange={handleChange} required />
+                    <div className='btn-box'>
+                        <SimpleButton
+                            width={'80px'}
                             height={'40px'}
-                            border={'6px'}
-                            radius={'12px'}
-                            maincolor={'edit'}
+                            radius={'8px'}
+                            textcolor={'#28a745'}
+                            bgcolor={'#eee'}
                             active={false}
                             onToggle={handleUpdate}
                         >
                             <div className='text'>SAVE</div>
-                        </Button>
-                        <Button
-                            width={'100px'}
+                        </SimpleButton>
+                        <SimpleButton
+                            width={'80px'}
                             height={'40px'}
-                            border={'6px'}
-                            radius={'12px'}
-                            maincolor={'white'}
+                            radius={'8px'}
+                            textcolor={'#888'}
+                            bgcolor={'#eee'}
                             active={false}
                             onToggle={() => onClose()}
                         >
                             <div className='text'>CANCEL</div>
-                        </Button>
+                        </SimpleButton>
                     </div>
                 </form>
             </div>

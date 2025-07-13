@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { deleteData, fetchData, postData } from '../../../../mocks/CallingAPI.js';
+import ConfirmDialog from '../../../components/ConfirmDialog.jsx';
 import SimpleButton from '../../../components/SimpleButton.jsx';
 import { useAuth } from '../../../hooks/AuthContext/AuthContext.jsx';
 import Loading from '../../../layouts/Loading/Loading.jsx';
@@ -12,7 +13,9 @@ export default function SubjectManager() {
 
     const [SUBJECTs, setSUBJECTs] = useState([]);
     const [form, setForm] = useState({ name: '', image: '', price: '' });
-    const [editingSubject, setEditingSubject] = useState(null);
+    const [editing, setEditing] = useState(null);
+    const [showConfirm, setShowConfirm] = useState(false);
+    const [selectedId, setSelectedId] = useState(null);
     const [Refresh, setRefresh] = useState(0);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -47,6 +50,7 @@ export default function SubjectManager() {
             setLoading(true);
             const resultAddSubject = await postData('api/subject', form, token);
             console.log('resultAddSubject', resultAddSubject);
+            // setForm({ name: '', image: '', price: '' });
             setRefresh(p => p + 1);
         } catch (error) {
             setError(error);
@@ -55,14 +59,20 @@ export default function SubjectManager() {
         }
     };
 
-    const handleDelete = async (SubjectId) => {
+    const handleDeleteClick = (id) => {
+        setSelectedId(id);
+        setShowConfirm(true);
+    };
+
+    const handleDelete = async () => {
         // const token = user?.token;
         const token = '';
         try {
             setLoading(true);
-            const resultDeleteSubject = await deleteData(`api/subject/${SubjectId}`, token);
+            const resultDeleteSubject = await deleteData(`api/subject/${selectedId}`, token);
             console.log('resultDeleteSubject', resultDeleteSubject);
             setRefresh(p => p + 1);
+            setShowConfirm(false);
         } catch (error) {
             setError(error);
         } finally {
@@ -70,12 +80,12 @@ export default function SubjectManager() {
         }
     };
 
-    const openEditModal = (subject) => { setEditingSubject(subject); };
-    const closeEditModal = () => { setEditingSubject(null); };
+    const openEditModal = (subject) => { setEditing(subject); };
+    const closeEditModal = () => { setEditing(null); };
 
     if (loading) return <Loading Size={'Large'} />
     return (
-        <div className='subjectmanager-container learn-container'>
+        <div className='subjectmanager-container'>
             <div className='title'>Subject Manager</div>
             <form onSubmit={handleSubmit} className='add-form'>
                 <input name='name' placeholder='Name' value={form.name} onChange={handleChange} required />
@@ -96,7 +106,7 @@ export default function SubjectManager() {
                     width={'80px'}
                     height={'40px'}
                     radius={'8px'}
-                    textcolor={'#888'}
+                    textcolor={'#007bff'}
                     bgcolor={'#eee'}
                     active={false}
                     onToggle={() => setRefresh(p => p + 1)}
@@ -105,113 +115,117 @@ export default function SubjectManager() {
                 </SimpleButton>
             </form>
 
-            <table className='table'>
-                <thead>
-                    <tr>
-                        {/* <th>#</th> */}
-                        <th>ID</th>
-                        <th>Image</th>
-                        <th>Name</th>
-                        <th>Price</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {SUBJECTs.map((s, i) => (
-                        <tr key={s.id}>
-                            {/* <td className='fit-td'>#{i + 1}</td> */}
-                            <td className='fit-td'>{s.id}</td>
-                            <td className='fit-td'><img src={s.image} alt='subject' /></td>
-                            <td>{s.name}</td>
-                            <td>{s.price.toLocaleString('vi-VN')} VND</td>
-                            <td className='fit-td'>
-                                <div className='btn-box'>
-                                    <SimpleButton
-                                        width={'80px'}
-                                        height={'40px'}
-                                        radius={'8px'}
-                                        textcolor={'#fb8b24'}
-                                        bgcolor={'#eee'}
-                                        active={false}
-                                        onToggle={() => openEditModal(s)}
-                                    >
-                                        <div className='text'>EDIT</div>
-                                    </SimpleButton>
-                                    <SimpleButton
-                                        width={'80px'}
-                                        height={'40px'}
-                                        radius={'8px'}
-                                        textcolor={'#dc3545'}
-                                        bgcolor={'#eee'}
-                                        active={false}
-                                        onToggle={() => handleDelete(s.id)}
-                                    >
-                                        <div className='text'>DELETE</div>
-                                    </SimpleButton>
-                                    <Link
-                                        to={`./${s.id}/chapter`}
-                                        state={s.chapters}
-                                    >
-                                        <SimpleButton
-                                            width={'80px'}
-                                            height={'40px'}
-                                            radius={'8px'}
-                                            textcolor={'#007bff'}
-                                            bgcolor={'#eee'}
-                                            active={false}
-                                        >
-                                            <div className='text'>VIEW</div>
-                                        </SimpleButton>
-                                    </Link>
-                                    {/* <Button
-                                        width={'80px'}
-                                        height={'40px'}
-                                        border={'6px'}
-                                        radius={'12px'}
-                                        maincolor={'edit'}
-                                        active={false}
-                                        onToggle={() => openEditModal(s)}
-                                    >
-                                        <div className='text'>EDIT</div>
-                                    </Button>
-                                    <Button
-                                        width={'80px'}
-                                        height={'40px'}
-                                        border={'6px'}
-                                        radius={'12px'}
-                                        maincolor={'incorrect'}
-                                        active={false}
-                                        onToggle={() => handleDelete(s.id)}
-                                    >
-                                        <div className='text'>DELETE</div>
-                                    </Button>
-                                    <Link
-                                        to={`./${s.id}/chapter`}
-                                        state={s.chapters}
-                                    >
-                                        <Button
-                                            width={'80px'}
-                                            height={'40px'}
-                                            border={'6px'}
-                                            radius={'12px'}
-                                            maincolor={'correct'}
-                                            active={false}
-                                        >
-                                            <div className='text'>VIEW</div>
-                                        </Button>
-                                    </Link> */}
-                                </div>
-                            </td>
+            <div className='table-container'>
+                <table className='table'>
+                    {/* <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>ID</th>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Actions</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead> */}
+                    <tbody>
+                        {SUBJECTs.map((s, i) => (
+                            <tr key={s.id}>
+                                {/* <td className='fit-td'>#{i + 1}</td> */}
+                                <td className='fit-td'>{s.id}</td>
+                                <td className='fit-td'><img src={s.image} alt='subject' className='convex' /></td>
+                                <td><div className='name convex'>{s.name}</div></td>
+                                <td><div className='price convex'>{s.price.toLocaleString('vi-VN')} VND</div></td>
+                                <td className='fit-td'>
+                                    <div className='btn-box'>
+                                        <div className='show-btn'>
+                                            <SimpleButton
+                                                width={'76px'}
+                                                height={'32px'}
+                                                radius={'8px'}
+                                                textcolor={'#888'}
+                                                bgcolor={'#eee'}
+                                                active={false}
+                                                onToggle={() => setSelectedId(p => p == s.id ? null : s.id)}
+                                            >
+                                                <i className={`fa-solid fa-${selectedId == s.id ? 'xmark' : 'ellipsis'}`}></i>
+                                            </SimpleButton>
+                                            {selectedId == s.id &&
+                                                <div className='hidden-btn'>
+                                                    <Link
+                                                        to={`./${s.id}/chapter`}
+                                                        state={s.chapters}
+                                                    >
+                                                        <SimpleButton
+                                                            width={'32px'}
+                                                            height={'32px'}
+                                                            radius={'8px'}
+                                                            textcolor={'#007bff'}
+                                                            bgcolor={'#eee'}
+                                                            active={false}
+                                                        >
+                                                            <i className='fa-solid fa-magnifying-glass'></i>
+                                                        </SimpleButton>
+                                                    </Link>
+                                                    <SimpleButton
+                                                        width={'32px'}
+                                                        height={'32px'}
+                                                        radius={'8px'}
+                                                        textcolor={'#8b4513'}
+                                                        bgcolor={'#eee'}
+                                                        active={false}
+                                                        // onToggle={() => openEditModal(s)}
+                                                    >
+                                                        <i className='fa-solid fa-book'></i>
+                                                    </SimpleButton>
+                                                    <SimpleButton
+                                                        width={'32px'}
+                                                        height={'32px'}
+                                                        radius={'8px'}
+                                                        textcolor={'#fb8b24'}
+                                                        bgcolor={'#eee'}
+                                                        active={false}
+                                                        onToggle={() => openEditModal(s)}
+                                                    >
+                                                        <i className='fa-solid fa-pencil'></i>
+                                                    </SimpleButton>
+                                                    <SimpleButton
+                                                        width={'32px'}
+                                                        height={'32px'}
+                                                        radius={'8px'}
+                                                        textcolor={'#dc3545'}
+                                                        bgcolor={'#eee'}
+                                                        active={false}
+                                                        onToggle={() => handleDeleteClick(s.id)}
+                                                    >
+                                                        <i className='fa-solid fa-trash-can'></i>
+                                                    </SimpleButton>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
 
-            {editingSubject && (
+            {editing && (
                 <EditSubjectModal
-                    subject={editingSubject}
+                    subject={editing}
                     onClose={closeEditModal}
                     setRefresh={setRefresh}
+                />
+            )}
+
+            {showConfirm && (
+                <ConfirmDialog
+                    title={'Delete Confirmation'}
+                    message={'Are you sure you want to delete this subject?'}
+                    button={'DELETE'}
+                    color={'#dc3545'}
+                    onConfirm={handleDelete}
+                    onCancel={() => setShowConfirm(false)}
                 />
             )}
         </div>
