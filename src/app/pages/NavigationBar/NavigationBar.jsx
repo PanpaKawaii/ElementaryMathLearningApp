@@ -6,15 +6,15 @@ import './NavigationBar.css';
 export default function NavigationBar() {
     const { user } = useAuth();
     const location = useLocation();
-    console.log(location.pathname);
+    console.log('NavigationBar', location.pathname);
 
     const menuItems = [
-        { name: 'LEARN', icon: 'house', path: '/learn' },
-        { name: 'SUBJECT', icon: 'book', path: '/subject' },
-        { name: 'RANK', icon: 'star', path: '/ranking' },
-        { name: 'PROFILE', icon: 'user', path: '/profile' },
-        { name: 'LOGIN-REGISTER', icon: 'right-to-bracket', path: '/login-register' },
-        { name: 'SUBJECT-MANAGER', icon: 'book', path: '/manager/subject' },
+        { name: 'LEARN', icon: 'house', path: '/learn', role: 'Student' },
+        { name: 'SUBJECT', icon: 'book', path: '/subject', role: 'Guest Student Parent' },
+        { name: 'RANK', icon: 'star', path: '/ranking', role: 'Student' },
+        { name: 'PROFILE', icon: 'user', path: '/profile', role: 'Student Parent Admin' },
+        { name: 'LOGIN-REGISTER', icon: 'right-to-bracket', path: '/login-register', role: 'Guest' },
+        { name: 'MANAGEMENT', icon: 'book', path: '/management/subject', role: 'Admin' },
     ];
 
     return (
@@ -26,13 +26,16 @@ export default function NavigationBar() {
                 <div className='items'>
                     {menuItems.map((item, index) => (
                         <React.Fragment key={index}>
-                            {(
-                                (item.path !== '/profile' && item.path !== '/login-register' && item.path !== '/comment' && item.path !== '/ranking') ||
-                                (item.path === '/profile' && user) ||
-                                (item.path === '/ranking' && user) ||
-                                (item.path === '/login-register' && !user)
-                            ) &&
-                                <div className={`item ${location.pathname == item.path ? 'located' : ''}`}>
+                            {
+                                // (
+                                // (item.path !== '/profile' && item.path !== '/login-register' && item.path !== '/comment' && item.path !== '/ranking') ||
+                                // (item.path === '/profile' && user) ||
+                                // (item.path === '/ranking' && user) ||
+                                // (item.path === '/login-register' && !user)
+                                // (item.role.includes(user?.role) || (!user && item.role.includes('Guest')))
+                                // )
+                                // &&
+                                <div className={`item ${location.pathname.split('/')[1].includes(item.path.split('/')[1]) ? 'located' : ''}`}>
                                     <Link to={`${item.path}`}>
                                         <i className={`fa-solid fa-${item.icon}`}></i>
                                         <span>{item.name}</span>

@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import { patchData } from '../../../../mocks/CallingAPI.js';
-import SimpleButton from '../../../components/SimpleButton.jsx';
-import { useAuth } from '../../../hooks/AuthContext/AuthContext.jsx';
-import './EditModal.css';
+import { putData } from '../../../../../mocks/CallingAPI.js';
+import SimpleButton from '../../../../components/SimpleButton.jsx';
+import { useAuth } from '../../../../hooks/AuthContext/AuthContext.jsx';
+import '../EditModal.css';
 
-export default function EditSubjectModal({ subject, onClose, setRefresh }) {
+export default function EditChapterModal({ chapter, onClose, setRefresh }) {
     const { user } = useAuth();
 
-    const [form, setForm] = useState({ ...subject });
+    const [form, setForm] = useState({ ...chapter });
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
@@ -17,9 +17,9 @@ export default function EditSubjectModal({ subject, onClose, setRefresh }) {
         // const token = user?.token;
         const token = '';
         try {
-            form.price = Math.abs(form.price);
-            const resultUpdateSubject = await patchData(`api/subject?id=${id}`, form, token);
-            console.log('resultUpdateSubject', resultUpdateSubject);
+            form.number = Math.abs(form.number);
+            const resultUpdateChapter = await putData(`api/chapter/${id}`, form, token);
+            console.log('resultUpdateChapter', resultUpdateChapter);
             onClose();
             setRefresh(p => p + 1);
         } catch (error) { } finally { }
@@ -27,17 +27,16 @@ export default function EditSubjectModal({ subject, onClose, setRefresh }) {
 
     const handleUpdate = async (e) => {
         e.preventDefault();
-        Update(subject.id);
+        Update(chapter.id);
     };
 
     return (
         <div className='edit-modal'>
             <div className='modal-box'>
-                <div className='title'>Edit Subject</div>
+                <div className='title'>Edit Chapter</div>
                 <form onSubmit={handleUpdate}>
                     <input name='name' placeholder='Name' value={form.name} onChange={handleChange} required />
-                    <input name='image' placeholder='Image URL' value={form.image} onChange={handleChange} required />
-                    <input name='price' placeholder='Price' value={form.price} onChange={handleChange} required />
+                    <input name='number' placeholder='Number' value={form.number} onChange={handleChange} required />
                     <div className='btn-box'>
                         <SimpleButton
                             width={'80px'}

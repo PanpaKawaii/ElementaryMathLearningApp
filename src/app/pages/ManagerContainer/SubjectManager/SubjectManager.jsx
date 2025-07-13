@@ -14,7 +14,7 @@ export default function SubjectManager() {
     const [SUBJECTs, setSUBJECTs] = useState([]);
     const [form, setForm] = useState({ name: '', image: '', price: '' });
     const [editing, setEditing] = useState(null);
-    const [showConfirm, setShowConfirm] = useState(false);
+    const [confirm, setConfirm] = useState(false);
     const [selectedId, setSelectedId] = useState(null);
     const [Refresh, setRefresh] = useState(0);
     const [loading, setLoading] = useState(true);
@@ -25,6 +25,7 @@ export default function SubjectManager() {
         const token = '';
         const fetchDataAPI = async () => {
             try {
+                setLoading(true);
                 const subjectData = await fetchData('api/subject', token);
                 console.log('subjectData', subjectData);
                 setSUBJECTs(subjectData);
@@ -48,9 +49,10 @@ export default function SubjectManager() {
         const token = '';
         try {
             setLoading(true);
+            form.price = Math.abs(form.price);
             const resultAddSubject = await postData('api/subject', form, token);
             console.log('resultAddSubject', resultAddSubject);
-            // setForm({ name: '', image: '', price: '' });
+            setForm({ name: '', image: '', price: '' });
             setRefresh(p => p + 1);
         } catch (error) {
             setError(error);
@@ -61,7 +63,7 @@ export default function SubjectManager() {
 
     const handleDeleteClick = (id) => {
         setSelectedId(id);
-        setShowConfirm(true);
+        setConfirm(true);
     };
 
     const handleDelete = async () => {
@@ -72,7 +74,7 @@ export default function SubjectManager() {
             const resultDeleteSubject = await deleteData(`api/subject/${selectedId}`, token);
             console.log('resultDeleteSubject', resultDeleteSubject);
             setRefresh(p => p + 1);
-            setShowConfirm(false);
+            setConfirm(false);
         } catch (error) {
             setError(error);
         } finally {
@@ -80,12 +82,12 @@ export default function SubjectManager() {
         }
     };
 
-    const openEditModal = (subject) => { setEditing(subject); };
+    const openEditModal = (data) => { setEditing(data); };
     const closeEditModal = () => { setEditing(null); };
 
     if (loading) return <Loading Size={'Large'} />
     return (
-        <div className='subjectmanager-container'>
+        <div className='subjectmanager-container manager-container'>
             <div className='title'>Subject Manager</div>
             <form onSubmit={handleSubmit} className='add-form'>
                 <input name='name' placeholder='Name' value={form.name} onChange={handleChange} required />
@@ -128,13 +130,13 @@ export default function SubjectManager() {
                         </tr>
                     </thead> */}
                     <tbody>
-                        {SUBJECTs.map((s, i) => (
-                            <tr key={s.id}>
+                        {SUBJECTs.map((data, i) => (
+                            <tr key={data.id}>
                                 {/* <td className='fit-td'>#{i + 1}</td> */}
-                                <td className='fit-td'>{s.id}</td>
-                                <td className='fit-td'><img src={s.image} alt='subject' className='convex' /></td>
-                                <td><div className='name convex'>{s.name}</div></td>
-                                <td><div className='price convex'>{s.price.toLocaleString('vi-VN')} VND</div></td>
+                                <td className='fit-td'><div className='id convex'>ID: {data.id}</div></td>
+                                <td className='fit-td'><img src={data.image} alt='subject' className='convex' /></td>
+                                <td><div className='name convex'>{data.name}</div></td>
+                                <td><div className='price convex'>{data.price.toLocaleString('vi-VN')} VND</div></td>
                                 <td className='fit-td'>
                                     <div className='btn-box'>
                                         <div className='show-btn'>
@@ -145,15 +147,15 @@ export default function SubjectManager() {
                                                 textcolor={'#888'}
                                                 bgcolor={'#eee'}
                                                 active={false}
-                                                onToggle={() => setSelectedId(p => p == s.id ? null : s.id)}
+                                                onToggle={() => setSelectedId(p => p == data.id ? null : data.id)}
                                             >
-                                                <i className={`fa-solid fa-${selectedId == s.id ? 'xmark' : 'ellipsis'}`}></i>
+                                                <i className={`fa-solid fa-${selectedId == data.id ? 'xmark' : 'ellipsis'}`}></i>
                                             </SimpleButton>
-                                            {selectedId == s.id &&
+                                            {selectedId == data.id &&
                                                 <div className='hidden-btn'>
                                                     <Link
-                                                        to={`./${s.id}/chapter`}
-                                                        state={s.chapters}
+                                                        to={`./${data.id}/chapter`}
+                                                        // state={data.chapters}
                                                     >
                                                         <SimpleButton
                                                             width={'32px'}
@@ -166,17 +168,21 @@ export default function SubjectManager() {
                                                             <i className='fa-solid fa-magnifying-glass'></i>
                                                         </SimpleButton>
                                                     </Link>
-                                                    <SimpleButton
-                                                        width={'32px'}
-                                                        height={'32px'}
-                                                        radius={'8px'}
-                                                        textcolor={'#8b4513'}
-                                                        bgcolor={'#eee'}
-                                                        active={false}
-                                                        // onToggle={() => openEditModal(s)}
+                                                    <Link
+                                                        to={`./${data.id}/chapter`}
+                                                        // state={data.chapters}
                                                     >
-                                                        <i className='fa-solid fa-book'></i>
-                                                    </SimpleButton>
+                                                        <SimpleButton
+                                                            width={'32px'}
+                                                            height={'32px'}
+                                                            radius={'8px'}
+                                                            textcolor={'#8b4513'}
+                                                            bgcolor={'#eee'}
+                                                            active={false}
+                                                        >
+                                                            <i className='fa-solid fa-book'></i>
+                                                        </SimpleButton>
+                                                    </Link>
                                                     <SimpleButton
                                                         width={'32px'}
                                                         height={'32px'}
@@ -184,7 +190,7 @@ export default function SubjectManager() {
                                                         textcolor={'#fb8b24'}
                                                         bgcolor={'#eee'}
                                                         active={false}
-                                                        onToggle={() => openEditModal(s)}
+                                                        onToggle={() => openEditModal(data)}
                                                     >
                                                         <i className='fa-solid fa-pencil'></i>
                                                     </SimpleButton>
@@ -195,7 +201,7 @@ export default function SubjectManager() {
                                                         textcolor={'#dc3545'}
                                                         bgcolor={'#eee'}
                                                         active={false}
-                                                        onToggle={() => handleDeleteClick(s.id)}
+                                                        onToggle={() => handleDeleteClick(data.id)}
                                                     >
                                                         <i className='fa-solid fa-trash-can'></i>
                                                     </SimpleButton>
@@ -218,14 +224,14 @@ export default function SubjectManager() {
                 />
             )}
 
-            {showConfirm && (
+            {confirm && (
                 <ConfirmDialog
                     title={'Delete Confirmation'}
                     message={'Are you sure you want to delete this subject?'}
                     button={'DELETE'}
                     color={'#dc3545'}
                     onConfirm={handleDelete}
-                    onCancel={() => setShowConfirm(false)}
+                    onCancel={() => setConfirm(false)}
                 />
             )}
         </div>

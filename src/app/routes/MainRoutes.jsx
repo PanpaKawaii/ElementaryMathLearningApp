@@ -14,6 +14,7 @@ import AdvancedQuestion from '../pages/ForumContainer/AdvancedQuestion'
 
 import ManagerContainer from '../pages/ManagerContainer/ManagerContainer'
 import SubjectManager from '../pages/ManagerContainer/SubjectManager/SubjectManager'
+import ChapterManager from '../pages/ManagerContainer/SubjectManager/ChapterManager/ChapterManager'
 
 export default function MainRoutes() {
     return (
@@ -31,7 +32,9 @@ export default function MainRoutes() {
                         <Route path='profile' element={<ProfileContainer />} />
                         <Route path='login-register' element={<LoginRegister />} />
                         <Route path='forum/chapter/:chapter' element={<AdvancedQuestion />} />
-                        <Route path='manager/subject' element={<ManagerContainer />} />
+                        <Route path='management/subject' element={<ManagerContainer />} />
+                        <Route path='management/subject/:subject/chapter' element={<ManagerContainer />} />
+                        <Route path='management/subject/:subject/chapter/:chapter/topic' element={<ManagerContainer />} />
                     </Route>
                     <Route path='*' element={<Navigate to='/learn' replace />} />
                     <Route path='studying/chapter/:chapter/topic/:id' element={<Studying />} />

@@ -1,4 +1,4 @@
-.subjectmanager-container {
+.manager-container {
     height: 100%;
     padding: 20px;
     box-sizing: border-box;
@@ -36,12 +36,17 @@
                     white-space: nowrap;
                 }
 
+                .id,
+                .number,
                 .name,
-                .price {
+                .price,
+                .topic {
                     width: fit-content;
                     margin: 0 auto;
                     padding: 8px;
                     border-radius: 4px;
+                    font-weight: bold;
+                    color: #666;
                 }
 
                 img {
