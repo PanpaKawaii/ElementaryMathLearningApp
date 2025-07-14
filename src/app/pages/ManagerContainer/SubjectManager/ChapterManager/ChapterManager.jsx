@@ -126,8 +126,8 @@ export default function ChapterManager() {
                         {CHAPTERs.map((data, i) => (
                             <tr key={data.id}>
                                 {/* <td className='fit-td'>#{i + 1}</td> */}
-                                <td className='fit-td'><div className='number convex'>No.{data.number}</div></td>
-                                <td className='fit-td'><div className='id convex'>ID: {data.id}</div></td>
+                                <td><div className='number convex'>No.{data.number}</div></td>
+                                <td><div className='id convex'>ID: {data.id}</div></td>
                                 <td><div className='name convex'>Chapter: {data.name}</div></td>
                                 <td className='fit-td'>
                                     <div className='btn-box'>

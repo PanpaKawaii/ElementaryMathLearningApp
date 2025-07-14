@@ -21,7 +21,8 @@ img {
 }
 
 input,
-textarea {
+textarea,
+select {
   outline: none;
   border: 2px solid #ccc;
   padding: 8px 12px;

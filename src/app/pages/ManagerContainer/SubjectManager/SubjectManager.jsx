@@ -134,7 +134,7 @@ export default function SubjectManager() {
                             <tr key={data.id}>
                                 {/* <td className='fit-td'>#{i + 1}</td> */}
                                 <td className='fit-td'><div className='id convex'>ID: {data.id}</div></td>
-                                <td className='fit-td'><img src={data.image} alt='subject' className='convex' /></td>
+                                <td><img src={data.image} alt='subject' className='convex' /></td>
                                 <td><div className='name convex'>{data.name}</div></td>
                                 <td><div className='price convex'>{data.price.toLocaleString('vi-VN')} VND</div></td>
                                 <td className='fit-td'>

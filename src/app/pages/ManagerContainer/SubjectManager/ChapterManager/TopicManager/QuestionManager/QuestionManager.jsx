@@ -1,7 +1,254 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
+import { Link, useLocation, useParams } from 'react-router-dom';
+import { deleteData, fetchData, postData } from '../../../../../../../mocks/CallingAPI.js';
+import ConfirmDialog from '../../../../../../components/ConfirmDialog.jsx';
+import SimpleButton from '../../../../../../components/SimpleButton.jsx';
+import { useAuth } from '../../../../../../hooks/AuthContext/AuthContext.jsx';
+import Loading from '../../../../../../layouts/Loading/Loading.jsx';
+import '../../../ManagerStyle.css';
+import EditQuestionModal from './EditQuestionModal.jsx';
 
 export default function QuestionManager() {
+    const { user } = useAuth();
+    const location = useLocation();
+    const topicId = useParams().topic;
+    const question = location.state;
+    console.log('question', question);
+
+    const [QUESTIONs, setQUESTIONs] = useState([]);
+    const [form, setForm] = useState({ number: '', type: 'Multiple Choice', question1: '', correctAnswer: '', answers: '', explanation: '', note: '', topicId: topicId });
+    const [editing, setEditing] = useState(null);
+    const [confirm, setConfirm] = useState(false);
+    const [selectedId, setSelectedId] = useState(null);
+    const [Refresh, setRefresh] = useState(0);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        // const token = user?.token;
+        const token = '';
+        const fetchDataAPI = async () => {
+            try {
+                setLoading(true);
+                const topicData = await fetchData(`api/topic/${topicId}`, token);
+                console.log('topicData', topicData);
+                setQUESTIONs(topicData?.questions);
+            } catch (error) {
+                setError(error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchDataAPI();
+    }, [user, Refresh]);
+
+    const handleChange = (e) => {
+        setForm({ ...form, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        // const token = user?.token;
+        const token = '';
+        try {
+            setLoading(true);
+            form.number = Math.abs(form.number);
+            const resultAddQuestion = await postData('api/question', form, token);
+            console.log('resultAddQuestion', resultAddQuestion);
+            setForm({ number: '', type: 'Multiple Choice', question1: '', correctAnswer: '', answers: '', explanation: '', note: '', topicId: topicId });
+            setRefresh(p => p + 1);
+        } catch (error) {
+            setError(error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleDeleteClick = (id) => {
+        setSelectedId(id);
+        setConfirm(true);
+    };
+
+    const handleDelete = async () => {
+        // const token = user?.token;
+        const token = '';
+        try {
+            setLoading(true);
+            const resultDeleteQuestion = await deleteData(`api/question/${selectedId}`, token);
+            console.log('resultDeleteQuestion', resultDeleteQuestion);
+            setRefresh(p => p + 1);
+            setConfirm(false);
+        } catch (error) {
+            setError(error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const openEditModal = (data) => { setEditing(data); };
+    const closeEditModal = () => { setEditing(null); };
+
+    if (loading) return <Loading Size={'Large'} />
     return (
-        <div>QuestionManager</div>
+        <div className='questionmanager-container manager-container'>
+            <div className='title'>Question Manager</div>
+            <form onSubmit={handleSubmit} className='add-form'>
+                <input name='number' placeholder='Number' value={form.number} onChange={handleChange} required />
+                <input name='type' placeholder='Type' value={form.type} onChange={handleChange} required disabled/>
+                <input name='note' placeholder='Regular/Advanced' value={form.note} onChange={handleChange} required />
+                <input name='question1' placeholder='Question Content' value={form.question1} onChange={handleChange} required />
+                <input name='answers' placeholder='Full Answers' value={form.answers} onChange={handleChange} required />
+                <input name='correctAnswer' placeholder='Correct' value={form.correctAnswer} onChange={handleChange} required />
+                <input name='explanation' placeholder='Explanation' value={form.explanation} onChange={handleChange} />
+                <SimpleButton
+                    width={'80px'}
+                    height={'40px'}
+                    radius={'8px'}
+                    textcolor={'#28a745'}
+                    bgcolor={'#eee'}
+                    active={false}
+                    onToggle={handleSubmit}
+                >
+                    <div className='text'>ADD</div>
+                </SimpleButton>
+                <SimpleButton
+                    width={'80px'}
+                    height={'40px'}
+                    radius={'8px'}
+                    textcolor={'#007bff'}
+                    bgcolor={'#eee'}
+                    active={false}
+                    onToggle={() => setRefresh(p => p + 1)}
+                >
+                    <div className='text'>Refresh</div>
+                </SimpleButton>
+            </form>
+
+            <div className='table-container'>
+                <table className='table'>
+                    <thead>
+                        <tr>
+                            <th><div className='convex'>No.</div></th>
+                            <th><div className='convex'>ID</div></th>
+                            <th><div className='convex'>Question</div></th>
+                            <th><div className='convex'>Answers</div></th>
+                            <th><div className='convex'>Correct</div></th>
+                            <th><div className='convex'>Explanation</div></th>
+                            <th><div className='convex'>Note</div></th>
+                            <th><div className='convex'>Type</div></th>
+                            <th><div className='convex'>Actions</div></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {QUESTIONs.map((data, i) => (
+                            <tr key={data.id}>
+                                {/* <td className='fit-td'>#{i + 1}</td> */}
+                                <td className='fit-td'><div className='number convex'>{data.number}</div></td>
+                                <td className='fit-td'><div className='id convex'>{data.id}</div></td>
+                                <td className='large-td'><div className='name convex'>{data.question1}</div></td>
+                                <td className='fit-td'><div className='answers convex'>{data.answers.replace(/@@/g, ', ')}</div></td>
+                                <td className='fit-td'><div className='correct convex'>{data.correctAnswer} <i className='fa-solid fa-check'></i></div></td>
+                                <td><div className='explanation convex'>{data.explanation || <i className='no-explanation'>No explanation</i>}</div></td>
+                                <td className='fit-td'><div className='note convex'>{data.note}</div></td>
+                                <td><div className='type convex'>{data.type}</div></td>
+                                <td className='fit-td'>
+                                    <div className='btn-box'>
+                                        <div className='show-btn'>
+                                            <SimpleButton
+                                                width={'76px'}
+                                                height={'32px'}
+                                                radius={'8px'}
+                                                textcolor={'#888'}
+                                                bgcolor={'#eee'}
+                                                active={false}
+                                                onToggle={() => setSelectedId(p => p == data.id ? null : data.id)}
+                                            >
+                                                <i className={`fa-solid fa-${selectedId == data.id ? 'xmark' : 'ellipsis'}`}></i>
+                                            </SimpleButton>
+                                            {selectedId == data.id &&
+                                                <div className='hidden-btn'>
+                                                    <Link
+                                                        to={`./${data.id}/question`}
+                                                        // state={data.questions}
+                                                    >
+                                                        <SimpleButton
+                                                            width={'32px'}
+                                                            height={'32px'}
+                                                            radius={'8px'}
+                                                            textcolor={'#007bff'}
+                                                            bgcolor={'#eee'}
+                                                            active={false}
+                                                        >
+                                                            <i className='fa-solid fa-magnifying-glass'></i>
+                                                        </SimpleButton>
+                                                    </Link>
+                                                    <Link
+                                                        to={`./${data.id}/question`}
+                                                        // state={data.questions}
+                                                    >
+                                                        <SimpleButton
+                                                            width={'32px'}
+                                                            height={'32px'}
+                                                            radius={'8px'}
+                                                            textcolor={'#8b4513'}
+                                                            bgcolor={'#eee'}
+                                                            active={false}
+                                                        >
+                                                            <i className='fa-solid fa-book'></i>
+                                                        </SimpleButton>
+                                                    </Link>
+                                                    <SimpleButton
+                                                        width={'32px'}
+                                                        height={'32px'}
+                                                        radius={'8px'}
+                                                        textcolor={'#fb8b24'}
+                                                        bgcolor={'#eee'}
+                                                        active={false}
+                                                        onToggle={() => openEditModal(data)}
+                                                    >
+                                                        <i className='fa-solid fa-pencil'></i>
+                                                    </SimpleButton>
+                                                    <SimpleButton
+                                                        width={'32px'}
+                                                        height={'32px'}
+                                                        radius={'8px'}
+                                                        textcolor={'#dc3545'}
+                                                        bgcolor={'#eee'}
+                                                        active={false}
+                                                        onToggle={() => handleDeleteClick(data.id)}
+                                                    >
+                                                        <i className='fa-solid fa-trash-can'></i>
+                                                    </SimpleButton>
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+
+            {editing && (
+                <EditQuestionModal
+                    question={editing}
+                    onClose={closeEditModal}
+                    setRefresh={setRefresh}
+                />
+            )}
+
+            {confirm && (
+                <ConfirmDialog
+                    title={'Delete Confirmation'}
+                    message={'Are you sure you want to delete this question?'}
+                    button={'DELETE'}
+                    color={'#dc3545'}
+                    onConfirm={handleDelete}
+                    onCancel={() => setConfirm(false)}
+                />
+            )}
+        </div>
     )
 }
