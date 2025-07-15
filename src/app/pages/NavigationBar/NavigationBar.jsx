@@ -19,7 +19,7 @@ export default function NavigationBar() {
 
     return (
         <>
-            <div className='navigation-bar-container'>
+            <div className={`navigation-bar-container ${user?.role == 'Admin' ? 'simple-navigation-bar-container' : ''}`}>
                 <Link to='/'>
                     <div className='logo'>Smath</div>
                 </Link>

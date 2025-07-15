@@ -132,7 +132,7 @@ export default function SubjectManager() {
                     <tbody>
                         {SUBJECTs.map((data, i) => (
                             <tr key={data.id}>
-                                {/* <td className='fit-td'>#{i + 1}</td> */}
+                                <td className='fit-td'><div className='index convex'>#{i + 1}</div></td>
                                 <td className='fit-td'><div className='id convex'>ID: {data.id}</div></td>
                                 <td><img src={data.image} alt='subject' className='convex' /></td>
                                 <td><div className='name convex'>{data.name}</div></td>
@@ -155,7 +155,7 @@ export default function SubjectManager() {
                                                 <div className='hidden-btn'>
                                                     <Link
                                                         to={`./${data.id}/chapter`}
-                                                        // state={data.chapters}
+                                                    // state={data.chapters}
                                                     >
                                                         <SimpleButton
                                                             width={'32px'}
@@ -170,7 +170,7 @@ export default function SubjectManager() {
                                                     </Link>
                                                     <Link
                                                         to={`./${data.id}/chapter`}
-                                                        // state={data.chapters}
+                                                    // state={data.chapters}
                                                     >
                                                         <SimpleButton
                                                             width={'32px'}

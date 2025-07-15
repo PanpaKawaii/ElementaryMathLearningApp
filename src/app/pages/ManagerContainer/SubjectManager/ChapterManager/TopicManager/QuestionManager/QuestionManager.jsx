@@ -21,6 +21,7 @@ export default function QuestionManager() {
     const [confirm, setConfirm] = useState(false);
     const [selectedId, setSelectedId] = useState(null);
     const [Refresh, setRefresh] = useState(0);
+    const [GetAll, setGetAll] = useState(false);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -32,7 +33,8 @@ export default function QuestionManager() {
                 setLoading(true);
                 const topicData = await fetchData(`api/topic/${topicId}`, token);
                 console.log('topicData', topicData);
-                setQUESTIONs(topicData?.questions);
+                if (!GetAll) setQUESTIONs(topicData?.questions);
+                else setQUESTIONs(topicData?.questions);
             } catch (error) {
                 setError(error);
             } finally {
@@ -41,7 +43,7 @@ export default function QuestionManager() {
         };
 
         fetchDataAPI();
-    }, [user, Refresh]);
+    }, [user, Refresh, GetAll]);
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
@@ -95,7 +97,7 @@ export default function QuestionManager() {
             <div className='title'>Question Manager</div>
             <form onSubmit={handleSubmit} className='add-form'>
                 <input name='number' placeholder='Number' value={form.number} onChange={handleChange} required />
-                <input name='type' placeholder='Type' value={form.type} onChange={handleChange} required disabled/>
+                <input name='type' placeholder='Type' value={form.type} onChange={handleChange} required disabled />
                 <input name='note' placeholder='Regular/Advanced' value={form.note} onChange={handleChange} required />
                 <input name='question1' placeholder='Question Content' value={form.question1} onChange={handleChange} required />
                 <input name='answers' placeholder='Full Answers' value={form.answers} onChange={handleChange} required />
@@ -123,12 +125,24 @@ export default function QuestionManager() {
                 >
                     <div className='text'>Refresh</div>
                 </SimpleButton>
+                <SimpleButton
+                    width={'100px'}
+                    height={'40px'}
+                    radius={'8px'}
+                    textcolor={GetAll ? '#fb8b24' : '#888'}
+                    bgcolor={'#eee'}
+                    active={false}
+                    onToggle={() => setGetAll(p => !p)}
+                >
+                    <div className='text'>Get All <i className={`fa-solid fa-${GetAll ? 'check' : 'xmark'}`}></i></div>
+                </SimpleButton>
             </form>
 
             <div className='table-container'>
                 <table className='table'>
                     <thead>
                         <tr>
+                            <th><div className='convex'>#</div></th>
                             <th><div className='convex'>No.</div></th>
                             <th><div className='convex'>ID</div></th>
                             <th><div className='convex'>Question</div></th>
@@ -143,14 +157,14 @@ export default function QuestionManager() {
                     <tbody>
                         {QUESTIONs.map((data, i) => (
                             <tr key={data.id}>
-                                {/* <td className='fit-td'>#{i + 1}</td> */}
+                                <td className='fit-td'><div className='index convex'>#{i + 1}</div></td>
                                 <td className='fit-td'><div className='number convex'>{data.number}</div></td>
                                 <td className='fit-td'><div className='id convex'>{data.id}</div></td>
                                 <td className='large-td'><div className='name convex'>{data.question1}</div></td>
                                 <td className='fit-td'><div className='answers convex'>{data.answers.replace(/@@/g, ', ')}</div></td>
                                 <td className='fit-td'><div className='correct convex'>{data.correctAnswer} <i className='fa-solid fa-check'></i></div></td>
                                 <td><div className='explanation convex'>{data.explanation || <i className='no-explanation'>No explanation</i>}</div></td>
-                                <td className='fit-td'><div className='note convex'>{data.note}</div></td>
+                                <td className='fit-td'><div className={`note convex ${data.note == 'Advanced' ? 'advanced' : ''}`}>{data.note}</div></td>
                                 <td><div className='type convex'>{data.type}</div></td>
                                 <td className='fit-td'>
                                     <div className='btn-box'>
@@ -170,7 +184,7 @@ export default function QuestionManager() {
                                                 <div className='hidden-btn'>
                                                     <Link
                                                         to={`./${data.id}/question`}
-                                                        // state={data.questions}
+                                                    // state={data.questions}
                                                     >
                                                         <SimpleButton
                                                             width={'32px'}
@@ -185,7 +199,7 @@ export default function QuestionManager() {
                                                     </Link>
                                                     <Link
                                                         to={`./${data.id}/question`}
-                                                        // state={data.questions}
+                                                    // state={data.questions}
                                                     >
                                                         <SimpleButton
                                                             width={'32px'}

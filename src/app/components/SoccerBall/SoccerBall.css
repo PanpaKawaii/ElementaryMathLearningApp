@@ -1,0 +1,156 @@
+.scene-ball {
+    width: 300px;
+    height: 300px;
+    perspective: 800px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+    /* transform: scale(5); */
+    margin: 200px 0 0;
+
+    .ball {
+        position: relative;
+        width: 100px;
+        height: 100px;
+        transform-style: preserve-3d;
+        transition: all 1s ease;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        animation: spin 100s linear infinite;
+
+        .face {
+            position: absolute;
+            width: 100px;
+            height: 95.106px;
+            background: transparent;
+            opacity: 0.9;
+            transition: all 1s ease;
+            backface-visibility: hidden;
+
+            /* clip-path: polygon(50% 0%, 100% 38.197%, 80.902% 100%, 19.098% 100%, 0% 38.197%); */
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .triangle {
+                position: absolute;
+                width: 61.803px;
+                height: 95.106px;
+                background: transparent;
+                opacity: 0.9;
+                transition: all 1s ease;
+
+                clip-path: polygon(50% 55.4%, 100% 100%, 0% 100%);
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                border: 2px solid #ccc;
+                box-sizing: border-box;
+            }
+        }
+
+        .face-white {
+            width: 123.607px;
+            height: 123.607px;
+
+            /* clip-path: polygon(25% 6.699%, 75% 6.699%, 100% 50%, 75% 93.301%, 25% 93.301%, 0% 50%); */
+
+            .triangle {
+                position: absolute;
+                width: 123.607px;
+                height: 123.607px;
+                background: transparent;
+                opacity: 0.9;
+                transition: all 1s ease;
+
+                clip-path: polygon(50% 57.699%, 74.45% 100%, 25.55% 100%);
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                border: 2px solid #333;
+                box-sizing: border-box;
+            }
+        }
+
+        .line {
+            position: absolute;
+            width: 500px;
+            height: 4px;
+
+            &.line-x {
+                color: #ff0000;
+                background-color: #ff0000;
+                transform: rotateX(0) rotateY(0) rotateZ(0);
+
+                &.x-2 {
+                    transform: rotateX(90deg) rotateY(0) rotateZ(0);
+                    background-color: #fff;
+                    text-align: end;
+                }
+            }
+
+            &.line-y {
+                color: #28a745;
+                background-color: #28a745;
+                transform: rotateX(0) rotateY(0) rotateZ(90deg);
+
+                &.y-2 {
+                    transform: rotateX(0) rotateY(90deg) rotateZ(90deg);
+                    background-color: #fff;
+                    text-align: end;
+                }
+            }
+
+            &.line-z {
+                color: #007bff;
+                background-color: #007bff;
+                transform: rotateX(0) rotateY(90deg) rotateZ(0);
+
+                &.z-2 {
+                    transform: rotateY(90deg) rotateX(90deg) rotateZ(0);
+                    background-color: #fff;
+                    text-align: end;
+                }
+            }
+        }
+    }
+}
+
+/* .ball-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 100px;
+    transform-style: preserve-3d;
+} */
+
+.rotation-form {
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #fff;
+
+    .slider-group {
+        width: 400px;
+        display: flex;
+        align-items: center;
+
+        label {
+            width: 100px;
+        }
+
+        input {
+            width: 100%;
+        }
+    }
+}

@@ -4,6 +4,7 @@
     overflow-y: auto;
     box-sizing: border-box;
     padding: 0 16px;
+    background-color: #fff;
     border-right: 2px solid #ddd;
     position: fixed !important;
     scrollbar-width: none;
@@ -53,6 +54,34 @@
 
             a {
                 color: #28a745;
+            }
+        }
+    }
+}
+
+.simple-navigation-bar-container {
+    background-color: #555;
+    border-right: 2px solid #333;
+
+    .items {
+        .item {
+            a {
+                color: #aaa;
+            }
+        }
+
+        .item:hover {
+            border: 2px solid #666;
+            background-color: #666;
+        }
+
+        .located,
+        .located:hover {
+            border: 2px solid #7ed95780;
+            background-color: #7ed95740;
+
+            a {
+                color: #7ed957;
             }
         }
     }

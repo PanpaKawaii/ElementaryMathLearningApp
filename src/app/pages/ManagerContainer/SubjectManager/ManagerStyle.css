@@ -65,6 +65,7 @@
                     width: 30%;
                 }
 
+                .index,
                 .id,
                 .number,
                 .name,
@@ -86,6 +87,13 @@
                     &.correct {
                         background-color: #7ed95740;
                         box-shadow: 3px 3px 2px #40804080, -3px -3px 2px #ffffffbf;
+                    }
+
+                    &.advanced {
+                        color: #fff;
+                        text-shadow: 1px 0 1px #FF9600, -1px 0 1px #FF9600, 0 1px 1px #FF9600, 0 -1px 1px #FF9600;
+                        background: linear-gradient(45deg, #FFD900 0%, #FFD900 20%, #FEEA66 20%, #FEEA66 45%, #FFD900 45%, #FFD900 67%, #FEEA66 67%, #FEEA66 70%, #FFD900 70%, #FFD900 75%, #FEEA66 75%, #FEEA66 85%, #FFD900 85%, #FFD900 100%);
+                        box-shadow: 3px 3px 2px #80804080, -3px -3px 2px #ffffffbf;
                     }
 
                     .no-explanation {

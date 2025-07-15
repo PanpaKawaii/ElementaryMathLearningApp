@@ -21,6 +21,7 @@ export default function TopicManager() {
     const [confirm, setConfirm] = useState(false);
     const [selectedId, setSelectedId] = useState(null);
     const [Refresh, setRefresh] = useState(0);
+    const [GetAll, setGetAll] = useState(false);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -32,7 +33,8 @@ export default function TopicManager() {
                 setLoading(true);
                 const topicData = await fetchData('api/topic', token);
                 console.log('topicData', topicData);
-                setTOPICs(topicData.filter(topic => topic.chapterId == chapterId));
+                if (!GetAll) setTOPICs(topicData.filter(topic => topic.chapterId == chapterId));
+                else setTOPICs(topicData);
             } catch (error) {
                 setError(error);
             } finally {
@@ -41,7 +43,7 @@ export default function TopicManager() {
         };
 
         fetchDataAPI();
-    }, [user, Refresh]);
+    }, [user, Refresh, GetAll]);
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
@@ -118,6 +120,17 @@ export default function TopicManager() {
                 >
                     <div className='text'>Refresh</div>
                 </SimpleButton>
+                <SimpleButton
+                    width={'100px'}
+                    height={'40px'}
+                    radius={'8px'}
+                    textcolor={GetAll ? '#fb8b24' : '#888'}
+                    bgcolor={'#eee'}
+                    active={false}
+                    onToggle={() => setGetAll(p => !p)}
+                >
+                    <div className='text'>Get All <i className={`fa-solid fa-${GetAll ? 'check' : 'xmark'}`}></i></div>
+                </SimpleButton>
             </form>
 
             <div className='table-container'>
@@ -125,7 +138,7 @@ export default function TopicManager() {
                     <tbody>
                         {TOPICs.map((data, i) => (
                             <tr key={data.id}>
-                                {/* <td className='fit-td'>#{i + 1}</td> */}
+                                <td className='fit-td'><div className='index convex'>#{i + 1}</div></td>
                                 <td><div className='number convex'>No.{data.number}</div></td>
                                 <td><div className='id convex'>ID: {data.id}</div></td>
                                 <td><div className='name convex'>Topic: {data.name}</div></td>
@@ -147,7 +160,7 @@ export default function TopicManager() {
                                                 <div className='hidden-btn'>
                                                     <Link
                                                         to={`./${data.id}/question`}
-                                                        // state={data.questions}
+                                                    // state={data.questions}
                                                     >
                                                         <SimpleButton
                                                             width={'32px'}
@@ -162,7 +175,7 @@ export default function TopicManager() {
                                                     </Link>
                                                     <Link
                                                         to={`./${data.id}/question`}
-                                                        // state={data.questions}
+                                                    // state={data.questions}
                                                     >
                                                         <SimpleButton
                                                             width={'32px'}
