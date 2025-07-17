@@ -10,6 +10,7 @@
     scrollbar-width: none;
     user-select: none;
     font-family: 'Quicksand', Arial, sans-serif;
+    z-index: 2;
 
     a {
         .logo {
@@ -67,6 +68,10 @@
         .item {
             a {
                 color: #aaa;
+
+                &.management {
+                    justify-content: space-between;
+                }
             }
         }
 

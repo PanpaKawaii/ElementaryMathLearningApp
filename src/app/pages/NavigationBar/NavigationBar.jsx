@@ -11,10 +11,12 @@ export default function NavigationBar() {
     const menuItems = [
         { name: 'LEARN', icon: 'house', path: '/learn', role: 'Student' },
         { name: 'SUBJECT', icon: 'book', path: '/subject', role: 'Guest Student Parent' },
+        { name: 'GAME', icon: 'book', path: '/game', role: 'Guest Student' },
         { name: 'RANK', icon: 'star', path: '/ranking', role: 'Student' },
         { name: 'PROFILE', icon: 'user', path: '/profile', role: 'Student Parent Admin' },
         { name: 'LOGIN-REGISTER', icon: 'right-to-bracket', path: '/login-register', role: 'Guest' },
-        { name: 'MANAGEMENT', icon: 'book', path: '/management/subject', role: 'Admin' },
+        { name: 'SUBJECT', icon: 'book', path: '/management-subject/subject', role: 'Admin' },
+        { name: 'USER', icon: 'id-card', path: '/management-user/user', role: 'Admin' },
     ];
 
     return (
@@ -35,10 +37,11 @@ export default function NavigationBar() {
                                 // (item.role.includes(user?.role) || (!user && item.role.includes('Guest')))
                                 // )
                                 // &&
-                                <div className={`item ${location.pathname.split('/')[1].includes(item.path.split('/')[1]) ? 'located' : ''}`}>
-                                    <Link to={`${item.path}`}>
+                                <div className={`item ${location.pathname.split('/')[1] == item.path.split('/')[1] ? 'located' : ''}`}>
+                                    <Link to={`${item.path}`} className={`${item.path.includes('management') ? 'management' : ''}`}>
                                         <i className={`fa-solid fa-${item.icon}`}></i>
                                         <span>{item.name}</span>
+                                        {item.path.includes('management') && <i className='fa-solid fa-gear'></i>}
                                     </Link>
                                 </div>
                             }

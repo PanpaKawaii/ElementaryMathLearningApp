@@ -1,27 +1,36 @@
 import { useEffect, useState } from 'react';
-import { Link, useLocation, useParams } from 'react-router-dom';
-import { deleteData, fetchData, postData } from '../../../../../../../mocks/CallingAPI.js';
-import ConfirmDialog from '../../../../../../components/ConfirmDialog.jsx';
-import SimpleButton from '../../../../../../components/SimpleButton.jsx';
-import { useAuth } from '../../../../../../hooks/AuthContext/AuthContext.jsx';
-import Loading from '../../../../../../layouts/Loading/Loading.jsx';
-import '../../../ManagerStyle.css';
-import EditQuestionModal from './EditQuestionModal.jsx';
+import { Link } from 'react-router-dom';
+import { deleteData, fetchData, postData } from '../../../../mocks/CallingAPI.js';
+import ConfirmDialog from '../../../components/ConfirmDialog.jsx';
+import SimpleButton from '../../../components/SimpleButton.jsx';
+import { useAuth } from '../../../hooks/AuthContext/AuthContext.jsx';
+import Loading from '../../../layouts/Loading/Loading.jsx';
+import EditUserModal from './EditUserModal.jsx';
+import '../SubjectManager/ManagerStyle.css';
 
-export default function QuestionManager() {
+export default function UserManager() {
     const { user } = useAuth();
-    const location = useLocation();
-    const topicId = useParams().topic;
-    const question = location.state;
-    console.log('question', question);
 
-    const [QUESTIONs, setQUESTIONs] = useState([]);
-    const [form, setForm] = useState({ number: '', type: 'Multiple Choice', question1: '', correctAnswer: '', answers: '', explanation: '', note: '', topicId: topicId });
+    const [USERs, setUSERs] = useState([]);
+    const [form, setForm] = useState({
+        name: '',
+        username: '',
+        password: '',
+        role: '',
+        curatorId: null,
+        email: '',
+        point: 0,
+        joinedDate: null,
+        dayStreak: 0,
+        highestDayStreak: 0,
+        image: '',
+        lastOnline: new Date(Date.now() - 86400000).toLocaleDateString('en-CA', { timeZone: 'Asia/Bangkok' }).split('T')[0],
+        type: '',
+    });
     const [editing, setEditing] = useState(null);
     const [confirm, setConfirm] = useState(false);
     const [selectedId, setSelectedId] = useState(null);
     const [Refresh, setRefresh] = useState(0);
-    const [GetAll, setGetAll] = useState(false);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -31,10 +40,9 @@ export default function QuestionManager() {
         const fetchDataAPI = async () => {
             try {
                 setLoading(true);
-                const topicData = await fetchData(`api/topic/${topicId}`, token);
-                console.log('topicData', topicData);
-                if (!GetAll) setQUESTIONs(topicData?.questions);
-                else setQUESTIONs(topicData?.questions);
+                const userData = await fetchData('listuser', token);
+                console.log('userData', userData);
+                setUSERs(userData);
             } catch (error) {
                 setError(error);
             } finally {
@@ -43,7 +51,7 @@ export default function QuestionManager() {
         };
 
         fetchDataAPI();
-    }, [user, Refresh, GetAll]);
+    }, [user, Refresh]);
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
@@ -55,10 +63,24 @@ export default function QuestionManager() {
         const token = '';
         try {
             setLoading(true);
-            form.number = Math.abs(form.number);
-            const resultAddQuestion = await postData('api/question', form, token);
-            console.log('resultAddQuestion', resultAddQuestion);
-            setForm({ number: '', type: 'Multiple Choice', question1: '', correctAnswer: '', answers: '', explanation: '', note: '', topicId: topicId });
+            // form.price = Math.abs(form.price);
+            // const resultAddUser = await postData('api/user', form, token);
+            // console.log('resultAddUser', resultAddUser);
+            setForm({
+                name: '',
+                username: '',
+                password: '',
+                role: '',
+                curatorId: null,
+                email: '',
+                point: 0,
+                joinedDate: null,
+                dayStreak: 0,
+                highestDayStreak: 0,
+                image: '',
+                lastOnline: new Date(Date.now() - 86400000).toLocaleDateString('en-CA', { timeZone: 'Asia/Bangkok' }).split('T')[0],
+                type: '',
+            });
             setRefresh(p => p + 1);
         } catch (error) {
             setError(error);
@@ -77,8 +99,8 @@ export default function QuestionManager() {
         const token = '';
         try {
             setLoading(true);
-            const resultDeleteQuestion = await deleteData(`api/question/${selectedId}`, token);
-            console.log('resultDeleteQuestion', resultDeleteQuestion);
+            // const resultDeleteUser = await deleteData(`api/user/${selectedId}`, token);
+            // console.log('resultDeleteUser', resultDeleteUser);
             setRefresh(p => p + 1);
             setConfirm(false);
         } catch (error) {
@@ -93,16 +115,12 @@ export default function QuestionManager() {
 
     if (loading) return <Loading Size={'Large'} />
     return (
-        <div className='questionmanager-container manager-container'>
-            <div className='title'>Question Manager</div>
+        <div className='usermanager-container manager-container learn-container'>
+            <div className='title'>User Manager</div>
             <form onSubmit={handleSubmit} className='add-form'>
-                <input name='number' placeholder='Number' value={form.number} onChange={handleChange} required />
-                <input name='type' placeholder='Type' value={form.type} onChange={handleChange} required disabled />
-                <input name='note' placeholder='Regular/Advanced' value={form.note} onChange={handleChange} required />
-                <input name='question1' placeholder='Question Content' value={form.question1} onChange={handleChange} required />
-                <input name='answers' placeholder='Full Answers' value={form.answers} onChange={handleChange} required />
-                <input name='correctAnswer' placeholder='Correct' value={form.correctAnswer} onChange={handleChange} required />
-                <input name='explanation' placeholder='Explanation' value={form.explanation} onChange={handleChange} />
+                <input name='name' placeholder='Name' value={form.name} onChange={handleChange} required />
+                <input name='image' placeholder='Image URL' value={form.image} onChange={handleChange} required />
+                <input name='price' placeholder='Price' value={form.price} onChange={handleChange} required />
                 <SimpleButton
                     width={'80px'}
                     height={'40px'}
@@ -125,47 +143,46 @@ export default function QuestionManager() {
                 >
                     <div className='text'>Refresh</div>
                 </SimpleButton>
-                <SimpleButton
-                    width={'100px'}
-                    height={'40px'}
-                    radius={'8px'}
-                    textcolor={GetAll ? '#fb8b24' : '#888'}
-                    bgcolor={'#eee'}
-                    active={false}
-                    onToggle={() => setGetAll(p => !p)}
-                >
-                    <div className='text'>Get All <i className={`fa-solid fa-${GetAll ? 'check' : 'xmark'}`}></i></div>
-                </SimpleButton>
             </form>
 
-            <div className='table-container'>
+            <div className='table-container user-table'>
                 <table className='table'>
                     <thead>
                         <tr>
                             <th><div className='convex'>#</div></th>
-                            <th><div className='convex'>No.</div></th>
                             <th><div className='convex'>ID</div></th>
-                            <th><div className='convex'>Question</div></th>
-                            <th><div className='convex'>Answers</div></th>
-                            <th><div className='convex'>Correct</div></th>
-                            <th><div className='convex'>Explanation</div></th>
-                            <th><div className='convex'>Note</div></th>
+                            <th><div className='convex'>Avatar</div></th>
+                            <th><div className='convex'>Name</div></th>
+                            <th><div className='convex'>Email</div></th>
+                            <th><div className='convex'><i className='fa-solid fa-fire'></i></div></th>
+                            <th><div className='convex'>Point</div></th>
+                            <th><div className='convex'>Role</div></th>
                             <th><div className='convex'>Type</div></th>
+                            {/* <th><div className='convex'>Curator</div></th> */}
+                            {/* <th><div className='convex'>Highest Streak</div></th> */}
+                            {/* <th><div className='convex'>Joined</div></th> */}
+                            {/* <th><div className='convex'>Last Online</div></th> */}
+                            {/* <th><div className='convex'>Username</div></th> */}
                             <th><div className='convex'>Actions</div></th>
                         </tr>
                     </thead>
                     <tbody>
-                        {QUESTIONs.map((data, i) => (
-                            <tr key={data.id}>
+                        {USERs.map((data, i) => (
+                            <tr key={data.id} className={`${data.role == 'Admin' ? 'tr-admin' : ''}`}>
                                 <td className='fit-td'><div className='index convex'>#{i + 1}</div></td>
-                                <td className='fit-td'><div className='number convex'>{data.number}</div></td>
                                 <td className='fit-td'><div className='id convex'>{data.id}</div></td>
-                                <td className='large-td'><div className='name convex'>{data.question1}</div></td>
-                                <td className='fit-td'><div className='answers convex'>{data.answers.replace(/@@/g, ', ')}</div></td>
-                                <td className='fit-td'><div className='correct convex'>{data.correctAnswer} <i className='fa-solid fa-check'></i></div></td>
-                                <td><div className='explanation convex'>{data.explanation || <i className='no-data'>No data</i>}</div></td>
-                                <td className='fit-td'><div className={`note convex ${data.note == 'Advanced' ? 'gold' : ''}`}>{data.note}</div></td>
-                                <td><div className='type convex'>{data.type}</div></td>
+                                <td className='fit-td'><img src={data.image} alt={data.name} className='avatar convex' /></td>
+                                <td><div className='name convex'>{data.name}</div></td>
+                                <td><div className='email convex'>{data.email}</div></td>
+                                <td><div className='daystreak convex'>{data.role == 'Student' ? data.dayStreak : <i className='no-data'>No data</i>}</div></td>
+                                <td><div className='point convex'>{(data.role == 'Student' || data.role == 'Parent') ? data.point : <i className='no-data'>No data</i>}</div></td>
+                                <td><div className='role convex'>{data.role}</div></td>
+                                <td><div className={`type convex ${data.type == 'VIP' ? 'gold' : ''}`}>{data.type}</div></td>
+                                {/* <td><div className='curator convex'>{data.curatorId}</div></td> */}
+                                {/* <td><div className='highestdaystreak convex'>{data.highestDayStreak}</div></td> */}
+                                {/* <td className='fit-td'><div className='joineddate convex'>{data.joinedDate}</div></td> */}
+                                {/* <td className='fit-td'><div className='lastonline convex'>{data.lastOnline}</div></td> */}
+                                {/* <td><div className='username convex'>{data.username}</div></td> */}
                                 <td className='fit-td'>
                                     <div className='btn-box'>
                                         <div className='show-btn'>
@@ -183,8 +200,8 @@ export default function QuestionManager() {
                                             {selectedId == data.id &&
                                                 <div className='hidden-btn'>
                                                     <Link
-                                                        to={`./${data.id}/question`}
-                                                    // state={data.questions}
+                                                    // to={`./${data.id}/chapter`}
+                                                    // state={data.chapters}
                                                     >
                                                         <SimpleButton
                                                             width={'32px'}
@@ -197,9 +214,9 @@ export default function QuestionManager() {
                                                             <i className='fa-solid fa-magnifying-glass'></i>
                                                         </SimpleButton>
                                                     </Link>
-                                                    <Link
-                                                        to={`./${data.id}/question`}
-                                                    // state={data.questions}
+                                                    {/* <Link
+                                                    // to={`./${data.id}/chapter`}
+                                                    // state={data.chapters}
                                                     >
                                                         <SimpleButton
                                                             width={'32px'}
@@ -211,7 +228,7 @@ export default function QuestionManager() {
                                                         >
                                                             <i className='fa-solid fa-book'></i>
                                                         </SimpleButton>
-                                                    </Link>
+                                                    </Link> */}
                                                     <SimpleButton
                                                         width={'32px'}
                                                         height={'32px'}
@@ -223,7 +240,7 @@ export default function QuestionManager() {
                                                     >
                                                         <i className='fa-solid fa-pencil'></i>
                                                     </SimpleButton>
-                                                    <SimpleButton
+                                                    {/* <SimpleButton
                                                         width={'32px'}
                                                         height={'32px'}
                                                         radius={'8px'}
@@ -233,7 +250,7 @@ export default function QuestionManager() {
                                                         onToggle={() => handleDeleteClick(data.id)}
                                                     >
                                                         <i className='fa-solid fa-trash-can'></i>
-                                                    </SimpleButton>
+                                                    </SimpleButton> */}
                                                 </div>
                                             }
                                         </div>
@@ -246,17 +263,18 @@ export default function QuestionManager() {
             </div>
 
             {editing && (
-                <EditQuestionModal
-                    question={editing}
+                <EditUserModal
+                    userprop={editing}
                     onClose={closeEditModal}
                     setRefresh={setRefresh}
+                    USERs={USERs}
                 />
             )}
 
             {confirm && (
                 <ConfirmDialog
                     title={'Delete Confirmation'}
-                    message={'Are you sure you want to delete this question?'}
+                    message={'Are you sure you want to delete this user?'}
                     button={'DELETE'}
                     color={'#dc3545'}
                     onConfirm={handleDelete}

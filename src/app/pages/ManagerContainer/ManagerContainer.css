@@ -60,26 +60,4 @@
             }
         }
     }
-
-    .title {
-        margin: 0 0 20px;
-        font-size: 32px;
-        font-weight: bold;
-    }
-
-    input {
-        flex: 1;
-        height: 40px;
-        border-radius: 6px;
-        box-shadow: inset 4px 4px 2px #00000040, inset -4px -4px 2px #ffffffbf;
-        background-color: #eee;
-        border: none;
-        font-weight: bold;
-
-        &:disabled {
-            color: #aaa;
-            background-color: #ddd;
-            box-shadow: inset 2px 2px 2px #00000040, inset -2px -2px 2px #ffffffbf;
-        }
-    }
 }
