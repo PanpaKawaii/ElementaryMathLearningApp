@@ -30,54 +30,18 @@
             transition: all 1s ease;
             backface-visibility: hidden;
 
-            /* clip-path: polygon(50% 0%, 100% 38.197%, 80.902% 100%, 19.098% 100%, 0% 38.197%); */
+            clip-path: polygon(50% 0%, 100% 38.197%, 80.902% 100%, 19.098% 100%, 0% 38.197%);
 
             display: flex;
             justify-content: center;
             align-items: center;
-
-            .triangle {
-                position: absolute;
-                width: 61.803px;
-                height: 95.106px;
-                background: transparent;
-                opacity: 0.9;
-                transition: all 1s ease;
-
-                clip-path: polygon(50% 55.4%, 100% 100%, 0% 100%);
-
-                display: flex;
-                justify-content: center;
-                align-items: center;
-
-                border: 2px solid #ccc;
-                box-sizing: border-box;
-            }
         }
 
         .face-white {
             width: 123.607px;
             height: 123.607px;
 
-            /* clip-path: polygon(25% 6.699%, 75% 6.699%, 100% 50%, 75% 93.301%, 25% 93.301%, 0% 50%); */
-
-            .triangle {
-                position: absolute;
-                width: 123.607px;
-                height: 123.607px;
-                background: transparent;
-                opacity: 0.9;
-                transition: all 1s ease;
-
-                clip-path: polygon(50% 57.699%, 74.45% 100%, 25.55% 100%);
-
-                display: flex;
-                justify-content: center;
-                align-items: center;
-
-                border: 2px solid #333;
-                box-sizing: border-box;
-            }
+            clip-path: polygon(25% 6.699%, 75% 6.699%, 100% 50%, 75% 93.301%, 25% 93.301%, 0% 50%);
         }
 
         .line {
@@ -124,14 +88,14 @@
     }
 }
 
-/* .ball-container {
+.ball-container {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 100px;
     transform-style: preserve-3d;
-} */
+}
 
 .rotation-form {
     width: fit-content;
@@ -157,10 +121,10 @@
 
 @keyframes spin {
     from {
-        transform: rotateX(0deg) rotateY(0deg);
+        transform: rotateX(0deg) rotateY(-20deg);
     }
 
     to {
-        transform: rotateX(360deg) rotateY(720deg);
+        transform: rotateX(360deg) rotateY(700deg);
     }
 }

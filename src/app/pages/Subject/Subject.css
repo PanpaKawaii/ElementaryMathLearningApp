@@ -6,10 +6,11 @@
 
         .heading {
             margin: 0 0 16px;
-            padding: 20px;
-            background-color: #b7ffc7;
+            padding: 12px 20px;
+            color: #fff;
+            background-color: #7ed957bf;
             box-sizing: border-box;
-            font-size: 32px;
+            font-size: 28px;
             font-weight: bold;
         }
 
@@ -26,6 +27,7 @@
                 align-items: start;
 
                 .card {
+                    position: relative;
                     width: 200px;
                     height: 100%;
                     /* border: 2px solid #f99dbc; */
@@ -46,6 +48,41 @@
                         /* background-color: #28a745; */
                     }
 
+                    .badge {
+                        position: absolute;
+                        padding: 2px 8px;
+                        color: #fff;
+                        font-weight: bold;
+                        width: fit-content;
+                        box-sizing: border-box;
+                        border-radius: 8px 0 0 8px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 4px;
+                        border: 2px solid #ffffff80;
+                        border-right: none;
+
+                        &.rating {
+                            top: 20px;
+                            right: 2px;
+                            background-color: #ffd700;
+                            text-shadow: 1px 1px 0 #FF9600;
+
+                            i {
+                                font-size: 13px;
+                            }
+                        }
+
+                        &.boughtcount {
+                            top: 44px;
+                            right: 2px;
+                            font-size: 12px;
+                            background-color: #28a745;
+                            text-shadow: 1px 1px 0 #22913c;
+                        }
+                    }
+
                     .name {
                         color: #000;
                         margin: 8px 0 4px;
@@ -54,8 +91,22 @@
                     }
 
                     .price {
-                        color: #000;
                         margin: 0 0 4px;
+                        color: #28a745;
+                        font-weight: bold;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        gap: 8px;
+
+                        .bought {
+                            padding: 2px 4px;
+                            font-size: 10px;
+                            color: #fff;
+                            background-color: #dc3546;
+                            text-shadow: 1px 1px 0 #c02d3c;
+                            border-radius: 4px;
+                        }
                     }
                 }
             }

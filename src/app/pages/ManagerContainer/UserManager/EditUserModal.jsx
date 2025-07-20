@@ -153,7 +153,7 @@ export default function EditUserModal({ userprop, onClose, setRefresh, USERs }) 
                                 <label htmlFor='role'>Role</label>
                             </div>
                         }
-                        {user?.role == 'Student' &&
+                        {userprop?.role == 'Student' &&
                             <div className='input-group group-2'>
                                 <select name='curatorId' onChange={handleChange}>
                                     <option value={userprop.curatorId}>[{userprop.curatorId || 'none'}] {USERs.find(u => u.id == userprop.curatorId)?.name}</option>

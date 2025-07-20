@@ -5,6 +5,7 @@ import NavigationBar from '../pages/NavigationBar/NavigationBar'
 
 import LearnContainer from '../pages/LearnContainer/LearnContainer'
 import Subject from '../pages/Subject/Subject'
+import SubjectDetail from '../pages/Subject/SubjectDetail/SubjectDetail'
 import ListGame from '../pages/ListGame/ListGame'
 import RankingContainer from '../pages/RankingContainer/RankingContainer'
 import ProfileContainer from '../pages/ProfileContainer/ProfileContainer'
@@ -28,6 +29,7 @@ export default function MainRoutes() {
                     <Route path='/' element={<NavigationBar />} >
                         <Route path='learn' element={<LearnContainer />} />
                         <Route path='subject' element={<Subject />} />
+                        <Route path='subject/:subject' element={<SubjectDetail />} />
                         <Route path='game' element={<ListGame />} />
                         <Route path='ranking' element={<RankingContainer />} />
                         <Route path='profile' element={<ProfileContainer />} />

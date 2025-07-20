@@ -1,0 +1,78 @@
+.subjectdetail-container {
+    width: 100%;
+
+    .container-2 {
+        margin: 40px 0 0;
+
+        img {
+            width: 400px;
+            height: auto;
+            max-height: 600px;
+            border: 4px solid #cccccc80;
+            box-sizing: border-box;
+            border-radius: 40px;
+        }
+
+        .name {
+            color: #000;
+            margin: 8px 0 4px;
+            font-size: 40px;
+            font-weight: bold;
+        }
+
+        .price {
+            margin: 0 0 4px;
+            color: #28a745;
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            .bought {
+                padding: 2px 4px;
+                font-size: 10px;
+                color: #fff;
+                background-color: #dc3546;
+                text-shadow: 1px 1px 0 #c02d3c;
+                border-radius: 4px;
+            }
+        }
+
+        .rating-boughtcount {
+            display: flex;
+            align-items: end;
+            gap: 20px;
+
+            .rating {
+                width: fit-content;
+                color: #ffd700;
+                text-shadow: 1px 1px 0 #FF9600;
+                font-size: 24px;
+                font-weight: bold;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 4px;
+            }
+
+            .boughtcount {
+                font-size: 20px;
+                color: #999;
+            }
+        }
+
+        .upload {
+            margin: 20px 0;
+            color: #999;
+            font-style: italic;
+        }
+    }
+
+    @media (max-width: 992px) {
+        .container-2 {
+            flex-direction: column;
+            gap: 20px;
+        }
+    }
+}
