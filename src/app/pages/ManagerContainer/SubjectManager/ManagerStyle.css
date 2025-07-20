@@ -170,7 +170,7 @@
                 }
             }
 
-            .tr-blocked {
+            .tr-disable {
                 opacity: 0.4;
                 filter: blur(0.8px);
             }

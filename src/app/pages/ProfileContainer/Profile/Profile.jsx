@@ -5,7 +5,9 @@ import Button from '../../../components/Button.jsx';
 import { useAuth } from '../../../hooks/AuthContext/AuthContext.jsx';
 import Loading from '../../../layouts/Loading/Loading.jsx';
 import StudentManagement from '../../StudentManagement/StudentManagement.jsx';
+import EditUserModal from '../../ManagerContainer/UserManager/EditUserModal.jsx';
 import './Profile.css';
+import '../../ManagerContainer/SubjectManager/EditModal.css';
 
 // Mock user data as backup
 const mockUser = {
@@ -80,17 +82,22 @@ export default function Profile({ Following, Follower, setFollowPopup, UserStudy
     const navigate = useNavigate();
 
     const [USER, setUSER] = useState(null);
+    const [USERs, setUSERs] = useState([]);
     const [PerfectLesson, setPerfectLesson] = useState(null);
     const [achievements, setAchievements] = useState(mockAchievements);
+    const [Refresh, setRefresh] = useState(0);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    const [editing, setEditing] = useState(null);
+
     useEffect(() => {
         if (!user) navigate('/login-register');
-        // const token = user?.token;
-        const token = '';
         const fetchDataAPI = async () => {
+            // const token = user?.token;
+            const token = '';
             try {
+                const usersData = await fetchData('listuser', token);
                 const topicprogressData = await fetchData(`api/topicprogress`, token);
                 const chapterprogressData = await fetchData(`api/chapterprogress`, token);
                 console.log('Topic, Chapter', topicprogressData, chapterprogressData);
@@ -111,6 +118,7 @@ export default function Profile({ Following, Follower, setFollowPopup, UserStudy
                 // console.log('userWithMoreDetail', userWithMoreDetail);
                 // setUSER(userWithMoreDetail);
                 setUSER(userData);
+                setUSERs(usersData);
             } catch (error) {
                 setError(error);
             } finally {
@@ -128,13 +136,16 @@ export default function Profile({ Following, Follower, setFollowPopup, UserStudy
         //     .catch(() => {
         //         setAchievements(mockAchievements); // fallback to mock achievements
         //     });
-    }, [user]);
+    }, [user, Refresh]);
 
     const handleOpenFollow = (Status) => {
         setFollowPopup(Status);
         // window.location.href = '#follow';
         // navigate('#follow');
     }
+
+    const openEditModal = (data) => { setEditing(data); };
+    const closeEditModal = () => { setEditing(null); };
 
     if (loading) return <Loading Size={'Average'} />
     return (
@@ -170,7 +181,7 @@ export default function Profile({ Following, Follower, setFollowPopup, UserStudy
                                     radius={'16px'}
                                     maincolor={'correct'}
                                     active={false}
-                                // onToggle={() => {}} === FIX ===
+                                    onToggle={() => openEditModal(USER)}
                                 >
                                     <div className='text'>Modify</div>
                                 </Button>
@@ -212,7 +223,6 @@ export default function Profile({ Following, Follower, setFollowPopup, UserStudy
                             >
                                 <div className='text'>Logout</div>
                             </Button>
-                            {/* <button className='btn' onClick={() => logout()}>Logout</button> */}
                         </div>
                     </div>
                 </div>
@@ -269,6 +279,15 @@ export default function Profile({ Following, Follower, setFollowPopup, UserStudy
                     }
                 </div>
             </div>
+
+            {editing && (
+                <EditUserModal
+                    userprop={editing}
+                    onClose={closeEditModal}
+                    setRefresh={setRefresh}
+                    USERs={USERs}
+                />
+            )}
         </div>
     );
 }

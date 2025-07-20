@@ -168,7 +168,7 @@ export default function UserManager() {
                     </thead>
                     <tbody>
                         {USERs.map((data, i) => (
-                            <tr key={data.id} className={`${data.role == 'Admin' ? 'tr-admin' : (data.role == 'Blocked' ? 'tr-blocked' : '')}`}>
+                            <tr key={data.id} className={`${data.role == 'Admin' ? 'tr-admin' : (data.role == 'Disable' ? 'tr-disable' : '')}`}>
                                 <td className='fit-td'><div className='index convex'>#{i + 1}</div></td>
                                 <td className='fit-td'><div className='id convex'>{data.id}</div></td>
                                 <td className='fit-td'><img src={data.image} alt={data.name} className='avatar convex' /></td>

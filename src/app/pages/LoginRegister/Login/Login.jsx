@@ -44,8 +44,14 @@ export default function Login({ MoveImage }) {
             setLoading(true);
             const result = await postData('api/user/loginusername', LoginData, '');
             console.log('result', result);
-            login(result);
 
+            if (result?.role == 'Disable') {
+                console.error('This user was disabled');
+                setLoginError({ value: 'This user was disabled', name: 'Username or Password' });
+                return;
+            }
+
+            login(result);
             navigate('/profile');
         } catch (error) {
             console.log('Login failed:', error);
