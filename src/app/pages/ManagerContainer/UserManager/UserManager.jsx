@@ -118,9 +118,9 @@ export default function UserManager() {
         <div className='usermanager-container manager-container learn-container'>
             <div className='title'>User Manager</div>
             <form onSubmit={handleSubmit} className='add-form'>
-                <input name='name' placeholder='Name' value={form.name} onChange={handleChange} required />
+                {/* <input name='name' placeholder='Name' value={form.name} onChange={handleChange} required />
                 <input name='image' placeholder='Image URL' value={form.image} onChange={handleChange} required />
-                <input name='price' placeholder='Price' value={form.price} onChange={handleChange} required />
+                <input name='price' placeholder='Price' value={form.price} onChange={handleChange} required /> */}
                 <SimpleButton
                     width={'80px'}
                     height={'40px'}
@@ -155,7 +155,7 @@ export default function UserManager() {
                             <th><div className='convex'>Name</div></th>
                             <th><div className='convex'>Email</div></th>
                             <th><div className='convex'><i className='fa-solid fa-fire'></i></div></th>
-                            <th><div className='convex'>Point</div></th>
+                            <th><div className='convex'><i className='fa-solid fa-lightbulb'></i></div></th>
                             <th><div className='convex'>Role</div></th>
                             <th><div className='convex'>Type</div></th>
                             {/* <th><div className='convex'>Curator</div></th> */}
@@ -168,7 +168,7 @@ export default function UserManager() {
                     </thead>
                     <tbody>
                         {USERs.map((data, i) => (
-                            <tr key={data.id} className={`${data.role == 'Admin' ? 'tr-admin' : ''}`}>
+                            <tr key={data.id} className={`${data.role == 'Admin' ? 'tr-admin' : (data.role == 'Blocked' ? 'tr-blocked' : '')}`}>
                                 <td className='fit-td'><div className='index convex'>#{i + 1}</div></td>
                                 <td className='fit-td'><div className='id convex'>{data.id}</div></td>
                                 <td className='fit-td'><img src={data.image} alt={data.name} className='avatar convex' /></td>

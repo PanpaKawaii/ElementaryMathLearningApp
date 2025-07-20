@@ -37,41 +37,81 @@ export default function EditUserModal({ userprop, onClose, setRefresh, USERs }) 
         <div className='edit-modal'>
             <div className='modal-box'>
                 <div className='title'>Edit User</div>
+                <button className='btn close-btn' onClick={() => onClose()}><i className='fa-solid fa-xmark'></i></button>
                 <form onSubmit={handleUpdate} className='user-edit-form'>
-                    <input name='name' placeholder='Name' value={form.name} onChange={handleChange} required />
-                    <input name='username' placeholder='Username' value={form.username} onChange={handleChange} required />
-                    <input name='password' placeholder='Password' value={form.password} onChange={handleChange} required />
-                    {/* <input name='role' placeholder='Role' value={form.role} onChange={handleChange} required /> */}
-                    <div className='flex'>
-                        <select>
-                            <option value={userprop.role}>{userprop.role}</option>
-                            <option value={'Admin'}>Admin</option>
-                            <option value={'Teacher'}>Teacher</option>
-                            <option value={'Parent'}>Parent</option>
-                            <option value={'Student'}>Student</option>
-                        </select>
-                        {/* <input name='curatorId' placeholder='curatorId' value={form.curatorId} onChange={handleChange} required /> */}
-                        <select>
-                            <option value={userprop.curatorId}>[{userprop.curatorId || 'none'}] {USERs.find(u => u.id == userprop.curatorId)?.name}</option>
-                            {USERs.filter(u => u.role == 'Parent' && u.id != userprop.curatorId).map((u, i) => (
-                                <option key={i} value={u.id}>[{u.id}] {u.name}</option>
-                            ))}
-                        </select>
+                    <div className='image-container'><img src={form.image || null} alt='avatar' /></div>
+                    <div className='input-group'>
+                        <input name='image' placeholder=' ' value={form.image} onChange={handleChange} required />
+                        <label htmlFor='image'>Image URL</label>
                     </div>
-                    <input name='email' placeholder='Email' value={form.email} onChange={handleChange} required />
-                    <input name='point' placeholder='Point' value={form.point} onChange={handleChange} required />
-                    <input name='joinedDate' placeholder='Joined Date' value={form.joinedDate} onChange={handleChange} required />
-                    <input name='dayStreak' placeholder='Day Streak' value={form.dayStreak} onChange={handleChange} required />
-                    <input name='highestDayStreak' placeholder='Highest Day Streak' value={form.highestDayStreak} onChange={handleChange} required />
-                    <input name='image' placeholder='Image URL' value={form.image} onChange={handleChange} required />
-                    <div className='image-container'><img src={form.image} alt='avatar' /></div>
-                    <input name='lastOnline' placeholder='Last Online' value={form.lastOnline} onChange={handleChange} required />
-                    {/* <input name='type' placeholder='Type' value={form.type} onChange={handleChange} required /> */}
-                    <select>
-                        <option value={userprop.type}>{userprop.type}</option>
-                        <option value={'Regular'}>Regular</option>
-                        <option value={'VIP'}>VIP</option>
-                    </select>
+                    <div className='input-group'>
+                        <input name='name' placeholder=' ' value={form.name} onChange={handleChange} required />
+                        <label htmlFor='name'>Name</label>
+                    </div>
+                    {/* <div className='input-group'>
+                        <input name='username' placeholder=' ' value={form.username} onChange={handleChange} required />
+                        <label htmlFor='username'>Username</label>
+                    </div> */}
+                    {/* <div className='input-group'>
+                        <input name='password' placeholder=' ' value={form.password} onChange={handleChange} required />
+                        <label htmlFor='password'>Password</label>
+                    </div> */}
+                    <div className='flex'>
+                        <div className='input-group group-1'>
+                            <select name='role' onChange={handleChange}>
+                                <option value={userprop.role}>{userprop.role}</option>
+                                <option value={'Admin'}>Admin</option>
+                                <option value={'Teacher'}>Teacher</option>
+                                <option value={'Parent'}>Parent</option>
+                                <option value={'Student'}>Student</option>
+                                <option value={'Blocked'}>Blocked</option>
+                            </select>
+                            <label htmlFor='role'>Role</label>
+                        </div>
+                        <div className='input-group group-2'>
+                            <select name='curatorId' onChange={handleChange}>
+                                <option value={userprop.curatorId}>[ID{userprop.curatorId || 'none'}] {USERs.find(u => u.id == userprop.curatorId)?.name}</option>
+                                {USERs.filter(u => u.role == 'Parent' && u.id != userprop.curatorId && u.id != userprop.id).map((u, i) => (
+                                    <option key={i} value={u.id}>[ID{u.id}] {u.name}</option>
+                                ))}
+                            </select>
+                            <label htmlFor='curatorId'>Curator</label>
+                        </div>
+                    </div>
+                    <div className='input-group'>
+                        <input name='email' placeholder=' ' value={form.email} onChange={handleChange} required />
+                        <label htmlFor='email'>Email</label>
+                    </div>
+                    <div className='flex'>
+                        <div className='input-group'>
+                            <input name='point' placeholder=' ' value={form.point} onChange={handleChange} required />
+                            <label htmlFor='point'>Point <i className='fa-solid fa-lightbulb'></i></label>
+                        </div>
+                        {/* <div className='input-group'>
+                        <input type='date' name='joinedDate' placeholder=' ' value={form.joinedDate} onChange={handleChange} required />
+                        <label htmlFor='joinedDate'>Joined Date</label>
+                    </div> */}
+                        <div className='input-group'>
+                            <input name='dayStreak' placeholder=' ' value={form.dayStreak} onChange={handleChange} required />
+                            <label htmlFor='dayStreak'>Day Streak <i className='fa-solid fa-fire'></i></label>
+                        </div>
+                        <div className='input-group'>
+                            <input name='highestDayStreak' placeholder=' ' value={form.highestDayStreak} onChange={handleChange} required />
+                            <label htmlFor='highestDayStreak'>Highest <i className='fa-solid fa-fire'></i></label>
+                        </div>
+                    </div>
+                    {/* <div className='input-group'>
+                        <input type='date' name='lastOnline' placeholder=' ' value={form.lastOnline} onChange={handleChange} required />
+                        <label htmlFor='lastOnline'>Last Online</label>
+                    </div> */}
+                    <div className='input-group group-1'>
+                        <select name='type' onChange={handleChange}>
+                            <option value={userprop.type}>{userprop.type}</option>
+                            <option value={'Regular'}>Regular</option>
+                            <option value={'VIP'}>VIP</option>
+                        </select>
+                        <label htmlFor='type'>Type</label>
+                    </div>
                     <div className='btn-box'>
                         <SimpleButton
                             width={'80px'}

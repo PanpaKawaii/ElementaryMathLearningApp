@@ -57,6 +57,11 @@
                     color: #ff4500;
                     font-size: 18px;
                 }
+
+                .fa-lightbulb {
+                    color: #fb8b24;
+                    font-size: 18px;
+                }
             }
 
             td {
@@ -163,6 +168,11 @@
                 td {
                     background: linear-gradient(45deg, #FFD900 0%, #FFD900 20%, #FEEA66 20%, #FEEA66 45%, #FFD900 45%, #FFD900 67%, #FEEA66 67%, #FEEA66 70%, #FFD900 70%, #FFD900 75%, #FEEA66 75%, #FEEA66 85%, #FFD900 85%, #FFD900 100%);
                 }
+            }
+
+            .tr-blocked {
+                opacity: 0.4;
+                filter: blur(0.8px);
             }
         }
     }
