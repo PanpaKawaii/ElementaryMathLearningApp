@@ -37,21 +37,12 @@
             th {
                 padding: 12px;
                 border-radius: 6px;
+                color: #666;
                 background-color: #fafafa;
                 box-shadow: inset 4px 4px 2px #00000040, inset -4px -4px 2px #ffffffbf;
                 position: sticky;
                 top: 0;
                 z-index: 1;
-
-                .convex {
-                    width: fit-content;
-                    margin: 0 auto;
-                    padding: 8px;
-                    border-radius: 4px;
-                    font-weight: bold;
-                    color: #666;
-                    background-color: #eee;
-                }
 
                 .fa-fire {
                     color: #ff4500;
@@ -85,6 +76,7 @@
                 .name,
                 .price,
                 .topic,
+                .question,
                 .answers,
                 .correct,
                 .explanation,
@@ -104,7 +96,7 @@
                     border-radius: 4px;
                     font-weight: bold;
                     color: #666;
-                    background-color: #eee;
+                    /* background-color: #bbb; */
 
                     &.correct {
                         background-color: #7ed95740;

@@ -149,40 +149,40 @@ export default function UserManager() {
                 <table className='table'>
                     <thead>
                         <tr>
-                            <th><div className='convex'>#</div></th>
-                            <th><div className='convex'>ID</div></th>
-                            <th><div className='convex'>Avatar</div></th>
-                            <th><div className='convex'>Name</div></th>
-                            <th><div className='convex'>Email</div></th>
-                            <th><div className='convex'><i className='fa-solid fa-fire'></i></div></th>
-                            <th><div className='convex'><i className='fa-solid fa-lightbulb'></i></div></th>
-                            <th><div className='convex'>Role</div></th>
-                            <th><div className='convex'>Type</div></th>
-                            {/* <th><div className='convex'>Curator</div></th> */}
-                            {/* <th><div className='convex'>Highest Streak</div></th> */}
-                            {/* <th><div className='convex'>Joined</div></th> */}
-                            {/* <th><div className='convex'>Last Online</div></th> */}
-                            {/* <th><div className='convex'>Username</div></th> */}
-                            <th><div className='convex'>Actions</div></th>
+                            <th>#</th>
+                            <th>ID</th>
+                            <th>Avatar</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th><i className='fa-solid fa-fire'></i></th>
+                            <th><i className='fa-solid fa-lightbulb'></i></th>
+                            <th>Role</th>
+                            <th>Type</th>
+                            {/* <th>Curator</th> */}
+                            {/* <th>Highest Streak</th> */}
+                            {/* <th>Joined</th> */}
+                            {/* <th>Last Online</th> */}
+                            {/* <th>Username</th> */}
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         {USERs.map((data, i) => (
                             <tr key={data.id} className={`${data.role == 'Admin' ? 'tr-admin' : (data.role == 'Disable' ? 'tr-disable' : '')}`}>
-                                <td className='fit-td'><div className='index convex'>#{i + 1}</div></td>
-                                <td className='fit-td'><div className='id convex'>{data.id}</div></td>
+                                <td className='fit-td'><div className='index'>#{i + 1}</div></td>
+                                <td className='fit-td'><div className='id'>{data.id}</div></td>
                                 <td className='fit-td'><img src={data.image} alt={data.name} className='avatar convex' /></td>
-                                <td><div className='name convex'>{data.name}</div></td>
-                                <td><div className='email convex'>{data.email}</div></td>
-                                <td><div className='daystreak convex'>{data.role == 'Student' ? data.dayStreak : <i className='no-data'>No data</i>}</div></td>
-                                <td><div className='point convex'>{(data.role == 'Student' || data.role == 'Parent') ? data.point : <i className='no-data'>No data</i>}</div></td>
-                                <td><div className='role convex'>{data.role}</div></td>
-                                <td><div className={`type convex ${data.type == 'VIP' ? 'gold' : ''}`}>{data.type}</div></td>
-                                {/* <td><div className='curator convex'>{data.curatorId}</div></td> */}
-                                {/* <td><div className='highestdaystreak convex'>{data.highestDayStreak}</div></td> */}
-                                {/* <td className='fit-td'><div className='joineddate convex'>{data.joinedDate}</div></td> */}
-                                {/* <td className='fit-td'><div className='lastonline convex'>{data.lastOnline}</div></td> */}
-                                {/* <td><div className='username convex'>{data.username}</div></td> */}
+                                <td><div className='name'>{data.name}</div></td>
+                                <td><div className='email'>{data.email}</div></td>
+                                <td><div className='daystreak'>{data.role == 'Student' ? data.dayStreak : <i className='no-data'>No data</i>}</div></td>
+                                <td><div className='point'>{(data.role == 'Student' || data.role == 'Parent') ? data.point : <i className='no-data'>No data</i>}</div></td>
+                                <td><div className='role'>{data.role}</div></td>
+                                <td><div className={`type ${data.type == 'VIP' ? 'gold' : ''}`}>{data.type}</div></td>
+                                {/* <td><div className='curator'>{data.curatorId}</div></td> */}
+                                {/* <td><div className='highestdaystreak'>{data.highestDayStreak}</div></td> */}
+                                {/* <td className='fit-td'><div className='joineddate'>{data.joinedDate}</div></td> */}
+                                {/* <td className='fit-td'><div className='lastonline'>{data.lastOnline}</div></td> */}
+                                {/* <td><div className='username'>{data.username}</div></td> */}
                                 <td className='fit-td'>
                                     <div className='btn-box'>
                                         <div className='show-btn'>

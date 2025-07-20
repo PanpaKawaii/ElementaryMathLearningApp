@@ -11,7 +11,7 @@ export default function NavigationBar() {
     const menuItems = [
         { name: 'LEARN', icon: 'house', path: '/learn', role: 'Student' },
         { name: 'SUBJECT', icon: 'book', path: '/subject', role: 'Guest Student Parent' },
-        { name: 'GAME', icon: 'book', path: '/game', role: 'Guest Student' },
+        { name: 'GAME', icon: 'futbol', path: '/game', role: 'Guest Student' },
         { name: 'RANK', icon: 'star', path: '/ranking', role: 'Student' },
         { name: 'PROFILE', icon: 'user', path: '/profile', role: 'Student Parent Admin' },
         { name: 'LOGIN-REGISTER', icon: 'right-to-bracket', path: '/login-register', role: 'Guest' },
