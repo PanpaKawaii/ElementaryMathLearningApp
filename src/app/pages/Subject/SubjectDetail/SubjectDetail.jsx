@@ -1,20 +1,20 @@
 import { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { fetchData } from '../../../../mocks/CallingAPI.js';
 import { useAuth } from '../../../hooks/AuthContext/AuthContext.jsx';
 import Loading from '../../../layouts/Loading/Loading.jsx';
+import BuySubject from './BuySubject/BuySubject.jsx';
 import Feedback from './Feedback/Feedback.jsx';
 import './SubjectDetail.css';
 
 export default function SubjectDetail() {
     const { user } = useAuth();
-    const navigate = useNavigate();
     const Params = useParams();
 
     const SubjectId = Params.subject;
     console.log('SubjectId', SubjectId);
 
-    const [USERs, setUSERs] = useState(null);
+    const [USERs, setUSERs] = useState([]);
     const [SUBJECT, setSUBJECT] = useState(null);
     const [BOUGHTSUBJECTs, setBOUGHTSUBJECTs] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -30,6 +30,8 @@ export default function SubjectDetail() {
                 setUSERs(userData);
 
                 const boughtSubjectsData = await fetchData('api/boughtsubject', token);
+                console.log('boughtSubjectsData', boughtSubjectsData);
+
                 setBOUGHTSUBJECTs(boughtSubjectsData);
 
                 const subjectData = await fetchData(`api/subject/${SubjectId}`, token);
@@ -83,7 +85,9 @@ export default function SubjectDetail() {
                         <div className='rating'><div>{SUBJECT?.rating}</div><i className='fa-solid fa-star'></i></div>
                         <div className='boughtcount'>Sold: {SUBJECT?.boughtCount}</div>
                     </div>
-                    <div className='upload'>Upload: {SUBJECT?.uploadDate}</div>
+                    <div className='upload'>Uploaded: {SUBJECT?.uploadDate}</div>
+
+                    <BuySubject SubjectId={SubjectId} USERs={USERs} />
                 </div>
             </div>
 

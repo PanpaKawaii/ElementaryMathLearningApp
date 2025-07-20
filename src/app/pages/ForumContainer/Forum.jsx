@@ -56,7 +56,7 @@ export default function Forum({ SelectedQuestion }) {
             content: Content,
             answer: Answer,
             questionId: SelectedQuestion?.id,
-            userId: user?.id
+            userId: user?.id,
         };
         console.log('CommentData:', CommentData);
 
