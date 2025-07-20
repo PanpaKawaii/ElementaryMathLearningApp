@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { fetchData } from '../../../../mocks/CallingAPI.js';
 import { useAuth } from '../../../hooks/AuthContext/AuthContext.jsx';
+import Loading from '../../../layouts/Loading/Loading.jsx';
 import './StudyHistory.css';
 
 export default function StudyHistory({ UserStudyHistory }) {
     const { user } = useAuth();
 
     const [UserTopicChapterProgress, setUserTopicChapterProgress] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
     useEffect(() => {
@@ -35,12 +36,12 @@ export default function StudyHistory({ UserStudyHistory }) {
                 const userchapterprogress = chapterprogress.filter(ctp => ctp.userId == UserStudyHistory);
                 console.log('userchapterprogress', userchapterprogress);
 
-                const chapter = await fetchData('api/chapter', token);
-                console.log('chapter', chapter);
+                const chapters = await fetchData('api/chapter', token);
+                console.log('chapters', chapters);
 
                 const mergedChapterProgresses = userchapterprogress.map(ct => ({
                     ...ct,
-                    relateId: chapter.find(c => c.id == ct.chapterId)
+                    relateId: chapters.find(c => c.id == ct.chapterId)
                 }));
                 console.log('mergedChapterProgresses', mergedChapterProgresses);
 
@@ -64,6 +65,9 @@ export default function StudyHistory({ UserStudyHistory }) {
         }
     }, [user, UserStudyHistory]);
 
+    if (loading) return <Loading Size={'Small'} />
+    else if (!UserStudyHistory) return <div className='notification please-select'>Please select a student</div>
+    else if (UserTopicChapterProgress.length == 0) return <div className='notification no-data'>No data</div>
     return (
         <div className='studyhistory-container'>
             <div className='table-container'>

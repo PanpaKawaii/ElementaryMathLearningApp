@@ -1,0 +1,19 @@
+.buysubject-container {
+    .buysubject-form {
+        select {
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .text {
+            padding: 0 8px;
+            font-size: 14px;
+        }
+
+        .buying-success {
+            margin: 20px 0;
+            color: #28a745;
+            font-weight: bold;
+        }
+    }
+}

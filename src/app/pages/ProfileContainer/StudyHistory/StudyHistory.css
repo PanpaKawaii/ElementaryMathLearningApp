@@ -72,3 +72,24 @@
         }
     }
 }
+
+.notification {
+    width: 400px;
+    margin: auto 0;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 20px;
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+
+    &.please-select {
+        color: hsl(120, 83%, 71%);
+        border: 8px solid hsl(120, 84%, 89%);
+    }
+
+    &.no-data {
+        color: hsl(0, 83%, 71%);
+        border: 8px solid hsl(0, 84%, 89%);
+    }
+}

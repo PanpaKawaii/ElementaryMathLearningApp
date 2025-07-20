@@ -56,12 +56,7 @@ export default function AdvancedQuestion() {
         setIndex(question_index);
     };
 
-    // useEffect(() => {
-    //     if (QUESTIONs?.length <= 0) navigate('/learn');
-    // }, []);
-
     if (loading) return <Loading Size={'Large'} />
-    // if (QUESTIONs?.length <= 0) navigate('/learn');
     return (
         <div className='learn-container'>
             <div className='container-2'>

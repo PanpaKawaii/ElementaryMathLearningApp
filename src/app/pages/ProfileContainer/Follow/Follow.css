@@ -91,7 +91,7 @@
                     img {
                         width: 100px;
                         height: 100px;
-                        border: 2px solid #ccc;
+                        border: 2px solid #cccccc80;
                         box-sizing: border-box;
                         border-radius: 12px;
                     }

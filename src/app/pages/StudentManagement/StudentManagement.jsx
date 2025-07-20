@@ -4,7 +4,7 @@ import Button from '../../components/Button.jsx';
 import { useAuth } from '../../hooks/AuthContext/AuthContext.jsx';
 import './StudentManagement.css';
 
-export default function StudentManagement({ setUserStudyHistory }) {
+export default function StudentManagement({ UserStudyHistory, setUserStudyHistory }) {
     const { user } = useAuth();
 
     const [MyStudent, setMyStudent] = useState([]);
@@ -38,7 +38,7 @@ export default function StudentManagement({ setUserStudyHistory }) {
                 <table className='no-wrap align-middle'>
                     <tbody>
                         {MyStudent.map((student, i) => (
-                            <tr key={i}>
+                            <tr key={i} className={`${UserStudyHistory == student.id ? 'chosen' : ''}`}>
                                 <td>
                                     <div className={`index ${i === 0 ? 'top gold' : (i === 1 ? 'top silver' : i === 2 ? 'top bronze' : '')}`}>{i + 1}</div>
                                 </td>
@@ -61,15 +61,16 @@ export default function StudentManagement({ setUserStudyHistory }) {
                                 </td>
                                 <td>
                                     <Button
-                                        width={'80px'}
+                                        width={'48px'}
                                         height={'40px'}
                                         border={'6px'}
                                         radius={'12px'}
-                                        maincolor={'correct'}
+                                        maincolor={`${UserStudyHistory == student.id ? 'incorrect' : 'correct'}`}
                                         active={false}
                                         onToggle={() => setUserStudyHistory(p => student.id == p ? null : student.id)}
                                     >
-                                        <div className='text'>Detail</div>
+                                        {/* <div className='text'>Detail</div> */}
+                                        <i className={`fa-solid fa-${UserStudyHistory == student.id ? 'xmark' : 'magnifying-glass'}`}></i>
                                     </Button>
                                 </td>
                             </tr>

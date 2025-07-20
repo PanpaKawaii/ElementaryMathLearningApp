@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { fetchData } from '../../../mocks/CallingAPI.js';
 import { useAuth } from '../../hooks/AuthContext/AuthContext.jsx';
+import Loading from '../../layouts/Loading/Loading.jsx';
 import './Subject.css';
 
 export default function Subject() {
@@ -18,14 +19,26 @@ export default function Subject() {
         const token = '';
         const fetchDataAPI = async () => {
             try {
-                const subjectData = await fetchData('api/subject', token);
-                console.log('subjectData', subjectData);
-                setSUBJECTs(subjectData);
-
-                const boughtSubjectData = await fetchData(`api/boughtsubject/user/${user.id}`, token);
-                console.log('boughtSubjectData', boughtSubjectData);
+                const boughtSubjectData = await fetchData(`api/boughtsubject/user/${user?.id}`, token);
                 setBOUGHTSUBJECTs(boughtSubjectData);
 
+                const boughtSubjectsData = await fetchData('api/boughtsubject', token);
+                const subjectData = await fetchData('api/subject', token);
+
+                const ratedSubjects = subjectData.map(subject => {
+                    const related = boughtSubjectsData.filter(b => b.subjectId == subject.id);
+                    const boughtCount = related.length;
+                    const rated = related.filter(b => b.rating > 0);
+                    const avg = rated.length === 0 ? 0 : parseFloat((rated.reduce((sum, b) => sum + b.rating, 0) / rated.length).toFixed(1));
+
+                    return {
+                        ...subject,
+                        rating: avg,
+                        boughtCount: boughtCount,
+                    };
+                });
+
+                setSUBJECTs(ratedSubjects);
             } catch (error) {
                 setError(error);
             } finally {
@@ -43,17 +56,16 @@ export default function Subject() {
             subjectInfo: subject || {}
         };
     });
-    console.log('BoughtSubjectInformation', BoughtSubjectInformation);
-
 
     const handleNavigate = (SubjectId) => {
         localStorage.setItem('SubjectId', SubjectId);
         navigate('/learn');
     }
 
+    if (loading) return <Loading Size={'Large'} />
     return (
         <div className='subject-container learn-container'>
-            {BoughtSubjectInformation?.length > 0 ?
+            {BoughtSubjectInformation?.length > 0 &&
                 <div className='subjects my-subject'>
                     <div className='heading'>MY SUBJECTS</div>
                     <div className='row'>
@@ -67,7 +79,6 @@ export default function Subject() {
                         ))}
                     </div>
                 </div>
-                : <p><i>You didn't buy any subject</i></p>
             }
             {SUBJECTs?.length > 0 ?
                 <div className='subjects buy-subject'>
@@ -75,13 +86,16 @@ export default function Subject() {
                     <div className='row'>
                         {SUBJECTs.map((subject, i) => (
                             <div to='./detail' key={i} className='col'>
-                                <div className='card'>
-                                    <Link>
-                                        <img src={subject.image} alt={subject.name} />
-                                        <div className='name'>{subject.name}</div>
-                                        <div className='price'>{subject.price.toLocaleString('vi-VN')} VND</div>
-                                    </Link>
-                                </div>
+                                <Link to={`./${subject.id}`} className='card'>
+                                    <img src={subject.image} alt={subject.name} />
+                                    <div className='name'>{subject.name}</div>
+                                    <div className='price'>
+                                        <div>{subject.price?.toLocaleString('vi-VN')} VND</div>
+                                        {BOUGHTSUBJECTs.find(b => b.subjectId == subject.id) && <div className='bought'>Bought</div>}
+                                    </div>
+                                    <div className='badge boughtcount'>Sold: {subject.boughtCount}</div>
+                                    <div className='badge rating'><div>{subject.rating}</div><i className='fa-solid fa-star'></i></div>
+                                </Link>
                             </div>
                         ))}
                     </div>

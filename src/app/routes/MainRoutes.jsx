@@ -5,6 +5,8 @@ import NavigationBar from '../pages/NavigationBar/NavigationBar'
 
 import LearnContainer from '../pages/LearnContainer/LearnContainer'
 import Subject from '../pages/Subject/Subject'
+import SubjectDetail from '../pages/Subject/SubjectDetail/SubjectDetail'
+import ListGame from '../pages/ListGame/ListGame'
 import RankingContainer from '../pages/RankingContainer/RankingContainer'
 import ProfileContainer from '../pages/ProfileContainer/ProfileContainer'
 import LoginRegister from '../pages/LoginRegister/LoginRegister'
@@ -12,6 +14,8 @@ import LoginRegister from '../pages/LoginRegister/LoginRegister'
 import Studying from '../pages/Studying/Studying'
 import AdvancedQuestion from '../pages/ForumContainer/AdvancedQuestion'
 
+import ManagerContainer from '../pages/ManagerContainer/ManagerContainer'
+import UserManager from '../pages/ManagerContainer/UserManager/UserManager'
 
 export default function MainRoutes() {
     return (
@@ -25,17 +29,24 @@ export default function MainRoutes() {
                     <Route path='/' element={<NavigationBar />} >
                         <Route path='learn' element={<LearnContainer />} />
                         <Route path='subject' element={<Subject />} />
+                        <Route path='subject/:subject' element={<SubjectDetail />} />
+                        <Route path='game' element={<ListGame />} />
                         <Route path='ranking' element={<RankingContainer />} />
                         <Route path='profile' element={<ProfileContainer />} />
                         <Route path='login-register' element={<LoginRegister />} />
                         <Route path='forum/chapter/:chapter' element={<AdvancedQuestion />} />
+                        <Route path='management-subject/subject' element={<ManagerContainer />} />
+                        <Route path='management-subject/subject/:subject/chapter' element={<ManagerContainer />} />
+                        <Route path='management-subject/subject/:subject/chapter/:chapter/topic' element={<ManagerContainer />} />
+                        <Route path='management-subject/subject/:subject/chapter/:chapter/topic/:topic/question' element={<ManagerContainer />} />
+                        <Route path='management-user/user' element={<UserManager />} />
                     </Route>
                     <Route path='*' element={<Navigate to='/learn' replace />} />
                     <Route path='studying/chapter/:chapter/topic/:id' element={<Studying />} />
                     <Route path='studying/quiz/chapter/:chapter' element={<Studying />} />
                     <Route path='studying/advanced/chapter/:chapter' element={<Studying />} />
                 </Routes>
-                <></>
+                {/* <></> */}
             </div>
         </BrowserRouter>
     )
