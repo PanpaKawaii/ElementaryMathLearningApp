@@ -13,7 +13,7 @@ export default function NavigationBar() {
         { name: 'SUBJECT', icon: 'book', path: '/subject', role: 'Guest Student Parent' },
         { name: 'GAME', icon: 'futbol', path: '/game', role: 'Guest Student' },
         { name: 'RANK', icon: 'star', path: '/ranking', role: 'Student' },
-        { name: 'PROFILE', icon: 'user', path: '/profile', role: 'Student Parent Admin' },
+        { name: 'PROFILE', icon: 'user', path: '/profile/' + user?.id, role: 'Student Parent Admin' },
         { name: 'LOGIN-REGISTER', icon: 'right-to-bracket', path: '/login-register', role: 'Guest' },
         { name: 'SUBJECT', icon: 'book', path: '/management-subject/subject', role: 'Admin' },
         { name: 'USER', icon: 'id-card', path: '/management-user/user', role: 'Admin' },

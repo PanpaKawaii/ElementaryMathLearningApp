@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { deleteData, postData } from '../../../../mocks/CallingAPI.js';
 import { useAuth } from '../../../hooks/AuthContext/AuthContext.jsx';
 import './Follow.css';
@@ -118,7 +119,7 @@ export default function Follow({ ListUser, Following, Follower, FollowPopup, set
                     <div className='list'>
                         {Follow.map((f, i) => (
                             <div key={i} className='item'>
-                                <img src={f.user?.image} alt={f.user?.name} />
+                                <Link to={`/profile/${f.user?.id}`} ><img src={f.user?.image} alt={f.user?.name} /></Link>
                                 <div className='info'>
                                     <div className='name-username'>
                                         <div className='name'>{f.user?.name}</div>

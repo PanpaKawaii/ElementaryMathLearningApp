@@ -9,72 +9,12 @@ import EditUserModal from '../../ManagerContainer/UserManager/EditUserModal.jsx'
 import './Profile.css';
 import '../../ManagerContainer/SubjectManager/EditModal.css';
 
-// Mock user data as backup
-const mockUser = {
-    id: 1,
-    name: 'John Doe',
-    username: 'jdoe',
-    password: 'pass123',
-    role: 'Student',
-    curatorId: null,
-    email: 'jdoe@example.com',
-    point: 100,
-    joinedDate: '2024-06-01',
-    dayStreak: 5,
-    highestDayStreak: 10
-};
-
 const mockAchievements = [
-    {
-        id: 1,
-        name: 'Wildfire',
-        description: 'Reach a 3 day streak',
-        icon: '🔥',
-        level: 1,
-        progress: 1,
-        goal: 3,
-        color: '#FF5B5B'
-    },
-    {
-        id: 2,
-        name: 'Sage',
-        description: 'Earn 500 XP',
-        icon: '🧙‍♂️',
-        level: 3,
-        progress: 451,
-        goal: 500,
-        color: '#7ED957'
-    },
-    {
-        id: 3,
-        name: 'Scholar',
-        description: 'Learn 50 new words in a single course',
-        icon: '📜',
-        level: 1,
-        progress: 2,
-        goal: 50,
-        color: '#FFD966'
-    },
-    {
-        id: 4,
-        name: 'Scholar',
-        description: 'Learn 50 new words in a single course',
-        icon: '📜',
-        level: 1,
-        progress: 2,
-        goal: 50,
-        color: '#FFD966'
-    },
-    {
-        id: 5,
-        name: 'Scholar',
-        description: 'Learn 50 new words in a single course',
-        icon: '📜',
-        level: 1,
-        progress: 2,
-        goal: 50,
-        color: '#FFD966'
-    }
+    { id: 1, name: 'Wildfire', description: 'Reach a 3 day streak', icon: '🔥', level: 1, progress: 1, goal: 3, color: '#FF5B5B'},
+    { id: 2, name: 'Sage', description: 'Earn 500 XP', icon: '🧙‍♂️', level: 3, progress: 451, goal: 500, color: '#7ED957'},
+    { id: 3, name: 'Scholar', description: 'Learn 50 new words in a single course', icon: '📜', level: 1, progress: 2, goal: 50, color: '#FFD966'},
+    { id: 4, name: 'Scholar', description: 'Learn 50 new words in a single course', icon: '📜', level: 1, progress: 2, goal: 50, color: '#FFD966'},
+    { id: 5, name: 'Scholar', description: 'Learn 50 new words in a single course', icon: '📜', level: 1, progress: 2, goal: 50, color: '#FFD966'},
 ];
 
 export default function Profile({ Following, Follower, setFollowPopup, UserStudyHistory, setUserStudyHistory }) {
