@@ -5,7 +5,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Quicksand', Arial, sans-serif;
+  font-family: 'Quicksand', Klee One, Arial;
 }
 
 .app-header {
@@ -29,7 +29,7 @@ select {
   box-sizing: border-box;
   border-radius: 8px;
   font-size: 16px;
-  font-family: 'Quicksand', Arial, sans-serif;
+  font-family: 'Quicksand', Klee One, Arial;
 }
 
 .btn {
@@ -43,7 +43,7 @@ select {
   border-radius: 4px;
   font-size: 16px;
   transition: all 0.15s ease;
-  font-family: 'Quicksand', Arial, sans-serif;
+  font-family: 'Quicksand', Klee One, Arial;
 }
 
 h1,

@@ -7,7 +7,7 @@ import './BuySubject.css';
 export default function BuySubject({ SubjectId, USERs }) {
     const { user } = useAuth();
 
-    const [BuyingSuccess, setBuyingSuccess] = useState(false);
+    const [BuyingStatus, setBuyingStatus] = useState('');
     const [Student, setStudent] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -25,7 +25,7 @@ export default function BuySubject({ SubjectId, USERs }) {
         // const token = user?.token;
         const token = '';
         try {
-            setBuyingSuccess(false);
+            setBuyingStatus('');
             setLoading(true);
             const resultBuySubject = await postData('api/boughtsubject', BuySubjectData, token);
             console.log('resultBuySubject', resultBuySubject);
@@ -42,10 +42,10 @@ export default function BuySubject({ SubjectId, USERs }) {
                 console.log('resultProgress', resultProgress);
 
                 console.log('Success');
-                setBuyingSuccess(true);
+                setBuyingStatus('Success');
             }
-
         } catch (error) {
+            setBuyingStatus('Fail');
             setError(error);
         } finally {
             console.log('Finish');
@@ -53,7 +53,7 @@ export default function BuySubject({ SubjectId, USERs }) {
         }
     };
 
-    const handleSubmitBuySubject = () => {
+    const handleSubmitBuySubject = (Student) => {
         const StudentId = Student;
         console.log({
             StudentId,
@@ -66,22 +66,38 @@ export default function BuySubject({ SubjectId, USERs }) {
             <form className='buysubject-form'>
                 <select onChange={(e) => setStudent(e.target.value)}>
                     <option value={null}>--Select a student--</option>
-                    {USERs.filter(u => u.curatorId == user?.id).map((student, i) => (
+                    {USERs.filter(u => user && u.curatorId == user?.id).map((student, i) => (
                         <option key={i} value={student.id}>{student.name}</option>
                     ))}
                 </select>
-                <Button
-                    width={'fit-content'}
-                    height={'40px'}
-                    border={'6px'}
-                    radius={'12px'}
-                    maincolor={'correct'}
-                    active={false}
-                    onToggle={() => handleSubmitBuySubject()}
-                >
-                    <div className='text'>BUY FOR THIS STUDENT</div>
-                </Button>
-                {BuyingSuccess && <div className='buying-success'>Buying Success</div>}
+                <div className='btn-box'>
+                    <Button
+                        width={'fit-content'}
+                        height={'40px'}
+                        border={'6px'}
+                        radius={'12px'}
+                        maincolor={'correct'}
+                        active={false}
+                        onToggle={() => handleSubmitBuySubject(Student)}
+                    >
+                        <div className='text'>BUY FOR THIS STUDENT</div>
+                    </Button>
+                    {user?.role == 'Student' &&
+                        <Button
+                            width={'fit-content'}
+                            height={'40px'}
+                            border={'6px'}
+                            radius={'12px'}
+                            maincolor={'edit'}
+                            active={false}
+                            onToggle={() => handleSubmitBuySubject(user?.id)}
+                        >
+                            <div className='text'>BUY FOR YOURSELF</div>
+                        </Button>
+                    }
+                </div>
+                {BuyingStatus == 'Success' && <div className='buying-status buying-success'>Buying Success</div>}
+                {BuyingStatus == 'Fail' && <div className='buying-status buying-fail'>Buying Fail</div>}
             </form>
         </div>
     )

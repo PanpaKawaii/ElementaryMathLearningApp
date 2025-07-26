@@ -19,9 +19,6 @@ export default function Subject() {
         const token = '';
         const fetchDataAPI = async () => {
             try {
-                const boughtSubjectData = await fetchData(`api/boughtsubject/user/${user?.id}`, token);
-                setBOUGHTSUBJECTs(boughtSubjectData);
-
                 const boughtSubjectsData = await fetchData('api/boughtsubject', token);
                 const subjectData = await fetchData('api/subject', token);
 
@@ -39,6 +36,9 @@ export default function Subject() {
                 });
 
                 setSUBJECTs(ratedSubjects);
+
+                const boughtSubjectData = await fetchData(`api/boughtsubject/user/${user?.id}`, token);
+                setBOUGHTSUBJECTs(boughtSubjectData);
             } catch (error) {
                 setError(error);
             } finally {

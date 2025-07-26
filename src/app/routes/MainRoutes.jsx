@@ -32,7 +32,7 @@ export default function MainRoutes() {
                         <Route path='subject/:subject' element={<SubjectDetail />} />
                         <Route path='game' element={<ListGame />} />
                         <Route path='ranking' element={<RankingContainer />} />
-                        <Route path='profile/:user' element={<ProfileContainer />} />
+                        <Route path='profile' element={<ProfileContainer />} />
                         <Route path='login-register' element={<LoginRegister />} />
                         <Route path='forum/chapter/:chapter' element={<AdvancedQuestion />} />
                         <Route path='management-subject/subject' element={<ManagerContainer />} />
