@@ -10,10 +10,28 @@
             font-size: 14px;
         }
 
-        .buying-success {
+        .btn-box {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .buying-status {
             margin: 20px 0;
-            color: #28a745;
+            padding: 2px 4px;
+            width: fit-content;
             font-weight: bold;
+            box-sizing: border-box;
+            border-radius: 6px;
+
+            &.buying-success {
+                color: #28a745;
+                border: 2px solid #28a745;
+            }
+
+            &.buying-fail {
+                color: #dc3545;
+                border: 2px solid #dc3545;
+            }
         }
     }
 }

@@ -6,7 +6,6 @@ console.log(apiUrl);
 // Hàm gọi API GET
 export const fetchData = async (endpoint, token) => {
     try {
-        console.log('Here');
         const response = await fetch(`${apiUrl}${endpoint}`, {
             method: 'GET',
             headers: {

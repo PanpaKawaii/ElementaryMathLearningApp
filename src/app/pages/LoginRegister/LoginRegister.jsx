@@ -15,7 +15,7 @@ export default function LoginRegister() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (user) navigate('/learn');
+        if (user) navigate('/subject');
     }, []);
 
     const moveImage = () => {

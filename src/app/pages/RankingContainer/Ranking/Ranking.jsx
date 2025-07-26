@@ -15,7 +15,7 @@ export default function Ranking() {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        if (!user) navigate('/login-register');
+        if (!user) navigate('/subject');
         // const token = user?.token;
         const token = '';
         const fetchDataAPI = async () => {

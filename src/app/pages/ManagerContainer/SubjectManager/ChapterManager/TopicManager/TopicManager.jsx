@@ -138,10 +138,10 @@ export default function TopicManager() {
                     <tbody>
                         {TOPICs.map((data, i) => (
                             <tr key={data.id}>
-                                <td className='fit-td'><div className='index convex'>#{i + 1}</div></td>
-                                <td><div className='number convex'>No.{data.number}</div></td>
-                                <td><div className='id convex'>ID: {data.id}</div></td>
-                                <td><div className='name convex'>Topic: {data.name}</div></td>
+                                <td className='fit-td'><div className='index'>#{i + 1}</div></td>
+                                <td><div className='number'>No.{data.number}</div></td>
+                                <td><div className='id'>ID: {data.id}</div></td>
+                                <td><div className='name'>Topic: {data.name}</div></td>
                                 <td className='fit-td'>
                                     <div className='btn-box'>
                                         <div className='show-btn'>

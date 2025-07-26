@@ -174,7 +174,8 @@ CREATE TABLE [Following] (
 INSERT INTO [Subject] (Name, Image, Price, UploadDate, LastEditDate) VALUES
 ('Mathematics', 'https://i.pinimg.com/736x/ca/cd/c1/cacdc137ba5fa2b0e1fe5b3b89d87aad.jpg', 600000, '2024-01-15', '2025-05-20'),
 ('Physics', 'https://i.pinimg.com/736x/47/b1/d8/47b1d8383b7538c114b8008dfbad2ec4.jpg', 700000, '2024-02-10', '2025-06-01'),
-('Chemistry', 'https://i.pinimg.com/736x/ad/a8/b7/ada8b78b5d1fbf18ca2c9ea379070e42.jpg', 800000, '2024-03-05', '2025-05-25')
+('Chemistry', 'https://i.pinimg.com/736x/ad/a8/b7/ada8b78b5d1fbf18ca2c9ea379070e42.jpg', 800000, '2024-03-05', '2025-05-25'),
+('Japanese', 'https://i.pinimg.com/736x/16/90/0a/16900a3ebf88003bc85fc12c7a490dae.jpg', 30000000, '2025-07-17', '2025-07-17')
 
 INSERT INTO [Chapter] (Number, Name, SubjectId) VALUES
 (1, 'Calculus', 1),
@@ -183,7 +184,16 @@ INSERT INTO [Chapter] (Number, Name, SubjectId) VALUES
 (1, 'Velocity, Time And Distance', 2),
 (2, 'Force And Gravity', 2),
 (1, 'Electromagnetism', 3),
-(2, 'Organic Chemistry', 3)
+(2, 'Organic Chemistry', 3),
+
+(1, N'信　想　伝　欲', 4),
+(2, N'苦　悩　困　難', 4),
+(3, N'怒　悲　笑　喜', 4),
+(4, 'Chapter 4', 4),
+(5, 'Chapter 5', 4),
+(6, 'Chapter 6', 4),
+(7, 'Chapter 7', 4),
+(8, 'Chapter 8', 4)
 
 INSERT INTO [Topic] (Number, Name, ChapterId) VALUES
 (1, 'Plus Numbers', 1),
@@ -199,20 +209,37 @@ INSERT INTO [Topic] (Number, Name, ChapterId) VALUES
 (1, 'Newtons Laws', 4),
 (2, 'E=mc^2', 4),
 (1, 'Hydrocarbons', 6),
-(2, 'C12H22O11', 6)
+(2, 'C12H22O11', 6),
 
---INSERT INTO [Question] (Number, Type, Question, CorrectAnswer, Answers, Explanation, Note, TopicId) VALUES
---(1, 'Multiple Choice', 'What is 3 + 2?', '5', '7@@6@@5@@8', '3 + 2 equals 5 because you add 3 and 2 together.', 'Basic addition', 1),
---(2, 'Text Answer', 'Fill in the blank: 4 + _ = 7', '3', '2@@3@@4@@5', 'To find the missing number, you subtract 4 from 7. 7 - 4 = 3.', 'Simple addition', 1),
---(3, 'Multiple Choice', 'Which number is greater: 8 or 5?', '8', '8@@5', '8 is greater than 5 because 8 is a larger number.', 'Number comparison', 1),
---(4, 'Sorting', 'Arrange the numbers in ascending order: 5, 3, 8, 2', '2, 3, 5, 8', '2, 3, 5, 8@@3, 5, 8, 2@@8, 5, 3, 2@@5, 2, 3, 8', 'Ascending order means arranging numbers from the smallest to the largest.', 'Number sequencing', 1),
---(5, 'Sorting', 'Arrange the numbers in descending order: 7, 2, 9, 5', '9, 7, 5, 2', '9, 7, 5, 2@@2, 5, 7, 9@@9, 7, 2, 5@@7, 5, 2, 9', 'Descending order means arranging numbers from the largest to the smallest.', 'Number sequencing', 1),
---(6, 'Text Answer', 'Fill in the blank: 10 - _ = 6', '4', '3@@5@@6@@4', 'To find the missing number, subtract 6 from 10. 10 - 6 = 4.', 'Simple subtraction', 1),
---(7, 'Multiple Choice', 'What is 6 + 3?', '9', '8@@9@@7@@6', '6 + 3 equals 9 because adding 6 and 3 gives you 9.', 'Basic addition', 1),
---(8, 'Multiple Choice', 'What is the number that comes after 10?', '11', '11@@9@@10@@12', 'The number after 10 is 11.', 'Basic counting', 1),
---(9, 'Text Answer', 'Fill in the blank: _ + 5 = 9', '4', '6@@3@@4@@5', 'To find the missing number, subtract 5 from 9. 9 - 5 = 4.', 'Simple addition', 1),
---(10, 'Multiple Choice', 'Which number is smaller: 4 or 6?', '4', '4@@6', '4 is smaller than 6 because 4 is less than 6.', 'Number comparison', 1);
--- Addition (TopicId = 1)
+(1, N'信', 8),
+(2, N'想', 8),
+(3, N'伝', 8),
+(4, N'欲', 8),
+
+(1, N'苦', 9),
+(2, N'悩', 9),
+(3, N'困', 9),
+(4, N'難', 9),
+
+(1, N'怒', 10),
+(2, N'悲', 10),
+(3, N'笑', 10),
+(4, N'喜', 10)
+
+-- (1, 'aaaaaaaaaaa1', 10),
+-- (2, 'aaaaaaaaaaa2', 10),
+-- (3, 'aaaaaaaaaaa3', 10),
+-- (4, 'aaaaaaaaaaa4', 10),
+-- (5, 'aaaaaaaaaaa5', 10),
+-- (6, 'aaaaaaaaaaa6', 10)
+
+-- (1, 'aaaaaaaaaaa1', 11),
+-- (2, 'aaaaaaaaaaa2', 11),
+-- (3, 'aaaaaaaaaaa3', 11),
+-- (4, 'aaaaaaaaaaa4', 11),
+-- (5, 'aaaaaaaaaaa5', 11),
+-- (6, 'aaaaaaaaaaa6', 11)
+
 INSERT INTO [Question] (Number, Type, Question, CorrectAnswer, Answers, Explanation, Note, TopicId) VALUES
 (1, 'Multiple Choice', 'What is 2 + 3?', '5', '6@@3@@5@@4', '', 'Regular', 1),
 (2, 'Multiple Choice', 'What is 1 + 6?', '7', '5@@8@@7@@6', '', 'Regular', 1),
@@ -327,7 +354,84 @@ INSERT INTO [Question] (Number, Type, Question, CorrectAnswer, Answers, Explanat
 (7, 'Multiple Choice', 'Arrange in descending order: 5, 7, 6, 8', '8, 7, 6, 5', '6, 7, 8, 5@@7, 5, 6, 8@@8, 7, 6, 5@@5, 6, 7, 8', '', 'Regular', 10),
 (8, 'Multiple Choice', 'Arrange in descending order: 15, 12, 13, 14', '15, 14, 13, 12', '13, 14, 12, 15@@12, 13, 14, 15@@14, 15, 13, 12@@15, 14, 13, 12', '', 'Regular', 10),
 (9, 'Multiple Choice', 'Arrange in descending order: 20, 18, 19, 17', '20, 19, 18, 17', '18, 20, 17, 19@@19, 18, 17, 20@@17, 18, 19, 20@@20, 19, 18, 17', '', 'Regular', 10),
-(10, 'Multiple Choice', 'Arrange in descending order: 0, 2, 1, 3', '3, 2, 1, 0', '0, 2, 1, 3@@2, 1, 3, 0@@3, 2, 1, 0@@1, 0, 2, 3', '', 'Regular', 10);
+(10, 'Multiple Choice', 'Arrange in descending order: 0, 2, 1, 3', '3, 2, 1, 0', '0, 2, 1, 3@@2, 1, 3, 0@@3, 2, 1, 0@@1, 0, 2, 3', '', 'Regular', 10),
+
+
+
+
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 15),
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 15),
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 15),
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 15),
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 15),
+
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 16),
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 16),
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 16),
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 16),
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 16),
+
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 17),
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 17),
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 17),
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 17),
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 17),
+
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 18),
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 18),
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 18),
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 18),
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 18),
+
+
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 19),
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 19),
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 19),
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 19),
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 19),
+
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 20),
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 20),
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 20),
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 20),
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 20),
+
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 21),
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 21),
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 21),
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 21),
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 21),
+
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 22),
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 22),
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 22),
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 22),
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 22),
+
+
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 23),
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 23),
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 23),
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 23),
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 23),
+
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 24),
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 24),
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 24),
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 24),
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 24),
+
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 25),
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 25),
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 25),
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 25),
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 25),
+
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 26),
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 26),
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 26),
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 26),
+(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 26)
 
 
 INSERT INTO [User] (Name, Image, Username, Password, Role, Type, CuratorId, Email, Point, LastOnline, JoinedDate, DayStreak, HighestDayStreak) VALUES
@@ -347,7 +451,8 @@ INSERT INTO [User] (Name, Image, Username, Password, Role, Type, CuratorId, Emai
 (N'Phạm Thành Danh', 'https://i.pinimg.com/736x/d1/ba/15/d1ba156c10b10d44a92d6bac20849953.jpg', 'thanhdanh', '123456', 'Student', 'Regular', 3, 'thanhdanh@example.com', 2970, '2025-07-10', '2025-07-10', 731, 952),
 (N'Nguyễn Trường Sang', 'https://i.pinimg.com/736x/88/39/3e/88393ead9af03f8f76814c42352ded55.jpg', 'truongsang', '123456', 'Student', 'Regular', 3, 'truongsang@example.com', 5230, '2025-07-10', '2025-07-10', 533, 587),
 (N'Võ Minh Tiến', 'https://i.pinimg.com/736x/d1/ba/15/d1ba156c10b10d44a92d6bac20849953.jpg', 'minhtien', '123456', 'Student', 'Regular', 3, 'minhtien@example.com', 14780, '2025-07-10', '2025-07-10', 601, 601),
-(N'Nguyễn Văn Khoa', 'https://i.pinimg.com/736x/75/7f/86/757f86f55d1ad5ac6529267d1f405ce7.jpg', 'vankhoa', '123456', 'Student', 'Regular', 3, 'vankhoa@example.com', 8590, '2025-07-10', '2025-07-10', 687, 687)
+(N'Nguyễn Văn Khoa', 'https://i.pinimg.com/736x/75/7f/86/757f86f55d1ad5ac6529267d1f405ce7.jpg', 'vankhoa', '123456', 'Student', 'Regular', 3, 'vankhoa@example.com', 8590, '2025-07-10', '2025-07-10', 687, 687),
+(N'HCM25_CPL_JS_02', 'https://i.pinimg.com/736x/0e/93/bc/0e93bc8607a6e41cd7df5a831cc115e4.jpg', 'hcm25_cpl_js_02', '123456', 'Student', 'Regular', 3, 'hcm25_cpl_js_02@example.com', 0, '2025-07-17', '2025-07-17', 0, 0)
 UPDATE [User] SET CuratorId = 3 WHERE Id = 1;
 
 INSERT INTO [Comment] (Content, Answer, CommentDate, QuestionId, UserId) VALUES
@@ -372,10 +477,12 @@ INSERT INTO [Comment] (Content, Answer, CommentDate, QuestionId, UserId) VALUES
 INSERT INTO [BoughtSubject] (PurchaseDate, Feedback, Rating, SubjectId, UserId) VALUES
 ('2025-01-10', 'Great Math course', 5, 1, 1),
 ('2025-01-10', 'Great Physics course', 4, 2, 1),
+('2025-01-10', 'Japanese is great!', 5, 4, 1),
 ('2025-02-15', 'Very informative', 5, 2, 2),
-('2025-03-20', 'Needs more examples', 3, 3, 3),
-('2025-04-25', 'Excellent content', 4, 2, 4),
-('2025-05-30', 'Highly recommended', 5, 3, 5)
+('2025-03-20', 'Needs more examples', 3, 3, 7),
+('2025-04-25', 'Excellent content', 4, 2, 8),
+('2025-05-30', 'Highly recommended', 5, 3, 9),
+('2025-07-17', 'I LOVE LEARNING JAPANESE!', 5, 4, 18)
 
 INSERT INTO [Progress] (Chapter, Topic, BoughtSubjectId) VALUES
 (2, 1, 1),
@@ -383,7 +490,9 @@ INSERT INTO [Progress] (Chapter, Topic, BoughtSubjectId) VALUES
 (1, 1, 3),
 (1, 1, 4),
 (1, 1, 5),
-(1, 1, 6)
+(1, 1, 6),
+(1, 1, 7),
+(1, 1, 8)
 
 INSERT INTO [ChapterProgress] (Score, StartDate, Note, UserId, ChapterId) VALUES
 (30, '2025-06-01 14:30:00', 'Quiz', 1, 1),

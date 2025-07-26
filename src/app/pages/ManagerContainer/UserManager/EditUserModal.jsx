@@ -155,7 +155,7 @@ export default function EditUserModal({ userprop, onClose, setRefresh, USERs }) 
                         }
                         {userprop?.role == 'Student' &&
                             <div className='input-group group-2'>
-                                <select name='curatorId' onChange={handleChange}>
+                                <select name='curatorId' onChange={handleChange} disabled={userprop.curatorId && user?.role == 'Student'}>
                                     <option value={userprop.curatorId}>[{userprop.curatorId || 'none'}] {USERs.find(u => u.id == userprop.curatorId)?.name}</option>
                                     {USERs.filter(u => u.role == 'Parent' && u.id != userprop.curatorId && u.id != userprop.id).map((u, i) => (
                                         <option key={i} value={u.id}>[{u.id}] {u.name}</option>

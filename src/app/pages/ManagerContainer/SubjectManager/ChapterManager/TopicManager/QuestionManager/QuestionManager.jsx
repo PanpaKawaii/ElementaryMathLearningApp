@@ -16,7 +16,7 @@ export default function QuestionManager() {
     console.log('question', question);
 
     const [QUESTIONs, setQUESTIONs] = useState([]);
-    const [form, setForm] = useState({ number: '', type: 'Multiple Choice', question1: '', correctAnswer: '', answers: '', explanation: '', note: '', topicId: topicId });
+    const [form, setForm] = useState({ number: '', type: 'Multiple Choice', question1: '', correctAnswer: '', answers: '', explanation: '', note: 'Regular', topicId: topicId });
     const [editing, setEditing] = useState(null);
     const [confirm, setConfirm] = useState(false);
     const [selectedId, setSelectedId] = useState(null);
@@ -58,7 +58,7 @@ export default function QuestionManager() {
             form.number = Math.abs(form.number);
             const resultAddQuestion = await postData('api/question', form, token);
             console.log('resultAddQuestion', resultAddQuestion);
-            setForm({ number: '', type: 'Multiple Choice', question1: '', correctAnswer: '', answers: '', explanation: '', note: '', topicId: topicId });
+            setForm({ number: '', type: 'Multiple Choice', question1: '', correctAnswer: '', answers: '', explanation: '', note: 'Regular', topicId: topicId });
             setRefresh(p => p + 1);
         } catch (error) {
             setError(error);
@@ -98,7 +98,12 @@ export default function QuestionManager() {
             <form onSubmit={handleSubmit} className='add-form'>
                 <input name='number' placeholder='Number' value={form.number} onChange={handleChange} required />
                 <input name='type' placeholder='Type' value={form.type} onChange={handleChange} required disabled />
-                <input name='note' placeholder='Regular/Advanced' value={form.note} onChange={handleChange} required />
+                <select name='note' onChange={handleChange}>
+                    <option value={form.note}>{form.note}</option>
+                    {form.note != 'Regular' && <option value={'Regular'}>Regular</option>}
+                    {form.note != 'Advanced' && <option value={'Advanced'}>Advanced</option>}
+                </select>
+                {/* <input name='note' placeholder='Regular/Advanced' value={form.note} onChange={handleChange} required /> */}
                 <input name='question1' placeholder='Question Content' value={form.question1} onChange={handleChange} required />
                 <input name='answers' placeholder='Full Answers' value={form.answers} onChange={handleChange} required />
                 <input name='correctAnswer' placeholder='Correct' value={form.correctAnswer} onChange={handleChange} required />
@@ -142,30 +147,30 @@ export default function QuestionManager() {
                 <table className='table'>
                     <thead>
                         <tr>
-                            <th><div className='convex'>#</div></th>
-                            <th><div className='convex'>No.</div></th>
-                            <th><div className='convex'>ID</div></th>
-                            <th><div className='convex'>Question</div></th>
-                            <th><div className='convex'>Answers</div></th>
-                            <th><div className='convex'>Correct</div></th>
-                            <th><div className='convex'>Explanation</div></th>
-                            <th><div className='convex'>Note</div></th>
-                            <th><div className='convex'>Type</div></th>
-                            <th><div className='convex'>Actions</div></th>
+                            <th>#</th>
+                            <th>No.</th>
+                            <th>ID</th>
+                            <th>Question</th>
+                            <th>Answers</th>
+                            <th>Correct</th>
+                            <th>Explanation</th>
+                            <th>Note</th>
+                            <th>Type</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         {QUESTIONs.map((data, i) => (
                             <tr key={data.id}>
-                                <td className='fit-td'><div className='index convex'>#{i + 1}</div></td>
-                                <td className='fit-td'><div className='number convex'>{data.number}</div></td>
-                                <td className='fit-td'><div className='id convex'>{data.id}</div></td>
-                                <td className='large-td'><div className='name convex'>{data.question1}</div></td>
-                                <td className='fit-td'><div className='answers convex'>{data.answers.replace(/@@/g, ', ')}</div></td>
-                                <td className='fit-td'><div className='correct convex'>{data.correctAnswer} <i className='fa-solid fa-check'></i></div></td>
-                                <td><div className='explanation convex'>{data.explanation || <i className='no-data'>No data</i>}</div></td>
-                                <td className='fit-td'><div className={`note convex ${data.note == 'Advanced' ? 'gold' : ''}`}>{data.note}</div></td>
-                                <td><div className='type convex'>{data.type}</div></td>
+                                <td className='fit-td'><div className='index'>#{i + 1}</div></td>
+                                <td className='fit-td'><div className='number'>{data.number}</div></td>
+                                <td className='fit-td'><div className='id'>{data.id}</div></td>
+                                <td className='large-td'><div className='question'>{data.question1}</div></td>
+                                <td className='fit-td'><div className='answers'>{data.answers.replace(/@@/g, ', ')}</div></td>
+                                <td className='fit-td'><div className='correct'>{data.correctAnswer} <i className='fa-solid fa-check'></i></div></td>
+                                <td><div className='explanation'>{data.explanation || <i className='no-data'>No data</i>}</div></td>
+                                <td className='fit-td'><div className={`note ${data.note == 'Advanced' ? 'gold' : ''}`}>{data.note}</div></td>
+                                <td><div className='type'>{data.type}</div></td>
                                 <td className='fit-td'>
                                     <div className='btn-box'>
                                         <div className='show-btn'>
@@ -182,7 +187,7 @@ export default function QuestionManager() {
                                             </SimpleButton>
                                             {selectedId == data.id &&
                                                 <div className='hidden-btn'>
-                                                    <Link
+                                                    {/* <Link
                                                         to={`./${data.id}/question`}
                                                     // state={data.questions}
                                                     >
@@ -196,8 +201,8 @@ export default function QuestionManager() {
                                                         >
                                                             <i className='fa-solid fa-magnifying-glass'></i>
                                                         </SimpleButton>
-                                                    </Link>
-                                                    <Link
+                                                    </Link> */}
+                                                    {/* <Link
                                                         to={`./${data.id}/question`}
                                                     // state={data.questions}
                                                     >
@@ -211,7 +216,7 @@ export default function QuestionManager() {
                                                         >
                                                             <i className='fa-solid fa-book'></i>
                                                         </SimpleButton>
-                                                    </Link>
+                                                    </Link> */}
                                                     <SimpleButton
                                                         width={'32px'}
                                                         height={'32px'}

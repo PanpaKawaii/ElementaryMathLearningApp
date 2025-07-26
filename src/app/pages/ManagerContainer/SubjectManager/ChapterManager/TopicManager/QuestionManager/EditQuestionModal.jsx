@@ -37,7 +37,12 @@ export default function EditQuestionModal({ question, onClose, setRefresh }) {
                 <form onSubmit={handleUpdate}>
                     <input name='number' placeholder='Number' value={form.number} onChange={handleChange} required />
                     <input name='type' placeholder='Type' value={form.type} onChange={handleChange} required disabled />
-                    <input name='note' placeholder='Regular/Advanced' value={form.note} onChange={handleChange} required />
+                    <select name='note' onChange={handleChange}>
+                        <option value={form.note}>{form.note}</option>
+                        {form.note != 'Regular' && <option value={'Regular'}>Regular</option>}
+                        {form.note != 'Advanced' && <option value={'Advanced'}>Advanced</option>}
+                    </select>
+                    {/* <input name='note' placeholder='Regular/Advanced' value={form.note} onChange={handleChange} required /> */}
                     <input name='question1' placeholder='Question Content' value={form.question1} onChange={handleChange} required />
                     <input name='answers' placeholder='Full Answers' value={form.answers} onChange={handleChange} required />
                     <input name='correctAnswer' placeholder='Correct' value={form.correctAnswer} onChange={handleChange} required />

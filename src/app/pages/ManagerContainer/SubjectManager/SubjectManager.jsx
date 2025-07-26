@@ -132,11 +132,11 @@ export default function SubjectManager() {
                     <tbody>
                         {SUBJECTs.map((data, i) => (
                             <tr key={data.id}>
-                                <td className='fit-td'><div className='index convex'>#{i + 1}</div></td>
-                                <td className='fit-td'><div className='id convex'>ID: {data.id}</div></td>
+                                <td className='fit-td'><div className='index'>#{i + 1}</div></td>
+                                <td className='fit-td'><div className='id'>ID: {data.id}</div></td>
                                 <td><img src={data.image} alt='subject' className='convex' /></td>
-                                <td><div className='name convex'>{data.name}</div></td>
-                                <td><div className='price convex'>{data.price.toLocaleString('vi-VN')} VND</div></td>
+                                <td><div className='name'>{data.name}</div></td>
+                                <td><div className='price'>{data.price.toLocaleString('vi-VN')} VND</div></td>
                                 <td className='fit-td'>
                                     <div className='btn-box'>
                                         <div className='show-btn'>

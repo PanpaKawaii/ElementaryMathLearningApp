@@ -17,7 +17,7 @@ export default function Feedback({ FeedbackComment }) {
                                 </div>
                             </div>
                             <StarRating Rating={comment.rating} Size={'1em'} Color={'#ffd700'} />
-                            <div className='comment-content'>{false ? comment.feedback : <i>(No feedbacks)</i>}</div>
+                            <div className='comment-content'>{comment.feedback ? comment.feedback : <i>(No feedbacks)</i>}</div>
                         </div>
                     ))
                 ) : (
