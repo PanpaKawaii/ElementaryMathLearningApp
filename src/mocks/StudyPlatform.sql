@@ -358,80 +358,82 @@ INSERT INTO [Question] (Number, Type, Question, CorrectAnswer, Answers, Explanat
 
 
 
-
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 15),
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 15),
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 15),
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 15),
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 15),
-
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 16),
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 16),
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 16),
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 16),
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 16),
-
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 17),
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 17),
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 17),
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 17),
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 17),
-
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 18),
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 18),
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 18),
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 18),
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 18),
-
-
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 19),
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 19),
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 19),
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 19),
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 19),
-
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 20),
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 20),
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 20),
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 20),
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 20),
-
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 21),
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 21),
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 21),
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 21),
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 21),
-
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 22),
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 22),
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 22),
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 22),
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 22),
+-- 信
+(1, 'Multiple Choice', N'私は親から「信頼」されている。', N'しんらい', N'しらい@@しんら@@しんらい@@しら', N'Tôi được bố mẹ tin tưởng.', 'Regular', 15),
+(1, 'Multiple Choice', N'「信号」をよく見て横断歩道を渡る。', N'しんごう', N'しんごう@@しんご@@しごう@@しご', N'Nhìn đèn tín hiệu kỹ rồi băng qua đường dành cho người đi bộ.', 'Regular', 15),
+(1, 'Multiple Choice', N'私は彼を「しんじて」いる。', N'信じて', N'信じ@@信じて@@信二@@信二て', N'Tôi tin tưởng anh ấy.', 'Regular', 15),
+(1, 'Multiple Choice', N'人の前で話すことに「じしん」がある。', N'自信', N'時針@@自信@@自身@@地震', N'Tôi tự tin khi nói trước đám đông.', 'Regular', 15),
+(1, 'Multiple Choice', N'友達を「しんよう」してお金を貸した。', N'信用', N'信用@@新用@@信頼@@信陽', N'Vì tin tưởng bạn nên tôi đã cho mượn tiền.', 'Regular', 15),
+-- 想
+(1, 'Multiple Choice', N'未来の生活を「空想」する。', N'くうそう', N'くそ@@くうそ@@くそう@@くうそう', N'Tôi tưởng tượng về cuộc sống trong tương lai.', 'Regular', 16),
+(1, 'Multiple Choice', N'彼女はだれに対しても「愛想」がいい。', N'あいそ', N'あいそう@@あいそ@@おいそう@@おいそ', N'Cô ấy rất thân thiện với mọi người.', 'Regular', 16),
+(1, 'Multiple Choice', N'毎朝、「瞑想」しています。', N'めいそう', N'めいそう@@めいそ@@めそう@@めそ', N'Mỗi sáng tôi đều thiền định.', 'Regular', 16),
+(1, 'Multiple Choice', N'どちらが勝つか「よそう」する。', N'予想', N'予装@@予想@@装う@@予想う', N'Tôi dự đoán bên nào sẽ thắng.', 'Regular', 16),
+(1, 'Multiple Choice', N'彼は「りそう」の恋人だ。', N'理想', N'離巣@@離窓@@理想@@裏層', N'Anh ấy là người yêu lý tưởng.', 'Regular', 16),
+-- 伝
+(1, 'Multiple Choice', N'階段の手すりを「伝って」上る。', N'つたって', N'つなって@@つたって@@つたわって@@つたえって', N'Tôi vịn tay vịn cầu thang để leo lên.', 'Regular', 17),
+(1, 'Multiple Choice', N'この村には昔からの「伝説」が多くある。', N'でんせつ', N'てんせつ@@でんせつ@@つたせつ@@つだせつ', N'Ngôi làng này có rất nhiều truyền thuyết từ xưa.', 'Regular', 17),
+(1, 'Multiple Choice', N'友達に先生への「伝言」をたのむ。', N'でんごん', N'でんごん@@てんごん@@でんこん@@てんこん', N'Nhờ bạn nhắn lại lời cho thầy cô.', 'Regular', 17),
+(1, 'Multiple Choice', N'日本の「伝統」文化にきょうみがある。', N'でんとう', N'でんとう@@てんとう@@でんどう@@てんどう', N'Tôi có hứng thú với văn hóa truyền thống Nhật Bản.', 'Regular', 17),
+(1, 'Multiple Choice', N'表情から彼の悲しみが「つたわった」。', N'伝わった', N'会わった@@合わった@@伝わった@@答わった', N'Qua biểu cảm, tôi cảm nhận được nỗi buồn của anh ấy.', 'Regular', 17),
+-- 欲
+(1, 'Multiple Choice', N'心の「欲する」ままに行動する。', N'ほっする', N'はっする@@ほっする@@ぼっする@@ぽっする', N'Tôi hành động theo những gì trái tim mong muốn.', 'Regular', 18),
+(1, 'Multiple Choice', N'彼は「愛欲」に溺れて、自分を見失った', N'あいよく', N'あいほしい@@あいよく@@あいほっする@@おいよく', N'Anh ta chìm đắm trong ái dục và đánh mất chính mình.', 'Regular', 18),
+(1, 'Multiple Choice', N'「性欲」は人間の本能の一つだ。', N'せいよく', N'せいほっする@@せいほしい@@せいよぐ@@せいよく', N'Ham muốn tình dục là một trong những bản năng của con người.', 'Regular', 18),
+(1, 'Multiple Choice', N'いいにおいがして「しょくよく」がわく。', N'食欲', N'食飲欲@@食事欲@@飲欲@@食欲', N'Mùi thơm khiến tôi cảm thấy thèm ăn.', 'Regular', 18),
+(1, 'Multiple Choice', N'人気ブランドの洋服が「ほしい」。', N'欲しい', N'想しい@@想っしい@@欲しい@@欲っしい', N'Tôi muốn có quần áo của thương hiệu nổi tiếng.', 'Regular', 18),
 
 
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 23),
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 23),
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 23),
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 23),
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 23),
+-- 苦
+(1, 'Multiple Choice', N'重い病気で長い間「苦しんで」いる。', N'くるしんで', N'くるしん@@くるしんで@@くしん@@くしんで', N'Tôi đã chịu đựng một căn bệnh nặng trong thời gian dài.', 'Regular', 19),
+(1, 'Multiple Choice', N'若いころ非行に走って親を「苦しめた」。', N'くるしめた', N'くしめ@@くしめた@@くるしめ@@くるしめた', N'Khi còn trẻ tôi đã hư hỏng và làm bố mẹ khổ sở.', 'Regular', 19),
+(1, 'Multiple Choice', N'このコーヒーは少し「苦み」がある。', N'にがみ', N'にがみ@@にかみ@@こがみ@@こかみ', N'Cà phê này có hơi vị đắng một chút.', 'Regular', 19),
+(1, 'Multiple Choice', N'せきが止まらなくて「くるしい」。', N'苦しい', N'古し@@古しい@@苦し@@苦しい', N'Bị ho không ngừng khiến tôi rất đau khổ.', 'Regular', 19),
+(1, 'Multiple Choice', N'このお茶は「にがい」。', N'苦い', N'古@@古い@@苦@@苦い', N'Trà này đắng.', 'Regular', 19),
+-- 悩
+(1, 'Multiple Choice', N'頭痛に「悩まされて」いる。', N'なやまされて', N'たやまされ@@たやまされて@@なやまされ@@なやまされて', N'Tôi đang bị cơn đau đầu hành hạ.', 'Regular', 20),
+(1, 'Multiple Choice', N'将来のことで「悩んで」います。', N'なやんで', N'なやん@@なやんで@@のうん@@のうんで', N'Tôi đang lo lắng về tương lai.', 'Regular', 20),
+(1, 'Multiple Choice', N'彼は恋愛に「悩んで」いる。', N'なやんで', N'なや@@なやで@@なやんで@@なやん', N'Anh ấy đang phiền muộn vì chuyện tình cảm.', 'Regular', 20),
+(1, 'Multiple Choice', N'深刻な「悩殺」シーンに観客は驚いた。', N'のうさつ', N'なやさつ@@のうさつ@@なやんさつ@@のさつ', N'Khán giả đã bất ngờ với cảnh quyến rũ chết người.', 'Regular', 20),
+(1, 'Multiple Choice', N'進学するか帰国するか、「なやんで」いる。', N'悩んで', N'悩で@@悩@@悩んで@@悩ん', N'Tôi đang phân vân giữa việc học tiếp hay về nước.', 'Regular', 20),
+-- 困
+(1, 'Multiple Choice', N'急に雨が降り出して「困った」。', N'こまった', N'こんなった@@こんな@@こまった@@こま', N'Tự nhiên trời đổ mưa khiến tôi rất khổ sở.', 'Regular', 21),
+(1, 'Multiple Choice', N'彼はどんな「困難」にも立ち向かう人だ。', N'こんなん', N'こんなん@@こんな@@こなん@@こな', N'Anh ấy là người luôn đối mặt với mọi khó khăn.', 'Regular', 21),
+(1, 'Multiple Choice', N'助けてくれなくて、本当に「困った」。', N'こまった', N'こんなった@@こんな@@こまった@@こま', N'Không ai giúp đỡ, tôi thực sự rất khốn đốn.', 'Regular', 21),
+(1, 'Multiple Choice', N'「困難」を乗り越えて、夢を叶えた。', N'こんなん', N'こなん@@こんなん@@こまなん@@こまんなん', N'Vượt qua khó khăn, tôi đã thực hiện được ước mơ.', 'Regular', 21),
+(1, 'Multiple Choice', N'お金がなくて生活に「こまって」いる。', N'困って', N'国って@@国った@@困って@@困った', N'Tôi đang khốn đốn vì không có tiền để sống.', 'Regular', 21),
+-- 難
+(1, 'Multiple Choice', N'たえ「難い」痛みで病院へ運ばれた。', N'かたい', N'むずがしい@@むずかしい@@がたい@@かたい', N'Vì cơn đau không thể chịu nổi nên tôi đã được đưa đến bệnh viện.', 'Regular', 22),
+(1, 'Multiple Choice', N'工事は今、最大の「難所」にかかっている。', N'なんしょ', N'なんしょ@@なしょ@@たんしょ@@たしょ', N'Công trình hiện đang đến đoạn khó khăn nhất.', 'Regular', 22),
+(1, 'Multiple Choice', N'この問題はとても「難しい」。', N'むずかしい', N'むすがしい@@むすかしい@@むずがしい@@むずかしい', N'Câu hỏi này rất khó.', 'Regular', 22),
+(1, 'Multiple Choice', N'問題が「むずかしくて」、答えがわからない。', N'難しくて', N'難しで@@難しくて@@悩しくて@@悩しで', N'Bài toán quá khó, tôi không biết đáp án là gì.', 'Regular', 22),
+(1, 'Multiple Choice', N'数学の「なんもん」をすらすら解いた。', N'難問', N'難問@@難聞@@難開@@難間', N'Tôi giải trôi chảy các bài toán khó trong môn Toán.', 'Regular', 22),
 
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 24),
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 24),
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 24),
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 24),
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 24),
 
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 25),
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 25),
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 25),
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 25),
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 25),
-
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 26),
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 26),
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 26),
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 26),
-(1, 'Multiple Choice', 'qqqqqqqqq', 'ccccccccc', 'aaaaaaaa', 'eeeeeeee', 'Regular', 26)
+-- 怒
+(1, 'Multiple Choice', N'成績が下がって親に「怒られた」。', N'おこられた', N'いかられた@@おこられた@@どられた@@あこられた', N'Vì thành tích giảm sút nên tôi bị bố mẹ la mắng.', 'Regular', 23),
+(1, 'Multiple Choice', N'相手の失礼なたいどに「激怒」する。', N'げきど', N'けきど@@げきと@@げきど@@けきと', N'Tôi nổi cơn thịnh nộ với thái độ vô lễ của đối phương.', 'Regular', 23),
+(1, 'Multiple Choice', N'彼は急に「怒り」出した。', N'おこり', N'いかる@@いかり@@おこる@@おこり', N'Anh ấy bất ngờ nổi giận.', 'Regular', 23),
+(1, 'Multiple Choice', N'「怒り」を抑えられなかった。', N'いかり', N'いかる@@いかり@@おこる@@おこり', N'Tôi không thể kiềm chế cơn giận.', 'Regular', 23),
+(1, 'Multiple Choice', N'失言により相手の「いかり」を買った。', N'怒り', N'題り@@題る@@怒り@@怒る', N'Vì lỡ lời nên tôi khiến đối phương nổi giận.', 'Regular', 23),
+-- 悲
+(1, 'Multiple Choice', N'かわいがっていた犬が死んで「悲しい」。', N'かなしい', N'かなしい@@かたしい@@がなしい@@がたしい', N'Con chó tôi yêu quý đã chết nên tôi rất buồn.', 'Regular', 24),
+(1, 'Multiple Choice', N'二人の結婚は「悲劇」に終わった。', N'ひげき', N'びげき@@ひげき@@ぴけき@@ひけき', N'Cuộc hôn nhân của hai người đã kết thúc trong bi kịch.', 'Regular', 24),
+(1, 'Multiple Choice', N'しょうらいを「悲観」してはいけない。', N'ひかん', N'がなかん@@びかん@@かなかん@@ひかん', N'Không nên bi quan về tương lai.', 'Regular', 24),
+(1, 'Multiple Choice', N'友人の死を「かなしむ」。', N'悲しむ', N'哀しむ@@悲しむ@@怒しむ@@難しむ', N'Tôi đau buồn vì cái chết của người bạn.', 'Regular', 24),
+(1, 'Multiple Choice', N'「ひれん」の物語を読んだ。', N'悲恋', N'悲恋@@笑恋@@悲赤@@笑赤', N'Tôi đã đọc một câu chuyện tình buồn.', 'Regular', 24),
+-- 笑
+(1, 'Multiple Choice', N'面白い話に声をあげて「笑った」。', N'わらった', N'わらいった@@しょうった@@えった@@わらった', N'Tôi bật cười vì câu chuyện thú vị.', 'Regular', 25),
+(1, 'Multiple Choice', N'彼のギャグにクラス中が「爆笑」した。', N'ばくしょう', N'ばくわらい@@ばくしょう@@はくわらい@@はくしょう', N'Cả lớp cười phá lên vì trò đùa của cậu ấy.', 'Regular', 25),
+(1, 'Multiple Choice', N'赤ちゃんを見て、思わずほほ「笑んだ」。', N'えんだ', N'わらうんだ@@えんだ@@わらんだ@@えみんだ', N'Nhìn thấy em bé, tôi bất giác mỉm cười.', 'Regular', 25),
+(1, 'Multiple Choice', N'落語を聞いて「おおわらい」する。', N'大笑い', N'犬笑い@@大笑い@@多笑い@@起笑い', N'Tôi đã cười phá lên khi nghe truyện cười.', 'Regular', 25),
+(1, 'Multiple Choice', N'彼女はいつも「えがお」をたやさない。', N'笑顔', N'難問@@笑問@@難顔@@笑顔', N'Cô ấy luôn luôn giữ nụ cười trên môi.', 'Regular', 25),
+-- 喜
+(1, 'Multiple Choice', N'ジュースを差し入れして「喜ばれた」。', N'よろこばれた', N'きばれた@@よろこばれた@@ぎばれた@@よるこばれた', N'Tôi được vui mừng đón nhận vì mang nước trái cây đến.', 'Regular', 26),
+(1, 'Multiple Choice', N'彼女は「喜怒哀楽」がはっきりした性格だ。', N'きどあいらく', N'ぎどあいらく@@きとあいらく@@きどおいらく@@きどあいらく', N'Cô ấy có tính cách thể hiện rõ vui, giận, buồn, vui.', 'Regular', 26),
+(1, 'Multiple Choice', N'彼の言葉に「喜ん」だ。', N'よろこん', N'よるこん@@よろこん@@よろごん@@よるごん', N'Tôi đã vui mừng vì lời nói của anh ấy.', 'Regular', 26),
+(1, 'Multiple Choice', N'母は大学合格を「よろこんで」くれた。', N'喜んで', N'言んで@@事んで@@喜んで@@信んで', N'Mẹ đã rất vui vì tôi đậu đại học.', 'Regular', 26),
+(1, 'Multiple Choice', N'さいふが見つかって「おおよろこび」する。', N'大喜び', N'大事び@@大信び@@大喜び@@大言び', N'Tôi vô cùng vui mừng vì đã tìm thấy ví.', 'Regular', 26)
 
 
 INSERT INTO [User] (Name, Image, Username, Password, Role, Type, CuratorId, Email, Point, LastOnline, JoinedDate, DayStreak, HighestDayStreak) VALUES
@@ -452,7 +454,7 @@ INSERT INTO [User] (Name, Image, Username, Password, Role, Type, CuratorId, Emai
 (N'Nguyễn Trường Sang', 'https://i.pinimg.com/736x/88/39/3e/88393ead9af03f8f76814c42352ded55.jpg', 'truongsang', '123456', 'Student', 'Regular', 3, 'truongsang@example.com', 5230, '2025-07-10', '2025-07-10', 533, 587),
 (N'Võ Minh Tiến', 'https://i.pinimg.com/736x/d1/ba/15/d1ba156c10b10d44a92d6bac20849953.jpg', 'minhtien', '123456', 'Student', 'Regular', 3, 'minhtien@example.com', 14780, '2025-07-10', '2025-07-10', 601, 601),
 (N'Nguyễn Văn Khoa', 'https://i.pinimg.com/736x/75/7f/86/757f86f55d1ad5ac6529267d1f405ce7.jpg', 'vankhoa', '123456', 'Student', 'Regular', 3, 'vankhoa@example.com', 8590, '2025-07-10', '2025-07-10', 687, 687),
-(N'HCM25_CPL_JS_02', 'https://i.pinimg.com/736x/0e/93/bc/0e93bc8607a6e41cd7df5a831cc115e4.jpg', 'hcm25_cpl_js_02', '123456', 'Student', 'Regular', 3, 'hcm25_cpl_js_02@example.com', 0, '2025-07-17', '2025-07-17', 0, 0)
+(N'HCM25_CPL_JS_02', 'https://i.pinimg.com/736x/51/f9/4b/51f94b909520bde0f044aa4d276e8c56.jpg', 'hcm25_cpl_js_02', '123456', 'Student', 'Regular', 3, 'hcm25_cpl_js_02@example.com', 0, '2025-07-17', '2025-07-17', 0, 0)
 UPDATE [User] SET CuratorId = 3 WHERE Id = 1;
 
 INSERT INTO [Comment] (Content, Answer, CommentDate, QuestionId, UserId) VALUES
@@ -482,6 +484,7 @@ INSERT INTO [BoughtSubject] (PurchaseDate, Feedback, Rating, SubjectId, UserId) 
 ('2025-03-20', 'Needs more examples', 3, 3, 7),
 ('2025-04-25', 'Excellent content', 4, 2, 8),
 ('2025-05-30', 'Highly recommended', 5, 3, 9),
+('2025-07-17', 'I LOVE LEARNING MATH!', 5, 1, 18),
 ('2025-07-17', 'I LOVE LEARNING JAPANESE!', 5, 4, 18)
 
 INSERT INTO [Progress] (Chapter, Topic, BoughtSubjectId) VALUES
@@ -492,7 +495,8 @@ INSERT INTO [Progress] (Chapter, Topic, BoughtSubjectId) VALUES
 (1, 1, 5),
 (1, 1, 6),
 (1, 1, 7),
-(1, 1, 8)
+(4, 1, 8),
+(4, 1, 9)
 
 INSERT INTO [ChapterProgress] (Score, StartDate, Note, UserId, ChapterId) VALUES
 (30, '2025-06-01 14:30:00', 'Quiz', 1, 1),

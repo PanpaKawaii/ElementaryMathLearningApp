@@ -28,7 +28,7 @@ export default function Button(props) {
             borderRadius: `${props.radius}`,
             border: `${props.border} solid hsl(0, 0%, 84%)`,
             color: `hsl(0, 0%, 70%)`,
-            textShadow: `1px 1px 1px hsl(0, 0%, 40%)`,
+            // textShadow: `1px 1px 1px hsl(0, 0%, 40%)`,
             backgroundColor: `hsl(0, 0%, 89%)`,
             boxShadow: `${(IsClicked || props.active) ? 'none' : `0px 8px 0px 0px hsl(0, 0%, 76%)`}`,
         };
@@ -39,7 +39,7 @@ export default function Button(props) {
             borderRadius: `${props.radius}`,
             border: `${props.border} solid hsl(0, 0%, 94%)`,
             color: `hsl(0, 0%, 60%)`,
-            textShadow: `1px 1px 1px hsl(0, 0%, 30%)`,
+            // textShadow: `1px 1px 1px hsl(0, 0%, 30%)`,
             backgroundColor: `hsl(0, 0%, 99%)`,
             boxShadow: `${(IsClicked || props.active) ? 'none' : `0px 8px 0px 0px hsl(0, 0%, 88%)`}`,
         };

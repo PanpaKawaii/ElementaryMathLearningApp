@@ -10,28 +10,47 @@
             width: 100%;
             max-width: 400px;
             justify-self: center;
-            border-collapse: collapse;
+            border-collapse: none;
 
             tr {
                 transition: all 0.2s ease;
+                background-color: #7ed95740;
 
-                &:first-child {
-                    border: none;
+                .td-index {
+                    color: #fff;
+                    background-color: #7ed957;
                 }
 
                 &:hover {
-                    background-color: #eee;
+                    background-color: #7ed95780;
                 }
 
                 &:nth-child(odd) {
-                    border-top: 2px solid #ffff00;
-                    border-bottom: 2px solid #ff0000;
-                    background-color: #ccc;
+                    color: #fff;
+                    background-color: #7ed957;
+
+                    td:first-child {
+                        border-radius: 20px 0 0 20px;
+                        overflow: hidden;
+                    }
+
+                    td:last-child {
+                        border-radius: 0 20px 0 0;
+                        overflow: hidden;
+                    }
                 }
 
                 &:nth-child(even) {
-                    border-bottom: 2px solid #ff00ff;
-                    background-color: #aaa;
+                    cursor: pointer;
+
+                    td {
+                        padding: 16px 8px;
+                    }
+
+                    td:last-child {
+                        border-radius: 0 0 20px 0;
+                        overflow: hidden;
+                    }
                 }
 
                 td {
@@ -42,17 +61,7 @@
                     font-weight: bold;
                     transition: all 0.15s ease;
 
-                    &:first-child {
-                        border-radius: 20px 0 0 20px;
-                        overflow: hidden;
-                    }
-
-                    &:last-child {
-                        border-radius: 0 20px 20px 0;
-                        overflow: hidden;
-                    }
-
-                    .name-date {
+                    .note-date {
                         display: flex;
                         justify-content: space-between;
                     }

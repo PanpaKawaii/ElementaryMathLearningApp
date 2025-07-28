@@ -76,19 +76,19 @@ export default function StudyHistory({ UserStudyHistory }) {
                         {UserTopicChapterProgress.map((progress, i) => (
                             <React.Fragment key={i}>
                                 <tr>
-                                    <td rowSpan={2}>
+                                    <td rowSpan={2} className='td-index'>
                                         <div className={`index`}>{i + 1}</div>
                                     </td>
                                     <td colSpan={4}>
-                                        <div className='name-date'>
-                                            <div>{progress.relateId?.name}</div>
+                                        <div className='note-date'>
+                                            <div className='note'>{progress.note}</div>
                                             <div>{progress.startDate}</div>
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <div className='note'>{progress.note}</div>
+                                        <div>{progress.relateId?.name}</div>
                                     </td>
                                     <td>
                                         <div className='score'>{progress.score}%</div>

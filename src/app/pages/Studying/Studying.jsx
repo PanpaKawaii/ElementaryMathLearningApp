@@ -320,7 +320,7 @@ export default function Studying() {
                                 }`
                             }>
                                 <div className='result-status'>
-                                    {QuizProgress[Order] == null ? <i className='fa-solid fa-ellipsis'></i>
+                                    {QuizProgress[Order] == null ? <i className='fa-regular fa-comment'></i>
                                         : (QuizProgress[Order] === true ?
                                             <>
                                                 <i className='fa-solid fa-circle-check'></i>
