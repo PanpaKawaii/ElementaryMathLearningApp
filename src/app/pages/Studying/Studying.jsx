@@ -320,16 +320,16 @@ export default function Studying() {
                                 }`
                             }>
                                 <div className='result-status'>
-                                    {QuizProgress[Order] == null ? <i className='fa-solid fa-ellipsis'></i>
+                                    {QuizProgress[Order] == null ? <i className='fa-regular fa-comment'></i>
                                         : (QuizProgress[Order] === true ?
                                             <>
                                                 <i className='fa-solid fa-circle-check'></i>
-                                                <div className='text-status'>Correct</div>
+                                                <div className='text-correct'>{QUESTIONs[Order].explanation || 'No explanation'}</div>
                                             </>
                                             :
                                             <>
                                                 <i className='fa-solid fa-circle-xmark'></i>
-                                                <div className='text-explanation'>{QUESTIONs[Order].explanation || 'No explanation'}</div>
+                                                <div className='text-incorrect'>{QUESTIONs[Order].explanation || 'No explanation'}</div>
                                             </>
                                         )
                                     }

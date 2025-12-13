@@ -4,7 +4,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-family: 'Quicksand', Arial, sans-serif;
 
     .card-study {
         margin: 120px 20px 0;
@@ -102,8 +101,8 @@
                             border-radius: 100%;
                         }
 
-                        .fa-ellipsis {
-                            color: #777;
+                        .fa-comment {
+                            color: #ccc;
                         }
 
                         .fa-circle-check {
@@ -114,12 +113,13 @@
                             color: #dc3545;
                         }
 
-                        .text-status {
+                        .text-correct {
                             color: #28a745;
                             font-weight: bold;
+                            word-break: break-all;
                         }
 
-                        .text-explanation {
+                        .text-incorrect {
                             color: #dc3545;
                             font-weight: bold;
                             word-break: break-all;
@@ -128,13 +128,11 @@
                 }
 
                 .correct-result {
-                    /* border-top: 2px solid hsl(134, 61%, 80%); */
                     border: none;
                     background-color: #d3f9d8;
                 }
 
                 .incorrect-result {
-                    /* border-top: 2px solid hsl(354, 70%, 80%); */
                     border: none;
                     background-color: #fad7d9;
                 }
