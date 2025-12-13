@@ -1,5 +1,4 @@
 const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
-const apiKey = import.meta.env.VITE_REACT_APP_API_KEY;
 
 console.log(apiUrl);
 
@@ -65,7 +64,7 @@ export const putData = async (endpoint, data, token) => {
     }
 };
 
-// Hàm gọi API PUT
+// Hàm gọi API PATCH
 export const patchData = async (endpoint, data, token) => {
     try {
         const response = await fetch(`${apiUrl}${endpoint}`, {
@@ -81,7 +80,7 @@ export const patchData = async (endpoint, data, token) => {
         }
         return;
     } catch (error) {
-        console.error('Error putting data:', error);
+        console.error('Error patching data:', error);
         throw error;
     }
 };
